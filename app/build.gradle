@@ -19,7 +19,6 @@ android {
     }
 }
 
-
 // Looks like I already have :p
 greendao {
     schemaVersion 1
