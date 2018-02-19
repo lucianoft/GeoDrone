@@ -1,5 +1,6 @@
 package br.com.geodrone.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -82,7 +83,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            // Handle the camera action
+            Intent i = new Intent(this,EnvImgCameraActivity.class);
+            startActivity(i);
+
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
@@ -90,6 +93,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
+            Intent i = new Intent(this,RegChuvasActivity.class);
+            startActivity(i);
 
         } else if (id == R.id.nav_send) {
 

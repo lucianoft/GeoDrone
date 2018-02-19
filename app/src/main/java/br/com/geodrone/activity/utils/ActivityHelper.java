@@ -1,4 +1,4 @@
-package br.com.geodrone.activity;
+package br.com.geodrone.activity.utils;
 
 import android.Manifest;
 import android.app.Activity;
