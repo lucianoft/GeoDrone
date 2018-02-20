@@ -97,6 +97,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(i);
 
         } else if (id == R.id.nav_send) {
+            Intent i = new Intent(this,CadastroPluviosidadeActivity.class);
+            startActivity(i);
 
         }
 
