@@ -7,9 +7,11 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -19,14 +21,20 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import br.com.geodrone.R;
+import java.text.DateFormat;
 
-public class CadastroPluviosidadeActivity extends FragmentActivity implements OnMapReadyCallback {
+import br.com.geodrone.R;
+import br.com.geodrone.activity.utils.ActivityHelper;
+
+public class CadastroPluviosidadeActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener {
+
+    private static final String TAG = CadastroPluviosidadeActivity.class.getSimpleName();
 
     private GoogleMap mMap;
+    private LocationManager locationManager;
+
     // The minimum distance to change Updates in meters
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
-
     // The minimum time between updates in milliseconds
     private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
 
@@ -35,81 +43,86 @@ public class CadastroPluviosidadeActivity extends FragmentActivity implements On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_pluviosidade);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
-        mMap.setMinZoomPreference(14.0f);
-        mMap.setMaxZoomPreference(30.0f);
-        mMap.animateCamera(CameraUpdateFactory.zoomIn());
 
-        //Initialize Google Play Services
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(this,
-                    Manifest.permission.ACCESS_FINE_LOCATION)
-                    == PackageManager.PERMISSION_GRANTED) {
-                mMap.setMyLocationEnabled(true);
-            }
-        }
-        else {
-            mMap.setMyLocationEnabled(true);
-        }
+        ActivityHelper activityHelper = new ActivityHelper();
+        if (activityHelper.checkPermissionsLocation(this)){
+            initMap();
+        };
+    }
 
+    private void initMap() {
         try{
-            LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            mMap.setMyLocationEnabled(true);
+            mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
 
-            LocationListener locationListener = new LocationListener() {
-                public void onLocationChanged(Location location) {
-                    double lat = location.getLatitude();
-                    double lng = location.getLongitude();
-                    LatLng locAtual = new LatLng(lat, lng);
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(locAtual, 15));
-                    mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
-                }
-
-                public void onStatusChanged(String provider, int status, Bundle extras) { }
-
-                public void onProviderEnabled(String provider) { }
-
-                public void onProviderDisabled(String provider) { }
-            };
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, locationListener);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
             if (locationManager != null) {
-                Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                if (location != null) {
-                    double lat = location.getLatitude();
-                    double lng = location.getLongitude();
-                    LatLng locAtual = new LatLng(lat, lng);
-                    mMap.addMarker(new MarkerOptions().position(locAtual).title("Localizacao Inicial"));
-                    Toast.makeText(this, location.toString(), Toast.LENGTH_LONG).show();
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(locAtual, 15
-                    ));
-                }
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-18.9202562,-48.2460435), 15));
+
             }
+            mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener(){
+                @Override
+                public void onMapClick(LatLng point) {
+                    Toast.makeText(CadastroPluviosidadeActivity.this, point.toString(), Toast.LENGTH_LONG).show();
+
+                }
+
+            });
         }catch(SecurityException ex){
             Toast.makeText(this, ex.getMessage(), Toast.LENGTH_LONG).show();
         }
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener(){
-            @Override
-            public void onMapClick(LatLng point) {
-                Toast.makeText(CadastroPluviosidadeActivity.this, point.toString(), Toast.LENGTH_LONG).show();
+    }
 
-            }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode){
+            case ActivityHelper.REQUEST_PERMISSION_LOCATION:
+                if(grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED){
+                    initMap();
+                } else {
+                    finish();
+                }
+                break;
+        }
+    }
 
-        });
+    @Override
+    public void onLocationChanged(Location location) {
+        if (location != null) {
+            String strLocation =
+                    DateFormat.getTimeInstance().format(location.getTime()) + "\n" +
+                            "Latitude=" + location.getLatitude() + "\n" +
+                            "Longitude=" + location.getLongitude();
+            Log.d(TAG, strLocation);
+
+            double lat = location.getLatitude();
+            double lng = location.getLongitude();
+            LatLng locAtual = new LatLng(lat, lng);
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(locAtual, 15));
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+        }
+    }
+
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String s) {
+
     }
 }

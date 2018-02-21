@@ -26,4 +26,5 @@
     <string name="title_activity_env_img_camera">EnvImgCameraActivity</string>
     <string name="title_activity_reg_chuvas">Registro de Chuvas</string>
     <string name="title_activity_cadastro_pluviosidade">Map</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

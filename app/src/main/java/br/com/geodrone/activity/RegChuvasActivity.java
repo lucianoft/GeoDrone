@@ -86,23 +86,6 @@ public class RegChuvasActivity extends FragmentActivity implements OnMapReadyCal
         // Getting LocationManager object from System Service LOCATION_SERVICE
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
-        // Getting the name of the best provider
-        String provider = this.getLocationProvider(locationManager);
-
-        // Getting Current Location
-        //Location location = locationManager.getLastKnownLocation(provider);
-
-        /*Location location = new Location(provider);
-        location.setLatitude(-48.2443293);
-        location.setLongitude(-18.9255573);
-        if(location!=null){
-            onLocationChanged(location);
-        }*/
-        //locationManager.requestLocationUpdates(provider, LOCATION_UPDATE_MIN_DISTANCE, LOCATION_UPDATE_MIN_TIME, this);
-
-        // Register the listener with Location Manager's network provider
-        //locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, LOCATION_UPDATE_MIN_DISTANCE, LOCATION_UPDATE_MIN_TIME, this);
-        //Or  Register the listener with Location Manager's gps provider
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, LOCATION_UPDATE_MIN_DISTANCE, LOCATION_UPDATE_MIN_TIME, this);
 
         LatLng SYDNEY = new LatLng(-33.88,151.21);
@@ -111,20 +94,7 @@ public class RegChuvasActivity extends FragmentActivity implements OnMapReadyCal
         // Move the camera instantly to Sydney with a zoom of 15.
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SYDNEY, 15));
 
-// Zoom in, animating the camera.
-        mMap.animateCamera(CameraUpdateFactory.zoomIn());
 
-// Zoom out to zoom level 10, animating with a duration of 2 seconds.
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
-
-// Construct a CameraPosition focusing on Mountain View and animate the camera to that position.
-        CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(MOUNTAIN_VIEW)      // Sets the center of the map to Mountain View
-                .zoom(17)                   // Sets the zoom
-                .bearing(90)                // Sets the orientation of the camera to east
-                .tilt(30)                   // Sets the tilt of the camera to 30 degrees
-                .build();                   // Creates a CameraPosition from the builder
-        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
 
 

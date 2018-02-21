@@ -87,7 +87,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(i);
 
         } else if (id == R.id.nav_gallery) {
-
+            Intent i = new Intent(this,MapsActivity.class);
+            startActivity(i);
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
