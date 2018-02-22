@@ -25,6 +25,7 @@ import java.text.DateFormat;
 
 import br.com.geodrone.R;
 import br.com.geodrone.activity.utils.ActivityHelper;
+import butterknife.ButterKnife;
 
 public class CadastroPluviosidadeActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener {
 
@@ -42,6 +43,8 @@ public class CadastroPluviosidadeActivity extends FragmentActivity implements On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_pluviosidade);
+        ButterKnife.bind(this);
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -61,21 +64,30 @@ public class CadastroPluviosidadeActivity extends FragmentActivity implements On
     private void initMap() {
         try{
             mMap.setMyLocationEnabled(true);
-            mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+            mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+            mMap.getUiSettings().setCompassEnabled(true);
+            mMap.getUiSettings().setZoomControlsEnabled(true);
+            mMap.getUiSettings().setMyLocationButtonEnabled(true);//botal da localizacao atual
+            mMap.getUiSettings().setMapToolbarEnabled(true);
+            mMap.getUiSettings().setZoomGesturesEnabled(true);
+            mMap.getUiSettings().setScrollGesturesEnabled(true);
+            mMap.getUiSettings().setTiltGesturesEnabled(true);
+            mMap.getUiSettings().setRotateGesturesEnabled(true);
 
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
             if (locationManager != null) {
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-18.9202562,-48.2460435), 15));
-
+                LatLng position = new LatLng(-18.9202562, -48.224);
+                mMap.addMarker(new MarkerOptions().position(position).title("Kathmandu, Nepal"));
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(position));
             }
-            mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener(){
+            /*mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener(){
                 @Override
                 public void onMapClick(LatLng point) {
                     Toast.makeText(CadastroPluviosidadeActivity.this, point.toString(), Toast.LENGTH_LONG).show();
 
                 }
 
-            });
+            });*/
         }catch(SecurityException ex){
             Toast.makeText(this, ex.getMessage(), Toast.LENGTH_LONG).show();
         }
@@ -108,6 +120,9 @@ public class CadastroPluviosidadeActivity extends FragmentActivity implements On
             LatLng locAtual = new LatLng(lat, lng);
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(locAtual, 15));
             mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+
+            Toast.makeText(CadastroPluviosidadeActivity.this, locAtual.toString(), Toast.LENGTH_SHORT).show();
+
         }
     }
 

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">GeoDrone</string>
     <string name="title_activity_login">Login</string>
+    <string name="title_activity_main">Menu Principal</string>
 
     <!-- Strings related to login -->
     <string name="lb_email">Email</string>
@@ -17,7 +18,6 @@
     </string>
 
     <string name="lb_criar_usuario">Criar Usuario</string>
-    <string name="title_activity_main">MainActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

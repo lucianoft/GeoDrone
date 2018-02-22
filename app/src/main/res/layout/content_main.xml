@@ -8,4 +8,22 @@
     tools:context="br.com.geodrone.activity.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_weight="0.03">
+
+        <ImageView android:src="@drawable/geodrone"
+            android:layout_width="wrap_content"
+            android:paddingHorizontal="24dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:scaleType="centerInside"
+            />
+
+    </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>
