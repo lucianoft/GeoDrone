@@ -9,6 +9,9 @@ import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.view.inputmethod.InputMethodManager;
+
+import static android.content.Context.INPUT_METHOD_SERVICE;
 
 
 public class ActivityHelper {
@@ -19,6 +22,11 @@ public class ActivityHelper {
 
     public ActivityHelper(){
 
+    }
+
+    public  void  escondeTeclado(Activity activity){
+        InputMethodManager imm = (InputMethodManager)activity.getSystemService(INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
 
     public boolean checkPermissionsCamera(final Activity activity) {

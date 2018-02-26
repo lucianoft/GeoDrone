@@ -2,11 +2,21 @@
     <string name="app_name">GeoDrone</string>
     <string name="title_activity_login">Login</string>
     <string name="title_activity_main">Menu Principal</string>
+    <string name="title_activity_env_img_camera">EnvImgCameraActivity</string>
+    <string name="title_activity_reg_chuvas">Registro de Chuvas</string>
+    <string name="title_activity_cadastro_pluviosidade">Map</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_cadatrar_usuario">CadatrarUsuarioActivity</string>
+    <string name="title_activity_cadatro_usuario">Cadastrar Usuario</string>
 
     <!-- Strings related to login -->
+    <string name="lb_nome">Nome</string>
+    <string name="lb_telefone">Telefone</string>
     <string name="lb_email">Email</string>
     <string name="lb_senha">Senha</string>
+    <string name="lb_confirmar_senha">Confirmar Senha</string>
     <string name="lb_login">Login</string>
+    <string name="lb_registrar">Registrar</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
@@ -23,8 +33,4 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
-    <string name="title_activity_env_img_camera">EnvImgCameraActivity</string>
-    <string name="title_activity_reg_chuvas">Registro de Chuvas</string>
-    <string name="title_activity_cadastro_pluviosidade">Map</string>
-    <string name="title_activity_maps">Map</string>
 </resources>

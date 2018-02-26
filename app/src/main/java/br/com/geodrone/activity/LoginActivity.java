@@ -20,7 +20,9 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.text.InputType;
 import android.text.TextUtils;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -49,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
     private UsuarioPresenter usuarioPresenter = null;
     @BindView(R.id.input_email) EditText _emailText;
     @BindView(R.id.input_password) EditText _passwordText;
+    @BindView(R.id.btn_olho) Button _showPasswordButton;
     @BindView(R.id.btn_login) Button _loginButton;
     @BindView(R.id.link_signup) TextView _signupLink;
 
@@ -74,8 +77,26 @@ public class LoginActivity extends AppCompatActivity {
                 // Start the Signup activity
                 //Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
                 //startActivityForResult(intent, REQUEST_SIGNUP);
-                finish();
-                overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+                Intent i = new Intent(LoginActivity.this ,CadatroUsuarioActivity.class);
+                startActivity(i);
+
+                //finish();
+                //overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+            }
+        });
+        _showPasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            if(_passwordText.getInputType() == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
+                _passwordText.setInputType( InputType.TYPE_CLASS_TEXT |
+                        InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                _showPasswordButton.setBackgroundResource(R.mipmap.eye_closed);
+            }else {
+                _passwordText.setInputType( InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD );
+                _showPasswordButton.setBackgroundResource(R.mipmap.eye_opened);
+            }
+                _passwordText.setSelection(_passwordText.getText().length());
             }
         });
     }

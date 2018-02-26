@@ -76,9 +76,12 @@ public class CadastroPluviosidadeActivity extends FragmentActivity implements On
 
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
             if (locationManager != null) {
-                LatLng position = new LatLng(-18.9202562, -48.224);
-                mMap.addMarker(new MarkerOptions().position(position).title("Kathmandu, Nepal"));
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(position));
+                Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                if (location != null) {
+                    LatLng position = new LatLng(location.getLatitude(), location.getLongitude());
+                    mMap.addMarker(new MarkerOptions().position(position).title("Posiçao atual"));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(position));
+                }
             }
             /*mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener(){
                 @Override
