@@ -73,15 +73,24 @@ public class CadastroPluviosidadeActivity extends FragmentActivity implements On
             mMap.getUiSettings().setScrollGesturesEnabled(true);
             mMap.getUiSettings().setTiltGesturesEnabled(true);
             mMap.getUiSettings().setRotateGesturesEnabled(true);
+            // getting GPS status
+            boolean isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+            // getting network status
+            boolean isNetworkEnabled = false/*locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)*/;
 
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
-            if (locationManager != null) {
-                Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                if (location != null) {
-                    LatLng position = new LatLng(location.getLatitude(), location.getLongitude());
-                    mMap.addMarker(new MarkerOptions().position(position).title("Posiçao atual"));
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(position));
-                }
+            Location location = null;
+
+            if (isNetworkEnabled) {
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+                location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            }else{
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+                location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            }
+            if (location != null) {
+                LatLng position = new LatLng(location.getLatitude(), location.getLongitude());
+                mMap.addMarker(new MarkerOptions().position(position).title("Posiçao atual"));
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(position));
             }
             /*mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener(){
                 @Override
@@ -136,7 +145,7 @@ public class CadastroPluviosidadeActivity extends FragmentActivity implements On
 
     @Override
     public void onProviderEnabled(String s) {
-
+        Log.i(s, s);
     }
 
     @Override
