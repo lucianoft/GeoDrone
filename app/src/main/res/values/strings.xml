@@ -8,6 +8,7 @@
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_cadatrar_usuario">CadatrarUsuarioActivity</string>
     <string name="title_activity_cadatro_usuario">Cadastrar Usuario</string>
+    <string name="title_activity_cadastro_imagem">Enviar Foto</string>
 
     <!-- Strings related to login -->
     <string name="lb_nome">Nome</string>

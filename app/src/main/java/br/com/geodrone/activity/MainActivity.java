@@ -13,7 +13,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
 
 import br.com.geodrone.R;
 import butterknife.BindView;
@@ -84,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            Intent i = new Intent(this,EnvImgCameraActivity.class);
+            Intent i = new Intent(this,CadastroImagemActivity.class);
             startActivity(i);
 
         } else if (id == R.id.nav_gallery) {
