@@ -14,7 +14,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_centerVertical="true"
-        android:src="@drawable/geodrone" />
+        android:src="@drawable/ic_geodrone" />
 
     <TextView
         android:layout_alignParentBottom="true"
