@@ -12,10 +12,11 @@
         android:paddingLeft="24dp"
         android:paddingRight="24dp">
 
-        <ImageView android:src="@drawable/ic_geodrone"
-            android:layout_width="wrap_content"
+        <ImageView android:src="@drawable/img_geodrone"
+            android:layout_width="match_parent"
             android:layout_height="72dp"
             android:layout_marginBottom="24dp"
+            android:scaleType = "centerCrop"
             android:layout_gravity="center_horizontal" />
 
         <!--  Email Label -->
