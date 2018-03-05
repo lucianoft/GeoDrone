@@ -9,6 +9,7 @@ import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.PersistableBundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -51,6 +52,9 @@ public class CadastroImagemActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
+        getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,7 +72,10 @@ public class CadastroImagemActivity extends AppCompatActivity {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
                 || ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
                 || ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA,
+                                                                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                                                            Manifest.permission.READ_EXTERNAL_STORAGE},
+                                                1);
         }
         else
             dispatchTakePictureIntent();
@@ -92,8 +99,8 @@ public class CadastroImagemActivity extends AppCompatActivity {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_DCIM), "Camera");
+        File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "Camera");
+        //File storageDir = new File(Environment.getDataDirectory(), "Camera");
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
                 ".jpg",         /* suffix */
@@ -106,52 +113,70 @@ public class CadastroImagemActivity extends AppCompatActivity {
     }
 
     private void dispatchTakePictureIntent()  {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        // Ensure that there's a camera activity to handle the intent
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            // Create the File where the photo should go
-            File photoFile = null;
-            try {
-                photoFile = createImageFile();
-            } catch (IOException ex) {
-                // Error occurred while creating the File
-                return;
-            }
-            // Continue only if the File was successfully created
-            if (photoFile != null) {
-                Uri photoURI = null;
+        try {
+            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            // Ensure that there's a camera activity to handle the intent
+            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                startActivityForResult(Intent.createChooser(takePictureIntent, "Tire uma Foto"), REQUEST_TAKE_PHOTO);
+                /*// Create the File where the photo should go
+                File photoFile = null;
                 try {
-                    photoURI = FileProvider.getUriForFile(CadastroImagemActivity.this,
-                            BuildConfig.APPLICATION_ID + ".provider",
-                            createImageFile());
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    photoFile = createImageFile();
+                } catch (IOException ex) {
+                    // Error occurred while creating the File
+                    return;
                 }
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+                // Continue only if the File was successfully created
+                if (photoFile != null) {
+                    Uri photoURI = null;
+                    try {
+                        photoURI = FileProvider.getUriForFile(CadastroImagemActivity.this, BuildConfig.APPLICATION_ID + ".provider", createImageFile());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    //takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                    startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+                }*/
             }
+        }catch (Exception ex){
+            Toast.makeText(this, ex.toString(), Toast.LENGTH_LONG);
+            Log.e("erro", ex.toString(), ex);
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Uri imageUri = Uri.parse(mCurrentPhotoPath);
-            File file = new File(imageUri.getPath());
-            try {
-                InputStream ims = new FileInputStream(file);
-                imagem.setImageBitmap(BitmapFactory.decodeStream(ims));
-            } catch (FileNotFoundException e) {
-                return;
-            }
+        try{
+            if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+                Bitmap bitmap;
+                if(data.getData()==null){
+                    bitmap = (Bitmap)data.getExtras().get("data");
+                }else{
+                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
+                }
+                if (bitmap != null) {
+                    imagem.setImageBitmap(bitmap);
+                }
+               /* Uri imageUri = Uri.parse(mCurrentPhotoPath);
+                File file = new File(imageUri.getPath());
+                try {
+                    InputStream ims = new FileInputStream(file);
+                    imagem.setImageBitmap(BitmapFactory.decodeStream(ims));
+                } catch (FileNotFoundException e) {
+                    return;
+                }
 
-            // ScanFile so it will be appeared on Gallery
-            MediaScannerConnection.scanFile(CadastroImagemActivity.this,
-                    new String[]{imageUri.getPath()}, null,
-                    new MediaScannerConnection.OnScanCompletedListener() {
-                        public void onScanCompleted(String path, Uri uri) {
-                        }
-                    });
+                // ScanFile so it will be appeared on Gallery
+                MediaScannerConnection.scanFile(CadastroImagemActivity.this,
+                        new String[]{imageUri.getPath()}, null,
+                        new MediaScannerConnection.OnScanCompletedListener() {
+                            public void onScanCompleted(String path, Uri uri) {
+                            }
+                        });*/
+            }
+        }catch (Exception ex){
+            Toast.makeText(this, ex.toString(), Toast.LENGTH_LONG);
+            Log.e("erro", ex.toString(), ex);
         }
     }
 

@@ -20,11 +20,15 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.SphericalUtil;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.com.geodrone.R;
 import br.com.geodrone.activity.utils.ActivityHelper;
+import br.com.geodrone.dto.PluviosidadeDiariaDto;
 import butterknife.ButterKnife;
 
 public class CadastroPluviosidadeActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener {
@@ -38,6 +42,8 @@ public class CadastroPluviosidadeActivity extends FragmentActivity implements On
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
     // The minimum time between updates in milliseconds
     private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
+    private static final int ZOOM_MAP = 17;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,8 +96,16 @@ public class CadastroPluviosidadeActivity extends FragmentActivity implements On
             if (location != null) {
                 LatLng position = new LatLng(location.getLatitude(), location.getLongitude());
                 mMap.addMarker(new MarkerOptions().position(position).title("Posiçao atual"));
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(position));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, ZOOM_MAP));
             }
+
+            List<PluviosidadeDiariaDto> s = getPontosColeta();
+            for(PluviosidadeDiariaDto pluviosidadeDiariaDto : s) {
+                LatLng position = new LatLng(pluviosidadeDiariaDto.getLatitude(), pluviosidadeDiariaDto.getLongitude());
+                mMap.addMarker(new MarkerOptions().position(position).title(pluviosidadeDiariaDto.getDescricao()));
+
+            }
+
             /*mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener(){
                 @Override
                 public void onMapClick(LatLng point) {
@@ -130,10 +144,12 @@ public class CadastroPluviosidadeActivity extends FragmentActivity implements On
             double lat = location.getLatitude();
             double lng = location.getLongitude();
             LatLng locAtual = new LatLng(lat, lng);
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(locAtual, 15));
-            mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(locAtual, ZOOM_MAP));
 
-            Toast.makeText(CadastroPluviosidadeActivity.this, locAtual.toString(), Toast.LENGTH_SHORT).show();
+
+            LatLng locDestino = new LatLng(new Double("-18.100"), new Double("-47.3344"));
+            double distancia = SphericalUtil.computeDistanceBetween(locAtual, locDestino);
+            Toast.makeText(CadastroPluviosidadeActivity.this, locAtual.toString() + " Distancia: " + distancia + " m", Toast.LENGTH_SHORT).show();
 
         }
     }
@@ -151,5 +167,22 @@ public class CadastroPluviosidadeActivity extends FragmentActivity implements On
     @Override
     public void onProviderDisabled(String s) {
 
+    }
+
+    private List<PluviosidadeDiariaDto> getPontosColeta(){
+        Double latitude = new Double("-18.100");
+        Double longitude = new Double("-47.3344");
+        List<PluviosidadeDiariaDto> pluviosidadeDiariaDtos = new ArrayList<>();
+        for (int i = 0 ; i <= 50; i++){
+            latitude = latitude + new Double("0.010");
+            longitude = longitude + new Double("0.011");
+
+            PluviosidadeDiariaDto pluviosidadeDiariaDto = new PluviosidadeDiariaDto();
+            pluviosidadeDiariaDto.setDescricao("Posicao " + i);
+            pluviosidadeDiariaDto.setLatitude(latitude);
+            pluviosidadeDiariaDto.setLongitude(longitude);
+            pluviosidadeDiariaDtos.add(pluviosidadeDiariaDto);
+        }
+        return pluviosidadeDiariaDtos;
     }
 }

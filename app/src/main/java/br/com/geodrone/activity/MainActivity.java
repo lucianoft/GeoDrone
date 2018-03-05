@@ -90,8 +90,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent i = new Intent(this,MapsActivity.class);
             startActivity(i);
         } else if (id == R.id.nav_slideshow) {
+            Intent i = new Intent(this,AndroidCameraApiActivity.class);
+            startActivity(i);
 
         } else if (id == R.id.nav_manage) {
+            Intent i = new Intent(this,RegistroPragasActivity.class);
+            startActivity(i);
+
 
         } else if (id == R.id.nav_share) {
             Intent i = new Intent(this,RegChuvasActivity.class);
