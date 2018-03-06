@@ -35,26 +35,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-        <Spinner
-               android:id="@+id/spiPragas"
-               android:layout_width="match_parent"
-               android:layout_height="match_parent"/>
-        </android.support.design.widget.TextInputLayout>
+    <LinearLayout
+        android:id="@+id/cadastroRegistroLayoutObs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cadastroRegistroLblObs"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/linear_layout_custom"
+        android:elevation="10dp"
+        android:orientation="vertical"
+        android:visibility="visible">
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
-            <EditText android:id="@+id/input_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:hint="@string/lb_email" />
+                <EditText android:id="@+id/input_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:inputType="text|textMultiLine"
+                    android:gravity="top"
+                    android:hint="@string/lb_email"
+                    android:maxLength="255"/>
         </android.support.design.widget.TextInputLayout>
-
+    </LinearLayout>
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

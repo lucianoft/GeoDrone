@@ -140,7 +140,6 @@ public class CadastroPluviosidadeActivity extends FragmentActivity implements On
                             "Latitude=" + location.getLatitude() + "\n" +
                             "Longitude=" + location.getLongitude();
             Log.d(TAG, strLocation);
-
             double lat = location.getLatitude();
             double lng = location.getLongitude();
             LatLng locAtual = new LatLng(lat, lng);
