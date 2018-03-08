@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="br.com.geodrone.activity.CadastroImagemActivity"
-    tools:showIn="@layout/activity_cadastro_imagem">
+    tools:context="br.com.geodrone.activity.CadImagemActivity"
+    tools:showIn="@layout/activity_cad_imagem">
 
     <ImageView
         android:id="@+id/imagem"

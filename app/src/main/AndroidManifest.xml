@@ -85,18 +85,15 @@
             android:parentActivityName=".activity.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.CadastroImagemActivity"
+            android:name=".activity.CadImagemActivity"
             android:label="@string/title_activity_cadastro_imagem"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.AndroidCameraApiActivity" />
-        <activity
-            android:name=".activity.MapsActivity2"
-            android:label="@string/title_activity_maps2" />
-        <activity android:name=".activity.LiteListDemoActivity" />
+        <activity android:name=".activity.CameraFotoActivity" />
         <activity
             android:name=".activity.RegistroPragasActivity"
             android:label="@string/title_activity_registro_pragas"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.CadastroImagemActivity"></activity>
     </application>
 
 </manifest>

@@ -3,6 +3,7 @@ package br.com.geodrone.activity;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.hardware.GeomagneticField;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -145,6 +146,8 @@ public class CadastroPluviosidadeActivity extends FragmentActivity implements On
             LatLng locAtual = new LatLng(lat, lng);
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(locAtual, ZOOM_MAP));
 
+            GeomagneticField geoField = new GeomagneticField(Double.valueOf(location.getLatitude()).floatValue(), Double.valueOf(location.getLongitude()).floatValue(), Double.valueOf(location.getAltitude()).floatValue(), System.currentTimeMillis());
+            float Declination = geoField.getDeclination();
 
             LatLng locDestino = new LatLng(new Double("-18.100"), new Double("-47.3344"));
             double distancia = SphericalUtil.computeDistanceBetween(locAtual, locDestino);
