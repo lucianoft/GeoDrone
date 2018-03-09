@@ -37,8 +37,10 @@
     import java.io.IOException;
     import java.io.OutputStream;
     import java.nio.ByteBuffer;
+    import java.text.SimpleDateFormat;
     import java.util.ArrayList;
     import java.util.Arrays;
+    import java.util.Date;
     import java.util.List;
 
     import br.com.geodrone.R;
@@ -48,6 +50,7 @@
     public class CameraFotoActivity extends AppCompatActivity {
 
         private static final String TAG = "AndroidCameraApi";
+        private String mCurrentPhotoPath;
 
         @BindView(R.id.texture)
         TextureView textureView;
@@ -179,7 +182,7 @@
                 Toast.makeText(CameraFotoActivity.this, "Rotation:" + rotation, Toast.LENGTH_SHORT).show();
                 Toast.makeText(CameraFotoActivity.this, "Orientacao:" + ORIENTATIONS.get(rotation), Toast.LENGTH_SHORT).show();
 
-                final File file = new File(Environment.getExternalStorageDirectory()+"/pic.jpg");
+                final File file = createImageFile();
                 ImageReader.OnImageAvailableListener readerListener = new ImageReader.OnImageAvailableListener() {
                     @Override
                     public void onImageAvailable(ImageReader reader) {
@@ -235,6 +238,8 @@
                     }
                 }, mBackgroundHandler);
             } catch (CameraAccessException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -334,5 +339,22 @@
             //closeCamera();
             stopBackgroundThread();
             super.onPause();
+        }
+
+        private File createImageFile() throws IOException {
+            // Create an image file name
+            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+            String imageFileName = "JPEG_" + timeStamp + "_";
+            File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "Camera");
+            //File storageDir = new File(Environment.getDataDirectory(), "Camera");
+            File image = File.createTempFile(
+                    imageFileName,  /* prefix */
+                    ".jpg",         /* suffix */
+                    storageDir      /* directory */
+            );
+
+            // Save a file: path for use with ACTION_VIEW intents
+            mCurrentPhotoPath = "file:" + image.getAbsolutePath();
+            return image;
         }
     }
