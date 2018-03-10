@@ -29,6 +29,7 @@ import java.util.List;
 
 import br.com.geodrone.R;
 import br.com.geodrone.activity.utils.ActivityHelper;
+import br.com.geodrone.activity.utils.Constantes;
 import br.com.geodrone.dto.PluviosidadeDiariaDto;
 import butterknife.ButterKnife;
 
@@ -39,11 +40,6 @@ public class CadastroPluviosidadeActivity extends FragmentActivity implements On
     private GoogleMap mMap;
     private LocationManager locationManager;
 
-    // The minimum distance to change Updates in meters
-    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
-    // The minimum time between updates in milliseconds
-    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
-    private static final int ZOOM_MAP = 17;
 
 
     @Override
@@ -88,16 +84,16 @@ public class CadastroPluviosidadeActivity extends FragmentActivity implements On
             Location location = null;
 
             if (isNetworkEnabled) {
-                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, Constantes.MIN_TIME_BW_UPDATES, Constantes.MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
                 location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
             }else{
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, Constantes.MIN_TIME_BW_UPDATES, Constantes.MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
                 location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             }
             if (location != null) {
                 LatLng position = new LatLng(location.getLatitude(), location.getLongitude());
                 mMap.addMarker(new MarkerOptions().position(position).title("Posiçao atual"));
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, ZOOM_MAP));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, Constantes.ZOOM_MAP));
             }
 
             List<PluviosidadeDiariaDto> s = getPontosColeta();
@@ -144,7 +140,7 @@ public class CadastroPluviosidadeActivity extends FragmentActivity implements On
             double lat = location.getLatitude();
             double lng = location.getLongitude();
             LatLng locAtual = new LatLng(lat, lng);
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(locAtual, ZOOM_MAP));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(locAtual, Constantes.ZOOM_MAP));
 
             GeomagneticField geoField = new GeomagneticField(Double.valueOf(location.getLatitude()).floatValue(), Double.valueOf(location.getLongitude()).floatValue(), Double.valueOf(location.getAltitude()).floatValue(), System.currentTimeMillis());
             float Declination = geoField.getDeclination();

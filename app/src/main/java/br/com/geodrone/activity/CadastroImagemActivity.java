@@ -9,18 +9,16 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import br.com.geodrone.R;
+import br.com.geodrone.activity.utils.Constantes;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class CadastroImagemActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
-
-    public static final int PICK_IMAGE = 1234;
 
     @BindView(R.id.bottom_nav_view_cad_imagem)
     BottomNavigationView bottomNavigationView;
@@ -48,11 +46,11 @@ public class CadastroImagemActivity extends AppCompatActivity implements BottomN
         switch (item.getItemId()) {
             case R.id.action_camera:
                 Intent i = new Intent(this,CameraFotoActivity.class);
-                startActivity(i);
+                startActivityForResult(i, Constantes.ACTIVITY_CODE_TIRAR_FOTO);
                 break;
             case R.id.action_galeria:
                 i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-                startActivityForResult(Intent.createChooser(i, "Selecione uma imagem"), PICK_IMAGE);
+                startActivityForResult(Intent.createChooser(i, "Selecione uma imagem"), Constantes.ACTIVITY_CODE_PICK_IMAGE);
                 break;
             default:
                 break;
@@ -63,13 +61,17 @@ public class CadastroImagemActivity extends AppCompatActivity implements BottomN
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(resultCode != Activity.RESULT_CANCELED){
-            if(requestCode == PICK_IMAGE){
+            if(requestCode == Constantes.ACTIVITY_CODE_PICK_IMAGE){
                 Uri imagemSelecionada = data.getData();
                 Bitmap bitmap = BitmapFactory.decodeFile(String.valueOf(imagemSelecionada));
                 Bitmap bitmapReduzido = Bitmap.createScaledBitmap(bitmap, 1080, 1000, true);
                 imageView.setImageBitmap(bitmapReduzido);
                 imageView.setScaleType(ImageView.ScaleType.FIT_XY);
                 Toast.makeText(getApplicationContext(), imagemSelecionada.toString(), Toast.LENGTH_SHORT).show();
+            }else if (requestCode == Constantes.ACTIVITY_CODE_TIRAR_FOTO){
+                String campinhoImagem = data.getExtras().getString(Constantes.PARAM_CAMINHO_ARQUIVO);
+                Toast.makeText(getApplicationContext(), campinhoImagem, Toast.LENGTH_SHORT).show();
+
             }
         }
     }

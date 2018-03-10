@@ -2,6 +2,7 @@
 
     import android.Manifest;
     import android.content.Context;
+    import android.content.Intent;
     import android.content.pm.PackageManager;
     import android.graphics.ImageFormat;
     import android.graphics.SurfaceTexture;
@@ -44,6 +45,7 @@
     import java.util.List;
 
     import br.com.geodrone.R;
+    import br.com.geodrone.activity.utils.Constantes;
     import butterknife.BindView;
     import butterknife.ButterKnife;
 
@@ -208,6 +210,7 @@
                         try {
                             output = new FileOutputStream(file);
                             output.write(bytes);
+                           onBackPressed();
                         } finally {
                             if (null != output) {
                                 output.close();
@@ -356,5 +359,13 @@
             // Save a file: path for use with ACTION_VIEW intents
             mCurrentPhotoPath = "file:" + image.getAbsolutePath();
             return image;
+        }
+
+        @Override
+        public void onBackPressed() {
+            Intent it = new Intent();
+            it.putExtra(Constantes.PARAM_CAMINHO_ARQUIVO, mCurrentPhotoPath);
+            setResult(Constantes.ACTIVITY_CODE_TIRAR_FOTO, it);
+            super.onBackPressed();
         }
     }
