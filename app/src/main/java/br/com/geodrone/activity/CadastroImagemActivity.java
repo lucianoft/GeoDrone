@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import java.io.InputStream;
 
 import br.com.geodrone.R;
 import br.com.geodrone.activity.utils.Constantes;
@@ -49,8 +52,9 @@ public class CadastroImagemActivity extends AppCompatActivity implements BottomN
                 startActivityForResult(i, Constantes.ACTIVITY_CODE_TIRAR_FOTO);
                 break;
             case R.id.action_galeria:
-                i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-                startActivityForResult(Intent.createChooser(i, "Selecione uma imagem"), Constantes.ACTIVITY_CODE_PICK_IMAGE);
+                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+                photoPickerIntent.setType("image/*");
+                startActivityForResult(Intent.createChooser(photoPickerIntent, "Selecione uma imagem"), Constantes.ACTIVITY_CODE_PICK_IMAGE);
                 break;
             default:
                 break;
@@ -60,19 +64,24 @@ public class CadastroImagemActivity extends AppCompatActivity implements BottomN
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode != Activity.RESULT_CANCELED){
-            if(requestCode == Constantes.ACTIVITY_CODE_PICK_IMAGE){
-                Uri imagemSelecionada = data.getData();
-                Bitmap bitmap = BitmapFactory.decodeFile(String.valueOf(imagemSelecionada));
-                Bitmap bitmapReduzido = Bitmap.createScaledBitmap(bitmap, 1080, 1000, true);
-                imageView.setImageBitmap(bitmapReduzido);
-                imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-                Toast.makeText(getApplicationContext(), imagemSelecionada.toString(), Toast.LENGTH_SHORT).show();
-            }else if (requestCode == Constantes.ACTIVITY_CODE_TIRAR_FOTO){
-                String campinhoImagem = data.getExtras().getString(Constantes.PARAM_CAMINHO_ARQUIVO);
-                Toast.makeText(getApplicationContext(), campinhoImagem, Toast.LENGTH_SHORT).show();
+        try {
+            if (resultCode != Activity.RESULT_CANCELED) {
+                if (requestCode == Constantes.ACTIVITY_CODE_PICK_IMAGE) {
+                    final Uri imageUri = data.getData();
+                    final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                    final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                    imageView.setImageBitmap(selectedImage);
+                    Toast.makeText(getApplicationContext(), imageUri.toString(), Toast.LENGTH_SHORT).show();
+                } else if (requestCode == Constantes.ACTIVITY_CODE_TIRAR_FOTO) {
+                    String campinhoImagem = data.getExtras().getString(Constantes.PARAM_CAMINHO_ARQUIVO);
+                    Toast.makeText(getApplicationContext(), campinhoImagem, Toast.LENGTH_SHORT).show();
 
+                }
             }
+        }catch (Exception ex){
+            Toast.makeText(getApplicationContext(), ex.toString() , Toast.LENGTH_SHORT).show();
+
+            ex.printStackTrace();
         }
     }
 }

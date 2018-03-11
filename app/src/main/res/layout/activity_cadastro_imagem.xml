@@ -11,26 +11,52 @@
     tools:context="br.com.geodrone.activity.CadastroImagemActivity">
 
     <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/db1_root"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical" >
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <ImageView
+            android:id="@+id/imgCamera"
+            android:contentDescription="Foto tirada"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_above="@+id/lbDescImagem"
+            android:layout_alignParentTop="true" />
 
-            <ImageView
-                android:id="@+id/imgCamera"
-                android:contentDescription="Foto tirada"
+
+        <LinearLayout
+            android:id="@+id/lbDescImagem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/linear_layout_custom"
+            android:elevation="10dp"
+            android:orientation="vertical"
+            android:layout_above="@+id/bottom_nav_view_cad_imagem"
+            android:visibility="visible">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+                <EditText android:id="@+id/input_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:inputType="text|textMultiLine"
+                    android:gravity="top"
+                    android:hint="@string/lb_email"
+                    android:maxLength="255"/>
+            </android.support.design.widget.TextInputLayout>
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_login"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true" />
-
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:padding="12dp"
+                android:text="@string/lb_login"/>
 
         </LinearLayout>
+
+
 
         <android.support.design.widget.BottomNavigationView
             android:layout_alignParentLeft="true"
