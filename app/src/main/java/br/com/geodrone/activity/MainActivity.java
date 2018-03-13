@@ -105,23 +105,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_registro_foto) {
             Intent i = new Intent(this,CadastroImagemActivity.class);
             startActivity(i);
 
-        } else if (id == R.id.nav_gallery) {
-            Intent i = new Intent(this,MapsActivity.class);
+        } else if (id == R.id.nav_registo_chuva) {
+            Intent i = new Intent(this,CadastroPluviosidadeActivity.class);
             startActivity(i);
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
 
-        } else if (id == R.id.nav_share) {
-            Intent i = new Intent(this,RegChuvasActivity.class);
+        } else if (id == R.id.nav_mensagem) {
+            Intent i = new Intent(this,MensagemActivity.class);
             startActivity(i);
 
-        } else if (id == R.id.nav_send) {
-            Intent i = new Intent(this,CadastroPluviosidadeActivity.class);
+        } else if (id == R.id.nav_forum) {
+            Intent i = new Intent(this,ForunActivity.class);
             startActivity(i);
 
         }

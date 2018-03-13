@@ -5,13 +5,13 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/nav_registro_foto"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:title="@string/menu_registro_foto" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:id="@+id/nav_registo_chuva"
+            android:icon="@drawable/ic_pluviosidade"
+            android:title="@string/menu_registro_chuva" />
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
@@ -22,16 +22,17 @@
             android:title="Tools" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/menu_comunicacao">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:id="@+id/nav_mensagem"
+                android:icon="@drawable/ic_menu_mensagem"
+                android:title="@string/menu_mensagem" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/nav_forum"
+                android:icon="@drawable/ic_menu_forum"
+                android:title="@string/menu_forum" />
+
         </menu>
     </item>
 

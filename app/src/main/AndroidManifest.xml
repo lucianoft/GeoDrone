@@ -93,7 +93,9 @@
             android:name=".activity.RegistroPragasActivity"
             android:label="@string/title_activity_registro_pragas"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.CadastroImagemActivity"></activity>
+        <activity android:name=".activity.CadastroImagemActivity" />
+        <activity android:name=".activity.MensagemActivity" />
+        <activity android:name=".activity.ForunActivity"></activity>
     </application>
 
 </manifest>

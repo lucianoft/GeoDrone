@@ -38,4 +38,10 @@
     <string name="title_activity_registro_pragas">Registro de Pagras</string>
 
     <string name="widget_labelled_spinner_errorText">You must choose an item.</string>
+
+    <string name="menu_registro_chuva">Registro Chuva</string>
+    <string name="menu_registro_foto">Registro Fotos</string>
+    <string name="menu_comunicacao">Comunicação</string>
+    <string name="menu_mensagem">Mensagem</string>
+    <string name="menu_forum">Forum</string>
 </resources>
