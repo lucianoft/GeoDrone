@@ -9,7 +9,7 @@ import org.greenrobot.greendao.annotation.Generated;
 @Entity(generateConstructors = false, nameInDb = "TB_USUARIO")
 public class Usuario {
 
-    @Id(autoincrement =  true)
+    @Id(autoincrement =  false)
     @Property(nameInDb = "ID_USUARIO")
     private Long id;
 
