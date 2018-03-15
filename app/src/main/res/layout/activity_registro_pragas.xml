@@ -30,12 +30,18 @@
         android:paddingRight="5dp">
 
         <com.satsuware.usefulviews.LabelledSpinner
-            android:id="@+id/spiPragras2"
+            android:id="@+id/spiTipoPragra"
             app:labelText="@string/app_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-    <LinearLayout
+        <com.satsuware.usefulviews.LabelledSpinner
+            android:id="@+id/spiPragra"
+            app:labelText="@string/app_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
         android:id="@+id/cadastroRegistroLayoutObs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
