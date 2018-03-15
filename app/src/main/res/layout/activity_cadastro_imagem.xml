@@ -11,6 +11,7 @@
     tools:context="br.com.geodrone.activity.CadastroImagemActivity">
 
     <RelativeLayout
+        android:id="@+id/layout_cad_imagem"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -19,12 +20,12 @@
             android:contentDescription="Foto tirada"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/lbDescImagem"
+            android:layout_above="@+id/layout_cad_imagem_salvar"
             android:layout_alignParentTop="true" />
 
 
         <LinearLayout
-            android:id="@+id/lbDescImagem"
+            android:id="@+id/layout_cad_imagem_salvar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/linear_layout_custom"
@@ -55,7 +56,6 @@
                 android:text="@string/lb_login"/>
 
         </LinearLayout>
-
 
 
         <android.support.design.widget.BottomNavigationView

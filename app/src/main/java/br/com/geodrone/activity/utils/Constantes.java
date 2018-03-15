@@ -14,6 +14,7 @@ public interface Constantes {
 
 
     public static final int ACTIVITY_CODE_PICK_IMAGE = 1234;
+    public static final int ACTIVITY_REQUEST_TAKE_PHOTO = 1235;
     public static final int ACTIVITY_CODE_TIRAR_FOTO = 1235;
 
 
