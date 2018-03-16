@@ -39,6 +39,7 @@ import java.util.List;
 
 import br.com.geodrone.R;
 import br.com.geodrone.presenter.UsuarioPresenter;
+import br.com.geodrone.utils.PreferencesUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -62,6 +63,9 @@ public class LoginActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         usuarioPresenter = new UsuarioPresenter(this);
+        _emailText.setText(PreferencesUtils.getString(getApplicationContext(), PreferencesUtils.CHAVE_EMAIL_USUARIO, ""));
+        _passwordText.setText(PreferencesUtils.getString(getApplicationContext(), PreferencesUtils.CHAVE_SENHA_USUARIO, ""));
+
         _loginButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -154,6 +158,8 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onLoginSuccess() {
         _loginButton.setEnabled(true);
+        PreferencesUtils.putString(getApplicationContext(), PreferencesUtils.CHAVE_EMAIL_USUARIO, _emailText.getText().toString());
+        PreferencesUtils.putString(getApplicationContext(), PreferencesUtils.CHAVE_SENHA_USUARIO, _passwordText.getText().toString());
         Intent i = new Intent(this,MainActivity.class);
         startActivity(i);
         finish();

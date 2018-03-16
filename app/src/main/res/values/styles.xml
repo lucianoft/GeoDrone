@@ -6,6 +6,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorButtonNormal">@color/colorPrimary</item>
+        <item name="colorControlHighlight">@color/colorAccent</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -25,6 +27,11 @@
 
     <style name="AppCompat.TelaCheia" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="AppTheme.Button" parent="Base.Widget.AppCompat.Button">
+        <item name="colorButtonNormal">@color/colorRed</item>
+        <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
 

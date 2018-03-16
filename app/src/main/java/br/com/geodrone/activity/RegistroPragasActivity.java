@@ -25,7 +25,7 @@ import com.satsuware.usefulviews.LabelledSpinner;
 
 public class RegistroPragasActivity extends AppCompatActivity implements LabelledSpinner.OnItemChosenListener {
 
-    @BindView(R.id.spiPragras2)
+    @BindView(R.id.spiPragra)
     LabelledSpinner spiPragas;
 
 
