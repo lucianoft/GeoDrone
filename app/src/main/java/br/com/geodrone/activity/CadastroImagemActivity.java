@@ -46,7 +46,7 @@ public class CadastroImagemActivity extends AppCompatActivity implements BottomN
     ImageView imageView;
 
     @BindView(R.id.layout_cad_imagem_salvar)
-    LinearLayout layoutSalvar;
+    RelativeLayout layoutSalvar;
 
     private String mCurrentPhotoPath;
 

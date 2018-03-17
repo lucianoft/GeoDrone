@@ -42,7 +42,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SEND"
+            android:src="@drawable/ic_menu_send"
             android:enabled="false"
             android:id="@+id/sendButton"
             android:layout_gravity="bottom"/>

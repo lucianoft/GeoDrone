@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import org.greenrobot.greendao.database.Database;
 
+import br.com.geodrone.model.Usuario;
 import br.com.geodrone.model.daoGen.DaoMaster;
 import br.com.geodrone.model.daoGen.DaoSession;
 import br.com.geodrone.model.daoGen.DbOpenHelper;
@@ -28,9 +29,16 @@ public class GeoDroneApplication extends Application {
 */
 
         // USER CREATION FOR DEMO PURPOSE
-       /* if(daoSession.getUserDao().loadAll().size() == 0){
-            daoSession.getUserDao().insert(new User(1L, "Janishar Ali","", ""));
-        }*/
+        if(daoSession.getUsuarioDao().loadAll().size() == 0){
+            Usuario usuario = new Usuario();
+            usuario.setId(1L);
+            usuario.setEmail("admin@gmail.com");
+            usuario.setSenha("1234");
+            usuario.setSobrenome("admin");
+            usuario.setNome("admin");
+
+            daoSession.getUsuarioDao().insert(usuario);
+        }
         /*DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, ENCRYPTED ? Constantes.BD_NOME : "notes-db");
         Database db = ENCRYPTED ? helper.getEncryptedWritableDb("super-secret") : helper.getWritableDb();
         daoSession = new DaoMaster(db).newSession();*/

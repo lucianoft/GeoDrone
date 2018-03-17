@@ -30,6 +30,7 @@
                 android:inputType="text|textMultiLine"
                 android:gravity="top"
                 android:hint="@string/lb_email"
+                android:ems="10"
                 android:maxLength="255"/>
         </android.support.design.widget.TextInputLayout>
 
