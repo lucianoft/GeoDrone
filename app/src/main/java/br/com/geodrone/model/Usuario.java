@@ -6,7 +6,7 @@ import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.Property;
 import org.greenrobot.greendao.annotation.Generated;
 
-@Entity(generateConstructors = false, nameInDb = "TB_USUARIO")
+@Entity(generateConstructors = false, createInDb = true, nameInDb = "TB_USUARIO")
 public class Usuario {
 
     @Id(autoincrement =  false)
@@ -23,6 +23,10 @@ public class Usuario {
     @Property(nameInDb = "EMAIL")
     @NotNull
     private String email;
+
+    @Property(nameInDb = "TELEFONE" )
+    @NotNull
+    private String telefone;
 
     @Property(nameInDb = "SENHA")
     @NotNull
@@ -94,5 +98,13 @@ public class Usuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getTelefone() {
+        return this.telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 }

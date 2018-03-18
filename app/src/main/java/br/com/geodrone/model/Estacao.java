@@ -7,6 +7,7 @@ import org.greenrobot.greendao.annotation.Property;
 
 import java.util.Date;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.ToMany;
 
 /**
  * Created by fernandes on 16/03/2018.
@@ -41,6 +42,9 @@ public class Estacao {
     @NotNull()
     @Property(nameInDb = "DT_ALTERACAO")
     private Date dtAlteracao;
+
+    @Property(nameInDb = "ID_USUARIO")
+    private Long idUsuario;
 
     @Property(nameInDb = "ID_ESTACAO_WEB")
     private Long idEstacaoWeb;
@@ -110,6 +114,14 @@ public class Estacao {
 
     public void setIdEstacaoWeb(Long idEstacaoWeb) {
         this.idEstacaoWeb = idEstacaoWeb;
+    }
+
+    public Long getIdUsuario() {
+        return this.idUsuario;
+    }
+
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
 

@@ -33,15 +33,16 @@ public class Cliente {
     @Property(nameInDb = "SOBRENOME")
     private String nomeFantasia;
 
+    @Property(nameInDb = "SEGMENTO")
+    private String segmento;
+
     @Property(nameInDb = "EMAIL")
     @NotNull
     private String email;
 
-
     @Property(nameInDb = "TELEFONE")
     @NotNull
     private String telefone;
-
 
     @Property(nameInDb = "CELULAR")
     @NotNull
@@ -96,6 +97,14 @@ public class Cliente {
 
     public void setNomeFantasia(String nomeFantasia) {
         this.nomeFantasia = nomeFantasia;
+    }
+
+    public String getSegmento() {
+        return segmento;
+    }
+
+    public void setSegmento(String segmento) {
+        this.segmento = segmento;
     }
 
     public String getEmail() {

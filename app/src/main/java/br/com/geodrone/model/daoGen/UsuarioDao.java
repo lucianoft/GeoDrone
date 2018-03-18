@@ -28,7 +28,8 @@ public class UsuarioDao extends AbstractDao<Usuario, Long> {
         public final static Property Nome = new Property(1, String.class, "nome", false, "NOME");
         public final static Property Sobrenome = new Property(2, String.class, "sobrenome", false, "SOBRENOME");
         public final static Property Email = new Property(3, String.class, "email", false, "EMAIL");
-        public final static Property Senha = new Property(4, String.class, "senha", false, "SENHA");
+        public final static Property Telefone = new Property(4, String.class, "telefone", false, "TELEFONE");
+        public final static Property Senha = new Property(5, String.class, "senha", false, "SENHA");
     }
 
 
@@ -48,7 +49,8 @@ public class UsuarioDao extends AbstractDao<Usuario, Long> {
                 "\"NOME\" TEXT NOT NULL ," + // 1: nome
                 "\"SOBRENOME\" TEXT," + // 2: sobrenome
                 "\"EMAIL\" TEXT NOT NULL ," + // 3: email
-                "\"SENHA\" TEXT NOT NULL );"); // 4: senha
+                "\"TELEFONE\" TEXT NOT NULL ," + // 4: telefone
+                "\"SENHA\" TEXT NOT NULL );"); // 5: senha
     }
 
     /** Drops the underlying database table. */
@@ -72,7 +74,8 @@ public class UsuarioDao extends AbstractDao<Usuario, Long> {
             stmt.bindString(3, sobrenome);
         }
         stmt.bindString(4, entity.getEmail());
-        stmt.bindString(5, entity.getSenha());
+        stmt.bindString(5, entity.getTelefone());
+        stmt.bindString(6, entity.getSenha());
     }
 
     @Override
@@ -90,7 +93,8 @@ public class UsuarioDao extends AbstractDao<Usuario, Long> {
             stmt.bindString(3, sobrenome);
         }
         stmt.bindString(4, entity.getEmail());
-        stmt.bindString(5, entity.getSenha());
+        stmt.bindString(5, entity.getTelefone());
+        stmt.bindString(6, entity.getSenha());
     }
 
     @Override
@@ -111,7 +115,8 @@ public class UsuarioDao extends AbstractDao<Usuario, Long> {
         entity.setNome(cursor.getString(offset + 1));
         entity.setSobrenome(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setEmail(cursor.getString(offset + 3));
-        entity.setSenha(cursor.getString(offset + 4));
+        entity.setTelefone(cursor.getString(offset + 4));
+        entity.setSenha(cursor.getString(offset + 5));
      }
     
     @Override

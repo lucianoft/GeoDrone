@@ -30,9 +30,10 @@ public class ClienteDao extends AbstractDao<Cliente, Long> {
         public final static Property Cfp = new Property(3, Long.class, "cfp", false, "CPF");
         public final static Property Cnpj = new Property(4, Long.class, "cnpj", false, "CNPJ");
         public final static Property NomeFantasia = new Property(5, String.class, "nomeFantasia", false, "SOBRENOME");
-        public final static Property Email = new Property(6, String.class, "email", false, "EMAIL");
-        public final static Property Telefone = new Property(7, String.class, "telefone", false, "TELEFONE");
-        public final static Property Celular = new Property(8, String.class, "celular", false, "CELULAR");
+        public final static Property Segmento = new Property(6, String.class, "segmento", false, "SEGMENTO");
+        public final static Property Email = new Property(7, String.class, "email", false, "EMAIL");
+        public final static Property Telefone = new Property(8, String.class, "telefone", false, "TELEFONE");
+        public final static Property Celular = new Property(9, String.class, "celular", false, "CELULAR");
     }
 
 
@@ -54,9 +55,10 @@ public class ClienteDao extends AbstractDao<Cliente, Long> {
                 "\"CPF\" INTEGER," + // 3: cfp
                 "\"CNPJ\" INTEGER," + // 4: cnpj
                 "\"SOBRENOME\" TEXT," + // 5: nomeFantasia
-                "\"EMAIL\" TEXT NOT NULL ," + // 6: email
-                "\"TELEFONE\" TEXT NOT NULL ," + // 7: telefone
-                "\"CELULAR\" TEXT NOT NULL );"); // 8: celular
+                "\"SEGMENTO\" TEXT," + // 6: segmento
+                "\"EMAIL\" TEXT NOT NULL ," + // 7: email
+                "\"TELEFONE\" TEXT NOT NULL ," + // 8: telefone
+                "\"CELULAR\" TEXT NOT NULL );"); // 9: celular
     }
 
     /** Drops the underlying database table. */
@@ -90,9 +92,14 @@ public class ClienteDao extends AbstractDao<Cliente, Long> {
         if (nomeFantasia != null) {
             stmt.bindString(6, nomeFantasia);
         }
-        stmt.bindString(7, entity.getEmail());
-        stmt.bindString(8, entity.getTelefone());
-        stmt.bindString(9, entity.getCelular());
+ 
+        String segmento = entity.getSegmento();
+        if (segmento != null) {
+            stmt.bindString(7, segmento);
+        }
+        stmt.bindString(8, entity.getEmail());
+        stmt.bindString(9, entity.getTelefone());
+        stmt.bindString(10, entity.getCelular());
     }
 
     @Override
@@ -120,9 +127,14 @@ public class ClienteDao extends AbstractDao<Cliente, Long> {
         if (nomeFantasia != null) {
             stmt.bindString(6, nomeFantasia);
         }
-        stmt.bindString(7, entity.getEmail());
-        stmt.bindString(8, entity.getTelefone());
-        stmt.bindString(9, entity.getCelular());
+ 
+        String segmento = entity.getSegmento();
+        if (segmento != null) {
+            stmt.bindString(7, segmento);
+        }
+        stmt.bindString(8, entity.getEmail());
+        stmt.bindString(9, entity.getTelefone());
+        stmt.bindString(10, entity.getCelular());
     }
 
     @Override
@@ -145,9 +157,10 @@ public class ClienteDao extends AbstractDao<Cliente, Long> {
         entity.setCfp(cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3));
         entity.setCnpj(cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4));
         entity.setNomeFantasia(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setEmail(cursor.getString(offset + 6));
-        entity.setTelefone(cursor.getString(offset + 7));
-        entity.setCelular(cursor.getString(offset + 8));
+        entity.setSegmento(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setEmail(cursor.getString(offset + 7));
+        entity.setTelefone(cursor.getString(offset + 8));
+        entity.setCelular(cursor.getString(offset + 9));
      }
     
     @Override

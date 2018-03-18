@@ -31,7 +31,8 @@ public class EstacaoDao extends AbstractDao<Estacao, Long> {
         public final static Property DtInstalacao = new Property(4, java.util.Date.class, "dtInstalacao", false, "DT_INSTALACAO");
         public final static Property DtInclusao = new Property(5, java.util.Date.class, "dtInclusao", false, "DT_INCLUSAO");
         public final static Property DtAlteracao = new Property(6, java.util.Date.class, "dtAlteracao", false, "DT_ALTERACAO");
-        public final static Property IdEstacaoWeb = new Property(7, Long.class, "idEstacaoWeb", false, "ID_ESTACAO_WEB");
+        public final static Property IdUsuario = new Property(7, Long.class, "idUsuario", false, "ID_USUARIO");
+        public final static Property IdEstacaoWeb = new Property(8, Long.class, "idEstacaoWeb", false, "ID_ESTACAO_WEB");
     }
 
 
@@ -54,7 +55,8 @@ public class EstacaoDao extends AbstractDao<Estacao, Long> {
                 "\"DT_INSTALACAO\" INTEGER NOT NULL ," + // 4: dtInstalacao
                 "\"DT_INCLUSAO\" INTEGER NOT NULL ," + // 5: dtInclusao
                 "\"DT_ALTERACAO\" INTEGER NOT NULL ," + // 6: dtAlteracao
-                "\"ID_ESTACAO_WEB\" INTEGER);"); // 7: idEstacaoWeb
+                "\"ID_USUARIO\" INTEGER," + // 7: idUsuario
+                "\"ID_ESTACAO_WEB\" INTEGER);"); // 8: idEstacaoWeb
     }
 
     /** Drops the underlying database table. */
@@ -78,9 +80,14 @@ public class EstacaoDao extends AbstractDao<Estacao, Long> {
         stmt.bindLong(6, entity.getDtInclusao().getTime());
         stmt.bindLong(7, entity.getDtAlteracao().getTime());
  
+        Long idUsuario = entity.getIdUsuario();
+        if (idUsuario != null) {
+            stmt.bindLong(8, idUsuario);
+        }
+ 
         Long idEstacaoWeb = entity.getIdEstacaoWeb();
         if (idEstacaoWeb != null) {
-            stmt.bindLong(8, idEstacaoWeb);
+            stmt.bindLong(9, idEstacaoWeb);
         }
     }
 
@@ -99,9 +106,14 @@ public class EstacaoDao extends AbstractDao<Estacao, Long> {
         stmt.bindLong(6, entity.getDtInclusao().getTime());
         stmt.bindLong(7, entity.getDtAlteracao().getTime());
  
+        Long idUsuario = entity.getIdUsuario();
+        if (idUsuario != null) {
+            stmt.bindLong(8, idUsuario);
+        }
+ 
         Long idEstacaoWeb = entity.getIdEstacaoWeb();
         if (idEstacaoWeb != null) {
-            stmt.bindLong(8, idEstacaoWeb);
+            stmt.bindLong(9, idEstacaoWeb);
         }
     }
 
@@ -126,7 +138,8 @@ public class EstacaoDao extends AbstractDao<Estacao, Long> {
         entity.setDtInstalacao(new java.util.Date(cursor.getLong(offset + 4)));
         entity.setDtInclusao(new java.util.Date(cursor.getLong(offset + 5)));
         entity.setDtAlteracao(new java.util.Date(cursor.getLong(offset + 6)));
-        entity.setIdEstacaoWeb(cursor.isNull(offset + 7) ? null : cursor.getLong(offset + 7));
+        entity.setIdUsuario(cursor.isNull(offset + 7) ? null : cursor.getLong(offset + 7));
+        entity.setIdEstacaoWeb(cursor.isNull(offset + 8) ? null : cursor.getLong(offset + 8));
      }
     
     @Override

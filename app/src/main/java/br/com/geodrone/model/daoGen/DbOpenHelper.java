@@ -5,11 +5,12 @@ import android.util.Log;
 
 import org.greenrobot.greendao.database.Database;
 
+import br.com.geodrone.model.Usuario;
+
 public class DbOpenHelper extends DaoMaster.OpenHelper {
 
     public DbOpenHelper(Context context, String name) {
         super(context, name);
-        ///mDaoSession = new DaoMaster(new DbOpenHelper(this, "greendao_demo.db").getWritableDb()).newSession();
 
         // USER CREATION FOR DEMO PURPOSE
         /*if(mDaoSession.getUserDao().loadAll().size() == 0){

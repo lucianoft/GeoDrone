@@ -20,28 +20,25 @@ public class GeoDroneApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        daoSession = new DaoMaster(new DbOpenHelper(this, "movies-db").getWritableDb()).newSession();
+        //daoSession = new DaoMaster(new DbOpenHelper(this, "movies-db").getWritableDb()).newSession();
 
-/*
-        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this,"movies-db"); //The users-db here is the name of our database.
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this,Constantes.BD_NOME); //The users-db here is the name of our database.
         Database db = helper.getWritableDb();
         daoSession = new DaoMaster(db).newSession();
-*/
 
-        // USER CREATION FOR DEMO PURPOSE
-        if(daoSession.getUsuarioDao().loadAll().size() == 0){
-            Usuario usuario = new Usuario();
-            usuario.setId(1L);
-            usuario.setEmail("admin@gmail.com");
-            usuario.setSenha("1234");
-            usuario.setSobrenome("admin");
-            usuario.setNome("admin");
-
-            daoSession.getUsuarioDao().insert(usuario);
-        }
         /*DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, ENCRYPTED ? Constantes.BD_NOME : "notes-db");
         Database db = ENCRYPTED ? helper.getEncryptedWritableDb("super-secret") : helper.getWritableDb();
         daoSession = new DaoMaster(db).newSession();*/
+        if(daoSession.getUsuarioDao().loadAll().size() == 0){
+            Usuario usuario = new Usuario();
+            usuario.setId(1L);
+            usuario.setNome("admin");
+            usuario.setSobrenome("admin");
+            usuario.setEmail("admin@gmail.com");
+            usuario.setSenha("admin");
+            usuario.setTelefone("9999-9999");
+            daoSession.getUsuarioDao().insert(usuario);
+        }
     }
 
     public DaoSession getDaoSession() {

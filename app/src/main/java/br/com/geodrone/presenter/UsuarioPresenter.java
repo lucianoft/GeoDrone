@@ -15,6 +15,7 @@ public class UsuarioPresenter {
     }
 
     public Usuario findByEmail(String email, String senha){
+        this.usuarioService.findAll();
         return this.usuarioService.findByEmail(email);
     }
 }
