@@ -10,10 +10,16 @@
     tools:openDrawer="start"
     tools:context="br.com.geodrone.activity.CadastroImagemActivity">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
     <RelativeLayout
         android:id="@+id/layout_cad_imagem"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        >
 
         <ImageView
             android:id="@+id/imgCamera"

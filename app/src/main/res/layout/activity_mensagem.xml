@@ -1,51 +1,69 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start"
+    tools:context=".activity.MensagemActivity">
 
     <LinearLayout
-        android:id="@+id/mensagemActivityLinearLayout"
+        android:background="@color/colorWhite"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:baselineAligned="false"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        >
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_weight="5">
-
-            <EditText
-                android:id="@+id/mensagemEditText"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="top"
-                android:hint="@string/lb_mensagem"
-                android:inputType="textMultiLine"
-                android:maxLength="255" />
-        </android.support.design.widget.TextInputLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/chatRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="0px"
+            android:layout_weight="1">
+        </android.support.v7.widget.RecyclerView>
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical">
+            android:background="@color/colorWhite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="5dp">
 
-            <Button
-                android:id="@+id/cadastrarMensagemButton"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:background="@drawable/ic_menu_send"
-                android:foregroundGravity="center_vertical|center_horizontal" />
+            <android.support.design.widget.TextInputLayout
+                android:layout_margin="5dp"
+                android:id="@+id/messageToSendInputLayout"
+                android:background="@drawable/btn_transparent_edge_green"
+                android:layout_width="0dp"
+                android:layout_weight="8"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:layout_margin="5dp"
+                    android:id="@+id/messageToSend"
+                    android:layout_width="match_parent"
+                    android:layout_weight="8"
+                    android:layout_height="wrap_content" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.FloatingActionButton
+                android:layout_margin="5dp"
+                android:id="@+id/newChatFab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/ic_menu_send"/>
+            <!--
+            <ImageButton
+                android:layout_margin="5dp"
+                android:background="@drawable/btn_transparent_edge_green"
+                android:src="@drawable/ic_menu_send"
+                android:id="@+id/sendMessageButton"
+                android:text="Send"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                />
+                -->
         </LinearLayout>
+
     </LinearLayout>
 </RelativeLayout>

@@ -19,7 +19,7 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener /*BottomNavigationView.OnNavigationItemSelectedListener*/ {
 
-    @BindView(R.id.toolbarMain)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
 
     //@BindView(R.id.navigationMain)
@@ -115,6 +115,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
+            Intent i = new Intent(this,RegistroPragasActivity.class);
+            startActivity(i);
 
         } else if (id == R.id.nav_mensagem) {
             Intent i = new Intent(this,MensagemActivity.class);

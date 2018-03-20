@@ -1,6 +1,7 @@
 package br.com.geodrone.repository;
 
 import android.app.Activity;
+import android.content.Context;
 
 
 import org.greenrobot.greendao.AbstractDao;
@@ -19,8 +20,8 @@ public abstract class CrudRepository<T, ID> {
     public AbstractDao<T, ID> dao = null;
     DaoSession daoSession = null;
 
-    public CrudRepository(Activity activity){
-        daoSession = ((GeoDroneApplication)activity.getApplication()).getDaoSession();
+    public CrudRepository(Context ctx){
+        daoSession = ((GeoDroneApplication)ctx.getApplicationContext()).getDaoSession();
     }
 
     public abstract AbstractDao<T, ID> getCrudDao();

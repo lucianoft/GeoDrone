@@ -7,16 +7,15 @@ import org.greenrobot.greendao.annotation.Property;
 
 import java.util.Date;
 import org.greenrobot.greendao.annotation.Generated;
-import org.greenrobot.greendao.annotation.ToMany;
 
 /**
- * Created by fernandes on 16/03/2018.
+ * Created by fernandes on 19/03/2018.
  */
-@Entity(generateConstructors = false, nameInDb = "TB_ESTACAO")
-public class Estacao {
+@Entity(generateConstructors = false, generateGettersSetters = true,  nameInDb = "TB_DADOS_PLUVIOMETRICOS")
+public class DadosPluviometricos {
 
     @Id(autoincrement =  true)
-    @Property(nameInDb = "ID_ESTACAO")
+    @Property(nameInDb = "ID_DADOS_PLUVIOMETRICOS")
     private Long id;
 
     @NotNull
@@ -24,16 +23,8 @@ public class Estacao {
     private Long idCliente;
 
     @NotNull
-    @Property(nameInDb = "LATITUDE")
-    private Long latitude;
-
-    @NotNull
-    @Property(nameInDb = "LONGITUDE")
-    private Long longitude;
-
-    @NotNull
-    @Property(nameInDb = "DT_INSTALACAO")
-    private Date dtInstalacao;
+    @Property(nameInDb = "VOLUME")
+    private Long volume;
 
     @NotNull()
     @Property(nameInDb = "DT_INCLUSAO")
@@ -46,14 +37,14 @@ public class Estacao {
     @Property(nameInDb = "ID_USUARIO")
     private Long idUsuario;
 
-    @Property(nameInDb = "ID_ESTACAO_WEB")
-    private Long idEstacaoWeb;
+    @Property(nameInDb = "ID_DADOS_PLUVIOMETRICOS_WEB")
+    private Long idDadosPluviometricosWeb;
 
-    public Estacao() {
+    public DadosPluviometricos() {
     }
 
     public Long getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Long id) {
@@ -61,39 +52,23 @@ public class Estacao {
     }
 
     public Long getIdCliente() {
-        return idCliente;
+        return this.idCliente;
     }
 
     public void setIdCliente(Long idCliente) {
         this.idCliente = idCliente;
     }
 
-    public Long getLatitude() {
-        return latitude;
+    public Long getVolume() {
+        return this.volume;
     }
 
-    public void setLatitude(Long latitude) {
-        this.latitude = latitude;
-    }
-
-    public Long getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(Long longitude) {
-        this.longitude = longitude;
-    }
-
-    public Date getDtInstalacao() {
-        return dtInstalacao;
-    }
-
-    public void setDtInstalacao(Date dtInstalacao) {
-        this.dtInstalacao = dtInstalacao;
+    public void setVolume(Long volume) {
+        this.volume = volume;
     }
 
     public Date getDtInclusao() {
-        return dtInclusao;
+        return this.dtInclusao;
     }
 
     public void setDtInclusao(Date dtInclusao) {
@@ -101,19 +76,11 @@ public class Estacao {
     }
 
     public Date getDtAlteracao() {
-        return dtAlteracao;
+        return this.dtAlteracao;
     }
 
     public void setDtAlteracao(Date dtAlteracao) {
         this.dtAlteracao = dtAlteracao;
-    }
-
-    public Long getIdEstacaoWeb() {
-        return idEstacaoWeb;
-    }
-
-    public void setIdEstacaoWeb(Long idEstacaoWeb) {
-        this.idEstacaoWeb = idEstacaoWeb;
     }
 
     public Long getIdUsuario() {
@@ -122,6 +89,14 @@ public class Estacao {
 
     public void setIdUsuario(Long idUsuario) {
         this.idUsuario = idUsuario;
+    }
+
+    public Long getIdDadosPluviometricosWeb() {
+        return this.idDadosPluviometricosWeb;
+    }
+
+    public void setIdDadosPluviometricosWeb(Long idDadosPluviometricosWeb) {
+        this.idDadosPluviometricosWeb = idDadosPluviometricosWeb;
     }
 
 

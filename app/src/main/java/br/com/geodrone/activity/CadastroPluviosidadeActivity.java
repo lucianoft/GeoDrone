@@ -40,8 +40,6 @@ public class CadastroPluviosidadeActivity extends FragmentActivity implements On
     private GoogleMap mMap;
     private LocationManager locationManager;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

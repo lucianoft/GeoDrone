@@ -1,6 +1,7 @@
 package br.com.geodrone.repository;
 
 import android.app.Activity;
+import android.content.Context;
 
 
 import org.greenrobot.greendao.AbstractDao;
@@ -11,8 +12,8 @@ import br.com.geodrone.model.daoGen.UsuarioDao;
 
 public class UsuarioRepository extends CrudRepository<Usuario, Long>{
 
-    public UsuarioRepository(Activity activity) {
-        super(activity);
+    public UsuarioRepository(Context ctx) {
+        super(ctx);
     }
 
     @Override

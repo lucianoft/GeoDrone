@@ -1,6 +1,7 @@
 package br.com.geodrone.service;
 
 import android.app.Activity;
+import android.content.Context;
 
 
 import java.util.List;
@@ -12,8 +13,8 @@ public class UsuarioService implements ServiceCrud<Usuario, Long>{
 
     UsuarioRepository usuarioRepository = null;
 
-    public UsuarioService(Activity activity){
-        usuarioRepository = new UsuarioRepository(activity);
+    public UsuarioService(Context ctx){
+        usuarioRepository = new UsuarioRepository(ctx);
     }
 
     @Override
