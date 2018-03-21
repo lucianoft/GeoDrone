@@ -5,9 +5,11 @@ import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.Property;
 
-import java.util.Date;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.ToMany;
+
+import java.util.Date;
+
 
 /**
  * Created by fernandes on 16/03/2018.
@@ -25,11 +27,11 @@ public class EstacaoPluviometrica {
 
     @NotNull
     @Property(nameInDb = "LATITUDE")
-    private Long latitude;
+    private Double latitude;
 
     @NotNull
     @Property(nameInDb = "LONGITUDE")
-    private Long longitude;
+    private Double longitude;
 
     @NotNull
     @Property(nameInDb = "DT_INSTALACAO")
@@ -49,7 +51,28 @@ public class EstacaoPluviometrica {
     @Property(nameInDb = "ID_ESTACAO_WEB")
     private Long idEstacaoWeb;
 
+    public EstacaoPluviometrica(Long id,
+                                Long idCliente,
+                                Double latitude,
+                                Double longitude,
+                                Date dtInstalacao,
+                                Date dtInclusao,
+                                Date dtAlteracao,
+                                Long idUsuario,
+                                Long idEstacaoWeb) {
+        this.id = id;
+        this.idCliente = idCliente;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.dtInstalacao = dtInstalacao;
+        this.dtInclusao = dtInclusao;
+        this.dtAlteracao = dtAlteracao;
+        this.idUsuario = idUsuario;
+        this.idEstacaoWeb = idEstacaoWeb;
+    }
+
     public EstacaoPluviometrica() {
+        this(null, null, null, null, null, null, null, null, null);
     }
 
     public Long getId() {
@@ -68,19 +91,19 @@ public class EstacaoPluviometrica {
         this.idCliente = idCliente;
     }
 
-    public Long getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(Long latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public Long getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(Long longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 

@@ -1,10 +1,15 @@
 package br.com.geodrone.model;
 
+import org.greenrobot.greendao.annotation.Convert;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.Property;
 import org.greenrobot.greendao.annotation.Generated;
+
+import br.com.geodrone.model.constantes.FlagStatusCliente;
+import br.com.geodrone.model.converter.FlagPerfilUsuarioConverter;
+import br.com.geodrone.model.converter.FlagStatusClienteConverter;
 
 /**
  * Created by fernandes on 13/03/2018.
@@ -41,12 +46,15 @@ public class Cliente {
     private String email;
 
     @Property(nameInDb = "TELEFONE")
-    @NotNull
     private String telefone;
 
     @Property(nameInDb = "CELULAR")
-    @NotNull
     private String celular;
+
+    @Property(nameInDb = "FLAG_STATUS")
+    @Convert(converter = FlagStatusClienteConverter.class, columnType = String.class)
+    @NotNull
+    private FlagStatusCliente flagStatus;
 
     public Cliente() {
     }
@@ -129,6 +137,14 @@ public class Cliente {
 
     public void setCelular(String celular) {
         this.celular = celular;
+    }
+
+    public FlagStatusCliente getFlagStatus() {
+        return flagStatus;
+    }
+
+    public void setFlagStatus(FlagStatusCliente flagStatus) {
+        this.flagStatus = flagStatus;
     }
 
     @Override

@@ -1,17 +1,14 @@
 package br.com.geodrone.activity;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.GeomagneticField;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -30,7 +27,9 @@ import java.util.List;
 import br.com.geodrone.R;
 import br.com.geodrone.activity.utils.ActivityHelper;
 import br.com.geodrone.activity.utils.Constantes;
-import br.com.geodrone.dto.PluviosidadeDiariaDto;
+import br.com.geodrone.dto.ColetaPluviosidadeDto;
+import br.com.geodrone.model.EstacaoPluviometrica;
+import br.com.geodrone.presenter.EstacaoPluviometricaPresenter;
 import butterknife.ButterKnife;
 
 public class CadastroPluviosidadeActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener {
@@ -94,8 +93,8 @@ public class CadastroPluviosidadeActivity extends FragmentActivity implements On
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, Constantes.ZOOM_MAP));
             }
 
-            List<PluviosidadeDiariaDto> s = getPontosColeta();
-            for(PluviosidadeDiariaDto pluviosidadeDiariaDto : s) {
+            List<ColetaPluviosidadeDto> s = getPontosColeta();
+            for(ColetaPluviosidadeDto pluviosidadeDiariaDto : s) {
                 LatLng position = new LatLng(pluviosidadeDiariaDto.getLatitude(), pluviosidadeDiariaDto.getLongitude());
                 mMap.addMarker(new MarkerOptions().position(position).title(pluviosidadeDiariaDto.getDescricao()));
 
@@ -165,20 +164,19 @@ public class CadastroPluviosidadeActivity extends FragmentActivity implements On
 
     }
 
-    private List<PluviosidadeDiariaDto> getPontosColeta(){
-        Double latitude = new Double("-18.100");
-        Double longitude = new Double("-47.3344");
-        List<PluviosidadeDiariaDto> pluviosidadeDiariaDtos = new ArrayList<>();
-        for (int i = 0 ; i <= 50; i++){
-            latitude = latitude + new Double("0.010");
-            longitude = longitude + new Double("0.011");
+    private List<ColetaPluviosidadeDto> getPontosColeta(){
+        EstacaoPluviometricaPresenter estacaoPluviometricaPresenter = new EstacaoPluviometricaPresenter(this);
 
-            PluviosidadeDiariaDto pluviosidadeDiariaDto = new PluviosidadeDiariaDto();
-            pluviosidadeDiariaDto.setDescricao("Posicao " + i);
-            pluviosidadeDiariaDto.setLatitude(latitude);
-            pluviosidadeDiariaDto.setLongitude(longitude);
-            pluviosidadeDiariaDtos.add(pluviosidadeDiariaDto);
+        List<ColetaPluviosidadeDto> coletaPluviosidadeDtos = new ArrayList<>();
+        List<EstacaoPluviometrica> estacaoPluviometricas = estacaoPluviometricaPresenter.findAllByCliente(1L);
+        for (EstacaoPluviometrica estacaoPluviometrica : estacaoPluviometricas){
+
+            ColetaPluviosidadeDto pluviosidadeDiariaDto = new ColetaPluviosidadeDto();
+            pluviosidadeDiariaDto.setDescricao("");
+            pluviosidadeDiariaDto.setLatitude(estacaoPluviometrica.getLatitude());
+            pluviosidadeDiariaDto.setLongitude(estacaoPluviometrica.getLongitude());
+            coletaPluviosidadeDtos.add(pluviosidadeDiariaDto);
         }
-        return pluviosidadeDiariaDtos;
+        return coletaPluviosidadeDtos;
     }
 }

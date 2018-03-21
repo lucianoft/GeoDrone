@@ -6,7 +6,7 @@ import java.util.Date;
  * Created by fernandes on 03/03/2018.
  */
 
-public class PluviosidadeDiariaDto {
+public class ColetaPluviosidadeDto {
     private Long id;
     private String descricao;
 
@@ -14,8 +14,10 @@ public class PluviosidadeDiariaDto {
     private Double longitude;
 
     private Date dtLeitura;
-    private Double latitudeLeitura;
-    private Double longitudeLeitura;
+    private Double latLeitura;
+    private Double lonLeitura;
+
+    private String ultimaLeitura;
 
     public Long getId() {
         return id;
@@ -57,19 +59,27 @@ public class PluviosidadeDiariaDto {
         this.dtLeitura = dtLeitura;
     }
 
-    public Double getLatitudeLeitura() {
-        return latitudeLeitura;
+    public Double getLatLeitura() {
+        return latLeitura;
     }
 
-    public void setLatitudeLeitura(Double latitudeLeitura) {
-        this.latitudeLeitura = latitudeLeitura;
+    public void setLatLeitura(Double latLeitura) {
+        this.latLeitura = latLeitura;
     }
 
-    public Double getLongitudeLeitura() {
-        return longitudeLeitura;
+    public Double getLonLeitura() {
+        return lonLeitura;
     }
 
-    public void setLongitudeLeitura(Double longitudeLeitura) {
-        this.longitudeLeitura = longitudeLeitura;
+    public void setLonLeitura(Double lonLeitura) {
+        this.lonLeitura = lonLeitura;
+    }
+
+    public String getUltimaLeitura() {
+        return ultimaLeitura;
+    }
+
+    public void setUltimaLeitura(String ultimaLeitura) {
+        this.ultimaLeitura = ultimaLeitura;
     }
 }
