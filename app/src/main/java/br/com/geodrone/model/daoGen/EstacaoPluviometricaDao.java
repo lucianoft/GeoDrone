@@ -26,13 +26,14 @@ public class EstacaoPluviometricaDao extends AbstractDao<EstacaoPluviometrica, L
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "ID_ESTACAO");
         public final static Property IdCliente = new Property(1, Long.class, "idCliente", false, "ID_CLIENTE");
-        public final static Property Latitude = new Property(2, Double.class, "latitude", false, "LATITUDE");
-        public final static Property Longitude = new Property(3, Double.class, "longitude", false, "LONGITUDE");
-        public final static Property DtInstalacao = new Property(4, java.util.Date.class, "dtInstalacao", false, "DT_INSTALACAO");
-        public final static Property DtInclusao = new Property(5, java.util.Date.class, "dtInclusao", false, "DT_INCLUSAO");
-        public final static Property DtAlteracao = new Property(6, java.util.Date.class, "dtAlteracao", false, "DT_ALTERACAO");
-        public final static Property IdUsuario = new Property(7, Long.class, "idUsuario", false, "ID_USUARIO");
-        public final static Property IdEstacaoWeb = new Property(8, Long.class, "idEstacaoWeb", false, "ID_ESTACAO_WEB");
+        public final static Property Descricao = new Property(2, String.class, "descricao", false, "DESCRICAO");
+        public final static Property Latitude = new Property(3, Double.class, "latitude", false, "LATITUDE");
+        public final static Property Longitude = new Property(4, Double.class, "longitude", false, "LONGITUDE");
+        public final static Property DtInstalacao = new Property(5, java.util.Date.class, "dtInstalacao", false, "DT_INSTALACAO");
+        public final static Property DtInclusao = new Property(6, java.util.Date.class, "dtInclusao", false, "DT_INCLUSAO");
+        public final static Property DtAlteracao = new Property(7, java.util.Date.class, "dtAlteracao", false, "DT_ALTERACAO");
+        public final static Property IdUsuario = new Property(8, Long.class, "idUsuario", false, "ID_USUARIO");
+        public final static Property IdEstacaoWeb = new Property(9, Long.class, "idEstacaoWeb", false, "ID_ESTACAO_WEB");
     }
 
 
@@ -50,13 +51,14 @@ public class EstacaoPluviometricaDao extends AbstractDao<EstacaoPluviometrica, L
         db.execSQL("CREATE TABLE " + constraint + "\"TB_ESTACAO_PLUVIOMETRICA\" (" + //
                 "\"ID_ESTACAO\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"ID_CLIENTE\" INTEGER NOT NULL ," + // 1: idCliente
-                "\"LATITUDE\" REAL NOT NULL ," + // 2: latitude
-                "\"LONGITUDE\" REAL NOT NULL ," + // 3: longitude
-                "\"DT_INSTALACAO\" INTEGER NOT NULL ," + // 4: dtInstalacao
-                "\"DT_INCLUSAO\" INTEGER NOT NULL ," + // 5: dtInclusao
-                "\"DT_ALTERACAO\" INTEGER NOT NULL ," + // 6: dtAlteracao
-                "\"ID_USUARIO\" INTEGER," + // 7: idUsuario
-                "\"ID_ESTACAO_WEB\" INTEGER);"); // 8: idEstacaoWeb
+                "\"DESCRICAO\" TEXT NOT NULL ," + // 2: descricao
+                "\"LATITUDE\" REAL NOT NULL ," + // 3: latitude
+                "\"LONGITUDE\" REAL NOT NULL ," + // 4: longitude
+                "\"DT_INSTALACAO\" INTEGER NOT NULL ," + // 5: dtInstalacao
+                "\"DT_INCLUSAO\" INTEGER NOT NULL ," + // 6: dtInclusao
+                "\"DT_ALTERACAO\" INTEGER NOT NULL ," + // 7: dtAlteracao
+                "\"ID_USUARIO\" INTEGER," + // 8: idUsuario
+                "\"ID_ESTACAO_WEB\" INTEGER);"); // 9: idEstacaoWeb
     }
 
     /** Drops the underlying database table. */
@@ -74,20 +76,21 @@ public class EstacaoPluviometricaDao extends AbstractDao<EstacaoPluviometrica, L
             stmt.bindLong(1, id);
         }
         stmt.bindLong(2, entity.getIdCliente());
-        stmt.bindDouble(3, entity.getLatitude());
-        stmt.bindDouble(4, entity.getLongitude());
-        stmt.bindLong(5, entity.getDtInstalacao().getTime());
-        stmt.bindLong(6, entity.getDtInclusao().getTime());
-        stmt.bindLong(7, entity.getDtAlteracao().getTime());
+        stmt.bindString(3, entity.getDescricao());
+        stmt.bindDouble(4, entity.getLatitude());
+        stmt.bindDouble(5, entity.getLongitude());
+        stmt.bindLong(6, entity.getDtInstalacao().getTime());
+        stmt.bindLong(7, entity.getDtInclusao().getTime());
+        stmt.bindLong(8, entity.getDtAlteracao().getTime());
  
         Long idUsuario = entity.getIdUsuario();
         if (idUsuario != null) {
-            stmt.bindLong(8, idUsuario);
+            stmt.bindLong(9, idUsuario);
         }
  
         Long idEstacaoWeb = entity.getIdEstacaoWeb();
         if (idEstacaoWeb != null) {
-            stmt.bindLong(9, idEstacaoWeb);
+            stmt.bindLong(10, idEstacaoWeb);
         }
     }
 
@@ -100,20 +103,21 @@ public class EstacaoPluviometricaDao extends AbstractDao<EstacaoPluviometrica, L
             stmt.bindLong(1, id);
         }
         stmt.bindLong(2, entity.getIdCliente());
-        stmt.bindDouble(3, entity.getLatitude());
-        stmt.bindDouble(4, entity.getLongitude());
-        stmt.bindLong(5, entity.getDtInstalacao().getTime());
-        stmt.bindLong(6, entity.getDtInclusao().getTime());
-        stmt.bindLong(7, entity.getDtAlteracao().getTime());
+        stmt.bindString(3, entity.getDescricao());
+        stmt.bindDouble(4, entity.getLatitude());
+        stmt.bindDouble(5, entity.getLongitude());
+        stmt.bindLong(6, entity.getDtInstalacao().getTime());
+        stmt.bindLong(7, entity.getDtInclusao().getTime());
+        stmt.bindLong(8, entity.getDtAlteracao().getTime());
  
         Long idUsuario = entity.getIdUsuario();
         if (idUsuario != null) {
-            stmt.bindLong(8, idUsuario);
+            stmt.bindLong(9, idUsuario);
         }
  
         Long idEstacaoWeb = entity.getIdEstacaoWeb();
         if (idEstacaoWeb != null) {
-            stmt.bindLong(9, idEstacaoWeb);
+            stmt.bindLong(10, idEstacaoWeb);
         }
     }
 
@@ -133,13 +137,14 @@ public class EstacaoPluviometricaDao extends AbstractDao<EstacaoPluviometrica, L
     public void readEntity(Cursor cursor, EstacaoPluviometrica entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setIdCliente(cursor.getLong(offset + 1));
-        entity.setLatitude(cursor.getDouble(offset + 2));
-        entity.setLongitude(cursor.getDouble(offset + 3));
-        entity.setDtInstalacao(new java.util.Date(cursor.getLong(offset + 4)));
-        entity.setDtInclusao(new java.util.Date(cursor.getLong(offset + 5)));
-        entity.setDtAlteracao(new java.util.Date(cursor.getLong(offset + 6)));
-        entity.setIdUsuario(cursor.isNull(offset + 7) ? null : cursor.getLong(offset + 7));
-        entity.setIdEstacaoWeb(cursor.isNull(offset + 8) ? null : cursor.getLong(offset + 8));
+        entity.setDescricao(cursor.getString(offset + 2));
+        entity.setLatitude(cursor.getDouble(offset + 3));
+        entity.setLongitude(cursor.getDouble(offset + 4));
+        entity.setDtInstalacao(new java.util.Date(cursor.getLong(offset + 5)));
+        entity.setDtInclusao(new java.util.Date(cursor.getLong(offset + 6)));
+        entity.setDtAlteracao(new java.util.Date(cursor.getLong(offset + 7)));
+        entity.setIdUsuario(cursor.isNull(offset + 8) ? null : cursor.getLong(offset + 8));
+        entity.setIdEstacaoWeb(cursor.isNull(offset + 9) ? null : cursor.getLong(offset + 9));
      }
     
     @Override

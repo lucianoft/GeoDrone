@@ -101,16 +101,30 @@ public class GeoDroneApplication extends Application {
     private void criarEstacao() {
         if (daoSession.getEstacaoPluviometricaDao().loadAll().size() == 0) {
 
-            EstacaoPluviometrica estacaoPluviometrica = new EstacaoPluviometrica(null,
+            getDaoSession().getEstacaoPluviometricaDao().insert(new EstacaoPluviometrica(null,
                     1L,
-                    -18.9255573,
-                    -48.2443293,
+                    "AP",
+                    -18.9226893,
+                    -48.2466486,
                     new Date(),
                     new Date(),
                     new Date(),
                     1l,
-                    null);
-            getDaoSession().getEstacaoPluviometricaDao().insert(estacaoPluviometrica);
+                    null));
+
+            getDaoSession().getEstacaoPluviometricaDao().insert(new EstacaoPluviometrica(null,
+                    1L,
+                    "CDN",
+                    -18.929408,
+                    -48.2413727,
+                    new Date(),
+                    new Date(),
+                    new Date(),
+                    1l,
+                    null));
+
+
+
         }
 
     }

@@ -26,6 +26,10 @@ public class EstacaoPluviometrica {
     private Long idCliente;
 
     @NotNull
+    @Property(nameInDb = "DESCRICAO")
+    private String descricao;
+
+    @NotNull
     @Property(nameInDb = "LATITUDE")
     private Double latitude;
 
@@ -53,6 +57,7 @@ public class EstacaoPluviometrica {
 
     public EstacaoPluviometrica(Long id,
                                 Long idCliente,
+                                String descricao,
                                 Double latitude,
                                 Double longitude,
                                 Date dtInstalacao,
@@ -62,6 +67,7 @@ public class EstacaoPluviometrica {
                                 Long idEstacaoWeb) {
         this.id = id;
         this.idCliente = idCliente;
+        this.descricao = descricao;
         this.latitude = latitude;
         this.longitude = longitude;
         this.dtInstalacao = dtInstalacao;
@@ -72,7 +78,7 @@ public class EstacaoPluviometrica {
     }
 
     public EstacaoPluviometrica() {
-        this(null, null, null, null, null, null, null, null, null);
+        this(null, null, null, null, null, null, null, null, null, null);
     }
 
     public Long getId() {
@@ -89,6 +95,14 @@ public class EstacaoPluviometrica {
 
     public void setIdCliente(Long idCliente) {
         this.idCliente = idCliente;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public Double getLatitude() {

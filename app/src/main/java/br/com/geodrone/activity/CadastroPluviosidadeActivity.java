@@ -89,7 +89,7 @@ public class CadastroPluviosidadeActivity extends FragmentActivity implements On
             }
             if (location != null) {
                 LatLng position = new LatLng(location.getLatitude(), location.getLongitude());
-                mMap.addMarker(new MarkerOptions().position(position).title("Posiçao atual"));
+                //mMap.addMarker(new MarkerOptions().position(position).title("Posiçao atual"));
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, Constantes.ZOOM_MAP));
             }
 
@@ -139,12 +139,7 @@ public class CadastroPluviosidadeActivity extends FragmentActivity implements On
             LatLng locAtual = new LatLng(lat, lng);
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(locAtual, Constantes.ZOOM_MAP));
 
-            GeomagneticField geoField = new GeomagneticField(Double.valueOf(location.getLatitude()).floatValue(), Double.valueOf(location.getLongitude()).floatValue(), Double.valueOf(location.getAltitude()).floatValue(), System.currentTimeMillis());
-            float Declination = geoField.getDeclination();
-
-            LatLng locDestino = new LatLng(new Double("-18.100"), new Double("-47.3344"));
-            double distancia = SphericalUtil.computeDistanceBetween(locAtual, locDestino);
-            Toast.makeText(CadastroPluviosidadeActivity.this, locAtual.toString() + " Distancia: " + distancia + " m", Toast.LENGTH_SHORT).show();
+            Toast.makeText(CadastroPluviosidadeActivity.this, locAtual.toString() , Toast.LENGTH_SHORT).show();
 
         }
     }
@@ -172,7 +167,7 @@ public class CadastroPluviosidadeActivity extends FragmentActivity implements On
         for (EstacaoPluviometrica estacaoPluviometrica : estacaoPluviometricas){
 
             ColetaPluviosidadeDto pluviosidadeDiariaDto = new ColetaPluviosidadeDto();
-            pluviosidadeDiariaDto.setDescricao("");
+            pluviosidadeDiariaDto.setDescricao(estacaoPluviometrica.getDescricao());
             pluviosidadeDiariaDto.setLatitude(estacaoPluviometrica.getLatitude());
             pluviosidadeDiariaDto.setLongitude(estacaoPluviometrica.getLongitude());
             coletaPluviosidadeDtos.add(pluviosidadeDiariaDto);
