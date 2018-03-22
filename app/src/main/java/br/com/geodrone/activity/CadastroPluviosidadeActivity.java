@@ -45,6 +45,11 @@ public class CadastroPluviosidadeActivity extends FragmentActivity implements On
         setContentView(R.layout.activity_cadastro_pluviosidade);
         ButterKnife.bind(this);
 
+        ActivityHelper activityHelper = new ActivityHelper();
+        if (!activityHelper.checkPermissionsLocation(this)){
+            return;
+        }
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -54,11 +59,7 @@ public class CadastroPluviosidadeActivity extends FragmentActivity implements On
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-        ActivityHelper activityHelper = new ActivityHelper();
-        if (activityHelper.checkPermissionsLocation(this)){
-            initMap();
-        };
+        initMap();
     }
 
     private void initMap() {

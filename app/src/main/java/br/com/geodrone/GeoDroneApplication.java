@@ -104,8 +104,8 @@ public class GeoDroneApplication extends Application {
             getDaoSession().getEstacaoPluviometricaDao().insert(new EstacaoPluviometrica(null,
                     1L,
                     "AP",
-                    -18.9226893,
-                    -48.2466486,
+                    -18.92272265,
+                    -48.24413374,
                     new Date(),
                     new Date(),
                     new Date(),
@@ -123,7 +123,39 @@ public class GeoDroneApplication extends Application {
                     1l,
                     null));
 
+            getDaoSession().getEstacaoPluviometricaDao().insert(new EstacaoPluviometrica(null,
+                    1L,
+                    "CDN",
+                    -18.929408,
+                    -48.2413727,
+                    new Date(),
+                    new Date(),
+                    new Date(),
+                    1l,
+                    null));
 
+            getDaoSession().getEstacaoPluviometricaDao().insert(new EstacaoPluviometrica(null,
+                    1L,
+                    "MARIA DE NAZARE",
+                    -18.915298,
+                    -48.23462,
+                     new Date(),
+                     new Date(),
+                     new Date(),
+                    1l,
+                    null));
+
+
+            getDaoSession().getEstacaoPluviometricaDao().insert(new EstacaoPluviometrica(null,
+                    1L,
+                    "CASA DAS MASSAS",
+                    -18.9267564,
+                    -48.2536422,
+                    new Date(),
+                    new Date(),
+                    new Date(),
+                    1l,
+                    null));
 
         }
 

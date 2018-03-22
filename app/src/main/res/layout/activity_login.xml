@@ -9,8 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="56dp"
-        android:paddingLeft="24dp"
-        android:paddingRight="24dp">
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp">
 
         <ImageView android:src="@drawable/img_geodrone"
             android:layout_width="match_parent"
@@ -23,7 +23,7 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="30dp"
+            android:layout_marginRight="25dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp">
             <EditText android:id="@+id/input_email"
@@ -42,7 +42,7 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="30dp"
+                android:layout_marginRight="25dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp">
                 <EditText android:id="@+id/input_password"
@@ -58,7 +58,7 @@
                 android:layout_height="25dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="20dp"
+                android:layout_marginRight="15dp"
                 android:background="@mipmap/eye_closed" />
         </RelativeLayout>
 
@@ -68,13 +68,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:layout_marginRight="25dp"
             android:text="@string/lb_login"/>
 
         <TextView android:id="@+id/link_signup"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
             android:text="@string/lb_criar_usuario"
+            android:layout_marginTop="20dp"
             android:gravity="center"
             android:textSize="16dip"/>
 
