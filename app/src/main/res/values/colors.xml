@@ -23,6 +23,8 @@
     <color name="primary_error">#ff081e</color>
     <color name="primary_alert">#ffae41</color>
 
+    <color name="colorBackgroundMessage">#8cf8fcf9</color>
+
 
     <color name="textViewRegisterTitleColor">#000</color>
 

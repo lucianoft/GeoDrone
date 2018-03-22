@@ -62,6 +62,8 @@ public class CadastroImagemActivity extends AppCompatActivity implements BottomN
 
         layoutSalvar.setVisibility(View.INVISIBLE);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
+
+        getPermissions();
     }
 
     private void getPermissions() {
