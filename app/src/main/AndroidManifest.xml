@@ -71,31 +71,23 @@
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.RegChuvasActivity"
-            android:label="@string/title_activity_reg_chuvas" />
-        <activity
             android:name=".activity.CadastroPluviosidadeActivity"
-            android:label="@string/title_activity_cadastro_pluviosidade" />
-        <activity
-            android:name=".activity.MapsActivity"
-            android:label="@string/title_activity_maps" />
+            android:label="@string/title_activity_reg_chuvas" />
         <activity
             android:name=".activity.CadatroUsuarioActivity"
             android:label="@string/title_activity_cadatro_usuario"
-            android:parentActivityName=".activity.LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:parentActivityName=".activity.LoginActivity" />
         <activity
-            android:name=".activity.CadImagemActivity"
-            android:label="@string/title_activity_cadastro_imagem"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".activity.CadastroImagemActivity"
+            android:label="@string/title_activity_cadastro_imagem" />
         <activity android:name=".activity.CameraFotoActivity" />
         <activity
             android:name=".activity.RegistroPragasActivity"
-            android:label="@string/title_activity_registro_pragas"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.CadastroImagemActivity" />
+            android:label="@string/title_activity_registro_pragas" />
+
         <activity android:name=".activity.MensagemActivity" />
-        <activity android:name=".activity.ForunActivity"></activity>
+
+        <activity android:name=".activity.ForunActivity"/>
     </application>
 
 </manifest>

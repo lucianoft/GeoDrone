@@ -25,6 +25,11 @@
 
     <color name="colorBackgroundMessage">#8cf8fcf9</color>
 
+    <!-- Open Chat -->
+    <color name="openChatText">#47505d</color>
+    <color name="openChatNicknameOther">#3a414d</color>
+    <color name="openChatNicknameMe">#00BCD4</color>
+
 
     <color name="textViewRegisterTitleColor">#000</color>
 

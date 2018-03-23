@@ -15,8 +15,6 @@ import butterknife.ButterKnife;
 
 public class CadatroUsuarioActivity extends AppCompatActivity {
 
-
-    @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.input_telefone) EditText edTelefone;
 
 
@@ -26,7 +24,6 @@ public class CadatroUsuarioActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadatro_usuario);
         ButterKnife.bind(this);
 
-        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
 

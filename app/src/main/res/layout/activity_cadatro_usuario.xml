@@ -3,20 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="br.com.geodrone.activity.EnvImgCameraActivity">
-
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar" />
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        android:paddingLeft="24dp"
-        android:paddingRight="24dp">
+        android:gravity="start"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        >
 
         <!--  Nome Label -->
         <android.support.design.widget.TextInputLayout
@@ -81,7 +78,7 @@
 
         </android.support.design.widget.TextInputLayout>
 
-        <android.support.v7.widget.AppCompatButton
+        <Button
             android:id="@+id/btn_login"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

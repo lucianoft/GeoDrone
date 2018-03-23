@@ -25,8 +25,11 @@ import com.satsuware.usefulviews.LabelledSpinner;
 
 public class RegistroPragasActivity extends AppCompatActivity implements LabelledSpinner.OnItemChosenListener {
 
-    @BindView(R.id.spiPragra)
-    LabelledSpinner spiPragas;
+    @BindView(R.id.spinner_tipo_praga)
+    Spinner spiTipoPraga;
+
+    @BindView(R.id.spinner_praga)
+    Spinner spiPraga;
 
 
     @Override
@@ -35,11 +38,8 @@ public class RegistroPragasActivity extends AppCompatActivity implements Labelle
         setContentView(R.layout.activity_registro_pragas);
         ButterKnife.bind(this);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
-
 
         // Initializing list view with the custom adapter
         ArrayList <PragaDto> pragaList = new ArrayList<>();
@@ -47,8 +47,8 @@ public class RegistroPragasActivity extends AppCompatActivity implements Labelle
         for(int i=0; i<100; i++) {
             pragaList.add(new PragaDto(new Long(i), "Praga " + i));
         }
-        spiPragas.setItemsArray(pragaList);
-        spiPragas.setOnItemChosenListener(this);
+        //spiPraga.setItemsArray(pragaList);
+        //spiPraga.setOnItemChosenListener(this);
     }
 
     @Override
