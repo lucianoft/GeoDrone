@@ -27,6 +27,7 @@ import java.util.List;
 import br.com.geodrone.R;
 import br.com.geodrone.activity.utils.ActivityHelper;
 import br.com.geodrone.activity.utils.Constantes;
+import br.com.geodrone.activity.utils.LocationUtils;
 import br.com.geodrone.dto.ColetaPluviosidadeDto;
 import br.com.geodrone.model.EstacaoPluviometrica;
 import br.com.geodrone.presenter.EstacaoPluviometricaPresenter;
@@ -38,6 +39,7 @@ public class CadastroPluviosidadeActivity extends FragmentActivity implements On
 
     private GoogleMap mMap;
     private LocationManager locationManager;
+    private List<ColetaPluviosidadeDto> coletaPluviosidadeDtos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,8 +96,8 @@ public class CadastroPluviosidadeActivity extends FragmentActivity implements On
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, Constantes.ZOOM_MAP));
             }
 
-            List<ColetaPluviosidadeDto> s = getPontosColeta();
-            for(ColetaPluviosidadeDto pluviosidadeDiariaDto : s) {
+            this.coletaPluviosidadeDtos = getPontosColeta();
+            for(ColetaPluviosidadeDto pluviosidadeDiariaDto : this.coletaPluviosidadeDtos) {
                 LatLng position = new LatLng(pluviosidadeDiariaDto.getLatitude(), pluviosidadeDiariaDto.getLongitude());
                 mMap.addMarker(new MarkerOptions().position(position).title(pluviosidadeDiariaDto.getDescricao()));
 
@@ -140,7 +142,11 @@ public class CadastroPluviosidadeActivity extends FragmentActivity implements On
             LatLng locAtual = new LatLng(lat, lng);
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(locAtual, Constantes.ZOOM_MAP));
 
-            Toast.makeText(CadastroPluviosidadeActivity.this, locAtual.toString() , Toast.LENGTH_SHORT).show();
+
+            ColetaPluviosidadeDto coletaPluviosidadeDto = LocationUtils.localLessDistance(location, this.coletaPluviosidadeDtos);
+            Location locationMenor = LocationUtils.createNewLocation(coletaPluviosidadeDto.getLatitude(), coletaPluviosidadeDto.getLongitude());
+            double distancia = LocationUtils.calculateDistance(location, locationMenor);
+            Toast.makeText(CadastroPluviosidadeActivity.this, locAtual.toString() + "distancia: " + distancia, Toast.LENGTH_SHORT).show();
 
         }
     }
