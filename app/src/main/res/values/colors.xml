@@ -2,28 +2,22 @@
 <resources>
     <color name="colorPrimary">#649b71</color>
     <color name="colorPrimaryDark">#268e64</color>
+    <color name="colorAccent">@color/colorBlack</color>
+
+    <color name="colorLabel">#6D6D6D</color>
+    <color name="colorBlack">#000000</color>
+
+    <!--
     <color name="colorAccent">#54da3b</color>
+    -->
+    <!--
+    <color name="colorPrimary">#6595fb</color>
+    <color name="colorPrimaryDark">#4b82da</color>
+    <color name="colorAccent">#5067f9</color>
+-->
 
-    <color name="colorDarkFont">#202020</color>
-    <color name="colorRed">#c40909</color>
-    <color name="buttonColorBackground">#6595fb</color>
-    <color name="buttonColorText">#ffffff</color>
-    <color name="iconCollor">#00336a</color>
-    <color name="colorGrey">#c0c0c0</color>
-    <color name="colorGreen">#228b22</color>
+    <color name="colorCinza">#CCCCCC</color>
     <color name="colorWhite">#ffffff</color>
-    <color name="enabled_color">#000000</color>
-    <color name="disabled_color">#b3c2d1</color>
-    <color name="colorOrange">#ffa500</color>
-    <color name="colorIron">#CCCCCC</color>
-    <color name="bg_toast">#6dc729</color>
-    <color name="bg_action">#fc7952</color>
-    <color name="primary_sucesso">#8cc53e</color>
-    <color name="primary_info">#52c5b9</color>
-    <color name="primary_error">#ff081e</color>
-    <color name="primary_alert">#ffae41</color>
-
-    <color name="colorBackgroundMessage">#8cf8fcf9</color>
 
     <!-- Open Chat -->
     <color name="openChatText">#47505d</color>

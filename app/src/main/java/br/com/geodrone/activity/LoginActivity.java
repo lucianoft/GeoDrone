@@ -32,6 +32,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -55,12 +56,15 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.btn_olho) Button _showPasswordButton;
     @BindView(R.id.btn_login) Button _loginButton;
     @BindView(R.id.link_signup) TextView _signupLink;
+    @BindView(R.id.progressBar_login) ProgressBar progressBar;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        progressBar.setVisibility(View.INVISIBLE);
 
         usuarioPresenter = new UsuarioPresenter(this);
         _emailText.setText(PreferencesUtils.getString(getApplicationContext(), PreferencesUtils.CHAVE_EMAIL_USUARIO, ""));
@@ -108,8 +112,12 @@ public class LoginActivity extends AppCompatActivity {
     public void login() {
         Log.d(TAG, "Login");
 
+        progressBar.setVisibility(View.VISIBLE);
+
         if (!validate()) {
             onLoginFailed();
+            progressBar.setVisibility(View.INVISIBLE);
+
             return;
         }
         String email = _emailText.getText().toString();
@@ -118,11 +126,6 @@ public class LoginActivity extends AppCompatActivity {
         usuarioPresenter.findByEmail(email, password);
         _loginButton.setEnabled(false);
 
-        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
-                R.style.AppTheme_Dark_Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Autenticando...");
-        progressDialog.show();
 
         // TODO: Implement your own authentication logic here.
 
@@ -132,7 +135,6 @@ public class LoginActivity extends AppCompatActivity {
                         // On complete call either onLoginSuccess or onLoginFailed
                         onLoginSuccess();
                         // onLoginFailed();
-                        progressDialog.dismiss();
                     }
                 }, 3000);
     }
@@ -157,6 +159,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onLoginSuccess() {
+        progressBar.setVisibility(View.INVISIBLE);
         _loginButton.setEnabled(true);
         PreferencesUtils.putString(getApplicationContext(), PreferencesUtils.CHAVE_EMAIL_USUARIO, _emailText.getText().toString());
         PreferencesUtils.putString(getApplicationContext(), PreferencesUtils.CHAVE_SENHA_USUARIO, _passwordText.getText().toString());
@@ -167,6 +170,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onLoginFailed() {
         //UtilToas.showMsgAlertOK(this, "Erro", "Falha", TipoMsg.ERRO);
+        progressBar.setVisibility(View.INVISIBLE);
 
         _loginButton.setEnabled(true);
     }

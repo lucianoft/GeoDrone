@@ -28,7 +28,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         Handler handle = new Handler();
         final ProgressDialog progressDialog = new ProgressDialog(SplashScreenActivity.this,
-                R.style.AppTheme_Dark_Dialog);
+                R.style.AppTheme_PopUp);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Carregando...");
         progressDialog.show();

@@ -56,7 +56,7 @@
 
         <activity
             android:name=".activity.SplashScreenActivity"
-            android:theme="@style/AppCompat.TelaCheia">
+            android:theme="@style/AppTheme.TelaCheia">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -69,10 +69,11 @@
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".activity.CadastroPluviosidadeActivity"
-            android:label="@string/title_activity_reg_chuvas" />
+            android:label="@string/title_activity_reg_chuvas"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".activity.CadatroUsuarioActivity"
             android:label="@string/title_activity_cadatro_usuario"
