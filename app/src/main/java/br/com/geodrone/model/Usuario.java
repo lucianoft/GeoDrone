@@ -6,8 +6,12 @@ import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.Property;
 import org.greenrobot.greendao.annotation.Generated;
 
+import java.io.Serializable;
+
 @Entity(generateConstructors = false, createInDb = true, nameInDb = "TB_USUARIO")
-public class Usuario {
+public class Usuario implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id(autoincrement =  false)
     @Property(nameInDb = "ID_USUARIO")

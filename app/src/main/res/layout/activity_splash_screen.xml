@@ -3,11 +3,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
-    android:id="@+id/aberturaLayoutGeral"
+    android:id="@+id/relative_layout_abertura"
     android:orientation="vertical">
 
+    <ProgressBar
+        android:id="@+id/progressBar_abertura"
+        style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Small"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:progressDrawable="@drawable/progress_circular" />
+
     <ImageView
-        android:id="@+id/aberturaImageView"
+        android:id="@+id/image_view_abertura"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -23,7 +32,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="30dp"
-        android:id="@+id/aberturaVersaoTV"
+        android:id="@+id/text_view_versao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/colorPrimaryDark"

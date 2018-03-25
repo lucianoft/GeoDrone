@@ -2,104 +2,137 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="start"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginTop="10dp"
     tools:context=".activity.RegistroPragasActivity">
 
-    <RelativeLayout
+
+    <!--  Observacao -->
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/text_input_layout_latitude_praga"
+        style="@style/TextLabel"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        >
-
-        <RelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp">
+        <EditText android:id="@+id/edit_text_latitude_praga"
+            style="@style/TextLabel"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="10dp">
+            android:layout_height="wrap_content"
+            android:inputType="numberSigned"
+            android:focusable="false"
+            android:hint="@string/lb_latitude" />
+    </android.support.design.widget.TextInputLayout>
 
-            <LinearLayout
-                    android:id="@+id/linear_layout_tipo_pagra"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    >
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/lb_tipo_praga_doenca"
-                        />
 
-                    <Spinner
-                        style="@style/Widget.AppCompat.Spinner.Underlined"
-                        android:id="@+id/spinner_tipo_praga"
-                        android:layout_width="match_parent"
-                        android:layout_height="35dp"/>
-                </LinearLayout>
-                <!--NEW LINE!-->
-                <LinearLayout
-                    android:id="@+id/linear_layout_pagra"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/linear_layout_tipo_pagra"
-                    android:orientation="vertical">
+    <!--  Observacao -->
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/text_input_layout_longitude_praga"
+        android:layout_below="@+id/text_input_layout_latitude_praga"
+        style="@style/TextLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp">
+        <EditText android:id="@+id/edit_text_longitude_praga"
+            style="@style/TextLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberSigned"
+            android:focusable="false"
+            android:hint="@string/lb_longitude" />
+    </android.support.design.widget.TextInputLayout>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="@string/lb_praga_doenca"
-                        android:visibility="visible" />
+    <LinearLayout
+        android:id="@+id/linear_layout_tipo_pagra"
+        android:layout_below="@+id/text_input_layout_longitude_praga"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lb_tipo_praga_doenca"
+            />
 
-                    <Spinner
-                        android:id="@+id/spinner_praga"
-                        style="@style/Widget.AppCompat.Spinner.Underlined"
-                        android:layout_width="match_parent"
-                        android:layout_height="35dp"/>
-                </LinearLayout>
-                <!--NEW LINE!-->
-                <TextView
-                    android:id="@+id/cadastroRegistroLblObs"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/linear_layout_pagra"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/lb_observacao" />
+        <Spinner
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:id="@+id/spinner_tipo_praga"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"/>
+    </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/cadastroRegistroLayoutObs"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/cadastroRegistroLblObs"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/linear_layout_custom"
-                    android:elevation="10dp"
-                    android:orientation="vertical"
-                    android:visibility="visible">
+    <!--NEW LINE!-->
+        <LinearLayout
+            android:id="@+id/linear_layout_pagra"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linear_layout_tipo_pagra"
+            android:orientation="vertical">
 
-                    <EditText
-                        android:id="@+id/edit_observacao_praga"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textMultiLine"
-                        android:maxLength="250"/>
-                </LinearLayout>
-                <!--NEW LINE!-->
-                <Button
-                    android:id="@+id/btn_salvar_praga"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_below="@+id/cadastroRegistroLayoutObs"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="15dp"
-                    android:background="@drawable/btn_transparent_edge_green"
-                    android:text="@string/lb_btn_salvar" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/lb_praga_doenca"
+                android:visibility="visible" />
 
-            </RelativeLayout>
-    </RelativeLayout>
+            <Spinner
+                android:id="@+id/spinner_praga"
+                style="@style/Widget.AppCompat.Spinner.Underlined"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"/>
+        </LinearLayout>
+        <!--NEW LINE!-->
+
+    <!--  Observacao -->
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/text_input_layout_obs_praga"
+        android:layout_below="@+id/linear_layout_pagra"
+        style="@style/TextLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp">
+        <EditText android:id="@+id/edit_text_obs_praga"
+            style="@style/TextLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="@string/lb_observacao" />
+    </android.support.design.widget.TextInputLayout>
+
+    <!--  Observacao -->
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/text_input_layout_qtde_praga"
+        android:layout_below="@+id/text_input_layout_obs_praga"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp">
+        <EditText
+            android:id="@+id/edit_text_qtde_praga"
+            style="@style/TextLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="@string/lb_qtd_pragas" />
+    </android.support.design.widget.TextInputLayout>
+
+    <!--NEW LINE!-->
+        <Button
+            android:id="@+id/btn_salvar_praga"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_input_layout_qtde_praga"
+            android:layout_marginTop="15dp"
+            style="@style/CustomStyleButton"
+            android:text="@string/lb_btn_salvar" />
+
 </RelativeLayout>

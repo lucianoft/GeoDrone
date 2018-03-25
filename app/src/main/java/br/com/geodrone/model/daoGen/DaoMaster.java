@@ -26,6 +26,8 @@ public class DaoMaster extends AbstractDaoMaster {
         EstacaoPluviometricaDao.createTable(db, ifNotExists);
         PerfilUsuarioDao.createTable(db, ifNotExists);
         UsuarioDao.createTable(db, ifNotExists);
+        ConfiguracaoDao.createTable(db, ifNotExists);
+        RotaTrabalhoDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
@@ -35,6 +37,8 @@ public class DaoMaster extends AbstractDaoMaster {
         EstacaoPluviometricaDao.dropTable(db, ifExists);
         PerfilUsuarioDao.dropTable(db, ifExists);
         UsuarioDao.dropTable(db, ifExists);
+        ConfiguracaoDao.dropTable(db, ifExists);
+        RotaTrabalhoDao.dropTable(db, ifExists);
     }
 
     /**
@@ -58,6 +62,8 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(EstacaoPluviometricaDao.class);
         registerDaoClass(PerfilUsuarioDao.class);
         registerDaoClass(UsuarioDao.class);
+        registerDaoClass(ConfiguracaoDao.class);
+        registerDaoClass(RotaTrabalhoDao.class);
     }
 
     public DaoSession newSession() {

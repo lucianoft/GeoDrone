@@ -7,6 +7,8 @@ import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.Property;
 import org.greenrobot.greendao.annotation.Generated;
 
+import java.io.Serializable;
+
 import br.com.geodrone.model.constantes.FlagStatusCliente;
 import br.com.geodrone.model.converter.FlagPerfilUsuarioConverter;
 import br.com.geodrone.model.converter.FlagStatusClienteConverter;
@@ -15,7 +17,9 @@ import br.com.geodrone.model.converter.FlagStatusClienteConverter;
  * Created by fernandes on 13/03/2018.
  */
 @Entity(generateConstructors = false, nameInDb = "TB_CLIENTE")
-public class Cliente {
+public class Cliente implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id(autoincrement =  false)
     @Property(nameInDb = "ID_CLIENTE")

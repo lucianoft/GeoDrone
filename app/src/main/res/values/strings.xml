@@ -23,6 +23,9 @@
     <string name="lb_observacao">Observação</string>
     <string name="lb_tipo_praga_doenca">Tipo de Praga/Doença</string>
     <string name="lb_praga_doenca">Praga/Doença</string>
+    <string name="lb_qtd_pragas">Qtde</string>
+    <string name="lb_latitude">Latitude</string>
+    <string name="lb_longitude">Longitude</string>
 
     <string name="lb_btn_salvar">Salvar</string>
 
@@ -50,4 +53,11 @@
     <string name="menu_comunicacao">Comunicação</string>
     <string name="menu_mensagem">Mensagem</string>
     <string name="menu_forum">Forum</string>
+
+    <string name="menu_geoomonitora">GeooMonitora</string>
+    <string name="menu_monitoramento">Monitoramento</string>
+    <string name="menu_requisitar_arquivos_pragas">Requisitar Arquivos Pragas</string>
+
+
+    <string name="title_activity_monitoramento">Monitoramento</string>
 </resources>

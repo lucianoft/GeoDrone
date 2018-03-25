@@ -113,9 +113,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent i = new Intent(this,CadastroPluviosidadeActivity.class);
             startActivity(i);
         } else if (id == R.id.nav_slideshow) {
+            Intent i = new Intent(this,MonitoramentoActivity.class);
+            startActivity(i);
 
         } else if (id == R.id.nav_manage) {
             Intent i = new Intent(this,RegistroPragasActivity.class);
+            startActivity(i);
+        } else if (id == R.id.menu_item_monitoramento_campo) {
+            Intent i = new Intent(this,MonitoramentoActivity.class);
             startActivity(i);
 
         } else if (id == R.id.nav_mensagem) {

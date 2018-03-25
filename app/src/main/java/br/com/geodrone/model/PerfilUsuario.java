@@ -6,6 +6,7 @@ import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.Property;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import br.com.geodrone.model.constantes.FlagPerfilUsuario;
@@ -16,8 +17,10 @@ import org.greenrobot.greendao.annotation.Generated;
  * Created by fernandes on 17/03/2018.
  */
 @Entity(generateConstructors = false, createInDb = true, nameInDb = "TB_PERFIL_USUARIO")
+public class PerfilUsuario implements Serializable {
 
-public class PerfilUsuario {
+    private static final long serialVersionUID = 1L;
+
 
     @Id(autoincrement =  false)
     @Property(nameInDb = "ID_PERFIL_USUARIO")

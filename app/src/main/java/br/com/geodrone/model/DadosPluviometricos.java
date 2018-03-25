@@ -5,6 +5,7 @@ import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.Property;
 
+import java.io.Serializable;
 import java.util.Date;
 import org.greenrobot.greendao.annotation.Generated;
 
@@ -12,7 +13,9 @@ import org.greenrobot.greendao.annotation.Generated;
  * Created by fernandes on 19/03/2018.
  */
 @Entity(generateConstructors = false, generateGettersSetters = true,  nameInDb = "TB_DADOS_PLUVIOMETRICOS")
-public class DadosPluviometricos {
+public class DadosPluviometricos implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id(autoincrement =  true)
     @Property(nameInDb = "ID_DADOS_PLUVIOMETRICOS")

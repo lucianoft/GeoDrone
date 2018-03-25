@@ -16,7 +16,7 @@
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:progressDrawable="@drawable/cirrcular_progress" />
+        android:progressDrawable="@drawable/progress_circular" />
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -34,6 +34,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="72dp"
                 android:layout_marginBottom="24dp"
+                android:paddingLeft="0dp"
+                android:paddingRight="0dp"
                 android:scaleType = "centerCrop"
                 android:layout_gravity="center_horizontal" />
 
@@ -41,10 +43,10 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="25dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp">
-                <EditText android:id="@+id/input_email"
+                <EditText android:id="@+id/edit_text_email_login"
+                    style="@style/TextLabel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
@@ -60,10 +62,10 @@
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="25dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp">
-                    <EditText android:id="@+id/input_password"
+                    <EditText android:id="@+id/edit_text_senha_login"
+                        style="@style/TextLabel"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
@@ -71,25 +73,23 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <Button
-                    android:id="@+id/btn_olho"
+                    android:id="@+id/button_olho"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="15dp"
                     android:background="@mipmap/eye_closed" />
             </RelativeLayout>
 
             <Button
-                android:id="@+id/btn_login"
-                android:background="@drawable/btn_transparent_edge_green"
+                android:id="@+id/button_login"
+                style="@style/CustomStyleButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:layout_marginRight="25dp"
                 android:text="@string/lb_login"/>
 
-            <TextView android:id="@+id/link_signup"
+            <TextView android:id="@+id/text_view_criar_usuario"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/lb_criar_usuario"

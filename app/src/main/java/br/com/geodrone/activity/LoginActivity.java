@@ -39,6 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.geodrone.R;
+import br.com.geodrone.activity.utils.ActivityHelper;
 import br.com.geodrone.presenter.UsuarioPresenter;
 import br.com.geodrone.utils.PreferencesUtils;
 import butterknife.BindView;
@@ -51,13 +52,12 @@ public class LoginActivity extends AppCompatActivity {
     private static final int REQUEST_SIGNUP = 0;
 
     private UsuarioPresenter usuarioPresenter = null;
-    @BindView(R.id.input_email) EditText _emailText;
-    @BindView(R.id.input_password) EditText _passwordText;
-    @BindView(R.id.btn_olho) Button _showPasswordButton;
-    @BindView(R.id.btn_login) Button _loginButton;
-    @BindView(R.id.link_signup) TextView _signupLink;
+    @BindView(R.id.edit_text_email_login) EditText _emailText;
+    @BindView(R.id.edit_text_senha_login) EditText _passwordText;
+    @BindView(R.id.button_olho) Button _showPasswordButton;
+    @BindView(R.id.button_login) Button _loginButton;
+    @BindView(R.id.text_view_criar_usuario) TextView _signupLink;
     @BindView(R.id.progressBar_login) ProgressBar progressBar;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,6 +69,7 @@ public class LoginActivity extends AppCompatActivity {
         usuarioPresenter = new UsuarioPresenter(this);
         _emailText.setText(PreferencesUtils.getString(getApplicationContext(), PreferencesUtils.CHAVE_EMAIL_USUARIO, ""));
         _passwordText.setText(PreferencesUtils.getString(getApplicationContext(), PreferencesUtils.CHAVE_SENHA_USUARIO, ""));
+
 
         _loginButton.setOnClickListener(new View.OnClickListener() {
 
@@ -107,6 +108,8 @@ public class LoginActivity extends AppCompatActivity {
                 _passwordText.setSelection(_passwordText.getText().length());
             }
         });
+        ActivityHelper activityHelper = new ActivityHelper();
+        activityHelper.escondeTeclado(this);
     }
 
     public void login() {

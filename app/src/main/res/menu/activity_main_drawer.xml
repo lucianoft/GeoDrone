@@ -15,12 +15,26 @@
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:title="Monitoramento" />
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
             android:title="Tools" />
     </group>
+
+    <item android:title="@string/menu_geoomonitora">
+        <menu>
+            <item
+                android:id="@+id/menu_item_monitoramento_campo"
+                android:icon="@drawable/ic_monitoramento"
+                android:title="@string/menu_monitoramento" />
+            <item
+                android:id="@+id/menu_item_requisitar_arquivos_pragas"
+                android:icon="@drawable/ic_arquivo_black_24dp"
+                android:title="@string/menu_requisitar_arquivos_pragas" />
+
+        </menu>
+    </item>
 
     <item android:title="@string/menu_comunicacao">
         <menu>

@@ -1,14 +1,11 @@
 package br.com.geodrone.activity;
 
-import android.Manifest;
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.view.WindowManager;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
@@ -19,31 +16,29 @@ import butterknife.ButterKnife;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
-    @BindView(R.id.aberturaVersaoTV)TextView _versaoText;
+    @BindView(R.id.text_view_versao)TextView txtViewVersao;
+    @BindView(R.id.progressBar_abertura)
+    ProgressBar progressBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         ButterKnife.bind(this);
+        txtViewVersao.setText("Versão "+ BuildConfig.VERSION_NAME);
+        progressBar.setVisibility(View.VISIBLE);
         Handler handle = new Handler();
-        final ProgressDialog progressDialog = new ProgressDialog(SplashScreenActivity.this,
-                R.style.AppTheme_PopUp);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Carregando...");
-        progressDialog.show();
-
-        _versaoText.setText("Versão "+ BuildConfig.VERSION_NAME);
         handle.postDelayed(new Runnable() {
             @Override
             public void run() {
             mostrarLogin();
-            progressDialog.dismiss();
             }
         }, 3000);
     }
 
     private void mostrarLogin() {
+        progressBar.setVisibility(View.INVISIBLE);
         Intent i = new Intent(this,LoginActivity.class);
         startActivity(i);
         finish();

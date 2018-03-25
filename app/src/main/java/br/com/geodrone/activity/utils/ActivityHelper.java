@@ -26,7 +26,9 @@ public class ActivityHelper {
 
     public  void  escondeTeclado(Activity activity){
         InputMethodManager imm = (InputMethodManager)activity.getSystemService(INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+        if (activity.getCurrentFocus() != null) {
+            imm.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+        }
     }
 
     public boolean checkPermissionsCamera(final Activity activity) {

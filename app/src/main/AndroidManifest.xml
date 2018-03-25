@@ -69,11 +69,12 @@
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.CadastroPluviosidadeActivity"
             android:label="@string/title_activity_reg_chuvas"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:parentActivityName=".activity.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.CadatroUsuarioActivity"
             android:label="@string/title_activity_cadatro_usuario"
@@ -84,11 +85,18 @@
         <activity android:name=".activity.CameraFotoActivity" />
         <activity
             android:name=".activity.RegistroPragasActivity"
-            android:label="@string/title_activity_registro_pragas" />
-
-        <activity android:name=".activity.MensagemActivity" />
-
-        <activity android:name=".activity.ForunActivity"/>
+            android:label="@string/title_activity_registro_pragas"
+            android:parentActivityName=".activity.MainActivity" />
+        <activity
+            android:name=".activity.MensagemActivity"
+            android:parentActivityName=".activity.MainActivity" />
+        <activity
+            android:name=".activity.ForunActivity"
+            android:parentActivityName=".activity.MainActivity" />
+        <activity
+            android:name=".activity.MonitoramentoActivity"
+            android:label="@string/title_activity_monitoramento"
+            android:parentActivityName=".activity.MainActivity"/>
     </application>
 
 </manifest>
