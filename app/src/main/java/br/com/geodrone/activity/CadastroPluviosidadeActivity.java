@@ -1,14 +1,18 @@
 package br.com.geodrone.activity;
 
-import android.content.Context;
+import android.Manifest;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.hardware.GeomagneticField;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.support.annotation.NonNull;
+import android.os.Build;
+import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -17,8 +21,8 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.maps.android.SphericalUtil;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -27,18 +31,22 @@ import java.util.List;
 import br.com.geodrone.R;
 import br.com.geodrone.activity.utils.ActivityHelper;
 import br.com.geodrone.activity.utils.Constantes;
+import br.com.geodrone.activity.utils.GPSTracker;
 import br.com.geodrone.activity.utils.LocationUtils;
 import br.com.geodrone.dto.ColetaPluviosidadeDto;
 import br.com.geodrone.model.EstacaoPluviometrica;
 import br.com.geodrone.presenter.EstacaoPluviometricaPresenter;
+import br.com.geodrone.view.dialog.DialogInformarPluviosidade;
 import butterknife.ButterKnife;
 
-public class CadastroPluviosidadeActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener {
+public class CadastroPluviosidadeActivity extends FragmentActivity implements OnMapReadyCallback , GoogleMap.OnMarkerClickListener{
 
     private static final String TAG = CadastroPluviosidadeActivity.class.getSimpleName();
 
     private GoogleMap mMap;
-    private LocationManager locationManager;
+    private GPSTracker tracker;
+    private static final int REQ_LOCATION_PERMISSION = 101;
+    private static final int REQ_OPEN_SETTING = 102;
     private List<ColetaPluviosidadeDto> coletaPluviosidadeDtos;
 
     @Override
@@ -55,82 +63,131 @@ public class CadastroPluviosidadeActivity extends FragmentActivity implements On
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        initMap();
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+
+        tracker = new GPSTracker(this, mMap) {
+            @Override
+            public void onLocationChanged(Location location) {
+
+                super.onLocationChanged(location);
+                updateLocation(location);
+            }
+        };
+        mMap.setOnMarkerClickListener(this);
+
+        this.coletaPluviosidadeDtos = getPontosColeta();
+        for(ColetaPluviosidadeDto pluviosidadeDiariaDto : this.coletaPluviosidadeDtos) {
+            LatLng position = new LatLng(pluviosidadeDiariaDto.getLatitude(), pluviosidadeDiariaDto.getLongitude());
+            mMap.addMarker(new MarkerOptions().position(position).title(pluviosidadeDiariaDto.getDescricao()));
+
+        }
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener(){
+            @Override
+            public void onMapClick(LatLng point) {
+                Toast.makeText(CadastroPluviosidadeActivity.this, point.toString(), Toast.LENGTH_LONG).show();
+
+            }
+
+
+        });
+
     }
 
-    private void initMap() {
-        try{
-            mMap.setMyLocationEnabled(true);
-            mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-            mMap.getUiSettings().setCompassEnabled(true);
-            mMap.getUiSettings().setZoomControlsEnabled(true);
-            mMap.getUiSettings().setMyLocationButtonEnabled(true);//botal da localizacao atual
-            mMap.getUiSettings().setMapToolbarEnabled(true);
-            mMap.getUiSettings().setZoomGesturesEnabled(true);
-            mMap.getUiSettings().setScrollGesturesEnabled(true);
-            mMap.getUiSettings().setTiltGesturesEnabled(true);
-            mMap.getUiSettings().setRotateGesturesEnabled(true);
-            // getting GPS status
-            boolean isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-            // getting network status
-            boolean isNetworkEnabled = false/*locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)*/;
+    @Override
+    public boolean onMarkerClick(Marker marker) {
 
-            Location location = null;
+        Toast.makeText(this,marker.getTitle(),Toast.LENGTH_LONG).show();
 
-            if (isNetworkEnabled) {
-                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, Constantes.MIN_TIME_BW_UPDATES, Constantes.MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
-                location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-            }else{
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, Constantes.MIN_TIME_BW_UPDATES, Constantes.MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
-                location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            }
-            if (location != null) {
-                LatLng position = new LatLng(location.getLatitude(), location.getLongitude());
-                //mMap.addMarker(new MarkerOptions().position(position).title("Posiçao atual"));
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, Constantes.ZOOM_MAP));
-            }
+        new DialogInformarPluviosidade(this, "");
+        return true;
+    }
 
-            this.coletaPluviosidadeDtos = getPontosColeta();
-            for(ColetaPluviosidadeDto pluviosidadeDiariaDto : this.coletaPluviosidadeDtos) {
-                LatLng position = new LatLng(pluviosidadeDiariaDto.getLatitude(), pluviosidadeDiariaDto.getLongitude());
-                mMap.addMarker(new MarkerOptions().position(position).title(pluviosidadeDiariaDto.getDescricao()));
+    private void setLocation() {
+        if (!tracker.canGetLocation) {
+            if (Build.VERSION.SDK_INT >= 23) {
+                String[] PermissionsLocation = {android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION};
+                if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    requestPermissions(PermissionsLocation, REQ_LOCATION_PERMISSION);
+                } else
+                    showLocationAlert();
+            } else
+                showLocationAlert();
+        } else setMyLocation();
+    }
 
-            }
+    private void setMyLocation() {
+        if (tracker.getLatitude() != 0 && tracker.getLongitude() != 0) {
+            LatLng myLocation = new LatLng(tracker.getLatitude(), tracker.getLongitude());
+            mMap.clear();
+            mMap.addMarker(new MarkerOptions().position(myLocation).title("You are at Here!!"));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 14f));
+        }
+    }
 
-            /*mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener(){
-                @Override
-                public void onMapClick(LatLng point) {
-                    Toast.makeText(CadastroPluviosidadeActivity.this, point.toString(), Toast.LENGTH_LONG).show();
+    private AlertDialog locationAlertDialog;
+    private void showLocationAlert() {
+        if (null == locationAlertDialog)
+            locationAlertDialog = new AlertDialog.Builder(this, Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ? android.R.style.Theme_Material_Light_Dialog_Alert : -1)
+                    .setCancelable(false)
+                    .setMessage("This demo application would like to access your location")
+                    .setPositiveButton("Settings", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                            startActivityForResult(intent, REQ_OPEN_SETTING);
+                        }
+                    }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    }).show();
+        locationAlertDialog.show();
+    }
 
-                }
 
-            });*/
-        }catch(SecurityException ex){
-            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_LONG).show();
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQ_OPEN_SETTING) {
+            if (null != tracker)
+                tracker.getLocation();
+            checkLocation();
         }
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode){
-            case ActivityHelper.REQUEST_PERMISSION_LOCATION:
-                if(grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED){
-                    initMap();
-                } else {
-                    finish();
-                }
-                break;
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        if (requestCode == REQ_LOCATION_PERMISSION) {
+            if (grantResults.length > 1 && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                if (null != tracker)
+                    tracker.getLocation();
+                checkLocation();
+            }
         }
     }
 
-    @Override
-    public void onLocationChanged(Location location) {
+    private void checkLocation() {
+        if (tracker.canGetLocation)
+            setMyLocation();
+        else
+            showLocationAlert();
+    }
+
+    public void updateLocation(Location location) {
         if (location != null) {
             String strLocation =
                     DateFormat.getTimeInstance().format(location.getTime()) + "\n" +
@@ -151,20 +208,6 @@ public class CadastroPluviosidadeActivity extends FragmentActivity implements On
         }
     }
 
-    @Override
-    public void onStatusChanged(String s, int i, Bundle bundle) {
-
-    }
-
-    @Override
-    public void onProviderEnabled(String s) {
-        Log.i(s, s);
-    }
-
-    @Override
-    public void onProviderDisabled(String s) {
-
-    }
 
     private List<ColetaPluviosidadeDto> getPontosColeta(){
         EstacaoPluviometricaPresenter estacaoPluviometricaPresenter = new EstacaoPluviometricaPresenter(this);
