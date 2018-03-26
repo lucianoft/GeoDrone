@@ -54,9 +54,12 @@
     <string name="menu_mensagem">Mensagem</string>
     <string name="menu_forum">Forum</string>
 
+
+    <string name="menu_geooDrone">GeooDrone</string>
     <string name="menu_geoomonitora">GeooMonitora</string>
     <string name="menu_monitoramento">Monitoramento</string>
     <string name="menu_requisitar_arquivos_pragas">Requisitar Arquivos Pragas</string>
+    <string name="menu_registro_de_pragas">Registro Pragas</string>
 
 
     <string name="title_activity_monitoramento">Monitoramento</string>

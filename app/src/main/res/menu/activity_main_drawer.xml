@@ -3,24 +3,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_registro_foto"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_registro_foto" />
-        <item
-            android:id="@+id/nav_registo_chuva"
-            android:icon="@drawable/ic_pluviosidade"
-            android:title="@string/menu_registro_chuva" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Monitoramento" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
-    </group>
+    GeooDrone
+
+    <item android:title="@string/menu_geooDrone">
+        <menu>
+            <item
+                android:id="@+id/nav_registo_chuva"
+                android:icon="@drawable/ic_pluviosidade"
+                android:title="@string/menu_registro_chuva" />
+            <item
+                android:id="@+id/nav_registro_foto"
+                android:icon="@drawable/ic_menu_camera"
+                android:title="@string/menu_registro_foto" />
+            <item
+                android:id="@+id/nav_slideshow"
+                android:icon="@drawable/ic_menu_slideshow"
+                android:title="Monitoramento" />
+            <item
+                android:id="@+id/nav_manage"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="Tools" />
+        </menu>
+    </item>
 
     <item android:title="@string/menu_geoomonitora">
         <menu>
