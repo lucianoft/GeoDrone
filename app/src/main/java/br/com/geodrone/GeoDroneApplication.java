@@ -1,24 +1,17 @@
 package br.com.geodrone;
 
 import android.app.Application;
-import android.database.sqlite.SQLiteDatabase;
 
-import org.greenrobot.greendao.annotation.Convert;
-import org.greenrobot.greendao.annotation.NotNull;
-import org.greenrobot.greendao.annotation.Property;
 import org.greenrobot.greendao.database.Database;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 import br.com.geodrone.model.Cliente;
-import br.com.geodrone.model.EstacaoPluviometrica;
+import br.com.geodrone.model.PontoColetaChuva;
 import br.com.geodrone.model.Usuario;
 import br.com.geodrone.model.constantes.FlagStatusCliente;
-import br.com.geodrone.model.converter.FlagStatusClienteConverter;
 import br.com.geodrone.model.daoGen.DaoMaster;
 import br.com.geodrone.model.daoGen.DaoSession;
-import br.com.geodrone.model.daoGen.DbOpenHelper;
 import br.com.geodrone.utils.Constantes;
 
 
@@ -67,7 +60,7 @@ public class GeoDroneApplication extends Application {
                                String telefone, String celular,
                                FlagStatusCliente flagStatus) {
         Cliente cliente = new Cliente();
-        cliente.setId(id);
+        cliente.setIdClienteRef(id);
         cliente.setIndPessoaFisica(indPessoaFisica);
         cliente.setNomeRazaoSocial(nomeRazaoSocial);
         cliente.setCfp(cfp);
@@ -88,7 +81,7 @@ public class GeoDroneApplication extends Application {
     private void criarUsuario() {
         if (daoSession.getUsuarioDao().loadAll().size() == 0) {
             Usuario usuario = new Usuario();
-            usuario.setId(1L);
+            usuario.setIdUsuarioRef(1L);
             usuario.setNome("admin");
             usuario.setSobrenome("admin");
             usuario.setEmail("admin@gmail.com");
@@ -99,9 +92,9 @@ public class GeoDroneApplication extends Application {
     }
 
     private void criarEstacao() {
-        if (daoSession.getEstacaoPluviometricaDao().loadAll().size() == 0) {
+        if (daoSession.getPontoColetaChuvaDao().loadAll().size() == 0) {
 
-            getDaoSession().getEstacaoPluviometricaDao().insert(new EstacaoPluviometrica(null,
+            getDaoSession().getPontoColetaChuvaDao().insert(new PontoColetaChuva(
                     1L,
                     "AP",
                     -18.92272265,
@@ -109,10 +102,23 @@ public class GeoDroneApplication extends Application {
                     new Date(),
                     new Date(),
                     new Date(),
-                    1l,
+                    1L,
+                    1,
                     null));
 
-            getDaoSession().getEstacaoPluviometricaDao().insert(new EstacaoPluviometrica(null,
+            getDaoSession().getPontoColetaChuvaDao().insert(new PontoColetaChuva(
+                    1L,
+                    "CDN",
+                    -18.929408,
+                    -48.2413727,
+                    new Date(),
+                    new Date(),
+                    new Date(),
+                    1L,
+                    1,
+                    null));
+
+            getDaoSession().getPontoColetaChuvaDao().insert(new PontoColetaChuva(
                     1L,
                     "CDN",
                     -18.929408,
@@ -121,20 +127,10 @@ public class GeoDroneApplication extends Application {
                     new Date(),
                     new Date(),
                     1l,
+                    1,
                     null));
 
-            getDaoSession().getEstacaoPluviometricaDao().insert(new EstacaoPluviometrica(null,
-                    1L,
-                    "CDN",
-                    -18.929408,
-                    -48.2413727,
-                    new Date(),
-                    new Date(),
-                    new Date(),
-                    1l,
-                    null));
-
-            getDaoSession().getEstacaoPluviometricaDao().insert(new EstacaoPluviometrica(null,
+            getDaoSession().getPontoColetaChuvaDao().insert(new PontoColetaChuva(
                     1L,
                     "MARIA DE NAZARE",
                     -18.915298,
@@ -143,10 +139,11 @@ public class GeoDroneApplication extends Application {
                      new Date(),
                      new Date(),
                     1l,
+                    1,
                     null));
 
 
-            getDaoSession().getEstacaoPluviometricaDao().insert(new EstacaoPluviometrica(null,
+            getDaoSession().getPontoColetaChuvaDao().insert(new PontoColetaChuva(
                     1L,
                     "CASA DAS MASSAS",
                     -18.9267564,
@@ -155,6 +152,7 @@ public class GeoDroneApplication extends Application {
                     new Date(),
                     new Date(),
                     1l,
+                    1,
                     null));
 
         }

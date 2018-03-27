@@ -22,8 +22,8 @@ public class Cliente implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id(autoincrement =  false)
-    @Property(nameInDb = "ID_CLIENTE")
-    private Long id;
+    @Property(nameInDb = "ID_CLIENTE_REF")
+    private Long idClienteRef;
 
     @Property(nameInDb = "IND_PESSOA_FISICA" )
     @NotNull
@@ -63,12 +63,13 @@ public class Cliente implements Serializable {
     public Cliente() {
     }
 
-    public Long getId() {
-        return id;
+
+    public Long getIdClienteRef() {
+        return idClienteRef;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdClienteRef(Long idClienteRef) {
+        this.idClienteRef = idClienteRef;
     }
 
     public Integer getIndPessoaFisica() {
@@ -158,11 +159,11 @@ public class Cliente implements Serializable {
 
         Cliente cliente = (Cliente) o;
 
-        return id != null ? id.equals(cliente.id) : cliente.id == null;
+        return idClienteRef != null ? idClienteRef.equals(cliente.idClienteRef) : cliente.idClienteRef == null;
     }
 
     @Override
     public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+        return idClienteRef != null ? idClienteRef.hashCode() : 0;
     }
 }

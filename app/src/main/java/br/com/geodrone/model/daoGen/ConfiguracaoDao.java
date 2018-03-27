@@ -24,7 +24,7 @@ public class ConfiguracaoDao extends AbstractDao<Configuracao, Long> {
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property Id = new Property(0, Long.class, "id", true, "ID_ROTA_TRABALHO");
+        public final static Property IdConfiguracao = new Property(0, Long.class, "idConfiguracao", true, "ID_CONFIGURACAO");
         public final static Property IdDispositivo = new Property(1, Long.class, "idDispositivo", false, "ID_DISPOSITIVO");
         public final static Property Url = new Property(2, String.class, "url", false, "URL");
         public final static Property DtSincronizacao = new Property(3, java.util.Date.class, "dtSincronizacao", false, "DT_SINCRONIZACAO");
@@ -43,7 +43,7 @@ public class ConfiguracaoDao extends AbstractDao<Configuracao, Long> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"TB_CONFIGURACAO\" (" + //
-                "\"ID_ROTA_TRABALHO\" INTEGER PRIMARY KEY ," + // 0: id
+                "\"ID_CONFIGURACAO\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: idConfiguracao
                 "\"ID_DISPOSITIVO\" INTEGER NOT NULL ," + // 1: idDispositivo
                 "\"URL\" TEXT NOT NULL ," + // 2: url
                 "\"DT_SINCRONIZACAO\" INTEGER);"); // 3: dtSincronizacao
@@ -59,9 +59,9 @@ public class ConfiguracaoDao extends AbstractDao<Configuracao, Long> {
     protected final void bindValues(DatabaseStatement stmt, Configuracao entity) {
         stmt.clearBindings();
  
-        Long id = entity.getId();
-        if (id != null) {
-            stmt.bindLong(1, id);
+        Long idConfiguracao = entity.getIdConfiguracao();
+        if (idConfiguracao != null) {
+            stmt.bindLong(1, idConfiguracao);
         }
         stmt.bindLong(2, entity.getIdDispositivo());
         stmt.bindString(3, entity.getUrl());
@@ -76,9 +76,9 @@ public class ConfiguracaoDao extends AbstractDao<Configuracao, Long> {
     protected final void bindValues(SQLiteStatement stmt, Configuracao entity) {
         stmt.clearBindings();
  
-        Long id = entity.getId();
-        if (id != null) {
-            stmt.bindLong(1, id);
+        Long idConfiguracao = entity.getIdConfiguracao();
+        if (idConfiguracao != null) {
+            stmt.bindLong(1, idConfiguracao);
         }
         stmt.bindLong(2, entity.getIdDispositivo());
         stmt.bindString(3, entity.getUrl());
@@ -103,7 +103,7 @@ public class ConfiguracaoDao extends AbstractDao<Configuracao, Long> {
      
     @Override
     public void readEntity(Cursor cursor, Configuracao entity, int offset) {
-        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
+        entity.setIdConfiguracao(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setIdDispositivo(cursor.getLong(offset + 1));
         entity.setUrl(cursor.getString(offset + 2));
         entity.setDtSincronizacao(cursor.isNull(offset + 3) ? null : new java.util.Date(cursor.getLong(offset + 3)));
@@ -111,14 +111,14 @@ public class ConfiguracaoDao extends AbstractDao<Configuracao, Long> {
     
     @Override
     protected final Long updateKeyAfterInsert(Configuracao entity, long rowId) {
-        entity.setId(rowId);
+        entity.setIdConfiguracao(rowId);
         return rowId;
     }
     
     @Override
     public Long getKey(Configuracao entity) {
         if(entity != null) {
-            return entity.getId();
+            return entity.getIdConfiguracao();
         } else {
             return null;
         }
@@ -126,7 +126,7 @@ public class ConfiguracaoDao extends AbstractDao<Configuracao, Long> {
 
     @Override
     public boolean hasKey(Configuracao entity) {
-        return entity.getId() != null;
+        return entity.getIdConfiguracao() != null;
     }
 
     @Override

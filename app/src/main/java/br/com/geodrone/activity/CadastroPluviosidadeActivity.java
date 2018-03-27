@@ -2,7 +2,6 @@ package br.com.geodrone.activity;
 
 import android.Manifest;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -34,8 +33,8 @@ import br.com.geodrone.activity.utils.Constantes;
 import br.com.geodrone.activity.utils.GPSTracker;
 import br.com.geodrone.activity.utils.LocationUtils;
 import br.com.geodrone.dto.ColetaPluviosidadeDto;
-import br.com.geodrone.model.EstacaoPluviometrica;
-import br.com.geodrone.presenter.EstacaoPluviometricaPresenter;
+import br.com.geodrone.model.PontoColetaChuva;
+import br.com.geodrone.presenter.PontoColetaChuvaPresenter;
 import br.com.geodrone.view.dialog.DialogInformarPluviosidade;
 import butterknife.ButterKnife;
 
@@ -210,11 +209,11 @@ public class CadastroPluviosidadeActivity extends FragmentActivity implements On
 
 
     private List<ColetaPluviosidadeDto> getPontosColeta(){
-        EstacaoPluviometricaPresenter estacaoPluviometricaPresenter = new EstacaoPluviometricaPresenter(this);
+        PontoColetaChuvaPresenter estacaoPluviometricaPresenter = new PontoColetaChuvaPresenter(this);
 
         List<ColetaPluviosidadeDto> coletaPluviosidadeDtos = new ArrayList<>();
-        List<EstacaoPluviometrica> estacaoPluviometricas = estacaoPluviometricaPresenter.findAllByCliente(1L);
-        for (EstacaoPluviometrica estacaoPluviometrica : estacaoPluviometricas){
+        List<PontoColetaChuva> estacaoPluviometricas = estacaoPluviometricaPresenter.findAllByCliente(1L);
+        for (PontoColetaChuva estacaoPluviometrica : estacaoPluviometricas){
 
             ColetaPluviosidadeDto pluviosidadeDiariaDto = new ColetaPluviosidadeDto();
             pluviosidadeDiariaDto.setDescricao(estacaoPluviometrica.getDescricao());
@@ -224,4 +223,11 @@ public class CadastroPluviosidadeActivity extends FragmentActivity implements On
         }
         return coletaPluviosidadeDtos;
     }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        super.onBackPressed();
+    }
+
 }

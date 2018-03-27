@@ -18,9 +18,9 @@ public class Configuracao implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id(autoincrement =  false)
-    @Property(nameInDb = "ID_ROTA_TRABALHO")
-    private Long id;
+    @Id(autoincrement =  true)
+    @Property(nameInDb = "ID_CONFIGURACAO")
+    private Long idConfiguracao;
 
     @NotNull
     @Property(nameInDb = "ID_DISPOSITIVO")
@@ -36,12 +36,12 @@ public class Configuracao implements Serializable {
     public Configuracao() {
     }
 
-    public Long getId() {
-        return id;
+    public Long getIdConfiguracao() {
+        return idConfiguracao;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdConfiguracao(Long idConfiguracao) {
+        this.idConfiguracao = idConfiguracao;
     }
 
     public Long getIdDispositivo() {
@@ -75,11 +75,11 @@ public class Configuracao implements Serializable {
 
         Configuracao that = (Configuracao) o;
 
-        return id != null ? id.equals(that.id) : that.id == null;
+        return idConfiguracao != null ? idConfiguracao.equals(that.idConfiguracao) : that.idConfiguracao == null;
     }
 
     @Override
     public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+        return idConfiguracao != null ? idConfiguracao.hashCode() : 0;
     }
 }

@@ -60,6 +60,11 @@
         <item name="itemIconTint">@color/colorWhite</item>
         <item name="itemTextColor">@color/colorWhite</item>
     </style>
+
+    <style name="MyAlertDialogTheme" parent="Base.Theme.AppCompat.Light.Dialog.Alert">
+        <item name="windowFixedWidthMajor">90%</item>
+        <item name="windowFixedWidthMinor">30%</item>
+    </style>
 </resources>
 
 <!--

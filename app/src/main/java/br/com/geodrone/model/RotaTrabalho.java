@@ -14,9 +14,9 @@ import org.greenrobot.greendao.annotation.Generated;
 @Entity(generateConstructors = false, createInDb = true, nameInDb = "TB_ROTA_TRABALHO")
 public class RotaTrabalho {
 
-    @Id(autoincrement =  false)
+    @Id(autoincrement =  true)
     @Property(nameInDb = "ID_ROTA_TRABALHO")
-    private Long id;
+    private Long idRotaTrabalho;
 
     @NotNull
     @Property(nameInDb = "ID_CLIENTE")
@@ -38,24 +38,24 @@ public class RotaTrabalho {
     @Property(nameInDb = "DT_ALTERACAO")
     private Date dtAlteracao;
 
-    @Property(nameInDb = "ID_USUARIO")
-    private Long idUsuario;
+    @Property(nameInDb = "ID_USUARIO_REF")
+    private Long idUsuarioRef;
 
     @Property(nameInDb = "ID_DISPOSITIVO")
     private Long idDispositivo;
 
-    @Property(nameInDb = "ID_ROTA_TRABALHO_WEB")
-    private Long idRotaTrabalhoWeb;
+    @Property(nameInDb = "ID_ROTA_TRABALHO_REF")
+    private Long idRotaTrabalhoRef;
 
     public RotaTrabalho() {
     }
 
-    public Long getId() {
-        return id;
+    public Long getIdRotaTrabalho() {
+        return idRotaTrabalho;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdRotaTrabalho(Long idRotaTrabalho) {
+        this.idRotaTrabalho = idRotaTrabalho;
     }
 
     public Long getIdCliente() {
@@ -98,12 +98,12 @@ public class RotaTrabalho {
         this.dtAlteracao = dtAlteracao;
     }
 
-    public Long getIdUsuario() {
-        return idUsuario;
+    public Long getIdUsuarioRef() {
+        return idUsuarioRef;
     }
 
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setIdUsuarioRef(Long idUsuarioRef) {
+        this.idUsuarioRef = idUsuarioRef;
     }
 
     public Long getIdDispositivo() {
@@ -114,12 +114,12 @@ public class RotaTrabalho {
         this.idDispositivo = idDispositivo;
     }
 
-    public Long getIdRotaTrabalhoWeb() {
-        return idRotaTrabalhoWeb;
+    public Long getIdRotaTrabalhoRef() {
+        return idRotaTrabalhoRef;
     }
 
-    public void setIdRotaTrabalhoWeb(Long idRotaTrabalhoWeb) {
-        this.idRotaTrabalhoWeb = idRotaTrabalhoWeb;
+    public void setIdRotaTrabalhoRef(Long idRotaTrabalhoRef) {
+        this.idRotaTrabalhoRef = idRotaTrabalhoRef;
     }
 
     @Override
@@ -129,11 +129,11 @@ public class RotaTrabalho {
 
         RotaTrabalho that = (RotaTrabalho) o;
 
-        return id != null ? id.equals(that.id) : that.id == null;
+        return idRotaTrabalho != null ? idRotaTrabalho.equals(that.idRotaTrabalho) : that.idRotaTrabalho == null;
     }
 
     @Override
     public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+        return idRotaTrabalho != null ? idRotaTrabalho.hashCode() : 0;
     }
 }

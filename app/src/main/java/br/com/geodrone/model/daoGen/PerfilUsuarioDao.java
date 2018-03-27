@@ -27,12 +27,12 @@ public class PerfilUsuarioDao extends AbstractDao<PerfilUsuario, Long> {
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property Id = new Property(0, Long.class, "id", true, "ID_PERFIL_USUARIO");
+        public final static Property IdPerfilUsuarioRef = new Property(0, Long.class, "idPerfilUsuarioRef", true, "ID_PERFIL_USUARIO_REF");
         public final static Property Descricao = new Property(1, String.class, "descricao", false, "DESCRICAO");
         public final static Property FlagTipo = new Property(2, String.class, "flagTipo", false, "FLAG_TIPO");
         public final static Property DtInclusao = new Property(3, java.util.Date.class, "dtInclusao", false, "DT_INCLUSAO");
         public final static Property DtAlteracao = new Property(4, java.util.Date.class, "dtAlteracao", false, "DT_ALTERACAO");
-        public final static Property IdUsuario = new Property(5, Long.class, "idUsuario", false, "ID_USUARIO");
+        public final static Property IdUsuario = new Property(5, Long.class, "idUsuario", false, "ID_USUARIO_REF");
     }
 
     private final FlagPerfilUsuarioConverter flagTipoConverter = new FlagPerfilUsuarioConverter();
@@ -49,12 +49,12 @@ public class PerfilUsuarioDao extends AbstractDao<PerfilUsuario, Long> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"TB_PERFIL_USUARIO\" (" + //
-                "\"ID_PERFIL_USUARIO\" INTEGER PRIMARY KEY ," + // 0: id
+                "\"ID_PERFIL_USUARIO_REF\" INTEGER PRIMARY KEY ," + // 0: idPerfilUsuarioRef
                 "\"DESCRICAO\" TEXT NOT NULL ," + // 1: descricao
                 "\"FLAG_TIPO\" TEXT," + // 2: flagTipo
                 "\"DT_INCLUSAO\" INTEGER NOT NULL ," + // 3: dtInclusao
                 "\"DT_ALTERACAO\" INTEGER NOT NULL ," + // 4: dtAlteracao
-                "\"ID_USUARIO\" INTEGER);"); // 5: idUsuario
+                "\"ID_USUARIO_REF\" INTEGER);"); // 5: idUsuario
     }
 
     /** Drops the underlying database table. */
@@ -67,9 +67,9 @@ public class PerfilUsuarioDao extends AbstractDao<PerfilUsuario, Long> {
     protected final void bindValues(DatabaseStatement stmt, PerfilUsuario entity) {
         stmt.clearBindings();
  
-        Long id = entity.getId();
-        if (id != null) {
-            stmt.bindLong(1, id);
+        Long idPerfilUsuarioRef = entity.getIdPerfilUsuarioRef();
+        if (idPerfilUsuarioRef != null) {
+            stmt.bindLong(1, idPerfilUsuarioRef);
         }
         stmt.bindString(2, entity.getDescricao());
  
@@ -90,9 +90,9 @@ public class PerfilUsuarioDao extends AbstractDao<PerfilUsuario, Long> {
     protected final void bindValues(SQLiteStatement stmt, PerfilUsuario entity) {
         stmt.clearBindings();
  
-        Long id = entity.getId();
-        if (id != null) {
-            stmt.bindLong(1, id);
+        Long idPerfilUsuarioRef = entity.getIdPerfilUsuarioRef();
+        if (idPerfilUsuarioRef != null) {
+            stmt.bindLong(1, idPerfilUsuarioRef);
         }
         stmt.bindString(2, entity.getDescricao());
  
@@ -123,7 +123,7 @@ public class PerfilUsuarioDao extends AbstractDao<PerfilUsuario, Long> {
      
     @Override
     public void readEntity(Cursor cursor, PerfilUsuario entity, int offset) {
-        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
+        entity.setIdPerfilUsuarioRef(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setDescricao(cursor.getString(offset + 1));
         entity.setFlagTipo(cursor.isNull(offset + 2) ? null : flagTipoConverter.convertToEntityProperty(cursor.getString(offset + 2)));
         entity.setDtInclusao(new java.util.Date(cursor.getLong(offset + 3)));
@@ -133,14 +133,14 @@ public class PerfilUsuarioDao extends AbstractDao<PerfilUsuario, Long> {
     
     @Override
     protected final Long updateKeyAfterInsert(PerfilUsuario entity, long rowId) {
-        entity.setId(rowId);
+        entity.setIdPerfilUsuarioRef(rowId);
         return rowId;
     }
     
     @Override
     public Long getKey(PerfilUsuario entity) {
         if(entity != null) {
-            return entity.getId();
+            return entity.getIdPerfilUsuarioRef();
         } else {
             return null;
         }
@@ -148,7 +148,7 @@ public class PerfilUsuarioDao extends AbstractDao<PerfilUsuario, Long> {
 
     @Override
     public boolean hasKey(PerfilUsuario entity) {
-        return entity.getId() != null;
+        return entity.getIdPerfilUsuarioRef() != null;
     }
 
     @Override

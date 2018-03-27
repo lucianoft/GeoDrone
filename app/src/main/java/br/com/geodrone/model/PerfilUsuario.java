@@ -21,10 +21,9 @@ public class PerfilUsuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-
     @Id(autoincrement =  false)
-    @Property(nameInDb = "ID_PERFIL_USUARIO")
-    private Long id;
+    @Property(nameInDb = "ID_PERFIL_USUARIO_REF")
+    private Long idPerfilUsuarioRef;
 
     @Property(nameInDb = "DESCRICAO" )
     @NotNull
@@ -42,22 +41,22 @@ public class PerfilUsuario implements Serializable {
     @Property(nameInDb = "DT_ALTERACAO")
     private Date dtAlteracao;
 
-    @Property(nameInDb = "ID_USUARIO")
+    @Property(nameInDb = "ID_USUARIO_REF")
     private Long idUsuario;
 
     public PerfilUsuario() {
     }
 
-    public Long getId() {
-        return id;
+    public Long getIdPerfilUsuarioRef() {
+        return this.idPerfilUsuarioRef;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdPerfilUsuarioRef(Long idPerfilUsuarioRef) {
+        this.idPerfilUsuarioRef = idPerfilUsuarioRef;
     }
 
     public String getDescricao() {
-        return descricao;
+        return this.descricao;
     }
 
     public void setDescricao(String descricao) {
@@ -65,7 +64,7 @@ public class PerfilUsuario implements Serializable {
     }
 
     public FlagPerfilUsuario getFlagTipo() {
-        return flagTipo;
+        return this.flagTipo;
     }
 
     public void setFlagTipo(FlagPerfilUsuario flagTipo) {
@@ -73,7 +72,7 @@ public class PerfilUsuario implements Serializable {
     }
 
     public Date getDtInclusao() {
-        return dtInclusao;
+        return this.dtInclusao;
     }
 
     public void setDtInclusao(Date dtInclusao) {
@@ -81,7 +80,7 @@ public class PerfilUsuario implements Serializable {
     }
 
     public Date getDtAlteracao() {
-        return dtAlteracao;
+        return this.dtAlteracao;
     }
 
     public void setDtAlteracao(Date dtAlteracao) {
@@ -89,10 +88,11 @@ public class PerfilUsuario implements Serializable {
     }
 
     public Long getIdUsuario() {
-        return idUsuario;
+        return this.idUsuario;
     }
 
     public void setIdUsuario(Long idUsuario) {
         this.idUsuario = idUsuario;
     }
+
 }

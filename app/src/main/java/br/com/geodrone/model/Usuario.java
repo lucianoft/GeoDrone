@@ -14,8 +14,8 @@ public class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id(autoincrement =  false)
-    @Property(nameInDb = "ID_USUARIO")
-    private Long id;
+    @Property(nameInDb = "ID_USUARIO_REF")
+    private Long idUsuarioRef;
 
     @Property(nameInDb = "NOME" )
     @NotNull
@@ -39,12 +39,12 @@ public class Usuario implements Serializable {
     public Usuario() {
     }
 
-    public Long getId() {
-        return this.id;
+    public Long getIdUsuarioRef() {
+        return idUsuarioRef;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdUsuarioRef(Long idUsuarioRef) {
+        this.idUsuarioRef = idUsuarioRef;
     }
 
     public String getNome() {
@@ -55,33 +55,8 @@ public class Usuario implements Serializable {
         this.nome = nome;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Usuario usuario = (Usuario) o;
-
-        return id.equals(usuario.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return id.hashCode();
-    }
-
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", sobrenome='" + sobrenome + '\'' +
-                ", email='" + email + '\'' +
-                '}';
-    }
-
     public String getSobrenome() {
-        return this.sobrenome;
+        return sobrenome;
     }
 
     public void setSobrenome(String sobrenome) {
@@ -89,26 +64,41 @@ public class Usuario implements Serializable {
     }
 
     public String getEmail() {
-        return this.email;
+        return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
     public String getSenha() {
-        return this.senha;
+        return senha;
     }
 
     public void setSenha(String senha) {
         this.senha = senha;
     }
 
-    public String getTelefone() {
-        return this.telefone;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Usuario usuario = (Usuario) o;
+
+        return idUsuarioRef != null ? idUsuarioRef.equals(usuario.idUsuarioRef) : usuario.idUsuarioRef == null;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    @Override
+    public int hashCode() {
+        return idUsuarioRef != null ? idUsuarioRef.hashCode() : 0;
     }
 }
