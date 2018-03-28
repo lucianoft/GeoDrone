@@ -18,7 +18,7 @@ public class TipoCultivo implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id(autoincrement =  false)
-    @Property(nameInDb = "ID_TIPO_CULTIVO")
+    @Property(nameInDb = "ID_TIPO_CULTIVO_REF")
     private Long idTipoCultivoRef;
 
     @Property(nameInDb = "DESCRICAO" )
@@ -30,6 +30,12 @@ public class TipoCultivo implements Serializable {
     private Integer indAtivo;
 
     public TipoCultivo() {
+    }
+
+    public TipoCultivo(Long idTipoCultivoRef, String descricao, Integer indAtivo) {
+        this.idTipoCultivoRef = idTipoCultivoRef;
+        this.descricao = descricao;
+        this.indAtivo = indAtivo;
     }
 
     public Long getIdTipoCultivoRef() {

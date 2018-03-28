@@ -24,7 +24,7 @@ public class TipoCultivoDao extends AbstractDao<TipoCultivo, Long> {
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property IdTipoCultivoRef = new Property(0, Long.class, "idTipoCultivoRef", true, "ID_TIPO_CULTIVO");
+        public final static Property IdTipoCultivoRef = new Property(0, Long.class, "idTipoCultivoRef", true, "ID_TIPO_CULTIVO_REF");
         public final static Property Descricao = new Property(1, String.class, "descricao", false, "DESCRICAO");
         public final static Property IndAtivo = new Property(2, Integer.class, "indAtivo", false, "IND_ATIVO");
     }
@@ -42,7 +42,7 @@ public class TipoCultivoDao extends AbstractDao<TipoCultivo, Long> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"TB_TIPO_CULTIVO\" (" + //
-                "\"ID_TIPO_CULTIVO\" INTEGER PRIMARY KEY ," + // 0: idTipoCultivoRef
+                "\"ID_TIPO_CULTIVO_REF\" INTEGER PRIMARY KEY ," + // 0: idTipoCultivoRef
                 "\"DESCRICAO\" TEXT NOT NULL ," + // 1: descricao
                 "\"IND_ATIVO\" INTEGER NOT NULL );"); // 2: indAtivo
     }

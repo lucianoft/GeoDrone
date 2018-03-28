@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.ConsultarPragaActivity">
+
+    <TextView
+        android:id="@+id/textViewPragaPesquisa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/lb_praga"
+        android:visibility="visible" />
+
+    <Spinner
+        android:id="@+id/spinner_praga_pesquisa"
+        android:layout_below="@+id/textViewPragaPesquisa"
+        style="@style/Widget.AppCompat.Spinner.Underlined"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"/>
+
+
+    <EditText
+        android:id="@+id/edit_text_pesquisa_praga"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spinner_praga_pesquisa"
+        android:textSize="14sp"
+        android:hint="@string/lb_pesquisar_item" />
+
+    <android.support.v7.widget.RecyclerView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/recyclerViewPesquisaPraga"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/edit_text_pesquisa_praga"
+        app:layoutManager="LinearLayoutManager">
+
+    </android.support.v7.widget.RecyclerView>
+</RelativeLayout>

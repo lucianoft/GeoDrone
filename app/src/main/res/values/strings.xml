@@ -22,11 +22,15 @@
     <string name="lb_profile">Profile</string>
     <string name="lb_observacao">Observação</string>
     <string name="lb_tipo_praga_doenca">Tipo de Praga/Doença</string>
+    <string name="lb_tipo_praga">Tipo de Praga</string>
+    <string name="lb_tipo_cultivo">Tipo de Cultivo</string>
+    <string name="lb_praga">Doença</string>
     <string name="lb_praga_doenca">Praga/Doença</string>
     <string name="lb_qtd_pragas">Qtde</string>
     <string name="lb_latitude">Latitude</string>
     <string name="lb_longitude">Longitude</string>
     <string name="lb_ponto_registro_pluviosidade">Ponto Pluviometro</string>
+    <string name="lb_pesquisar_item">Pesquisar Item</string>
 
     <string name="lb_btn_salvar">Salvar</string>
 

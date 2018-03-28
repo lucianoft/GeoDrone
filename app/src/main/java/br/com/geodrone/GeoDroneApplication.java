@@ -8,6 +8,8 @@ import java.util.Date;
 
 import br.com.geodrone.model.Cliente;
 import br.com.geodrone.model.PontoColetaChuva;
+import br.com.geodrone.model.Praga;
+import br.com.geodrone.model.TipoCultivo;
 import br.com.geodrone.model.Usuario;
 import br.com.geodrone.model.constantes.FlagStatusCliente;
 import br.com.geodrone.model.daoGen.DaoMaster;
@@ -35,6 +37,8 @@ public class GeoDroneApplication extends Application {
         criarCliente();
         criarUsuario();
         criarEstacao();
+        criarTipoCultivo();
+        criarPragas();
     }
 
     private void criarCliente() {
@@ -135,9 +139,9 @@ public class GeoDroneApplication extends Application {
                     "MARIA DE NAZARE",
                     -18.915298,
                     -48.23462,
-                     new Date(),
-                     new Date(),
-                     new Date(),
+                    new Date(),
+                    new Date(),
+                    new Date(),
                     1l,
                     1,
                     null));
@@ -158,4 +162,35 @@ public class GeoDroneApplication extends Application {
         }
 
     }
+    private void criarTipoCultivo() {
+        if (daoSession.getTipoCultivoDao().loadAll().size() == 0) {
+            getDaoSession().getTipoCultivoDao().insert(new TipoCultivo(1L, "Soja", 1));
+            getDaoSession().getTipoCultivoDao().insert(new TipoCultivo(2L, "Feijao", 1));
+            getDaoSession().getTipoCultivoDao().insert(new TipoCultivo(3L, "Algodao", 1));
+            getDaoSession().getTipoCultivoDao().insert(new TipoCultivo(4L, "Milho", 1));
+        }
+    }
+
+
+    private void criarPragas() {
+        if (daoSession.getPragaDao().loadAll().size() == 0) {
+            getDaoSession().getPragaDao().insert(new Praga(1L, 1L, "Acaro Rajado",	"Tetranychus urticae", 1));
+            getDaoSession().getPragaDao().insert(new Praga(2L, 1L,"Acaro-branco",	"Polyphagotarsonemus latus", 1));
+            getDaoSession().getPragaDao().insert(new Praga(3L, 1L,"Bicudo-da-soja",	"Sternechus subsignatus", 1));
+            getDaoSession().getPragaDao().insert(new Praga(4L, 1L,"Broca-das-axilas",	"Epinotia aporema", 1));
+
+
+            getDaoSession().getPragaDao().insert(new Praga(5L, 3L,"Acaro branco",	"Polyphagotarsonemus latus", 1));
+            getDaoSession().getPragaDao().insert(new Praga(6L, 3L,"Acaro rajado e vermelho",	"Tetranychus urticae", 1));
+            getDaoSession().getPragaDao().insert(new Praga(7L, 3L,"Bicudo do Algodoeiro",	"Anthonomus grandis", 1));
+            getDaoSession().getPragaDao().insert(new Praga(8L, 3L,"Broca da Haste", "Conotrachelus denieri", 1));
+            getDaoSession().getPragaDao().insert(new Praga(9L, 3L,"Broca da Raiz", "Eutinobothrus brasiliensis", 1));
+
+            getDaoSession().getPragaDao().insert(new Praga(10L, 4L,"Cigarrinha-das-raízes",	"Mahanarva fimbriolata", 1));
+            getDaoSession().getPragaDao().insert(new Praga(11L, 4L,"Coro-das-pastagens", 	"Diloboderus abderus", 1));
+            getDaoSession().getPragaDao().insert(new Praga(12L, 4L,"Coro-da-soja", 	"Phyllophaga cuyabana", 1));
+            getDaoSession().getPragaDao().insert(new Praga(13L, 4L,"Coro-do-trigo", 	"Phyllophaga triticophaga", 1));
+        }
+    }
+
 }

@@ -22,6 +22,9 @@ public class Praga implements Serializable {
     @Property(nameInDb = "ID_PRAGA_REF")
     private Long idPragaRef;
 
+    @Property(nameInDb = "ID_TIPO_CULTIVO_REF")
+    private Long idTipoCultivoRef;
+
     @Property(nameInDb = "DESCRICAO" )
     @NotNull
     private String descricao;
@@ -37,12 +40,29 @@ public class Praga implements Serializable {
     public Praga() {
     }
 
+    public Praga(Long idPragaRef, Long idTipoCultivoRef, String descricao, String descricaoCientifica, Integer indAtivo) {
+        this.idPragaRef = idPragaRef;
+        this.idTipoCultivoRef = idTipoCultivoRef;
+        this.descricao = descricao;
+        this.descricaoCientifica = descricaoCientifica;
+        this.indAtivo = indAtivo;
+    }
+
     public Long getIdPragaRef() {
         return idPragaRef;
     }
 
     public void setIdPragaRef(Long idPragaRef) {
         this.idPragaRef = idPragaRef;
+    }
+
+
+    public Long getIdTipoCultivoRef() {
+        return idTipoCultivoRef;
+    }
+
+    public void setIdTipoCultivoRef(Long idTipoCultivoRef) {
+        this.idTipoCultivoRef = idTipoCultivoRef;
     }
 
     public String getDescricao() {

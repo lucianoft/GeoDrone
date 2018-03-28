@@ -58,7 +58,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/lb_tipo_praga_doenca"
+            android:text= "@string/lb_tipo_cultivo"
             />
 
         <Spinner
@@ -80,14 +80,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="@string/lb_praga_doenca"
+                android:text="@string/lb_praga"
                 android:visibility="visible" />
 
-            <Spinner
+            <!--<Spinner
                 android:id="@+id/spinner_praga"
                 style="@style/Widget.AppCompat.Spinner.Underlined"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"/>
+  -->
+            <AutoCompleteTextView
+                android:id="@+id/autoCompletePraga"
+                android:hint="@string/lb_praga"
+                android:completionThreshold="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
         <!--NEW LINE!-->
 

@@ -96,7 +96,8 @@
         <activity
             android:name=".activity.MonitoramentoActivity"
             android:label="@string/title_activity_monitoramento"
-            android:parentActivityName=".activity.MainActivity"/>
+            android:parentActivityName=".activity.MainActivity" />
+        <activity android:name=".activity.ConsultarPragaActivity"></activity>
     </application>
 
 </manifest>
