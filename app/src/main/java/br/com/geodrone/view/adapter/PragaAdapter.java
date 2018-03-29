@@ -4,6 +4,7 @@ package br.com.geodrone.view.adapter;
  * Created by fernandes on 28/03/2018.
  */
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.Filter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import br.com.geodrone.R;
@@ -46,19 +48,25 @@ public class PragaAdapter extends ArrayAdapter<Praga> {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.list_praga_layout, parent, false);
         }
-        nome = (TextView) view.findViewById(R.id.textViewPragaNome);
-        nomeCientifico = (TextView) view.findViewById(R.id.textViewPragaNomeCientificao);
-
-        Praga people = items.get(position);
-        if (people != null) {
-            nome.setText(people.getDescricao());
-            nomeCientifico.setText(people.getDescricaoCientifica());
+        nome = (TextView) view.findViewById(R.id.textViewPragaNomeComum);
+        //nomeCientifico = (TextView) view.findViewById(R.id.textViewPragaNomeCientificao);
+        Praga praga = items.get(position);
+        if (praga != null) {
+            nome.setText(praga.getDescricao() + " - (" + praga.getDescricaoCientifica() + ")");
+            //nomeCientifico.setText(praga.getDescricaoCientifica());
         }
         return view;
     }
 
     @Override
+    public void addAll(@NonNull Collection<? extends Praga> collection) {
+        this.items = items;
+        tempItems = new ArrayList<Praga>(items); // this makes the difference.
+    }
+
+    @Override
     public Filter getFilter() {
+
         return nameFilter;
     }
 
@@ -68,7 +76,7 @@ public class PragaAdapter extends ArrayAdapter<Praga> {
     Filter nameFilter = new Filter() {
         @Override
         public CharSequence convertResultToString(Object resultValue) {
-            String str = ((Praga) resultValue).getDescricao();
+            String str = ((Praga) resultValue).getDescricao() + " - (" + ((Praga) resultValue).getDescricaoCientifica() + ")";
             return str;
         }
 
@@ -102,4 +110,6 @@ public class PragaAdapter extends ArrayAdapter<Praga> {
             }
         }
     };
+
+
 }

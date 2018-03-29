@@ -76,4 +76,9 @@ public class TipoCultivo implements Serializable {
     public int hashCode() {
         return idTipoCultivoRef != null ? idTipoCultivoRef.hashCode() : 0;
     }
+
+    @Override
+    public String toString() {
+        return descricao;
+    }
 }

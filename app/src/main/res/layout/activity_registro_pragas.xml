@@ -11,46 +11,8 @@
     android:layout_marginTop="10dp"
     tools:context=".activity.RegistroPragasActivity">
 
-
-    <!--  Observacao -->
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/text_input_layout_latitude_praga"
-        style="@style/TextLabel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp">
-        <EditText android:id="@+id/edit_text_latitude_praga"
-            style="@style/TextLabel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="numberSigned"
-            android:focusable="false"
-            android:hint="@string/lb_latitude" />
-    </android.support.design.widget.TextInputLayout>
-
-
-    <!--  Observacao -->
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/text_input_layout_longitude_praga"
-        android:layout_below="@+id/text_input_layout_latitude_praga"
-        style="@style/TextLabel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp">
-        <EditText android:id="@+id/edit_text_longitude_praga"
-            style="@style/TextLabel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="numberSigned"
-            android:focusable="false"
-            android:hint="@string/lb_longitude" />
-    </android.support.design.widget.TextInputLayout>
-
     <LinearLayout
         android:id="@+id/linear_layout_tipo_pagra"
-        android:layout_below="@+id/text_input_layout_longitude_praga"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -65,38 +27,32 @@
             style="@style/Widget.AppCompat.Spinner.Underlined"
             android:id="@+id/spinner_tipo_praga"
             android:layout_width="match_parent"
-            android:layout_height="35dp"/>
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
     <!--NEW LINE!-->
-        <LinearLayout
-            android:id="@+id/linear_layout_pagra"
+    <LinearLayout
+        android:id="@+id/linear_layout_pagra"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear_layout_tipo_pagra"
+        android:orientation="vertical">
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/linear_layout_tipo_pagra"
-            android:orientation="vertical">
+            android:layout_marginTop="10dp"
+            android:text="@string/lb_praga"
+            android:visibility="visible" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/lb_praga"
-                android:visibility="visible" />
-
-            <!--<Spinner
-                android:id="@+id/spinner_praga"
-                style="@style/Widget.AppCompat.Spinner.Underlined"
-                android:layout_width="match_parent"
-                android:layout_height="35dp"/>
-  -->
-            <AutoCompleteTextView
-                android:id="@+id/autoCompletePraga"
-                android:hint="@string/lb_praga"
-                android:completionThreshold="1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-        <!--NEW LINE!-->
+        <AutoCompleteTextView
+            android:id="@+id/autoCompletePraga"
+            android:hint="@string/lb_pesquisar"
+            android:completionThreshold="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <!--NEW LINE!-->
 
     <!--  Observacao -->
     <android.support.design.widget.TextInputLayout
@@ -133,13 +89,13 @@
     </android.support.design.widget.TextInputLayout>
 
     <!--NEW LINE!-->
-        <Button
-            android:id="@+id/btn_salvar_praga"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/text_input_layout_qtde_praga"
-            android:layout_marginTop="15dp"
-            style="@style/CustomStyleButton"
-            android:text="@string/lb_btn_salvar" />
+    <Button
+        android:id="@+id/btn_salvar_praga"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_input_layout_qtde_praga"
+        android:layout_marginTop="15dp"
+        style="@style/CustomStyleButton"
+        android:text="@string/lb_btn_salvar" />
 
 </RelativeLayout>

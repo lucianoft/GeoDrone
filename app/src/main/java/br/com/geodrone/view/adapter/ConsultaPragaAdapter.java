@@ -29,8 +29,8 @@ public class ConsultaPragaAdapter extends RecyclerView.Adapter<ConsultaPragaAdap
 
         public MyViewHolder(View view) {
             super(view);
-            nome = (TextView) view.findViewById(R.id.textViewPragaNome);
-            nomeCientifico = (TextView) view.findViewById(R.id.textViewPragaNomeCientificao);
+            nome = (TextView) view.findViewById(R.id.textViewPragaNomeComum);
+            //nomeCientifico = (TextView) view.findViewById(R.id.textViewPragaNomeCientificao);
         }
     }
 
@@ -42,9 +42,9 @@ public class ConsultaPragaAdapter extends RecyclerView.Adapter<ConsultaPragaAdap
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Praga movie = moviesList.get(position);
-        holder.nome.setText(movie.getDescricao());
-        holder.nomeCientifico.setText(movie.getDescricaoCientifica());
+        Praga praga = moviesList.get(position);
+        holder.nome.setText(praga.getDescricao());
+        holder.nomeCientifico.setText(praga.getDescricaoCientifica());
     }
 
     @Override

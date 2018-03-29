@@ -3,22 +3,16 @@ package br.com.geodrone.activity;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +20,7 @@ import java.util.List;
 import br.com.geodrone.R;
 import br.com.geodrone.dto.PragaDto;
 import br.com.geodrone.model.Praga;
+import br.com.geodrone.model.TipoCultivo;
 import br.com.geodrone.presenter.PragaPresenter;
 import br.com.geodrone.utils.NumberUtils;
 import br.com.geodrone.view.adapter.PragaAdapter;
@@ -33,10 +28,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.satsuware.usefulviews.LabelledSpinner;
 
-public class RegistroPragasActivity extends AppCompatActivity implements LabelledSpinner.OnItemChosenListener {
+public class RegistroPragasActivity extends AppCompatActivity {
 
-    @BindView(R.id.edit_text_latitude_praga) EditText editTextLatitude;
-    @BindView(R.id.edit_text_longitude_praga) EditText editTextLongitude;
     @BindView(R.id.spinner_tipo_praga) Spinner spiTipoPraga;
     //@BindView(R.id.spinner_praga) Spinner spiPraga;
     @BindView(R.id.edit_text_obs_praga) EditText editTextObservacao;
@@ -49,9 +42,14 @@ public class RegistroPragasActivity extends AppCompatActivity implements Labelle
     private NumberUtils numberUtils = new NumberUtils();
 
     private PragaPresenter pragaPresenter;
-    PragaAdapter pragaAdapter;
+    private PragaAdapter pragaAdapter;
 
     private List<Praga> pragaList = new ArrayList<>();
+    private List<Praga> pragaListFilter = new ArrayList<>();
+
+    private List<TipoCultivo> tipoCultivoList = new ArrayList<>();
+    private TipoCultivo tipoCultivo = null;
+    private Praga praga = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,44 +62,72 @@ public class RegistroPragasActivity extends AppCompatActivity implements Labelle
 
         Intent it = getIntent();
         location = it.getParcelableExtra("localizacao");
-        if (location != null){
-            editTextLatitude.setText(numberUtils.toString(location.getLatitude()));
-            editTextLongitude.setText(numberUtils.toString(location.getLongitude()));
-        }
 
         pragaPresenter = new PragaPresenter(this);
 
-        pragaList = pragaPresenter.findAll();
+        tipoCultivoList = pragaPresenter.findAllTipoCultivo();
+        pragaList = pragaPresenter.findAllPraga();
+
+        ArrayAdapter<TipoCultivo> myAdapter = new ArrayAdapter<TipoCultivo>(this, android.R.layout.simple_spinner_item, tipoCultivoList);
+        spiTipoPraga.setAdapter(myAdapter);
+        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         autoCompletePraga.setThreshold(1);
-        pragaAdapter = new PragaAdapter(this, R.layout.activity_main, R.id.textViewPragaNome, pragaList);
+        pragaAdapter = new PragaAdapter(this, R.layout.activity_registro_pragas, R.id.textViewPragaNomeComum, pragaListFilter);
         autoCompletePraga.setAdapter(pragaAdapter);
+        pragaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
+        spiTipoPraga.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                tipoCultivo = (TipoCultivo) adapterView.getSelectedItem();
+                pragaListFilter = new ArrayList<>();
+                if (pragaList != null){
+                    for (Praga praga : pragaList){
+                        if (praga.getIdTipoCultivoRef() == null ||
+                                praga.getIdTipoCultivoRef().equals(tipoCultivo.getIdTipoCultivoRef())){
+                            pragaListFilter.add(praga);
+                        }
+                    }
+                }
+                autoCompletePraga.setText("");
+                pragaAdapter = new PragaAdapter(RegistroPragasActivity.this, R.layout.activity_main, R.id.textViewPragaNomeComum, pragaListFilter);
+                autoCompletePraga.setAdapter(pragaAdapter);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                pragaAdapter.clear();
+                pragaAdapter.notifyDataSetChanged();
+            }
+        });
+
+        autoCompletePraga.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Object item = parent.getItemAtPosition(position);
+                if (item instanceof Praga) {
+                    praga = (Praga) item;
+                }
+            }
+        });
         buttonSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            Intent i = new Intent(RegistroPragasActivity.this ,ConsultarPragaActivity.class);
-            startActivity(i);
-
+            validarCampos();
             }
         });
-        // Initializing list view with the custom adapter
-        ArrayList <PragaDto> pragaList = new ArrayList<>();
-        // Populating list Pragas
-        for(int i=0; i<100; i++) {
-            pragaList.add(new PragaDto(new Long(i), "Praga " + i));
+    }
+
+    private boolean validarCampos() {
+        TipoCultivo tipoCultivo = (TipoCultivo) spiTipoPraga.getSelectedItem();
+        if (tipoCultivo == null){
+            ((TextView)spiTipoPraga.getSelectedView()).setError("Error message");
         }
-        //spiPraga.setItemsArray(pragaList);
-        //spiPraga.setOnItemChosenListener(this);
+        if (praga == null){
+            autoCompletePraga.setError("Error message");
+        }
+        return true;
     }
 
-    @Override
-    public void onItemChosen(View labelledSpinner, AdapterView<?> adapterView, View itemView, int position, long id) {
-
-    }
-
-    @Override
-    public void onNothingChosen(View labelledSpinner, AdapterView<?> adapterView) {
-
-    }
 }

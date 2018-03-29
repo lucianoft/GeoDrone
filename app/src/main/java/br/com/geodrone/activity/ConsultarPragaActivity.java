@@ -45,7 +45,7 @@ public class ConsultarPragaActivity extends AppCompatActivity {
 
         pragaPresenter = new PragaPresenter(this);
 
-        pragaList = pragaPresenter.findAll();
+        pragaList = pragaPresenter.findAllPraga();
 
         pragaPresenter = new PragaPresenter(this);
         mAdapter = new ConsultaPragaAdapter(pragaList);

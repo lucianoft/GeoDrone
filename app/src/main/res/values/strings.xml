@@ -24,7 +24,8 @@
     <string name="lb_tipo_praga_doenca">Tipo de Praga/Doença</string>
     <string name="lb_tipo_praga">Tipo de Praga</string>
     <string name="lb_tipo_cultivo">Tipo de Cultivo</string>
-    <string name="lb_praga">Doença</string>
+    <string name="lb_pesquisar">pesquisar</string>
+    <string name="lb_praga">Praga</string>
     <string name="lb_praga_doenca">Praga/Doença</string>
     <string name="lb_qtd_pragas">Qtde</string>
     <string name="lb_latitude">Latitude</string>
