@@ -15,7 +15,7 @@ public class PontoColetaChuvaService extends ServiceCrud<PontoColetaChuva, Long>
         pontoColetaChuvaRepository = new PontoColetaChuvaRepository(ctx);
     }
 
-    public CrudRepository<PontoColetaChuva, Long> getCrudRepoitory(){
+    public CrudRepository<PontoColetaChuva, Long> getCrudRepository(){
         return pontoColetaChuvaRepository;
     }
 

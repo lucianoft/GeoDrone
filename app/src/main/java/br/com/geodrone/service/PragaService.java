@@ -16,7 +16,7 @@ public class PragaService extends ServiceCrud<Praga, Long> {
         pragaRepository = new PragaRepository(ctx);
     }
 
-    public CrudRepository<Praga, Long> getCrudRepoitory(){
+    public CrudRepository<Praga, Long> getCrudRepository(){
         return pragaRepository;
     }
 }

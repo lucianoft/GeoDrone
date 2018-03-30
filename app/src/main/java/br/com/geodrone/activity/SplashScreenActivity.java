@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import br.com.geodrone.BuildConfig;
 import br.com.geodrone.R;
+import br.com.geodrone.ui.login.LoginActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

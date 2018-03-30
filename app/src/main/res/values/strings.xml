@@ -32,8 +32,12 @@
     <string name="lb_longitude">Longitude</string>
     <string name="lb_ponto_registro_pluviosidade">Ponto Pluviometro</string>
     <string name="lb_pesquisar_item">Pesquisar Item</string>
+    <string name="lb_doenca">Doenca</string>
+    <string name="lb_qtd_doencas">Qtde</string>
 
     <string name="lb_btn_salvar">Salvar</string>
+
+    <string name="msg_login_invalido">Login Invalido</string>
 
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
@@ -65,7 +69,8 @@
     <string name="menu_geoomonitora">GeooMonitora</string>
     <string name="menu_monitoramento">Monitoramento</string>
     <string name="menu_requisitar_arquivos_pragas">Requisitar Arquivos Pragas</string>
-    <string name="menu_registro_de_pragas">Registro Pragas</string>
+    <string name="menu_registro_de_praga">Registro Pragas</string>
+    <string name="menu_registro_de_doenca">Registro Doenca</string>
 
 
     <string name="title_activity_monitoramento">Monitoramento</string>

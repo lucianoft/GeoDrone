@@ -17,7 +17,7 @@ public class PerfilUsuarioService extends ServiceCrud<PerfilUsuario, Long> {
         perfilUsuarioRepository = new PerfilUsuarioRepository(ctx);
     }
 
-    public CrudRepository<PerfilUsuario, Long> getCrudRepoitory(){
+    public CrudRepository<PerfilUsuario, Long> getCrudRepository(){
         return perfilUsuarioRepository;
     }
 }

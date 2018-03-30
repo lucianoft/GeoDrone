@@ -2,8 +2,6 @@ package br.com.geodrone.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -14,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import br.com.geodrone.R;
+import br.com.geodrone.ui.registropraga.RegistroPragaActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -117,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(i);
 
         } else if (id == R.id.nav_manage) {
-            Intent i = new Intent(this,RegistroPragasActivity.class);
+            Intent i = new Intent(this,RegistroPragaActivity.class);
             startActivity(i);
         } else if (id == R.id.menu_item_monitoramento_campo) {
             Intent i = new Intent(this,MonitoramentoActivity.class);

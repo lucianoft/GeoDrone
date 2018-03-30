@@ -17,7 +17,7 @@ public class ConfiguracaoService extends ServiceCrud<Configuracao, Long> {
         configuracaoRepository = new ConfiguracaoRepository(ctx);
     }
 
-    public CrudRepository<Configuracao, Long> getCrudRepoitory(){
+    public CrudRepository<Configuracao, Long> getCrudRepository(){
         return configuracaoRepository;
     }
 }

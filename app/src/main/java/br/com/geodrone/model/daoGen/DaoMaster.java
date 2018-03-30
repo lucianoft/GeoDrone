@@ -22,29 +22,29 @@ public class DaoMaster extends AbstractDaoMaster {
     /** Creates underlying database table using DAOs. */
     public static void createAllTables(Database db, boolean ifNotExists) {
         ClienteDao.createTable(db, ifNotExists);
-        PerfilUsuarioDao.createTable(db, ifNotExists);
-        UsuarioDao.createTable(db, ifNotExists);
         ConfiguracaoDao.createTable(db, ifNotExists);
-        RotaTrabalhoDao.createTable(db, ifNotExists);
         DoencaDao.createTable(db, ifNotExists);
+        PerfilUsuarioDao.createTable(db, ifNotExists);
         PontoColetaChuvaDao.createTable(db, ifNotExists);
         PragaDao.createTable(db, ifNotExists);
         RegistroChuvaDao.createTable(db, ifNotExists);
+        RotaTrabalhoDao.createTable(db, ifNotExists);
         TipoCultivoDao.createTable(db, ifNotExists);
+        UsuarioDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
     public static void dropAllTables(Database db, boolean ifExists) {
         ClienteDao.dropTable(db, ifExists);
-        PerfilUsuarioDao.dropTable(db, ifExists);
-        UsuarioDao.dropTable(db, ifExists);
         ConfiguracaoDao.dropTable(db, ifExists);
-        RotaTrabalhoDao.dropTable(db, ifExists);
         DoencaDao.dropTable(db, ifExists);
+        PerfilUsuarioDao.dropTable(db, ifExists);
         PontoColetaChuvaDao.dropTable(db, ifExists);
         PragaDao.dropTable(db, ifExists);
         RegistroChuvaDao.dropTable(db, ifExists);
+        RotaTrabalhoDao.dropTable(db, ifExists);
         TipoCultivoDao.dropTable(db, ifExists);
+        UsuarioDao.dropTable(db, ifExists);
     }
 
     /**
@@ -64,15 +64,15 @@ public class DaoMaster extends AbstractDaoMaster {
     public DaoMaster(Database db) {
         super(db, SCHEMA_VERSION);
         registerDaoClass(ClienteDao.class);
-        registerDaoClass(PerfilUsuarioDao.class);
-        registerDaoClass(UsuarioDao.class);
         registerDaoClass(ConfiguracaoDao.class);
-        registerDaoClass(RotaTrabalhoDao.class);
         registerDaoClass(DoencaDao.class);
+        registerDaoClass(PerfilUsuarioDao.class);
         registerDaoClass(PontoColetaChuvaDao.class);
         registerDaoClass(PragaDao.class);
         registerDaoClass(RegistroChuvaDao.class);
+        registerDaoClass(RotaTrabalhoDao.class);
         registerDaoClass(TipoCultivoDao.class);
+        registerDaoClass(UsuarioDao.class);
     }
 
     public DaoSession newSession() {

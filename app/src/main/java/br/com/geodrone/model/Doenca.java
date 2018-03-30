@@ -20,9 +20,13 @@ public class Doenca implements Serializable {
     @Property(nameInDb = "ID_DOENCA_REF")
     private Long idDoencaRef;
 
+    @Property(nameInDb = "ID_TIPO_CULTIVO_REF")
+    private Long idTipoCultivoRef;
+
     @Property(nameInDb = "DESCRICAO" )
     @NotNull
     private String descricao;
+
 
     @Property(nameInDb = "DESCRICAO_CIENTIFICA" )
     @NotNull
@@ -43,6 +47,14 @@ public class Doenca implements Serializable {
         this.idDoencaRef = idDoencaRef;
     }
 
+    public Long getIdTipoCultivoRef() {
+        return idTipoCultivoRef;
+    }
+
+    public void setIdTipoCultivoRef(Long idTipoCultivoRef) {
+        this.idTipoCultivoRef = idTipoCultivoRef;
+    }
+
     public String getDescricao() {
         return descricao;
     }
@@ -58,6 +70,7 @@ public class Doenca implements Serializable {
     public void setDescricaoCientifica(String descricaoCientifica) {
         this.descricaoCientifica = descricaoCientifica;
     }
+
 
     public Integer getIndAtivo() {
         return indAtivo;

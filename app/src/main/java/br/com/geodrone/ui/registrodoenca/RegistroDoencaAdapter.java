@@ -1,4 +1,4 @@
-package br.com.geodrone.view.adapter;
+package br.com.geodrone.ui.registrodoenca;
 
 /**
  * Created by fernandes on 28/03/2018.
@@ -17,27 +17,27 @@ import java.util.Collection;
 import java.util.List;
 
 import br.com.geodrone.R;
-import br.com.geodrone.model.Praga;
+import br.com.geodrone.model.Doenca;
 
 /**
  * Created by akshay on 1/2/15.
  */
-public class PragaAdapter extends ArrayAdapter<Praga> {
+public class RegistroDoencaAdapter extends ArrayAdapter<Doenca> {
 
     Context context;
     int resource, textViewResourceId;
-    List<Praga> items, tempItems, suggestions;
+    List<Doenca> items, tempItems, suggestions;
 
     public TextView nome, nomeCientifico;
 
-    public PragaAdapter(Context context, int resource, int textViewResourceId, List<Praga> items) {
+    public RegistroDoencaAdapter(Context context, int resource, int textViewResourceId, List<Doenca> items) {
         super(context, resource, textViewResourceId, items);
         this.context = context;
         this.resource = resource;
         this.textViewResourceId = textViewResourceId;
         this.items = items;
-        tempItems = new ArrayList<Praga>(items); // this makes the difference.
-        suggestions = new ArrayList<Praga>();
+        tempItems = new ArrayList<Doenca>(items); // this makes the difference.
+        suggestions = new ArrayList<Doenca>();
 
     }
 
@@ -46,22 +46,22 @@ public class PragaAdapter extends ArrayAdapter<Praga> {
         View view = convertView;
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.list_praga_layout, parent, false);
+            view = inflater.inflate(R.layout.list_doenca_layout, parent, false);
         }
-        nome = (TextView) view.findViewById(R.id.textViewPragaNomeComum);
-        //nomeCientifico = (TextView) view.findViewById(R.id.textViewPragaNomeCientificao);
-        Praga praga = items.get(position);
-        if (praga != null) {
-            nome.setText(praga.getDescricao() + " - (" + praga.getDescricaoCientifica() + ")");
-            //nomeCientifico.setText(praga.getDescricaoCientifica());
+        nome = (TextView) view.findViewById(R.id.textViewPraDoencaDescricao);
+        //nomeCientifico = (TextView) view.findViewById(R.id.textViewDoencaNomeCientificao);
+        Doenca doenca = items.get(position);
+        if (doenca != null) {
+            nome.setText(doenca.getDescricao() + " - (" + doenca.getDescricaoCientifica() + ")");
+            //nomeCientifico.setText(doenca.getDescricaoCientifica());
         }
         return view;
     }
 
     @Override
-    public void addAll(@NonNull Collection<? extends Praga> collection) {
+    public void addAll(@NonNull Collection<? extends Doenca> collection) {
         this.items = items;
-        tempItems = new ArrayList<Praga>(items); // this makes the difference.
+        tempItems = new ArrayList<Doenca>(items); // this makes the difference.
     }
 
     @Override
@@ -76,7 +76,7 @@ public class PragaAdapter extends ArrayAdapter<Praga> {
     Filter nameFilter = new Filter() {
         @Override
         public CharSequence convertResultToString(Object resultValue) {
-            String str = ((Praga) resultValue).getDescricao() + " - (" + ((Praga) resultValue).getDescricaoCientifica() + ")";
+            String str = ((Doenca) resultValue).getDescricao() + " - (" + ((Doenca) resultValue).getDescricaoCientifica() + ")";
             return str;
         }
 
@@ -84,7 +84,7 @@ public class PragaAdapter extends ArrayAdapter<Praga> {
         protected FilterResults performFiltering(CharSequence constraint) {
             if (constraint != null) {
                 suggestions.clear();
-                for (Praga people : tempItems) {
+                for (Doenca people : tempItems) {
                     if (people.getDescricao().toLowerCase().contains(constraint.toString().toLowerCase())) {
                         suggestions.add(people);
                     }
@@ -100,10 +100,10 @@ public class PragaAdapter extends ArrayAdapter<Praga> {
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            List<Praga> filterList = (ArrayList<Praga>) results.values;
+            List<Doenca> filterList = (ArrayList<Doenca>) results.values;
             if (results != null && results.count > 0) {
                 clear();
-                for (Praga people : filterList) {
+                for (Doenca people : filterList) {
                     add(people);
                     notifyDataSetChanged();
                 }

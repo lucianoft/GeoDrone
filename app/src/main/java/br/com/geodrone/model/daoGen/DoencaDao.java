@@ -25,9 +25,10 @@ public class DoencaDao extends AbstractDao<Doenca, Long> {
      */
     public static class Properties {
         public final static Property IdDoencaRef = new Property(0, Long.class, "idDoencaRef", true, "ID_DOENCA_REF");
-        public final static Property Descricao = new Property(1, String.class, "descricao", false, "DESCRICAO");
-        public final static Property DescricaoCientifica = new Property(2, String.class, "descricaoCientifica", false, "DESCRICAO_CIENTIFICA");
-        public final static Property IndAtivo = new Property(3, Integer.class, "indAtivo", false, "IND_ATIVO");
+        public final static Property IdTipoCultivoRef = new Property(1, Long.class, "idTipoCultivoRef", false, "ID_TIPO_CULTIVO_REF");
+        public final static Property Descricao = new Property(2, String.class, "descricao", false, "DESCRICAO");
+        public final static Property DescricaoCientifica = new Property(3, String.class, "descricaoCientifica", false, "DESCRICAO_CIENTIFICA");
+        public final static Property IndAtivo = new Property(4, Integer.class, "indAtivo", false, "IND_ATIVO");
     }
 
 
@@ -44,9 +45,10 @@ public class DoencaDao extends AbstractDao<Doenca, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"TB_DOENCA\" (" + //
                 "\"ID_DOENCA_REF\" INTEGER PRIMARY KEY ," + // 0: idDoencaRef
-                "\"DESCRICAO\" TEXT NOT NULL ," + // 1: descricao
-                "\"DESCRICAO_CIENTIFICA\" TEXT NOT NULL ," + // 2: descricaoCientifica
-                "\"IND_ATIVO\" INTEGER NOT NULL );"); // 3: indAtivo
+                "\"ID_TIPO_CULTIVO_REF\" INTEGER," + // 1: idTipoCultivoRef
+                "\"DESCRICAO\" TEXT NOT NULL ," + // 2: descricao
+                "\"DESCRICAO_CIENTIFICA\" TEXT NOT NULL ," + // 3: descricaoCientifica
+                "\"IND_ATIVO\" INTEGER NOT NULL );"); // 4: indAtivo
     }
 
     /** Drops the underlying database table. */
@@ -63,9 +65,14 @@ public class DoencaDao extends AbstractDao<Doenca, Long> {
         if (idDoencaRef != null) {
             stmt.bindLong(1, idDoencaRef);
         }
-        stmt.bindString(2, entity.getDescricao());
-        stmt.bindString(3, entity.getDescricaoCientifica());
-        stmt.bindLong(4, entity.getIndAtivo());
+ 
+        Long idTipoCultivoRef = entity.getIdTipoCultivoRef();
+        if (idTipoCultivoRef != null) {
+            stmt.bindLong(2, idTipoCultivoRef);
+        }
+        stmt.bindString(3, entity.getDescricao());
+        stmt.bindString(4, entity.getDescricaoCientifica());
+        stmt.bindLong(5, entity.getIndAtivo());
     }
 
     @Override
@@ -76,9 +83,14 @@ public class DoencaDao extends AbstractDao<Doenca, Long> {
         if (idDoencaRef != null) {
             stmt.bindLong(1, idDoencaRef);
         }
-        stmt.bindString(2, entity.getDescricao());
-        stmt.bindString(3, entity.getDescricaoCientifica());
-        stmt.bindLong(4, entity.getIndAtivo());
+ 
+        Long idTipoCultivoRef = entity.getIdTipoCultivoRef();
+        if (idTipoCultivoRef != null) {
+            stmt.bindLong(2, idTipoCultivoRef);
+        }
+        stmt.bindString(3, entity.getDescricao());
+        stmt.bindString(4, entity.getDescricaoCientifica());
+        stmt.bindLong(5, entity.getIndAtivo());
     }
 
     @Override
@@ -96,9 +108,10 @@ public class DoencaDao extends AbstractDao<Doenca, Long> {
     @Override
     public void readEntity(Cursor cursor, Doenca entity, int offset) {
         entity.setIdDoencaRef(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setDescricao(cursor.getString(offset + 1));
-        entity.setDescricaoCientifica(cursor.getString(offset + 2));
-        entity.setIndAtivo(cursor.getInt(offset + 3));
+        entity.setIdTipoCultivoRef(cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1));
+        entity.setDescricao(cursor.getString(offset + 2));
+        entity.setDescricaoCientifica(cursor.getString(offset + 3));
+        entity.setIndAtivo(cursor.getInt(offset + 4));
      }
     
     @Override

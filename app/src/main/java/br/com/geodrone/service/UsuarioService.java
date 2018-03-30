@@ -18,7 +18,7 @@ public class UsuarioService extends ServiceCrud<Usuario, Long>{
         usuarioRepository = new UsuarioRepository(ctx);
     }
 
-    public CrudRepository<Usuario, Long> getCrudRepoitory(){
+    public CrudRepository<Usuario, Long> getCrudRepository(){
         return usuarioRepository;
     }
 

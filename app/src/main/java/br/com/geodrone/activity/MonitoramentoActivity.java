@@ -15,15 +15,6 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
-
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -35,7 +26,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import br.com.geodrone.R;
 import br.com.geodrone.activity.utils.ActivityHelper;
 import br.com.geodrone.activity.utils.GPSTracker;
-import br.com.geodrone.view.popup.PopupCadastrarRegistroPragas;
+import br.com.geodrone.ui.registrodoenca.RegistroDoencaActivity;
+import br.com.geodrone.ui.registropraga.RegistroPragaActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -171,12 +163,15 @@ public class MonitoramentoActivity extends FragmentActivity implements OnMapRead
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_item_registrar_pragas:
-                Intent i = new Intent(this, RegistroPragasActivity.class);
+            case R.id.menu_item_registrar_praga:
+                Intent i = new Intent(this, RegistroPragaActivity.class);
                 i.putExtra("localizacao", tracker.getLocation());
                 startActivity(i);
                 break;
-            case R.id.action_item2:
+            case R.id.menu_item_registrar_doenca:
+                i = new Intent(this, RegistroDoencaActivity.class);
+                i.putExtra("localizacao", tracker.getLocation());
+                startActivity(i);
 
                 break;
             case R.id.action_item3:

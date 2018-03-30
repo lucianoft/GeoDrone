@@ -17,7 +17,7 @@ public class TipoCultivoService extends ServiceCrud<TipoCultivo, Long> {
         tipoCultivoRepository = new TipoCultivoRepository(ctx);
     }
 
-    public CrudRepository<TipoCultivo, Long> getCrudRepoitory(){
+    public CrudRepository<TipoCultivo, Long> getCrudRepository(){
         return tipoCultivoRepository;
     }
 }

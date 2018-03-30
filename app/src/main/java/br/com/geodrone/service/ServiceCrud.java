@@ -1,7 +1,5 @@
 package br.com.geodrone.service;
 
-import org.greenrobot.greendao.AbstractDao;
-
 import java.util.List;
 
 import br.com.geodrone.repository.CrudRepository;
@@ -12,21 +10,21 @@ import br.com.geodrone.repository.CrudRepository;
 
 public abstract class ServiceCrud<T, ID> {
 
-    public abstract CrudRepository<T, ID> getCrudRepoitory();
+    public abstract CrudRepository<T, ID> getCrudRepository();
 
     public T findById(ID id){
-        return getCrudRepoitory().findById(id);
+        return getCrudRepository().findById(id);
     };
     public T insert(T t){
-        return getCrudRepoitory().insert(t);
+        return getCrudRepository().insert(t);
     };
     public T update(T t){
-        return getCrudRepoitory().update(t);
+        return getCrudRepository().update(t);
     };
     public void delete(T t){
-        getCrudRepoitory().delete(t);
+        getCrudRepository().delete(t);
     };
     public List<T> findAll(){
-        return getCrudRepoitory().findAll();
+        return getCrudRepository().findAll();
     };
 }

@@ -16,7 +16,7 @@ public class ClienteService extends ServiceCrud<Cliente, Long> {
         clienteRepository = new ClienteRepository(ctx);
     }
 
-    public CrudRepository<Cliente, Long> getCrudRepoitory(){
+    public CrudRepository<Cliente, Long> getCrudRepository(){
         return clienteRepository;
     }
 }

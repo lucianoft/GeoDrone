@@ -17,7 +17,7 @@ public class RotaTrabalhoService extends ServiceCrud<RotaTrabalho, Long> {
         rotaTrabalhoRepository = new RotaTrabalhoRepository(ctx);
     }
 
-    public CrudRepository<RotaTrabalho, Long> getCrudRepoitory(){
+    public CrudRepository<RotaTrabalho, Long> getCrudRepository(){
         return rotaTrabalhoRepository;
     }
 }

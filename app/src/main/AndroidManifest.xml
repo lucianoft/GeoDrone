@@ -64,7 +64,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.LoginActivity"
+            android:name=".ui.login.LoginActivity"
             android:label="@string/title_activity_login" />
         <activity
             android:name=".activity.MainActivity"
@@ -78,13 +78,13 @@
         <activity
             android:name=".activity.CadatroUsuarioActivity"
             android:label="@string/title_activity_cadatro_usuario"
-            android:parentActivityName=".activity.LoginActivity" />
+            android:parentActivityName=".ui.login.LoginActivity" />
         <activity
             android:name=".activity.CadastroImagemActivity"
             android:label="@string/title_activity_cadastro_imagem" />
         <activity android:name=".activity.CameraFotoActivity" />
         <activity
-            android:name=".activity.RegistroPragasActivity"
+            android:name=".ui.registropraga.RegistroPragaActivity"
             android:label="@string/title_activity_registro_pragas"
             android:parentActivityName=".activity.MainActivity" />
         <activity
@@ -97,7 +97,8 @@
             android:name=".activity.MonitoramentoActivity"
             android:label="@string/title_activity_monitoramento"
             android:parentActivityName=".activity.MainActivity" />
-        <activity android:name=".activity.ConsultarPragaActivity"></activity>
+        <activity android:name=".activity.ConsultarPragaActivity" />
+        <activity android:name=".ui.registrodoenca.RegistroDoencaActivity"></activity>
     </application>
 
 </manifest>

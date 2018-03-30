@@ -3,9 +3,6 @@ package br.com.geodrone.view.popup;
 import android.app.Activity;
 import android.app.Dialog;
 import android.location.Location;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 
 import br.com.geodrone.R;
 
@@ -25,7 +22,7 @@ public class PopupCadastrarRegistroPragas {
 
     public  void showDialog(){
         final Dialog dialog = new Dialog(activity, R.style.Theme_AppCompat_Light_Dialog);
-        dialog.setContentView(R.layout.activity_registro_pragas);
+        dialog.setContentView(R.layout.activity_registro_praga);
         dialog.show();
     }
 
