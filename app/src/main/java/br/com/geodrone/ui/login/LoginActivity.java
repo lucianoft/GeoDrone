@@ -5,18 +5,15 @@ import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import br.com.geodrone.R;
-import br.com.geodrone.activity.CadatroUsuarioActivity;
-import br.com.geodrone.activity.MainActivity;
-import br.com.geodrone.activity.utils.ActivityHelper;
+import br.com.geodrone.ui.usuario.CadatroUsuarioActivity;
+import br.com.geodrone.ui.main.MainActivity;
 import br.com.geodrone.utils.PreferencesUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,6 +38,7 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.V
         editTextEmail.setText(PreferencesUtils.getString(getApplicationContext(), PreferencesUtils.CHAVE_EMAIL_USUARIO, ""));
         editTextSenha.setText(PreferencesUtils.getString(getApplicationContext(), PreferencesUtils.CHAVE_SENHA_USUARIO, ""));
     }
+
     @Override
     public void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);

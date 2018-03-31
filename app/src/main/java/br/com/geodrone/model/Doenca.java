@@ -39,6 +39,14 @@ public class Doenca implements Serializable {
     public Doenca() {
     }
 
+    public Doenca(Long idDoencaRef, Long idTipoCultivoRef, String descricao, String descricaoCientifica, Integer indAtivo) {
+        this.idDoencaRef = idDoencaRef;
+        this.idTipoCultivoRef = idTipoCultivoRef;
+        this.descricao = descricao;
+        this.descricaoCientifica = descricaoCientifica;
+        this.indAtivo = indAtivo;
+    }
+
     public Long getIdDoencaRef() {
         return idDoencaRef;
     }

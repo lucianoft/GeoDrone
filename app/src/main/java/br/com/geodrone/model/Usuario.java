@@ -36,7 +36,21 @@ public class Usuario implements Serializable {
     @NotNull
     private String senha;
 
+    @NotNull
+    @Property(nameInDb = "ID_CLIENTE_REF")
+    private Long idClienteRef;
+
     public Usuario() {
+    }
+
+    public Usuario(Long idUsuarioRef, String nome, String sobrenome, String email, String telefone, String senha, Long idClienteRef) {
+        this.idUsuarioRef = idUsuarioRef;
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.email = email;
+        this.telefone = telefone;
+        this.senha = senha;
+        this.idClienteRef = idClienteRef;
     }
 
     public Long getIdUsuarioRef() {
@@ -85,6 +99,14 @@ public class Usuario implements Serializable {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public Long getIdClienteRef() {
+        return idClienteRef;
+    }
+
+    public void setIdClienteRef(Long idClienteRef) {
+        this.idClienteRef = idClienteRef;
     }
 
     @Override

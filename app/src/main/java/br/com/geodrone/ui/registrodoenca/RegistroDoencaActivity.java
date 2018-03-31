@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +22,7 @@ import br.com.geodrone.model.TipoCultivo;
 import br.com.geodrone.utils.NumberUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.OnItemSelected;
 
 public class RegistroDoencaActivity extends AppCompatActivity implements RegistroDoencaPresenter.View{
@@ -72,7 +76,18 @@ public class RegistroDoencaActivity extends AppCompatActivity implements Registr
         doencaAdapter = new RegistroDoencaAdapter(this, R.layout.activity_registro_doenca, R.id.textViewPraDoencaDescricao, doencaListFilter);
         autoCompleteDoenca.setAdapter(doencaAdapter);
         doencaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        autoCompleteDoenca.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View arg1, int position, long id) {
+                Object item = parent.getItemAtPosition(0);
+                if (item instanceof Doenca){
+                    doenca =(Doenca) item;
+                }
+            }
+
+        });
     }
+
 
     @Override
     public void onPostCreate(Bundle savedInstanceState) {
@@ -85,6 +100,11 @@ public class RegistroDoencaActivity extends AppCompatActivity implements Registr
     public void onChanceTipoCultivo(int position) {
         tipoCultivo = (TipoCultivo) tipoCultivoList.get(position);
         onSelectedTipoCultivo(tipoCultivo);
+    }
+
+    @OnClick(R.id.btn_salvar_doenca)
+    public void salvar() {
+        registroDoencaPresenter.salvar(doenca, editTextObservacao.getText().toString(), location.getLatitude(), location.getLongitude(), editTextQtdeDoencas.getText().toString());
     }
 
     @Override
@@ -112,6 +132,17 @@ public class RegistroDoencaActivity extends AppCompatActivity implements Registr
         doencaAdapter = new RegistroDoencaAdapter(RegistroDoencaActivity.this, R.layout.activity_main, R.id.textViewPraDoencaDescricao, doencaListFilter);
         autoCompleteDoenca.setAdapter(doencaAdapter);
 
+    }
+
+    @Override
+    public void regitroDoencaSucesso() {
+        Toast.makeText(this, R.string.msg_operacao_sucesso, Toast.LENGTH_LONG).show();
+        finish(); // Finaliza essa activity e volta para anterior
+    }
+
+    @Override
+    public void regitroDoencaErro() {
+        Toast.makeText(this, R.string.msg_erro_cadastrar_registro_doenca, Toast.LENGTH_LONG).show();
     }
 
 }

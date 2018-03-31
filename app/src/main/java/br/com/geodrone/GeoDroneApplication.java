@@ -7,6 +7,7 @@ import org.greenrobot.greendao.database.Database;
 import java.util.Date;
 
 import br.com.geodrone.model.Cliente;
+import br.com.geodrone.model.Doenca;
 import br.com.geodrone.model.PontoColetaChuva;
 import br.com.geodrone.model.Praga;
 import br.com.geodrone.model.TipoCultivo;
@@ -39,6 +40,7 @@ public class GeoDroneApplication extends Application {
         criarEstacao();
         criarTipoCultivo();
         criarPragas();
+        criarDoencas();
     }
 
     private void criarCliente() {
@@ -91,6 +93,7 @@ public class GeoDroneApplication extends Application {
             usuario.setEmail("admin@gmail.com");
             usuario.setSenha("admin");
             usuario.setTelefone("9999-9999");
+            usuario.setIdClienteRef(1L);
             daoSession.getUsuarioDao().insert(usuario);
         }
     }
@@ -193,4 +196,24 @@ public class GeoDroneApplication extends Application {
         }
     }
 
+    private void criarDoencas() {
+        if (daoSession.getDoencaDao().loadAll().size() == 0) {
+            getDaoSession().getDoencaDao().insert(new Doenca(1L, 1L, "Acaro Rajado",	"Tetranychus urticae", 1));
+            getDaoSession().getDoencaDao().insert(new Doenca(2L, 1L,"Acaro-branco",	"Polyphagotarsonemus latus", 1));
+            getDaoSession().getDoencaDao().insert(new Doenca(3L, 1L,"Bicudo-da-soja",	"Sternechus subsignatus", 1));
+            getDaoSession().getDoencaDao().insert(new Doenca(4L, 1L,"Broca-das-axilas",	"Epinotia aporema", 1));
+
+
+            getDaoSession().getDoencaDao().insert(new Doenca(5L, 3L,"Acaro branco",	"Polyphagotarsonemus latus", 1));
+            getDaoSession().getDoencaDao().insert(new Doenca(6L, 3L,"Acaro rajado e vermelho",	"Tetranychus urticae", 1));
+            getDaoSession().getDoencaDao().insert(new Doenca(7L, 3L,"Bicudo do Algodoeiro",	"Anthonomus grandis", 1));
+            getDaoSession().getDoencaDao().insert(new Doenca(8L, 3L,"Broca da Haste", "Conotrachelus denieri", 1));
+            getDaoSession().getDoencaDao().insert(new Doenca(9L, 3L,"Broca da Raiz", "Eutinobothrus brasiliensis", 1));
+
+            getDaoSession().getDoencaDao().insert(new Doenca(10L, 4L,"Cigarrinha-das-raízes",	"Mahanarva fimbriolata", 1));
+            getDaoSession().getDoencaDao().insert(new Doenca(11L, 4L,"Coro-das-pastagens", 	"Diloboderus abderus", 1));
+            getDaoSession().getDoencaDao().insert(new Doenca(12L, 4L,"Coro-da-soja", 	"Phyllophaga cuyabana", 1));
+            getDaoSession().getDoencaDao().insert(new Doenca(13L, 4L,"Coro-do-trigo", 	"Phyllophaga triticophaga", 1));
+        }
+    }
 }

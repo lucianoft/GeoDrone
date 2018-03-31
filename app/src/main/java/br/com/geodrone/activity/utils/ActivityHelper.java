@@ -11,6 +11,10 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.inputmethod.InputMethodManager;
 
+import java.util.List;
+
+import br.com.geodrone.utils.Message;
+
 import static android.content.Context.INPUT_METHOD_SERVICE;
 
 
@@ -96,4 +100,7 @@ public class ActivityHelper {
         }
     }
 
+    public void showMessages(List<Message> messages, final Activity activity) {
+
+    }
 }

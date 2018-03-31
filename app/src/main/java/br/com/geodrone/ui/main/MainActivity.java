@@ -1,36 +1,61 @@
-package br.com.geodrone.activity;
+package br.com.geodrone.ui.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.TextureView;
+import android.view.View;
+import android.widget.TextView;
 
 import br.com.geodrone.R;
+import br.com.geodrone.activity.CadastroImagemActivity;
+import br.com.geodrone.activity.CadastroPluviosidadeActivity;
+import br.com.geodrone.activity.ForunActivity;
+import br.com.geodrone.activity.MensagemActivity;
+import br.com.geodrone.activity.MonitoramentoActivity;
+import br.com.geodrone.model.Usuario;
+import br.com.geodrone.ui.BaseActivity;
 import br.com.geodrone.ui.registropraga.RegistroPragaActivity;
+import br.com.geodrone.utils.PreferencesUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static java.security.AccessController.getContext;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener /*BottomNavigationView.OnNavigationItemSelectedListener*/ {
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+
+    @BindView(R.id.main_activity_coordinator_layout)
+    CoordinatorLayout coordinatorLayout;
 
     //@BindView(R.id.navigationMain)
     //BottomNavigationView bottomNavigationView;
-    @BindView(R.id.nav_view_main)
-    NavigationView navigationView;
-
+    @BindView(R.id.nav_view_main)NavigationView navigationView;
+    @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.drawer_layout) DrawerLayout drawer;
 
 
+    /*@Nullable
+    @BindView(R.id.textView_nome_usuario_main)
+    */
+     TextView nomeUsuario;
+
+    /*@Nullable
+    @BindView(R.id.textView_email_usuario_main) */TextView emailUsuario;
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
@@ -38,7 +63,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
-
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -48,6 +72,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //bottomNavigationView.setOnNavigationItemSelectedListener(this);
         navigationView.setNavigationItemSelectedListener(this);
 
+    }
+
+
+    @Override
+    public void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+
+        /*View header = LayoutInflater.from(this).inflate(R.id.linear_layout_nav_bar_main, null);
+        navigationView.addHeaderView(header);
+        nomeUsuario = (TextView) header.findViewById(R.id.textView_nome_usuario_main);
+        emailUsuario = (TextView) header.findViewById(R.id.textView_email_usuario_main);
+
+        Usuario usuario = PreferencesUtils.getUsuario(getApplicationContext());
+        if (usuario != null){
+            nomeUsuario.setText(usuario.getNome());
+            emailUsuario.setText(usuario.getEmail());
+        }*/
     }
 
     @Override

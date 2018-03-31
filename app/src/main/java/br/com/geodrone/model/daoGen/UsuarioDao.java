@@ -30,6 +30,7 @@ public class UsuarioDao extends AbstractDao<Usuario, Long> {
         public final static Property Email = new Property(3, String.class, "email", false, "EMAIL");
         public final static Property Telefone = new Property(4, String.class, "telefone", false, "TELEFONE");
         public final static Property Senha = new Property(5, String.class, "senha", false, "SENHA");
+        public final static Property IdClienteRef = new Property(6, Long.class, "idClienteRef", false, "ID_CLIENTE_REF");
     }
 
 
@@ -50,7 +51,8 @@ public class UsuarioDao extends AbstractDao<Usuario, Long> {
                 "\"SOBRENOME\" TEXT," + // 2: sobrenome
                 "\"EMAIL\" TEXT NOT NULL ," + // 3: email
                 "\"TELEFONE\" TEXT NOT NULL ," + // 4: telefone
-                "\"SENHA\" TEXT NOT NULL );"); // 5: senha
+                "\"SENHA\" TEXT NOT NULL ," + // 5: senha
+                "\"ID_CLIENTE_REF\" INTEGER NOT NULL );"); // 6: idClienteRef
     }
 
     /** Drops the underlying database table. */
@@ -76,6 +78,7 @@ public class UsuarioDao extends AbstractDao<Usuario, Long> {
         stmt.bindString(4, entity.getEmail());
         stmt.bindString(5, entity.getTelefone());
         stmt.bindString(6, entity.getSenha());
+        stmt.bindLong(7, entity.getIdClienteRef());
     }
 
     @Override
@@ -95,6 +98,7 @@ public class UsuarioDao extends AbstractDao<Usuario, Long> {
         stmt.bindString(4, entity.getEmail());
         stmt.bindString(5, entity.getTelefone());
         stmt.bindString(6, entity.getSenha());
+        stmt.bindLong(7, entity.getIdClienteRef());
     }
 
     @Override
@@ -117,6 +121,7 @@ public class UsuarioDao extends AbstractDao<Usuario, Long> {
         entity.setEmail(cursor.getString(offset + 3));
         entity.setTelefone(cursor.getString(offset + 4));
         entity.setSenha(cursor.getString(offset + 5));
+        entity.setIdClienteRef(cursor.getLong(offset + 6));
      }
     
     @Override

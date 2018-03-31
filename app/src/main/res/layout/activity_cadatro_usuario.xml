@@ -22,7 +22,22 @@
             android:layout_marginTop="30dp"
             android:layout_marginBottom="8dp">
 
-            <EditText android:id="@+id/input_nome"
+            <EditText android:id="@+id/input_sobrenome_usuario"
+                style="@style/TextLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:hint="@string/lb_nome" />
+        </android.support.design.widget.TextInputLayout>
+
+        <!--  Nome Label -->
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="8dp">
+
+            <EditText android:id="@+id/input_nome_usuario"
                 style="@style/TextLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -35,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <EditText android:id="@+id/input_telefone"
+            <EditText android:id="@+id/input_telefone_usuario"
                 style="@style/TextLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -47,7 +62,7 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <EditText android:id="@+id/input_email"
+            <EditText android:id="@+id/input_email_usuario"
                 style="@style/TextLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -58,7 +73,7 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <EditText android:id="@+id/input_password"
+            <EditText android:id="@+id/input_senha_usuario"
                 style="@style/TextLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -69,7 +84,7 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <EditText android:id="@+id/inputConfirmarSenha"
+            <EditText android:id="@+id/input_confirmar_senha_usuario"
                 style="@style/TextLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
