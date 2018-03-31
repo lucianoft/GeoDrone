@@ -46,7 +46,11 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public void onError(String message){
-        Toast.makeText(this, R.string.msg_login_invalido, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    public void onError(Exception ex){
+        Toast.makeText(this, ex.toString(), Toast.LENGTH_SHORT).show();
     }
 
     public void showMessage(String message){

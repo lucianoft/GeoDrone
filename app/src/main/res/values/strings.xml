@@ -38,6 +38,15 @@
 
     <string name="lb_btn_salvar">Salvar</string>
 
+    <string name="msg_obr_nome">É obrigatorio informar o campo nome</string>
+    <string name="msg_obr_sobrenome">É obrigatorio informar o campo sobrenome</string>
+    <string name="msg_obr_email">É obrigatorio informar o campo email</string>
+    <string name="msg_obr_senha">É obrigatorio informar o campo senha</string>
+    <string name="msg_obr_confirmar_senha">É obrigatorio informar o campo confirmar senha</string>
+
+    <string name="msg_inv_senha_dif_confirmar_senha">Campo confirmar senha diferente do campo senha</string>
+
+
     <string name="msg_login_invalido">Login Invalido</string>
     <string name="msg_operacao_sucesso">Operacao realizada com sucesso</string>
     <string name="msg_erro_cadastrar_registro_doenca">Erro ao cadastrar registro de doenca</string>

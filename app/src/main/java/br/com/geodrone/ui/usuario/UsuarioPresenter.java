@@ -1,5 +1,6 @@
 package br.com.geodrone.ui.usuario;
 
+import br.com.geodrone.R;
 import br.com.geodrone.Session;
 import br.com.geodrone.model.Cliente;
 import br.com.geodrone.model.Usuario;
@@ -46,22 +47,28 @@ public class UsuarioPresenter extends BasePresenter<UsuarioPresenter.View> {
         boolean isOk = true;
         if (hasView()) {
             if (nome == null){
-                view.onNomeObrigatorio();
+                view.onErrorNome(activity.getString(R.string.msg_obr_nome));
+                isOk = false;
             }
             if (telefone == null){
-                view.onTelefoneObrigatorio();
+                view.onErrorTelefone();
+                isOk = false;
             }
             if (email == null){
-                view.onEmailObrigatorio();
+                view.onErrorEmailObrigatorio();
+                isOk = false;
             }
             if (email == null){
-                view.onEmailObrigatorio();
+                view.onErroEmailObrigatorio();
+                isOk = false;
             }
             if (senha == null){
                 view.onSenhaObrigatorio();
+                isOk = false;
             }
             if (confirmSenha == null){
                 view.onConfirmSenhaObrigatorio();
+                isOk = false;
             }
         }
         return isOk;
@@ -81,7 +88,7 @@ public class UsuarioPresenter extends BasePresenter<UsuarioPresenter.View> {
             view.onCadastroSucesso();
             return usuario;
         }catch (Exception ex){
-            view.onCadastroErro();
+            activity.onError(ex);
         }
 
         return null;
