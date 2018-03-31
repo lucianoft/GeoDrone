@@ -1,4 +1,4 @@
-package br.com.geodrone.presenter;
+package br.com.geodrone.ui.base;
 
 /**
  * Created by fernandes on 29/03/2018.

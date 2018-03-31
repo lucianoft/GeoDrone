@@ -1,42 +1,38 @@
 package br.com.geodrone.ui.usuario;
 
-import android.app.Activity;
-
 import br.com.geodrone.Session;
 import br.com.geodrone.model.Cliente;
 import br.com.geodrone.model.Usuario;
-import br.com.geodrone.presenter.BasePresenter;
-import br.com.geodrone.presenter.ProgressBarPresenter;
+import br.com.geodrone.ui.base.BaseActivity;
+import br.com.geodrone.ui.base.BasePresenter;
 import br.com.geodrone.service.UsuarioService;
 import br.com.geodrone.utils.PreferencesUtils;
 
 
 public class UsuarioPresenter extends BasePresenter<UsuarioPresenter.View> {
 
-    interface View extends ProgressBarPresenter {
+    interface View {
 
-        void onClickCadastro();
+        void onClickLogin(String message);
 
-        void onCadastroErro();
+        void onCadastroSucesso(String message);
 
-        void onCadastroSucesso();
+        void onErrorNome(String message);
 
-        void onNomeObrigatorio();
+        void onErrorTelefone(String message);
 
-        void onTelefoneObrigatorio();
+        void onErrorEmail(String message);
 
-        void onEmailObrigatorio();
+        void onErrorSenha(String message);
 
-        void onSenhaObrigatorio();
-
-        void onConfirmSenhaObrigatorio();
+        void onErrorConfirmSenha(String message);
     }
 
-    private Activity activity;
+    private BaseActivity activity;
 
     UsuarioService usuarioService = null;
 
-    public UsuarioPresenter(Activity activity) {
+    public UsuarioPresenter(BaseActivity activity) {
         this.activity = activity;
         this.usuarioService = new UsuarioService(activity);
     }

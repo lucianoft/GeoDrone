@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import br.com.geodrone.R;
+import br.com.geodrone.ui.base.BaseActivity;
 import br.com.geodrone.ui.usuario.CadatroUsuarioActivity;
 import br.com.geodrone.ui.main.MainActivity;
 import br.com.geodrone.utils.PreferencesUtils;
@@ -19,7 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class LoginActivity extends AppCompatActivity implements LoginPresenter.View{
+public class LoginActivity extends BaseActivity implements LoginPresenter.View{
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
 
@@ -46,10 +47,6 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.V
         onInvisibleProgressBar();
     }
 
-    @Override
-    public void onLoginErro() {
-        Toast.makeText(this, R.string.msg_login_invalido, Toast.LENGTH_SHORT).show();
-    }
 
     @Override
     public void onSuccessoLogin() {
@@ -99,13 +96,22 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.V
 
 
     @Override
-    public void onVisibleProgressBar() {
-        progressBar.setVisibility(View.VISIBLE);
+    public void onClickLogin() {
+
     }
 
     @Override
-    public void onInvisibleProgressBar() {
-        progressBar.setVisibility(View.INVISIBLE);
+    public void onSuccessoLogin(String message) {
+        Toast.makeText(this, R.string.msg_login_invalido, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onErrorEmail(String message) {
+
+    }
+
+    @Override
+    public void onErrorSenha(String message) {
 
     }
 }

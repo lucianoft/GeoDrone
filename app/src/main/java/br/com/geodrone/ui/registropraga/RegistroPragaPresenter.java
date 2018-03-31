@@ -6,8 +6,8 @@ import java.util.List;
 
 import br.com.geodrone.model.Praga;
 import br.com.geodrone.model.TipoCultivo;
-import br.com.geodrone.presenter.BasePresenter;
-import br.com.geodrone.presenter.ProgressBarPresenter;
+import br.com.geodrone.ui.base.BasePresenter;
+import br.com.geodrone.ui.base.ProgressBarPresenter;
 import br.com.geodrone.service.PragaService;
 import br.com.geodrone.service.TipoCultivoService;
 

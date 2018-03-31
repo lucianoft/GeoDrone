@@ -6,8 +6,9 @@ import android.app.Activity;
 import br.com.geodrone.Session;
 import br.com.geodrone.model.Cliente;
 import br.com.geodrone.model.Usuario;
-import br.com.geodrone.presenter.BasePresenter;
-import br.com.geodrone.presenter.ProgressBarPresenter;
+import br.com.geodrone.ui.base.BaseActivity;
+import br.com.geodrone.ui.base.BasePresenter;
+import br.com.geodrone.ui.base.ProgressBarPresenter;
 import br.com.geodrone.service.ClienteService;
 import br.com.geodrone.service.UsuarioService;
 import br.com.geodrone.utils.PreferencesUtils;
@@ -18,24 +19,22 @@ import br.com.geodrone.utils.PreferencesUtils;
 
 public class LoginPresenter extends BasePresenter<LoginPresenter.View> {
 
-    interface View extends ProgressBarPresenter {
+    interface View {
 
-        void onLoginRequested();
+        void onClickLogin();
 
-        void onLoginErro();
+        void onSuccessoLogin(String message);
 
-        void onSuccessoLogin();
+        void onErrorEmail(String message);
 
-        void onEmailLoginErro();
-
-        void onSenhaLoginErro();
+        void onErrorSenha(String message);
     }
 
     UsuarioService usuarioService = null;
     ClienteService clienteService = null;
-    private Activity activity;
+    private BaseActivity activity;
 
-    public LoginPresenter(Activity activity){
+    public LoginPresenter(BaseActivity activity){
         this.activity = activity;
         this.usuarioService = new UsuarioService(activity);
         this.clienteService = new ClienteService(activity);
