@@ -10,20 +10,21 @@ import android.widget.EditText;
 
 import br.com.geodrone.R;
 import br.com.geodrone.activity.utils.Mask;
+import br.com.geodrone.ui.base.BaseActivity;
 import br.com.geodrone.ui.login.LoginPresenter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class CadatroUsuarioActivity extends AppCompatActivity implements UsuarioPresenter.View{
+public class CadatroUsuarioActivity extends BaseActivity implements UsuarioPresenter.View{
 
     private UsuarioPresenter usuarioPresenter;
 
     @BindView(R.id.input_nome_usuario) EditText editTextNome;
     @BindView(R.id.input_sobrenome_usuario) EditText editTextSobreNome;
     @BindView(R.id.input_telefone_usuario) EditText editTextTelefone;
-    @BindView(R.id.input_email_usuario) EditText edEmail;
-    @BindView(R.id.input_senha_usuario) EditText edSenha;
-    @BindView(R.id.input_confirmar_senha_usuario) EditText edConfirmarSenha;
+    @BindView(R.id.input_email_usuario) EditText editTextEmail;
+    @BindView(R.id.input_senha_usuario) EditText editTextSenha;
+    @BindView(R.id.input_confirmar_senha_usuario) EditText editTextConfirmarSenha;
 
 
     @Override
@@ -43,53 +44,18 @@ public class CadatroUsuarioActivity extends AppCompatActivity implements Usuario
     public void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         usuarioPresenter.takeView(this);
-        onInvisibleProgressBar();
+        hideLoading();
     }
 
 
     @Override
-    public void onClickCadastro() {
+    public void onClickLogin() {
         usuarioPresenter.salvar(editTextNome.getText().toString(),
                 editTextSobreNome.getText().toString(),
                 editTextTelefone.getText().toString(),
-                edEmail.getText().toString(),
-                edSenha.getText().toString(),
-                edConfirmarSenha.getText().toString());
-    }
-
-    @Override
-    public void onCadastroErro() {
-
-    }
-
-    @Override
-    public void onCadastroSucesso() {
-
-    }
-
-    @Override
-    public void onNomeObrigatorio() {
-
-    }
-
-    @Override
-    public void onTelefoneObrigatorio() {
-
-    }
-
-    @Override
-    public void onEmailObrigatorio() {
-
-    }
-
-    @Override
-    public void onSenhaObrigatorio() {
-
-    }
-
-    @Override
-    public void onConfirmSenhaObrigatorio() {
-
+                editTextEmail.getText().toString(),
+                editTextSenha.getText().toString(),
+                editTextConfirmarSenha.getText().toString());
     }
 
     @Override
@@ -98,13 +64,39 @@ public class CadatroUsuarioActivity extends AppCompatActivity implements Usuario
     }
 
     @Override
-    public void onVisibleProgressBar() {
-
+    public void onCadastroSucesso(String message) {
+        hideLoading();
+        finish();
+        onBackPressed();
     }
 
     @Override
-    public void onInvisibleProgressBar() {
-
+    public void onErrorNome(String message) {
+        editTextNome.setError(message);
     }
 
+    @Override
+    public void onErrorSobrenome(String message) {
+        editTextSobreNome.setError(message);
+    }
+
+    @Override
+    public void onErrorTelefone(String message) {
+        editTextTelefone.setError(message);
+    }
+
+    @Override
+    public void onErrorEmail(String message) {
+        editTextEmail.setError(message);
+    }
+
+    @Override
+    public void onErrorSenha(String message) {
+        editTextSobreNome.setError(message);
+    }
+
+    @Override
+    public void onErrorConfirmSenha(String message) {
+        editTextConfirmarSenha.setError(message);
+    }
 }

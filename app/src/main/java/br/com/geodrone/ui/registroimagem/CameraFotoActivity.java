@@ -1,4 +1,4 @@
-    package br.com.geodrone.activity;
+    package br.com.geodrone.ui.registroimagem;
 
     import android.Manifest;
     import android.content.Context;

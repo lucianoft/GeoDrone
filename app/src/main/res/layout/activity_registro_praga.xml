@@ -12,7 +12,7 @@
     tools:context=".ui.registropraga.RegistroPragaActivity">
 
     <LinearLayout
-        android:id="@+id/linear_layout_tipo_pagra"
+        android:id="@+id/linear_layout_tipo_cultivo_pagra"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -25,7 +25,7 @@
 
         <Spinner
             style="@style/Widget.AppCompat.Spinner.Underlined"
-            android:id="@+id/spinner_tipo_praga"
+            android:id="@+id/spinner_tipo_cultivo_praga"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>
@@ -35,7 +35,7 @@
         android:id="@+id/linear_layout_pagra"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/linear_layout_tipo_pagra"
+        android:layout_below="@+id/linear_layout_tipo_cultivo_pagra"
         android:orientation="vertical">
 
         <TextView

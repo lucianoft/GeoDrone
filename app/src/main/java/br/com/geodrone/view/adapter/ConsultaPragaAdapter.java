@@ -29,7 +29,7 @@ public class ConsultaPragaAdapter extends RecyclerView.Adapter<ConsultaPragaAdap
 
         public MyViewHolder(View view) {
             super(view);
-            nome = (TextView) view.findViewById(R.id.textViewPragaNomeComum);
+            nome = (TextView) view.findViewById(R.id.textViewPragaDescricao);
             //nomeCientifico = (TextView) view.findViewById(R.id.textViewPragaNomeCientificao);
         }
     }

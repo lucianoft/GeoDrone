@@ -71,7 +71,7 @@
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.CadastroPluviosidadeActivity"
+            android:name=".ui.registrochuva.RegistroPluviosidadeActivity"
             android:label="@string/title_activity_reg_chuvas"
             android:parentActivityName=".ui.main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -80,9 +80,9 @@
             android:label="@string/title_activity_cadatro_usuario"
             android:parentActivityName=".ui.login.LoginActivity" />
         <activity
-            android:name=".activity.CadastroImagemActivity"
+            android:name=".ui.registroimagem.CadastroImagemActivity"
             android:label="@string/title_activity_cadastro_imagem" />
-        <activity android:name=".activity.CameraFotoActivity" />
+        <activity android:name=".ui.registroimagem.CameraFotoActivity" />
         <activity
             android:name=".ui.registropraga.RegistroPragaActivity"
             android:label="@string/title_activity_registro_pragas"
@@ -94,7 +94,7 @@
             android:name=".activity.ForunActivity"
             android:parentActivityName=".ui.main.MainActivity" />
         <activity
-            android:name=".activity.MonitoramentoActivity"
+            android:name=".ui.monitoramento.MonitoramentoActivity"
             android:label="@string/title_activity_monitoramento"
             android:parentActivityName=".ui.main.MainActivity" />
         <activity android:name=".activity.ConsultarPragaActivity" />

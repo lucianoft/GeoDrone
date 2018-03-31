@@ -12,24 +12,39 @@ import br.com.geodrone.model.api.AuditApi;
 import org.greenrobot.greendao.annotation.Generated;
 
 /**
- * Created by fernandes on 19/03/2018.
+ * Created by fernandes on 30/03/2018.
  */
-@Entity(generateConstructors = false, generateGettersSetters = true,  nameInDb = "TB_REGISTRO_CHUVA")
-public class RegistroChuva implements AuditApi, Serializable {
+@Entity(generateConstructors = false, generateGettersSetters = true,  nameInDb = "TB_REGISTRO_PRAGA")
+public class RegistroPraga implements AuditApi, Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id(autoincrement =  true)
-    @Property(nameInDb = "ID_REGISTRO_CHUVA")
+    @Property(nameInDb = "ID_REGISTRO_PRAGA")
     private Long idRegistroChuva;
+
+    @NotNull
+    @Property(nameInDb = "ID_PRAGA_REF")
+    private Long idPragaRef;
 
     @NotNull
     @Property(nameInDb = "ID_CLIENTE_REF")
     private Long idClienteRef;
 
     @NotNull
-    @Property(nameInDb = "VOLUME")
-    private Long volume;
+    @Property(nameInDb = "LATITUDE")
+    private Double latitude;
+
+    @NotNull
+    @Property(nameInDb = "LONGITUDE")
+    private Double longitude;
+
+    @Property(nameInDb = "OBSERVACAO")
+    private String observacao;
+
+    @NotNull
+    @Property(nameInDb = "QTDE")
+    private Integer qtde;
 
     @NotNull()
     @Property(nameInDb = "DT_INCLUSAO")
@@ -39,14 +54,19 @@ public class RegistroChuva implements AuditApi, Serializable {
     @Property(nameInDb = "DT_ALTERACAO")
     private Date dtAlteracao;
 
+    @NotNull()
     @Property(nameInDb = "ID_USUARIO")
     private Long idUsuario;
 
-    @Property(nameInDb = "ID_REGISTRO_CHUVA_REF")
+    @Property(nameInDb = "ID_REGISTRO_PRAGA_REF")
     private Long idRegistroChuvaRef;
 
-    public RegistroChuva() {
+    @Property(nameInDb = "ID_DISPOSITIVO")
+    private Long idDispositivo;
+
+    public RegistroPraga() {
     }
+
 
     public Long getIdRegistroChuva() {
         return idRegistroChuva;
@@ -54,6 +74,14 @@ public class RegistroChuva implements AuditApi, Serializable {
 
     public void setIdRegistroChuva(Long idRegistroChuva) {
         this.idRegistroChuva = idRegistroChuva;
+    }
+
+    public Long getIdPragaRef() {
+        return idPragaRef;
+    }
+
+    public void setIdPragaRef(Long idPragaRef) {
+        this.idPragaRef = idPragaRef;
     }
 
     public Long getIdClienteRef() {
@@ -64,34 +92,65 @@ public class RegistroChuva implements AuditApi, Serializable {
         this.idClienteRef = idClienteRef;
     }
 
-    public Long getVolume() {
-        return volume;
+    public Double getLatitude() {
+        return latitude;
     }
 
-    public void setVolume(Long volume) {
-        this.volume = volume;
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
     }
 
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+
+    public Integer getQtde() {
+        return qtde;
+    }
+
+    public void setQtde(Integer qtde) {
+        this.qtde = qtde;
+    }
+
+    @Override
     public Date getDtInclusao() {
         return dtInclusao;
     }
 
+    @Override
     public void setDtInclusao(Date dtInclusao) {
         this.dtInclusao = dtInclusao;
     }
 
+    @Override
     public Date getDtAlteracao() {
         return dtAlteracao;
     }
 
+    @Override
     public void setDtAlteracao(Date dtAlteracao) {
         this.dtAlteracao = dtAlteracao;
     }
 
+    @Override
     public Long getIdUsuario() {
         return idUsuario;
     }
 
+    @Override
     public void setIdUsuario(Long idUsuario) {
         this.idUsuario = idUsuario;
     }
@@ -104,18 +163,11 @@ public class RegistroChuva implements AuditApi, Serializable {
         this.idRegistroChuvaRef = idRegistroChuvaRef;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        RegistroChuva that = (RegistroChuva) o;
-
-        return idRegistroChuva != null ? idRegistroChuva.equals(that.idRegistroChuva) : that.idRegistroChuva == null;
+    public Long getIdDispositivo() {
+        return idDispositivo;
     }
 
-    @Override
-    public int hashCode() {
-        return idRegistroChuva != null ? idRegistroChuva.hashCode() : 0;
+    public void setIdDispositivo(Long idDispositivo) {
+        this.idDispositivo = idDispositivo;
     }
 }

@@ -1,4 +1,4 @@
-package br.com.geodrone.model;
+package br.com.geodrone.model.api;
 
 import java.util.Date;
 

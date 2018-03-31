@@ -14,11 +14,13 @@ public class UsuarioPresenter extends BasePresenter<UsuarioPresenter.View> {
 
     interface View {
 
-        void onClickLogin(String message);
+        void onClickLogin();
 
         void onCadastroSucesso(String message);
 
         void onErrorNome(String message);
+
+        void onErrorSobrenome(String message);
 
         void onErrorTelefone(String message);
 
@@ -50,25 +52,29 @@ public class UsuarioPresenter extends BasePresenter<UsuarioPresenter.View> {
                 view.onErrorNome(activity.getString(R.string.msg_obr_nome));
                 isOk = false;
             }
+            if (sobrenome == null){
+                view.onErrorSobrenome(activity.getString(R.string.msg_obr_sobrenome));
+                isOk = false;
+            }
             if (telefone == null){
-                view.onErrorTelefone();
-                isOk = false;
-            }
-            if (email == null){
-                view.onErrorEmailObrigatorio();
-                isOk = false;
-            }
-            if (email == null){
-                view.onErroEmailObrigatorio();
+                view.onErrorTelefone(activity.getString(R.string.msg_obr_telefone));
                 isOk = false;
             }
             if (senha == null){
-                view.onSenhaObrigatorio();
+                view.onErrorSenha(activity.getString(R.string.msg_obr_senha));
                 isOk = false;
             }
             if (confirmSenha == null){
-                view.onConfirmSenhaObrigatorio();
+                view.onErrorConfirmSenha(activity.getString(R.string.msg_obr_confirmar_senha));
                 isOk = false;
+            }
+
+            if (senha != null && confirmSenha != null){
+                if (!senha.equals(confirmSenha)){
+                    view.onErrorConfirmSenha(activity.getString(R.string.msg_inv_senha_dif_confirmar_senha));
+                    isOk = false;
+
+                }
             }
         }
         return isOk;
@@ -85,7 +91,7 @@ public class UsuarioPresenter extends BasePresenter<UsuarioPresenter.View> {
             Usuario usuario = new Usuario(null, nome, sobrenome, email, telefone, senha, idCliente);
             usuario = usuarioService.insert(usuario);
 
-            view.onCadastroSucesso();
+            view.onCadastroSucesso(activity.getString(R.string.msg_operacao_sucesso));
             return usuario;
         }catch (Exception ex){
             activity.onError(ex);

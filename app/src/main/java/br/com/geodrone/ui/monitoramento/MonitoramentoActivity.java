@@ -1,4 +1,4 @@
-package br.com.geodrone.activity;
+package br.com.geodrone.ui.monitoramento;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -24,6 +24,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import br.com.geodrone.R;
+import br.com.geodrone.ui.base.BaseFragmentActivity;
+import br.com.geodrone.ui.registrochuva.RegistroPluviosidadeActivity;
 import br.com.geodrone.activity.utils.ActivityHelper;
 import br.com.geodrone.activity.utils.GPSTracker;
 import br.com.geodrone.ui.registrodoenca.RegistroDoencaActivity;
@@ -31,7 +33,9 @@ import br.com.geodrone.ui.registropraga.RegistroPragaActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MonitoramentoActivity extends FragmentActivity implements OnMapReadyCallback, BottomNavigationView.OnNavigationItemSelectedListener {
+public class MonitoramentoActivity extends BaseFragmentActivity implements OnMapReadyCallback,
+                                                                            BottomNavigationView.OnNavigationItemSelectedListener,
+        MonitoramentoPresenter.View{
 
     private GoogleMap mMap;
     private GPSTracker tracker;
@@ -40,11 +44,15 @@ public class MonitoramentoActivity extends FragmentActivity implements OnMapRead
     @BindView(R.id.bottom_navigation_monitoramento)
     BottomNavigationView bottomNavigationView ;
 
+    private MonitoramentoPresenter monitoramentoPresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monitoramento);
         ButterKnife.bind(this);
+
+        monitoramentoPresenter = new MonitoramentoPresenter(this);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         ActivityHelper activityHelper = new ActivityHelper();
@@ -83,6 +91,7 @@ public class MonitoramentoActivity extends FragmentActivity implements OnMapRead
             @Override
             public void onLocationChanged(Location location) {
                 super.onLocationChanged(location);
+                onChangeLocation(location);
             }
         };
 
@@ -168,15 +177,22 @@ public class MonitoramentoActivity extends FragmentActivity implements OnMapRead
                 i.putExtra("localizacao", tracker.getLocation());
                 startActivity(i);
                 break;
+            case R.id.menu_item_sem_registrar_praga:
+                i = new Intent(this, RegistroPragaActivity.class);
+                i.putExtra("localizacao", tracker.getLocation());
+                startActivity(i);
+                break;
             case R.id.menu_item_registrar_doenca:
                 i = new Intent(this, RegistroDoencaActivity.class);
                 i.putExtra("localizacao", tracker.getLocation());
                 startActivity(i);
 
                 break;
-            case R.id.action_item3:
-                i = new Intent(this, CadastroPluviosidadeActivity.class);
+            case R.id.menu_item_sem_registrar_doenca:
+                i = new Intent(this, RegistroDoencaActivity.class);
+                i.putExtra("localizacao", tracker.getLocation());
                 startActivity(i);
+
                 break;
             default:
                 break;
@@ -185,4 +201,8 @@ public class MonitoramentoActivity extends FragmentActivity implements OnMapRead
     }
 
 
+    @Override
+    public void onChangeLocation(Location location) {
+        monitoramentoPresenter.onChangeLocation(location);
+    }
 }

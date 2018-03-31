@@ -3,12 +3,12 @@ package br.com.geodrone.ui.login;
 
 import android.app.Activity;
 
+import br.com.geodrone.R;
 import br.com.geodrone.Session;
 import br.com.geodrone.model.Cliente;
 import br.com.geodrone.model.Usuario;
 import br.com.geodrone.ui.base.BaseActivity;
 import br.com.geodrone.ui.base.BasePresenter;
-import br.com.geodrone.ui.base.ProgressBarPresenter;
 import br.com.geodrone.service.ClienteService;
 import br.com.geodrone.service.UsuarioService;
 import br.com.geodrone.utils.PreferencesUtils;
@@ -16,7 +16,6 @@ import br.com.geodrone.utils.PreferencesUtils;
 /**
  * Created by fernandes on 29/03/2018.
  */
-
 public class LoginPresenter extends BasePresenter<LoginPresenter.View> {
 
     interface View {
@@ -45,11 +44,11 @@ public class LoginPresenter extends BasePresenter<LoginPresenter.View> {
         if (hasView()) {
             if (login == null){
                 isOk = false;
-                view.onEmailLoginErro();
+                view.onErrorEmail(activity.getString(R.string.msg_obr_email));
             }
             if (senha == null){
                 isOk = false;
-                view.onSenhaLoginErro();
+                view.onErrorSenha(activity.getString(R.string.msg_obr_senha));
             }
         }
         return isOk;
@@ -65,9 +64,9 @@ public class LoginPresenter extends BasePresenter<LoginPresenter.View> {
                 Cliente cliente = this.clienteService.findById(usuario.getIdClienteRef());
                 Session.setAttribute(PreferencesUtils.CHAVE_USUARIO, usuario);
                 Session.setAttribute(PreferencesUtils.CHAVE_CLIENTE, cliente);
-                view.onSuccessoLogin();
+                view.onSuccessoLogin(activity.getString(R.string.msg_obr_login_sucesso));
             }else{
-                view.onLoginErro();
+                activity.onError(activity.getString(R.string.msg_inv_login));
             }
         }
 

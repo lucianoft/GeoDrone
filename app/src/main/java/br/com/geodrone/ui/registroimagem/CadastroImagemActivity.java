@@ -1,4 +1,4 @@
-package br.com.geodrone.activity;
+package br.com.geodrone.ui.registroimagem;
 
 import android.Manifest;
 import android.app.Activity;
@@ -19,7 +19,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 

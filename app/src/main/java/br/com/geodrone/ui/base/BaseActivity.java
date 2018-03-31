@@ -6,6 +6,8 @@ import android.os.Build;
 import android.annotation.TargetApi;
 import android.content.pm.PackageManager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import br.com.geodrone.R;
@@ -13,10 +15,10 @@ import br.com.geodrone.R;
 public abstract class BaseActivity extends AppCompatActivity {
 
 
-    private ProgressDialog mProgressDialog;
+    private ProgressBar progressBar;
 
-    public void setmProgressDialog(ProgressDialog mProgressDialog) {
-        this.mProgressDialog = mProgressDialog;
+    public void setProgressBar(ProgressBar progressBar) {
+        this.progressBar = progressBar;
     }
 
     @TargetApi(Build.VERSION_CODES.M)
@@ -34,14 +36,14 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public void showLoading() {
         hideLoading();
-        if (mProgressDialog != null && mProgressDialog.isShowing()) {
-            mProgressDialog.show();
+        if (this.progressBar != null) {
+            this.progressBar.setVisibility(View.VISIBLE);
         }
     }
 
     public void hideLoading() {
-        if (mProgressDialog != null && mProgressDialog.isShowing()) {
-            mProgressDialog.cancel();
+        if (this.progressBar != null) {
+            this.progressBar.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -54,6 +56,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public void showMessage(String message){
-        Toast.makeText(this, R.string.msg_login_invalido, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

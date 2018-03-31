@@ -7,6 +7,8 @@ import org.greenrobot.greendao.annotation.Property;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import br.com.geodrone.model.api.AuditApi;
 import org.greenrobot.greendao.annotation.Generated;
 
 /**

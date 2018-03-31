@@ -35,6 +35,7 @@ public class LoginActivity extends BaseActivity implements LoginPresenter.View{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        setProgressBar(progressBar);
         loginPresenter = new LoginPresenter(this);
         editTextEmail.setText(PreferencesUtils.getString(getApplicationContext(), PreferencesUtils.CHAVE_EMAIL_USUARIO, ""));
         editTextSenha.setText(PreferencesUtils.getString(getApplicationContext(), PreferencesUtils.CHAVE_SENHA_USUARIO, ""));
@@ -44,35 +45,7 @@ public class LoginActivity extends BaseActivity implements LoginPresenter.View{
     public void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         loginPresenter.takeView(this);
-        onInvisibleProgressBar();
-    }
-
-
-    @Override
-    public void onSuccessoLogin() {
-        onInvisibleProgressBar();
-        PreferencesUtils.putString(getApplicationContext(), PreferencesUtils.CHAVE_EMAIL_USUARIO, editTextEmail.getText().toString());
-        PreferencesUtils.putString(getApplicationContext(), PreferencesUtils.CHAVE_SENHA_USUARIO, editTextSenha.getText().toString());
-        Intent i = new Intent(this,MainActivity.class);
-        startActivity(i);
-        finish();
-    }
-
-    @Override
-    public void onEmailLoginErro() {
-        onInvisibleProgressBar();
-        editTextEmail.setError("enter a valid email address");
-    }
-
-    @Override
-    public void onSenhaLoginErro() {
-        onInvisibleProgressBar();
-        editTextEmail.setError("enter a valid email address");
-    }
-
-    @OnClick(R.id.button_login)
-    public void onLoginRequested() {
-        loginPresenter.login(editTextEmail.getText().toString(), editTextSenha.getText().toString());
+        hideLoading();
     }
 
     @OnClick(R.id.text_view_criar_usuario)
@@ -96,22 +69,32 @@ public class LoginActivity extends BaseActivity implements LoginPresenter.View{
 
 
     @Override
+    @OnClick(R.id.button_login)
     public void onClickLogin() {
-
+        showLoading();
+        loginPresenter.login(editTextEmail.getText().toString(), editTextSenha.getText().toString());
     }
 
     @Override
     public void onSuccessoLogin(String message) {
-        Toast.makeText(this, R.string.msg_login_invalido, Toast.LENGTH_SHORT).show();
+        hideLoading();
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        PreferencesUtils.putString(getApplicationContext(), PreferencesUtils.CHAVE_EMAIL_USUARIO, editTextEmail.getText().toString());
+        PreferencesUtils.putString(getApplicationContext(), PreferencesUtils.CHAVE_SENHA_USUARIO, editTextSenha.getText().toString());
+        Intent i = new Intent(this,MainActivity.class);
+        startActivity(i);
+        finish();
     }
 
     @Override
     public void onErrorEmail(String message) {
-
+        hideLoading();
+        editTextEmail.setError(message);
     }
 
     @Override
     public void onErrorSenha(String message) {
-
+        hideLoading();
+        editTextSenha.setError(message);
     }
 }

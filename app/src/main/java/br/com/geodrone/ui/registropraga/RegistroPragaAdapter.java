@@ -48,7 +48,7 @@ public class RegistroPragaAdapter extends ArrayAdapter<Praga> {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.list_praga_layout, parent, false);
         }
-        nome = (TextView) view.findViewById(R.id.textViewPragaNomeComum);
+        nome = (TextView) view.findViewById(R.id.textViewPragaDescricao);
         Praga praga = items.get(position);
         if (praga != null) {
             nome.setText(praga.getDescricao() + " - (" + praga.getDescricaoCientifica() + ")");

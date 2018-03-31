@@ -1,4 +1,4 @@
-package br.com.geodrone.activity;
+package br.com.geodrone.ui.registrochuva;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -38,9 +38,9 @@ import br.com.geodrone.presenter.PontoColetaChuvaPresenter;
 import br.com.geodrone.view.dialog.DialogInformarPluviosidade;
 import butterknife.ButterKnife;
 
-public class CadastroPluviosidadeActivity extends FragmentActivity implements OnMapReadyCallback , GoogleMap.OnMarkerClickListener{
+public class RegistroPluviosidadeActivity extends FragmentActivity implements OnMapReadyCallback , GoogleMap.OnMarkerClickListener{
 
-    private static final String TAG = CadastroPluviosidadeActivity.class.getSimpleName();
+    private static final String TAG = RegistroPluviosidadeActivity.class.getSimpleName();
 
     private GoogleMap mMap;
     private GPSTracker tracker;
@@ -97,7 +97,7 @@ public class CadastroPluviosidadeActivity extends FragmentActivity implements On
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener(){
             @Override
             public void onMapClick(LatLng point) {
-                Toast.makeText(CadastroPluviosidadeActivity.this, point.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(RegistroPluviosidadeActivity.this, point.toString(), Toast.LENGTH_LONG).show();
 
             }
 
@@ -202,7 +202,7 @@ public class CadastroPluviosidadeActivity extends FragmentActivity implements On
             ColetaPluviosidadeDto coletaPluviosidadeDto = LocationUtils.localLessDistance(location, this.coletaPluviosidadeDtos);
             Location locationMenor = LocationUtils.createNewLocation(coletaPluviosidadeDto.getLatitude(), coletaPluviosidadeDto.getLongitude());
             double distancia = LocationUtils.calculateDistance(location, locationMenor);
-            Toast.makeText(CadastroPluviosidadeActivity.this, locAtual.toString() + "distancia: " + distancia, Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegistroPluviosidadeActivity.this, locAtual.toString() + "distancia: " + distancia, Toast.LENGTH_SHORT).show();
 
         }
     }

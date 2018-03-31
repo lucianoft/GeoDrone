@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="br.com.geodrone.activity.CadastroPluviosidadeActivity">
+    tools:context="br.com.geodrone.ui.registrochuva.RegistroPluviosidadeActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
             android:layout_height="match_parent"
             android:layout_above="@+id/bottom_navigation_maps"
             class="com.google.android.gms.maps.SupportMapFragment"
-            tools:context="br.com.geodrone.activity.CadastroPluviosidadeActivity"/>
+            tools:context="br.com.geodrone.ui.registrochuva.RegistroPluviosidadeActivity"/>
 
         <android.support.design.widget.BottomNavigationView
             android:id="@+id/bottom_navigation_maps"

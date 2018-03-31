@@ -6,21 +6,25 @@ import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.Property;
 
 import java.util.Date;
+
+import br.com.geodrone.model.api.AuditApi;
+import br.com.geodrone.model.api.ClienteApi;
+import br.com.geodrone.model.api.DispositivoApi;
 import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Created by fernandes on 25/03/2018.
  */
 @Entity(generateConstructors = false, createInDb = true, nameInDb = "TB_ROTA_TRABALHO")
-public class RotaTrabalho {
+public class RotaTrabalho implements AuditApi, ClienteApi, DispositivoApi {
 
     @Id(autoincrement =  true)
     @Property(nameInDb = "ID_ROTA_TRABALHO")
     private Long idRotaTrabalho;
 
     @NotNull
-    @Property(nameInDb = "ID_CLIENTE")
-    private Long idCliente;
+    @Property(nameInDb = "ID_CLIENTE_REF")
+    private Long idClienteRef;
 
     @NotNull
     @Property(nameInDb = "LATITUDE")
@@ -30,6 +34,12 @@ public class RotaTrabalho {
     @Property(nameInDb = "LONGITUDE")
     private Double longitude;
 
+    @Property(nameInDb = "ID_ROTA_TRABALHO_REF")
+    private Long idRotaTrabalhoRef;
+
+    @Property(nameInDb = "ID_DISPOSITIVO")
+    private Long idDispositivo;
+
     @NotNull()
     @Property(nameInDb = "DT_INCLUSAO")
     private Date dtInclusao;
@@ -38,14 +48,8 @@ public class RotaTrabalho {
     @Property(nameInDb = "DT_ALTERACAO")
     private Date dtAlteracao;
 
-    @Property(nameInDb = "ID_USUARIO_REF")
-    private Long idUsuarioRef;
-
-    @Property(nameInDb = "ID_DISPOSITIVO")
-    private Long idDispositivo;
-
-    @Property(nameInDb = "ID_ROTA_TRABALHO_REF")
-    private Long idRotaTrabalhoRef;
+    @Property(nameInDb = "ID_USUARIO")
+    private Long idUsuario;
 
     public RotaTrabalho() {
     }
@@ -58,12 +62,12 @@ public class RotaTrabalho {
         this.idRotaTrabalho = idRotaTrabalho;
     }
 
-    public Long getIdCliente() {
-        return idCliente;
+    public Long getIdClienteRef() {
+        return idClienteRef;
     }
 
-    public void setIdCliente(Long idCliente) {
-        this.idCliente = idCliente;
+    public void setIdClienteRef(Long idClienteRef) {
+        this.idClienteRef = idClienteRef;
     }
 
     public Double getLatitude() {
@@ -98,12 +102,15 @@ public class RotaTrabalho {
         this.dtAlteracao = dtAlteracao;
     }
 
-    public Long getIdUsuarioRef() {
-        return idUsuarioRef;
+    @Override
+    public Long getIdUsuario() {
+        return this.idUsuario;
     }
 
-    public void setIdUsuarioRef(Long idUsuarioRef) {
-        this.idUsuarioRef = idUsuarioRef;
+    @Override
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
+
     }
 
     public Long getIdDispositivo() {

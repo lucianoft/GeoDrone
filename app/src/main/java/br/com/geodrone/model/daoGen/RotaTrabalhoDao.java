@@ -25,14 +25,14 @@ public class RotaTrabalhoDao extends AbstractDao<RotaTrabalho, Long> {
      */
     public static class Properties {
         public final static Property IdRotaTrabalho = new Property(0, Long.class, "idRotaTrabalho", true, "ID_ROTA_TRABALHO");
-        public final static Property IdCliente = new Property(1, Long.class, "idCliente", false, "ID_CLIENTE");
+        public final static Property IdClienteRef = new Property(1, Long.class, "idClienteRef", false, "ID_CLIENTE_REF");
         public final static Property Latitude = new Property(2, Double.class, "latitude", false, "LATITUDE");
         public final static Property Longitude = new Property(3, Double.class, "longitude", false, "LONGITUDE");
-        public final static Property DtInclusao = new Property(4, java.util.Date.class, "dtInclusao", false, "DT_INCLUSAO");
-        public final static Property DtAlteracao = new Property(5, java.util.Date.class, "dtAlteracao", false, "DT_ALTERACAO");
-        public final static Property IdUsuarioRef = new Property(6, Long.class, "idUsuarioRef", false, "ID_USUARIO_REF");
-        public final static Property IdDispositivo = new Property(7, Long.class, "idDispositivo", false, "ID_DISPOSITIVO");
-        public final static Property IdRotaTrabalhoRef = new Property(8, Long.class, "idRotaTrabalhoRef", false, "ID_ROTA_TRABALHO_REF");
+        public final static Property IdRotaTrabalhoRef = new Property(4, Long.class, "idRotaTrabalhoRef", false, "ID_ROTA_TRABALHO_REF");
+        public final static Property IdDispositivo = new Property(5, Long.class, "idDispositivo", false, "ID_DISPOSITIVO");
+        public final static Property DtInclusao = new Property(6, java.util.Date.class, "dtInclusao", false, "DT_INCLUSAO");
+        public final static Property DtAlteracao = new Property(7, java.util.Date.class, "dtAlteracao", false, "DT_ALTERACAO");
+        public final static Property IdUsuario = new Property(8, Long.class, "idUsuario", false, "ID_USUARIO");
     }
 
 
@@ -49,14 +49,14 @@ public class RotaTrabalhoDao extends AbstractDao<RotaTrabalho, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"TB_ROTA_TRABALHO\" (" + //
                 "\"ID_ROTA_TRABALHO\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: idRotaTrabalho
-                "\"ID_CLIENTE\" INTEGER NOT NULL ," + // 1: idCliente
+                "\"ID_CLIENTE_REF\" INTEGER NOT NULL ," + // 1: idClienteRef
                 "\"LATITUDE\" REAL NOT NULL ," + // 2: latitude
                 "\"LONGITUDE\" REAL NOT NULL ," + // 3: longitude
-                "\"DT_INCLUSAO\" INTEGER NOT NULL ," + // 4: dtInclusao
-                "\"DT_ALTERACAO\" INTEGER NOT NULL ," + // 5: dtAlteracao
-                "\"ID_USUARIO_REF\" INTEGER," + // 6: idUsuarioRef
-                "\"ID_DISPOSITIVO\" INTEGER," + // 7: idDispositivo
-                "\"ID_ROTA_TRABALHO_REF\" INTEGER);"); // 8: idRotaTrabalhoRef
+                "\"ID_ROTA_TRABALHO_REF\" INTEGER," + // 4: idRotaTrabalhoRef
+                "\"ID_DISPOSITIVO\" INTEGER," + // 5: idDispositivo
+                "\"DT_INCLUSAO\" INTEGER NOT NULL ," + // 6: dtInclusao
+                "\"DT_ALTERACAO\" INTEGER NOT NULL ," + // 7: dtAlteracao
+                "\"ID_USUARIO\" INTEGER);"); // 8: idUsuario
     }
 
     /** Drops the underlying database table. */
@@ -73,25 +73,25 @@ public class RotaTrabalhoDao extends AbstractDao<RotaTrabalho, Long> {
         if (idRotaTrabalho != null) {
             stmt.bindLong(1, idRotaTrabalho);
         }
-        stmt.bindLong(2, entity.getIdCliente());
+        stmt.bindLong(2, entity.getIdClienteRef());
         stmt.bindDouble(3, entity.getLatitude());
         stmt.bindDouble(4, entity.getLongitude());
-        stmt.bindLong(5, entity.getDtInclusao().getTime());
-        stmt.bindLong(6, entity.getDtAlteracao().getTime());
  
-        Long idUsuarioRef = entity.getIdUsuarioRef();
-        if (idUsuarioRef != null) {
-            stmt.bindLong(7, idUsuarioRef);
+        Long idRotaTrabalhoRef = entity.getIdRotaTrabalhoRef();
+        if (idRotaTrabalhoRef != null) {
+            stmt.bindLong(5, idRotaTrabalhoRef);
         }
  
         Long idDispositivo = entity.getIdDispositivo();
         if (idDispositivo != null) {
-            stmt.bindLong(8, idDispositivo);
+            stmt.bindLong(6, idDispositivo);
         }
+        stmt.bindLong(7, entity.getDtInclusao().getTime());
+        stmt.bindLong(8, entity.getDtAlteracao().getTime());
  
-        Long idRotaTrabalhoRef = entity.getIdRotaTrabalhoRef();
-        if (idRotaTrabalhoRef != null) {
-            stmt.bindLong(9, idRotaTrabalhoRef);
+        Long idUsuario = entity.getIdUsuario();
+        if (idUsuario != null) {
+            stmt.bindLong(9, idUsuario);
         }
     }
 
@@ -103,25 +103,25 @@ public class RotaTrabalhoDao extends AbstractDao<RotaTrabalho, Long> {
         if (idRotaTrabalho != null) {
             stmt.bindLong(1, idRotaTrabalho);
         }
-        stmt.bindLong(2, entity.getIdCliente());
+        stmt.bindLong(2, entity.getIdClienteRef());
         stmt.bindDouble(3, entity.getLatitude());
         stmt.bindDouble(4, entity.getLongitude());
-        stmt.bindLong(5, entity.getDtInclusao().getTime());
-        stmt.bindLong(6, entity.getDtAlteracao().getTime());
  
-        Long idUsuarioRef = entity.getIdUsuarioRef();
-        if (idUsuarioRef != null) {
-            stmt.bindLong(7, idUsuarioRef);
+        Long idRotaTrabalhoRef = entity.getIdRotaTrabalhoRef();
+        if (idRotaTrabalhoRef != null) {
+            stmt.bindLong(5, idRotaTrabalhoRef);
         }
  
         Long idDispositivo = entity.getIdDispositivo();
         if (idDispositivo != null) {
-            stmt.bindLong(8, idDispositivo);
+            stmt.bindLong(6, idDispositivo);
         }
+        stmt.bindLong(7, entity.getDtInclusao().getTime());
+        stmt.bindLong(8, entity.getDtAlteracao().getTime());
  
-        Long idRotaTrabalhoRef = entity.getIdRotaTrabalhoRef();
-        if (idRotaTrabalhoRef != null) {
-            stmt.bindLong(9, idRotaTrabalhoRef);
+        Long idUsuario = entity.getIdUsuario();
+        if (idUsuario != null) {
+            stmt.bindLong(9, idUsuario);
         }
     }
 
@@ -140,14 +140,14 @@ public class RotaTrabalhoDao extends AbstractDao<RotaTrabalho, Long> {
     @Override
     public void readEntity(Cursor cursor, RotaTrabalho entity, int offset) {
         entity.setIdRotaTrabalho(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setIdCliente(cursor.getLong(offset + 1));
+        entity.setIdClienteRef(cursor.getLong(offset + 1));
         entity.setLatitude(cursor.getDouble(offset + 2));
         entity.setLongitude(cursor.getDouble(offset + 3));
-        entity.setDtInclusao(new java.util.Date(cursor.getLong(offset + 4)));
-        entity.setDtAlteracao(new java.util.Date(cursor.getLong(offset + 5)));
-        entity.setIdUsuarioRef(cursor.isNull(offset + 6) ? null : cursor.getLong(offset + 6));
-        entity.setIdDispositivo(cursor.isNull(offset + 7) ? null : cursor.getLong(offset + 7));
-        entity.setIdRotaTrabalhoRef(cursor.isNull(offset + 8) ? null : cursor.getLong(offset + 8));
+        entity.setIdRotaTrabalhoRef(cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4));
+        entity.setIdDispositivo(cursor.isNull(offset + 5) ? null : cursor.getLong(offset + 5));
+        entity.setDtInclusao(new java.util.Date(cursor.getLong(offset + 6)));
+        entity.setDtAlteracao(new java.util.Date(cursor.getLong(offset + 7)));
+        entity.setIdUsuario(cursor.isNull(offset + 8) ? null : cursor.getLong(offset + 8));
      }
     
     @Override

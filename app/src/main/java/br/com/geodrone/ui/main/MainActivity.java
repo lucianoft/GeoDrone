@@ -15,11 +15,11 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import br.com.geodrone.R;
-import br.com.geodrone.activity.CadastroImagemActivity;
-import br.com.geodrone.activity.CadastroPluviosidadeActivity;
+import br.com.geodrone.ui.registroimagem.CadastroImagemActivity;
+import br.com.geodrone.ui.registrochuva.RegistroPluviosidadeActivity;
 import br.com.geodrone.activity.ForunActivity;
 import br.com.geodrone.activity.MensagemActivity;
-import br.com.geodrone.activity.MonitoramentoActivity;
+import br.com.geodrone.ui.monitoramento.MonitoramentoActivity;
 import br.com.geodrone.ui.registropraga.RegistroPragaActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(i);
                 break;
             case R.id.action_item3:
-                i = new Intent(this,CadastroPluviosidadeActivity.class);
+                i = new Intent(this,RegistroPluviosidadeActivity.class);
                 startActivity(i);
                 break;
             default:
@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(i);
 
         } else if (id == R.id.nav_registo_chuva) {
-            Intent i = new Intent(this,CadastroPluviosidadeActivity.class);
+            Intent i = new Intent(this,RegistroPluviosidadeActivity.class);
             startActivity(i);
         } else if (id == R.id.nav_slideshow) {
             Intent i = new Intent(this,MonitoramentoActivity.class);
