@@ -14,8 +14,8 @@ public class ColetaPluviosidadeDto {
     private Double longitude;
 
     private Date dtLeitura;
-    private Double latLeitura;
-    private Double lonLeitura;
+    private Double latitudeLeitura;
+    private Double longitudeLeitura;
 
     private String ultimaLeitura;
 
@@ -59,20 +59,20 @@ public class ColetaPluviosidadeDto {
         this.dtLeitura = dtLeitura;
     }
 
-    public Double getLatLeitura() {
-        return latLeitura;
+    public Double getLatitudeLeitura() {
+        return latitudeLeitura;
     }
 
-    public void setLatLeitura(Double latLeitura) {
-        this.latLeitura = latLeitura;
+    public void setLatitudeLeitura(Double latitudeLeitura) {
+        this.latitudeLeitura = latitudeLeitura;
     }
 
-    public Double getLonLeitura() {
-        return lonLeitura;
+    public Double getLongitudeLeitura() {
+        return longitudeLeitura;
     }
 
-    public void setLonLeitura(Double lonLeitura) {
-        this.lonLeitura = lonLeitura;
+    public void setLongitudeLeitura(Double longitudeLeitura) {
+        this.longitudeLeitura = longitudeLeitura;
     }
 
     public String getUltimaLeitura() {

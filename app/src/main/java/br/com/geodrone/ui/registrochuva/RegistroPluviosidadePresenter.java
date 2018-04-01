@@ -33,6 +33,8 @@ public class RegistroPluviosidadePresenter extends BasePresenter<RegistroPluvios
         void onRegitroChuvaSucesso(String message);
         void onChangeLocation(Location location);
         void onShowDialogInfPluviosidade(ColetaPluviosidadeDto coletaPluviosidadeDto);
+        Location getLocalizacaoAtual();
+
     }
 
     private ColetaPluviosidadeDto coletaPluviosidadeDtoOld = null;
@@ -111,11 +113,18 @@ public class RegistroPluviosidadePresenter extends BasePresenter<RegistroPluvios
         List<PontoColetaChuva> estacaoPluviometricas = estacaoPluviometricaPresenter.findAllByCliente(1L);
         for (PontoColetaChuva pontoColetaChuva : estacaoPluviometricas){
 
+            Location locationAtual = view.getLocalizacaoAtual();
+
             ColetaPluviosidadeDto pluviosidadeDiariaDto = new ColetaPluviosidadeDto();
             pluviosidadeDiariaDto.setIdPontoColetaChuva(pontoColetaChuva.getIdPontoColetaChuva());
             pluviosidadeDiariaDto.setDescricao(pontoColetaChuva.getDescricao());
             pluviosidadeDiariaDto.setLatitude(pontoColetaChuva.getLatitude());
             pluviosidadeDiariaDto.setLongitude(pontoColetaChuva.getLongitude());
+            if(locationAtual != null){
+                pluviosidadeDiariaDto.setLatitudeLeitura(locationAtual.getLatitude());
+                pluviosidadeDiariaDto.setLongitudeLeitura(locationAtual.getLongitude());
+
+            }
             coletaPluviosidadeDtos.add(pluviosidadeDiariaDto);
         }
         return coletaPluviosidadeDtos;

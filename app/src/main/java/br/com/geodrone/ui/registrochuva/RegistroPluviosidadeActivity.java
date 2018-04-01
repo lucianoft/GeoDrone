@@ -23,6 +23,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -77,10 +79,13 @@ public class RegistroPluviosidadeActivity extends BaseMapFragmentActivity implem
         List<ColetaPluviosidadeDto> coletaPluviosidadeDtos = registroPluviosidadePresenter.getPontosColeta();
         for(ColetaPluviosidadeDto pluviosidadeDiariaDto : coletaPluviosidadeDtos) {
             LatLng position = new LatLng(pluviosidadeDiariaDto.getLatitude(), pluviosidadeDiariaDto.getLongitude());
-            mMap.addMarker(new MarkerOptions().position(position)
-                                              .title(pluviosidadeDiariaDto.getDescricao())
-                                              .snippet(pluviosidadeDiariaDto.getIdPontoColetaChuva().toString()));
 
+            BitmapDescriptor icon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE);
+            Marker marker = mMap.addMarker(new MarkerOptions().position(position)
+                                              .title(pluviosidadeDiariaDto.getDescricao())
+                                              .snippet(pluviosidadeDiariaDto.getUltimaLeitura())
+                                              .icon(icon));
+            marker.showInfoWindow();
         }
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener(){
             @Override
@@ -161,5 +166,13 @@ public class RegistroPluviosidadeActivity extends BaseMapFragmentActivity implem
         alerta = builder.create();
         alerta.show();
 
+    }
+
+    @Override
+    public Location getLocalizacaoAtual() {
+        if (null != tracker) {
+            return tracker.getLocation();
+        }
+        return null;
     }
 }
