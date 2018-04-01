@@ -64,6 +64,13 @@ public class RegistroDoencaActivity extends BaseActivity implements RegistroDoen
         initComponentes();
     }
 
+    @Override
+    public void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        registroDoencaPresenter.takeView(this);
+        hideLoading();
+    }
+
     private void initComponentes() {
         tipoCultivoList = registroDoencaPresenter.findAllTipoCultivo();
         doencaList = registroDoencaPresenter.findAllDoenca();
@@ -86,14 +93,6 @@ public class RegistroDoencaActivity extends BaseActivity implements RegistroDoen
             }
 
         });
-    }
-
-
-    @Override
-    public void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        registroDoencaPresenter.takeView(this);
-        hideLoading();
     }
 
     @OnItemSelected(R.id.spinner_tipo_doenca)

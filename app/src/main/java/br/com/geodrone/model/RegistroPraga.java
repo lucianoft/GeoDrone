@@ -23,7 +23,6 @@ public class RegistroPraga implements AuditApi, Serializable {
     @Property(nameInDb = "ID_REGISTRO_PRAGA")
     private Long idRegistroChuva;
 
-    @NotNull
     @Property(nameInDb = "ID_PRAGA_REF")
     private Long idPragaRef;
 

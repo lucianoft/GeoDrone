@@ -52,7 +52,7 @@ public class RegistroDoencaDao extends AbstractDao<RegistroDoenca, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"TB_REGISTRO_DOENCA\" (" + //
                 "\"ID_REGISTRO_DOENCA\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: idRegistroChuva
-                "\"ID_DOENCA_REF\" INTEGER NOT NULL ," + // 1: idDoencaRef
+                "\"ID_DOENCA_REF\" INTEGER," + // 1: idDoencaRef
                 "\"ID_CLIENTE_REF\" INTEGER NOT NULL ," + // 2: idClienteRef
                 "\"LATITUDE\" REAL NOT NULL ," + // 3: latitude
                 "\"LONGITUDE\" REAL NOT NULL ," + // 4: longitude
@@ -79,7 +79,11 @@ public class RegistroDoencaDao extends AbstractDao<RegistroDoenca, Long> {
         if (idRegistroChuva != null) {
             stmt.bindLong(1, idRegistroChuva);
         }
-        stmt.bindLong(2, entity.getIdDoencaRef());
+ 
+        Long idDoencaRef = entity.getIdDoencaRef();
+        if (idDoencaRef != null) {
+            stmt.bindLong(2, idDoencaRef);
+        }
         stmt.bindLong(3, entity.getIdClienteRef());
         stmt.bindDouble(4, entity.getLatitude());
         stmt.bindDouble(5, entity.getLongitude());
@@ -112,7 +116,11 @@ public class RegistroDoencaDao extends AbstractDao<RegistroDoenca, Long> {
         if (idRegistroChuva != null) {
             stmt.bindLong(1, idRegistroChuva);
         }
-        stmt.bindLong(2, entity.getIdDoencaRef());
+ 
+        Long idDoencaRef = entity.getIdDoencaRef();
+        if (idDoencaRef != null) {
+            stmt.bindLong(2, idDoencaRef);
+        }
         stmt.bindLong(3, entity.getIdClienteRef());
         stmt.bindDouble(4, entity.getLatitude());
         stmt.bindDouble(5, entity.getLongitude());
@@ -152,7 +160,7 @@ public class RegistroDoencaDao extends AbstractDao<RegistroDoenca, Long> {
     @Override
     public void readEntity(Cursor cursor, RegistroDoenca entity, int offset) {
         entity.setIdRegistroChuva(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setIdDoencaRef(cursor.getLong(offset + 1));
+        entity.setIdDoencaRef(cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1));
         entity.setIdClienteRef(cursor.getLong(offset + 2));
         entity.setLatitude(cursor.getDouble(offset + 3));
         entity.setLongitude(cursor.getDouble(offset + 4));

@@ -55,7 +55,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".activity.SplashScreenActivity"
+            android:name=".ui.splashscreen.SplashScreenActivity"
             android:theme="@style/AppTheme.TelaCheia">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -98,7 +98,10 @@
             android:label="@string/title_activity_monitoramento"
             android:parentActivityName=".ui.main.MainActivity" />
         <activity android:name=".activity.ConsultarPragaActivity" />
-        <activity android:name=".ui.registrodoenca.RegistroDoencaActivity"></activity>
+        <activity android:name=".ui.registrodoenca.RegistroDoencaActivity" />
+        <activity
+            android:name=".ui.MonActivity"
+            android:label="@string/title_activity_mon"></activity>
     </application>
 
 </manifest>

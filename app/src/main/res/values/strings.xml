@@ -37,6 +37,11 @@
     <string name="lb_qtd_doencas">Qtde</string>
 
     <string name="lb_btn_salvar">Salvar</string>
+    <string name="lb_possui_registro_doenca">Possui registro de doença?</string>
+    <string name="lb_possui_registro_praga">Possui registro de praga?</string>
+    <string name="lb_sim">Sim</string>
+    <string name="lb_nao">Não</string>
+
 
     <string name="msg_obr_nome">É obrigatorio informar o campo nome</string>
     <string name="msg_obr_sobrenome">É obrigatorio informar o campo sobrenome</string>
@@ -86,11 +91,17 @@
     <string name="menu_geoomonitora">GeooMonitora</string>
     <string name="menu_monitoramento">Monitoramento</string>
     <string name="menu_requisitar_arquivos_pragas">Requisitar Arquivos Pragas</string>
-    <string name="menu_registro_de_praga">Registro Pragas</string>
-    <string name="menu_sem_registro_de_praga">Sem Registro Pragas</string>
+    <string name="menu_registro_de_praga">Praga</string>
+    <string name="menu_sem_registro_de_praga">Sem Pragas</string>
     <string name="menu_registro_de_doenca">Registro Doenca</string>
-    <string name="menu_sem_registro_de_doenca">Sem Registro Doenca</string>
+    <string name="menu_sem_registro_de_doenca">Doenca</string>
 
+    <string name="title_dialog_confirmar_doenca">Registro de doença</string>
+    <string name="title_dialog_confirmar_praga">Registro de praga</string>
 
     <string name="title_activity_monitoramento">Monitoramento</string>
+    <string name="title_activity_mon">Teste</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>

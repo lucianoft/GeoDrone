@@ -30,6 +30,8 @@ public class GeoDroneApplication extends Application {
 
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, Constantes.BD_NOME); //The users-db here is the name of our database.
         Database db = helper.getWritableDb();
+        DaoMaster.dropAllTables(db, true);
+        DaoMaster.createAllTables(db, false);
         daoSession = new DaoMaster(db).newSession();
 
         /*DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, ENCRYPTED ? Constantes.BD_NOME : "notes-db");

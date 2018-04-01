@@ -23,7 +23,6 @@ public class RegistroDoenca implements AuditApi, Serializable {
     @Property(nameInDb = "ID_REGISTRO_DOENCA")
     private Long idRegistroChuva;
 
-    @NotNull
     @Property(nameInDb = "ID_DOENCA_REF")
     private Long idDoencaRef;
 

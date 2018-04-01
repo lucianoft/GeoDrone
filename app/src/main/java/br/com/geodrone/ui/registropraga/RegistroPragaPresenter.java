@@ -74,21 +74,25 @@ public class RegistroPragaPresenter extends BasePresenter<RegistroPragaPresenter
     }
 
     public void salvar(Praga praga, String observacao, Double latitude, Double longitude, String qtde) {
-        boolean isOk = validar(praga, observacao, latitude, longitude, qtde);
+        try {
+            boolean isOk = validar(praga, observacao, latitude, longitude, qtde);
 
-        if (isOk) {
-            RegistroPraga registroPraga = new RegistroPraga();
-            registroPraga.setIdPragaRef(praga != null ? praga.getIdPragaRef() : null);
-            registroPraga.setLatitude(latitude);
-            registroPraga.setLongitude(longitude);
-            registroPraga.setQtde(Integer.parseInt(qtde));
-            Cliente cliente = Session.getAttribute(PreferencesUtils.CHAVE_CLIENTE);
+            if (isOk) {
+                RegistroPraga registroPraga = new RegistroPraga();
+                registroPraga.setIdPragaRef(praga != null ? praga.getIdPragaRef() : null);
+                registroPraga.setLatitude(latitude);
+                registroPraga.setLongitude(longitude);
+                registroPraga.setQtde(Integer.parseInt(qtde));
+                Cliente cliente = Session.getAttribute(PreferencesUtils.CHAVE_CLIENTE);
 
-            registroPraga.setIdClienteRef(cliente != null ? cliente.getIdClienteRef() : null);
+                registroPraga.setIdClienteRef(cliente != null ? cliente.getIdClienteRef() : null);
 
-            this.registroPragaService.insert(registroPraga);
+                this.registroPragaService.insert(registroPraga);
 
-            view.onRegitroPragaSucesso(activity.getString(R.string.msg_operacao_sucesso));
+                view.onRegitroPragaSucesso(activity.getString(R.string.msg_operacao_sucesso));
+            }
+        }catch (Exception ex){
+            this.activity.onError(ex);
         }
     }
 }

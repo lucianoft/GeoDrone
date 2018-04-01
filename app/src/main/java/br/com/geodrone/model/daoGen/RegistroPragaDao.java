@@ -52,7 +52,7 @@ public class RegistroPragaDao extends AbstractDao<RegistroPraga, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"TB_REGISTRO_PRAGA\" (" + //
                 "\"ID_REGISTRO_PRAGA\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: idRegistroChuva
-                "\"ID_PRAGA_REF\" INTEGER NOT NULL ," + // 1: idPragaRef
+                "\"ID_PRAGA_REF\" INTEGER," + // 1: idPragaRef
                 "\"ID_CLIENTE_REF\" INTEGER NOT NULL ," + // 2: idClienteRef
                 "\"LATITUDE\" REAL NOT NULL ," + // 3: latitude
                 "\"LONGITUDE\" REAL NOT NULL ," + // 4: longitude
@@ -79,7 +79,11 @@ public class RegistroPragaDao extends AbstractDao<RegistroPraga, Long> {
         if (idRegistroChuva != null) {
             stmt.bindLong(1, idRegistroChuva);
         }
-        stmt.bindLong(2, entity.getIdPragaRef());
+ 
+        Long idPragaRef = entity.getIdPragaRef();
+        if (idPragaRef != null) {
+            stmt.bindLong(2, idPragaRef);
+        }
         stmt.bindLong(3, entity.getIdClienteRef());
         stmt.bindDouble(4, entity.getLatitude());
         stmt.bindDouble(5, entity.getLongitude());
@@ -112,7 +116,11 @@ public class RegistroPragaDao extends AbstractDao<RegistroPraga, Long> {
         if (idRegistroChuva != null) {
             stmt.bindLong(1, idRegistroChuva);
         }
-        stmt.bindLong(2, entity.getIdPragaRef());
+ 
+        Long idPragaRef = entity.getIdPragaRef();
+        if (idPragaRef != null) {
+            stmt.bindLong(2, idPragaRef);
+        }
         stmt.bindLong(3, entity.getIdClienteRef());
         stmt.bindDouble(4, entity.getLatitude());
         stmt.bindDouble(5, entity.getLongitude());
@@ -152,7 +160,7 @@ public class RegistroPragaDao extends AbstractDao<RegistroPraga, Long> {
     @Override
     public void readEntity(Cursor cursor, RegistroPraga entity, int offset) {
         entity.setIdRegistroChuva(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setIdPragaRef(cursor.getLong(offset + 1));
+        entity.setIdPragaRef(cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1));
         entity.setIdClienteRef(cursor.getLong(offset + 2));
         entity.setLatitude(cursor.getDouble(offset + 3));
         entity.setLongitude(cursor.getDouble(offset + 4));

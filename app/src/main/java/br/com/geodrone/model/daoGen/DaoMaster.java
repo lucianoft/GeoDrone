@@ -23,34 +23,34 @@ public class DaoMaster extends AbstractDaoMaster {
     public static void createAllTables(Database db, boolean ifNotExists) {
         ClienteDao.createTable(db, ifNotExists);
         ConfiguracaoDao.createTable(db, ifNotExists);
-        DispositivoDao.createTable(db, ifNotExists);
         DoencaDao.createTable(db, ifNotExists);
         PerfilUsuarioDao.createTable(db, ifNotExists);
         PontoColetaChuvaDao.createTable(db, ifNotExists);
         PragaDao.createTable(db, ifNotExists);
         RegistroChuvaDao.createTable(db, ifNotExists);
-        RegistroDoencaDao.createTable(db, ifNotExists);
-        RegistroPragaDao.createTable(db, ifNotExists);
         RotaTrabalhoDao.createTable(db, ifNotExists);
         TipoCultivoDao.createTable(db, ifNotExists);
         UsuarioDao.createTable(db, ifNotExists);
+        RegistroDoencaDao.createTable(db, ifNotExists);
+        DispositivoDao.createTable(db, ifNotExists);
+        RegistroPragaDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
     public static void dropAllTables(Database db, boolean ifExists) {
         ClienteDao.dropTable(db, ifExists);
         ConfiguracaoDao.dropTable(db, ifExists);
-        DispositivoDao.dropTable(db, ifExists);
         DoencaDao.dropTable(db, ifExists);
         PerfilUsuarioDao.dropTable(db, ifExists);
         PontoColetaChuvaDao.dropTable(db, ifExists);
         PragaDao.dropTable(db, ifExists);
         RegistroChuvaDao.dropTable(db, ifExists);
-        RegistroDoencaDao.dropTable(db, ifExists);
-        RegistroPragaDao.dropTable(db, ifExists);
         RotaTrabalhoDao.dropTable(db, ifExists);
         TipoCultivoDao.dropTable(db, ifExists);
         UsuarioDao.dropTable(db, ifExists);
+        RegistroDoencaDao.dropTable(db, ifExists);
+        DispositivoDao.dropTable(db, ifExists);
+        RegistroPragaDao.dropTable(db, ifExists);
     }
 
     /**
@@ -71,17 +71,17 @@ public class DaoMaster extends AbstractDaoMaster {
         super(db, SCHEMA_VERSION);
         registerDaoClass(ClienteDao.class);
         registerDaoClass(ConfiguracaoDao.class);
-        registerDaoClass(DispositivoDao.class);
         registerDaoClass(DoencaDao.class);
         registerDaoClass(PerfilUsuarioDao.class);
         registerDaoClass(PontoColetaChuvaDao.class);
         registerDaoClass(PragaDao.class);
         registerDaoClass(RegistroChuvaDao.class);
-        registerDaoClass(RegistroDoencaDao.class);
-        registerDaoClass(RegistroPragaDao.class);
         registerDaoClass(RotaTrabalhoDao.class);
         registerDaoClass(TipoCultivoDao.class);
         registerDaoClass(UsuarioDao.class);
+        registerDaoClass(RegistroDoencaDao.class);
+        registerDaoClass(DispositivoDao.class);
+        registerDaoClass(RegistroPragaDao.class);
     }
 
     public DaoSession newSession() {
