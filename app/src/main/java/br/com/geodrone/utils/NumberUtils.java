@@ -172,6 +172,16 @@ public class NumberUtils implements Serializable{
 		return (value1.intValue() == value2.intValue());
 	}
 
+	public boolean isEqualsDouble(Double value1, Double value2) {
+		if (value1 == null) {
+			return value2 == null;
+		} else if (value2 == null) {
+			return false;
+		}
+
+		return (value1.doubleValue() == value2.doubleValue());
+	}
+
 	public boolean isEqualsLong(Long value1, Long value2) {
 		if (value1 == null) {
             return value2 == null;

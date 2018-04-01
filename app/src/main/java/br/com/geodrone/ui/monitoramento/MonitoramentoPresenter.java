@@ -14,6 +14,8 @@ import br.com.geodrone.ui.base.BasePresenter;
 
 public class MonitoramentoPresenter extends BasePresenter<MonitoramentoPresenter.View> {
 
+    private static String TAG = MonitoramentoPresenter.class.getName();
+
     interface View {
         void onChangeLocation(Location location);
     }
@@ -43,9 +45,9 @@ public class MonitoramentoPresenter extends BasePresenter<MonitoramentoPresenter
                 rotaTrabalho.setLongitude(location.getLongitude());
                 rotaTrabalhoService.insert(rotaTrabalho);
             }
-            Log.i("deu certo", "deu certo");
+            Log.i(TAG, "Rota de trabalho grava com sucesso");
         }catch (Exception ex){
-            Log.i("teste", "erro");
+            Log.i(TAG, "Erro ao gravar Rota de trabalho");
         }
         locationOld = location;
 

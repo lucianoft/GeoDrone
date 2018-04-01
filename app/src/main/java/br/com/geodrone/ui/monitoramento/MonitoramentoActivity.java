@@ -26,6 +26,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import br.com.geodrone.R;
 import br.com.geodrone.ui.base.BaseFragmentActivity;
+import br.com.geodrone.ui.base.BaseMapFragmentActivity;
 import br.com.geodrone.ui.main.MainActivity;
 import br.com.geodrone.ui.registrochuva.RegistroPluviosidadeActivity;
 import br.com.geodrone.activity.utils.ActivityHelper;
@@ -37,18 +38,13 @@ import br.com.geodrone.ui.registropraga.RegistroSemPraga;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MonitoramentoActivity extends BaseFragmentActivity implements OnMapReadyCallback,
-                                                                            BottomNavigationView.OnNavigationItemSelectedListener,
+public class MonitoramentoActivity extends BaseMapFragmentActivity implements BottomNavigationView.OnNavigationItemSelectedListener,
                                                                             MonitoramentoPresenter.View,
                                                                             RegistroSemDoenca.View,
                                                                             RegistroSemPraga.View{
 
     private static final String TAG = MonitoramentoActivity.class.getName();
 
-    private GoogleMap mMap;
-    private GPSTracker tracker;
-    private static final int REQ_LOCATION_PERMISSION = 101;
-    private static final int REQ_OPEN_SETTING = 102;
     @BindView(R.id.bottom_navigation_monitoramento)
     BottomNavigationView bottomNavigationView ;
 
@@ -86,111 +82,6 @@ public class MonitoramentoActivity extends BaseFragmentActivity implements OnMap
         registroSemPraga.takeView(this);
         hideLoading();
     }
-
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-
-        tracker = new GPSTracker(this, mMap) {
-            @Override
-            public void onLocationChanged(Location location) {
-                super.onLocationChanged(location);
-                onChangeLocation(location);
-            }
-        };
-
-    }
-
-    private void setLocation() {
-        if (!tracker.canGetLocation) {
-            if (Build.VERSION.SDK_INT >= 23) {
-                String[] PermissionsLocation = {android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION};
-                if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    requestPermissions(PermissionsLocation, REQ_LOCATION_PERMISSION);
-                } else
-                    showLocationAlert();
-            } else
-                showLocationAlert();
-        } else setMyLocation();
-    }
-
-    private void setMyLocation() {
-        if (tracker.getLatitude() != 0 && tracker.getLongitude() != 0) {
-            LatLng myLocation = new LatLng(tracker.getLatitude(), tracker.getLongitude());
-            mMap.clear();
-            mMap.addMarker(new MarkerOptions().position(myLocation).title("You are at Here!!"));
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 14f));
-        }
-    }
-
-    private AlertDialog locationAlertDialog;
-    private void showLocationAlert() {
-        if (null == locationAlertDialog)
-            locationAlertDialog = new AlertDialog.Builder(this, Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ? android.R.style.Theme_Material_Light_Dialog_Alert : -1)
-                    .setCancelable(false)
-                    .setMessage("This demo application would like to access your location")
-                    .setPositiveButton("Settings", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                            startActivityForResult(intent, REQ_OPEN_SETTING);
-                        }
-                    }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    }).show();
-        locationAlertDialog.show();
-    }
-
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQ_OPEN_SETTING) {
-            if (null != tracker)
-                tracker.getLocation();
-            checkLocation();
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        if (requestCode == REQ_LOCATION_PERMISSION) {
-            if (grantResults.length > 1 && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-                if (null != tracker)
-                    tracker.getLocation();
-                checkLocation();
-            }
-        }
-    }
-
-    private void checkLocation() {
-        if (tracker.canGetLocation)
-            setMyLocation();
-        else
-            showLocationAlert();
-    }
-
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

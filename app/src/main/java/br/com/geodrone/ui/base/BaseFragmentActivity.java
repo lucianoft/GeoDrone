@@ -8,11 +8,14 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import br.com.geodrone.utils.Message;
+import br.com.geodrone.utils.Messenger;
+
 /**
  * Created by luciano on 31/03/2018.
  */
 
-public class BaseFragmentActivity extends FragmentActivity{
+public class BaseFragmentActivity extends FragmentActivity implements BaseError{
 
     private ProgressBar progressBar;
 
@@ -46,15 +49,26 @@ public class BaseFragmentActivity extends FragmentActivity{
                 checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED;
     }
 
+    @Override
     public void onError(String message){
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
     public void onError(Exception ex){
         Toast.makeText(this, ex.toString(), Toast.LENGTH_SHORT).show();
     }
 
+    @Override
     public void showMessage(String message){
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showMessenger(Messenger messenger){
+        if (messenger != null && messenger.getMessages() != null)
+            for (Message message : messenger.getMessages()) {
+                Toast.makeText(this, message.getContent(), Toast.LENGTH_SHORT).show();
+            }
     }
 }

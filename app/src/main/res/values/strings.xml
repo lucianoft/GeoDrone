@@ -35,6 +35,7 @@
     <string name="lb_pesquisar_item">Pesquisar Item</string>
     <string name="lb_doenca">Doenca</string>
     <string name="lb_qtd_doencas">Qtde</string>
+    <string name="lb_volume_chuva">Volume</string>
 
     <string name="lb_btn_salvar">Salvar</string>
     <string name="lb_possui_registro_doenca">Possui registro de doença?</string>
@@ -53,6 +54,8 @@
     <string name="msg_obr_doenca">É obrigatorio informar o campo doenca</string>
     <string name="msg_obr_praga">É obrigatorio informar o campo praga</string>
     <string name="msg_obr_qtde">É obrigatorio informar o campo qtde</string>
+    <string name="msg_obr_volume">É obrigatorio informar o campo volume</string>
+    <string name="msg_obr_ponto_coleta_chuva">É obrigatorio informar o Ponto de Coleta de Chuva</string>
 
     <string name="msg_inv_senha_dif_confirmar_senha">Campo confirmar senha diferente do campo senha</string>
 

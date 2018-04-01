@@ -25,12 +25,15 @@ public class RegistroChuvaDao extends AbstractDao<RegistroChuva, Long> {
      */
     public static class Properties {
         public final static Property IdRegistroChuva = new Property(0, Long.class, "idRegistroChuva", true, "ID_REGISTRO_CHUVA");
-        public final static Property IdClienteRef = new Property(1, Long.class, "idClienteRef", false, "ID_CLIENTE_REF");
-        public final static Property Volume = new Property(2, Long.class, "volume", false, "VOLUME");
-        public final static Property DtInclusao = new Property(3, java.util.Date.class, "dtInclusao", false, "DT_INCLUSAO");
-        public final static Property DtAlteracao = new Property(4, java.util.Date.class, "dtAlteracao", false, "DT_ALTERACAO");
-        public final static Property IdUsuario = new Property(5, Long.class, "idUsuario", false, "ID_USUARIO");
-        public final static Property IdRegistroChuvaRef = new Property(6, Long.class, "idRegistroChuvaRef", false, "ID_REGISTRO_CHUVA_REF");
+        public final static Property IdPontoColetaChuva = new Property(1, Long.class, "idPontoColetaChuva", false, "ID_PONTO_COLETA_CHUVA");
+        public final static Property IdClienteRef = new Property(2, Long.class, "idClienteRef", false, "ID_CLIENTE_REF");
+        public final static Property Observacao = new Property(3, String.class, "observacao", false, "OBSERVACAO");
+        public final static Property Volume = new Property(4, Long.class, "volume", false, "VOLUME");
+        public final static Property DtInclusao = new Property(5, java.util.Date.class, "dtInclusao", false, "DT_INCLUSAO");
+        public final static Property DtAlteracao = new Property(6, java.util.Date.class, "dtAlteracao", false, "DT_ALTERACAO");
+        public final static Property IdUsuario = new Property(7, Long.class, "idUsuario", false, "ID_USUARIO");
+        public final static Property IdDispositivo = new Property(8, Long.class, "idDispositivo", false, "ID_DISPOSITIVO");
+        public final static Property IdRegistroChuvaRef = new Property(9, Long.class, "idRegistroChuvaRef", false, "ID_REGISTRO_CHUVA_REF");
     }
 
 
@@ -47,12 +50,15 @@ public class RegistroChuvaDao extends AbstractDao<RegistroChuva, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"TB_REGISTRO_CHUVA\" (" + //
                 "\"ID_REGISTRO_CHUVA\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: idRegistroChuva
-                "\"ID_CLIENTE_REF\" INTEGER NOT NULL ," + // 1: idClienteRef
-                "\"VOLUME\" INTEGER NOT NULL ," + // 2: volume
-                "\"DT_INCLUSAO\" INTEGER NOT NULL ," + // 3: dtInclusao
-                "\"DT_ALTERACAO\" INTEGER NOT NULL ," + // 4: dtAlteracao
-                "\"ID_USUARIO\" INTEGER," + // 5: idUsuario
-                "\"ID_REGISTRO_CHUVA_REF\" INTEGER);"); // 6: idRegistroChuvaRef
+                "\"ID_PONTO_COLETA_CHUVA\" INTEGER NOT NULL ," + // 1: idPontoColetaChuva
+                "\"ID_CLIENTE_REF\" INTEGER NOT NULL ," + // 2: idClienteRef
+                "\"OBSERVACAO\" TEXT," + // 3: observacao
+                "\"VOLUME\" INTEGER NOT NULL ," + // 4: volume
+                "\"DT_INCLUSAO\" INTEGER NOT NULL ," + // 5: dtInclusao
+                "\"DT_ALTERACAO\" INTEGER NOT NULL ," + // 6: dtAlteracao
+                "\"ID_USUARIO\" INTEGER," + // 7: idUsuario
+                "\"ID_DISPOSITIVO\" INTEGER," + // 8: idDispositivo
+                "\"ID_REGISTRO_CHUVA_REF\" INTEGER);"); // 9: idRegistroChuvaRef
     }
 
     /** Drops the underlying database table. */
@@ -69,19 +75,30 @@ public class RegistroChuvaDao extends AbstractDao<RegistroChuva, Long> {
         if (idRegistroChuva != null) {
             stmt.bindLong(1, idRegistroChuva);
         }
-        stmt.bindLong(2, entity.getIdClienteRef());
-        stmt.bindLong(3, entity.getVolume());
-        stmt.bindLong(4, entity.getDtInclusao().getTime());
-        stmt.bindLong(5, entity.getDtAlteracao().getTime());
+        stmt.bindLong(2, entity.getIdPontoColetaChuva());
+        stmt.bindLong(3, entity.getIdClienteRef());
+ 
+        String observacao = entity.getObservacao();
+        if (observacao != null) {
+            stmt.bindString(4, observacao);
+        }
+        stmt.bindLong(5, entity.getVolume());
+        stmt.bindLong(6, entity.getDtInclusao().getTime());
+        stmt.bindLong(7, entity.getDtAlteracao().getTime());
  
         Long idUsuario = entity.getIdUsuario();
         if (idUsuario != null) {
-            stmt.bindLong(6, idUsuario);
+            stmt.bindLong(8, idUsuario);
+        }
+ 
+        Long idDispositivo = entity.getIdDispositivo();
+        if (idDispositivo != null) {
+            stmt.bindLong(9, idDispositivo);
         }
  
         Long idRegistroChuvaRef = entity.getIdRegistroChuvaRef();
         if (idRegistroChuvaRef != null) {
-            stmt.bindLong(7, idRegistroChuvaRef);
+            stmt.bindLong(10, idRegistroChuvaRef);
         }
     }
 
@@ -93,19 +110,30 @@ public class RegistroChuvaDao extends AbstractDao<RegistroChuva, Long> {
         if (idRegistroChuva != null) {
             stmt.bindLong(1, idRegistroChuva);
         }
-        stmt.bindLong(2, entity.getIdClienteRef());
-        stmt.bindLong(3, entity.getVolume());
-        stmt.bindLong(4, entity.getDtInclusao().getTime());
-        stmt.bindLong(5, entity.getDtAlteracao().getTime());
+        stmt.bindLong(2, entity.getIdPontoColetaChuva());
+        stmt.bindLong(3, entity.getIdClienteRef());
+ 
+        String observacao = entity.getObservacao();
+        if (observacao != null) {
+            stmt.bindString(4, observacao);
+        }
+        stmt.bindLong(5, entity.getVolume());
+        stmt.bindLong(6, entity.getDtInclusao().getTime());
+        stmt.bindLong(7, entity.getDtAlteracao().getTime());
  
         Long idUsuario = entity.getIdUsuario();
         if (idUsuario != null) {
-            stmt.bindLong(6, idUsuario);
+            stmt.bindLong(8, idUsuario);
+        }
+ 
+        Long idDispositivo = entity.getIdDispositivo();
+        if (idDispositivo != null) {
+            stmt.bindLong(9, idDispositivo);
         }
  
         Long idRegistroChuvaRef = entity.getIdRegistroChuvaRef();
         if (idRegistroChuvaRef != null) {
-            stmt.bindLong(7, idRegistroChuvaRef);
+            stmt.bindLong(10, idRegistroChuvaRef);
         }
     }
 
@@ -124,12 +152,15 @@ public class RegistroChuvaDao extends AbstractDao<RegistroChuva, Long> {
     @Override
     public void readEntity(Cursor cursor, RegistroChuva entity, int offset) {
         entity.setIdRegistroChuva(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setIdClienteRef(cursor.getLong(offset + 1));
-        entity.setVolume(cursor.getLong(offset + 2));
-        entity.setDtInclusao(new java.util.Date(cursor.getLong(offset + 3)));
-        entity.setDtAlteracao(new java.util.Date(cursor.getLong(offset + 4)));
-        entity.setIdUsuario(cursor.isNull(offset + 5) ? null : cursor.getLong(offset + 5));
-        entity.setIdRegistroChuvaRef(cursor.isNull(offset + 6) ? null : cursor.getLong(offset + 6));
+        entity.setIdPontoColetaChuva(cursor.getLong(offset + 1));
+        entity.setIdClienteRef(cursor.getLong(offset + 2));
+        entity.setObservacao(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setVolume(cursor.getLong(offset + 4));
+        entity.setDtInclusao(new java.util.Date(cursor.getLong(offset + 5)));
+        entity.setDtAlteracao(new java.util.Date(cursor.getLong(offset + 6)));
+        entity.setIdUsuario(cursor.isNull(offset + 7) ? null : cursor.getLong(offset + 7));
+        entity.setIdDispositivo(cursor.isNull(offset + 8) ? null : cursor.getLong(offset + 8));
+        entity.setIdRegistroChuvaRef(cursor.isNull(offset + 9) ? null : cursor.getLong(offset + 9));
      }
     
     @Override

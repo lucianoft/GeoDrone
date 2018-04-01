@@ -15,6 +15,7 @@ import br.com.geodrone.R;
 import br.com.geodrone.ui.base.BaseActivity;
 import br.com.geodrone.ui.usuario.CadatroUsuarioActivity;
 import br.com.geodrone.ui.main.MainActivity;
+import br.com.geodrone.utils.KeyboardUtils;
 import br.com.geodrone.utils.PreferencesUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,6 +40,8 @@ public class LoginActivity extends BaseActivity implements LoginPresenter.View{
         loginPresenter = new LoginPresenter(this);
         editTextEmail.setText(PreferencesUtils.getString(getApplicationContext(), PreferencesUtils.CHAVE_EMAIL_USUARIO, ""));
         editTextSenha.setText(PreferencesUtils.getString(getApplicationContext(), PreferencesUtils.CHAVE_SENHA_USUARIO, ""));
+
+        KeyboardUtils.hideSoftInput(this);
     }
 
     @Override

@@ -2,74 +2,88 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_marginTop="20dp"
-    android:layout_marginBottom="20dp"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
+    android:orientation="horizontal"
+    android:layout_marginTop="15dp"
+    android:layout_marginBottom="15dp"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
     >
 
-    <Button
-        android:id="@+id/button_cancela_dialog_inf_pluviosidade"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/text_input_layout_ponto_coleta_chuva_registro_chuva"
+        style="@style/TextLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp">
+        <EditText android:id="@+id/edit_text_ponto_coleta_chuva_registro_chuva"
+            style="@style/TextLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:focusable="false"
+            android:hint="@string/lb_observacao" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/text_input_layout_observacao_registro_chuva"
+        android:layout_below="@+id/text_input_layout_ponto_coleta_chuva_registro_chuva"
+        style="@style/TextLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp">
+        <EditText android:id="@+id/edit_text_observacao_registro_chuva"
+            style="@style/TextLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="@string/lb_observacao" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/text_input_layout_qtde_registro_chuva"
+        android:layout_below="@+id/text_input_layout_observacao_registro_chuva"
+        style="@style/TextLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp">
+        <EditText android:id="@+id/edit_text_qtde_registro_chuva"
+            style="@style/TextLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="@string/lb_volume_chuva" />
+    </android.support.design.widget.TextInputLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_gravity="right"
-        android:layout_marginEnd="11dp"
-        android:background="@drawable/ic_cancel_black_24dp" />
-    <View
-        android:id="@+id/view_dialog_inf_pluviosidade"
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:layout_marginBottom="6dp"
-        android:background="@android:color/transparent"
-        android:layout_below="@+id/button_cancela_dialog_inf_pluviosidade"
-        />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/text_input_layout_qtde_registro_chuva"
+        android:orientation="horizontal"
+        android:background="#C4C4C4"
+        android:paddingTop="4dp"
+        android:layout_marginTop="10dp">
 
-    <!--  Local -->
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/text_input_layout_descricao_pluviometro"
-        android:layout_below="@+id/view_dialog_inf_pluviosidade"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp">
-        <EditText
-            android:id="@+id/edit_text_descricao_pluviometro"
-            style="@style/TextLabel"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/btn_salvar_registro_chuva"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="@string/lb_ponto_registro_pluviosidade" />
-    </android.support.design.widget.TextInputLayout>
+            android:layout_weight="1"
+            style="@style/CustomStyleButton"
+            android:text="Confirmar" />
 
-    <!--  Volume Chuva -->
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/text_input_layout_volume_chuva"
-        android:layout_below="@+id/text_input_layout_descricao_pluviometro"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp">
-        <EditText
-            android:id="@+id/edit_text_qtde_praga"
-            style="@style/TextLabel"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/btn_cancelar_registro_chuva"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="@string/lb_qtd_pragas" />
-    </android.support.design.widget.TextInputLayout>
-
-    <!--NEW LINE!-->
-
-    <Button
-        android:id="@+id/btn_salvar_volume_chuva"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/text_input_layout_volume_chuva"
-        android:layout_marginTop="20dp"
-        style="@style/CustomStyleButton"
-        android:text="@string/lb_btn_salvar" />
+            android:layout_weight="1"
+            style="@style/CustomStyleButton"
+            android:text="Cancelar" />
+    </LinearLayout>
 
 </RelativeLayout>

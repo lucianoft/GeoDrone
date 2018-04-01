@@ -7,7 +7,7 @@ import java.util.Date;
  */
 
 public class ColetaPluviosidadeDto {
-    private Long id;
+    private Long idPontoColetaChuva;
     private String descricao;
 
     private Double latitude;
@@ -19,12 +19,12 @@ public class ColetaPluviosidadeDto {
 
     private String ultimaLeitura;
 
-    public Long getId() {
-        return id;
+    public Long getIdPontoColetaChuva() {
+        return idPontoColetaChuva;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdPontoColetaChuva(Long idPontoColetaChuva) {
+        this.idPontoColetaChuva = idPontoColetaChuva;
     }
 
     public String getDescricao() {
@@ -81,5 +81,20 @@ public class ColetaPluviosidadeDto {
 
     public void setUltimaLeitura(String ultimaLeitura) {
         this.ultimaLeitura = ultimaLeitura;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ColetaPluviosidadeDto that = (ColetaPluviosidadeDto) o;
+
+        return idPontoColetaChuva != null ? idPontoColetaChuva.equals(that.idPontoColetaChuva) : that.idPontoColetaChuva == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return idPontoColetaChuva != null ? idPontoColetaChuva.hashCode() : 0;
     }
 }
