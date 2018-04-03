@@ -15,7 +15,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import br.com.geodrone.R;
-import br.com.geodrone.ui.registroimagem.CadastroImagemActivity;
+import br.com.geodrone.ui.registroimagem.RegistroImagemActivity;
 import br.com.geodrone.ui.registrochuva.RegistroPluviosidadeActivity;
 import br.com.geodrone.activity.ForunActivity;
 import br.com.geodrone.activity.MensagemActivity;
@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(i);
                 break;
             case R.id.action_item2:
-                i = new Intent(this,CadastroImagemActivity.class);
+                i = new Intent(this,RegistroImagemActivity.class);
                 startActivity(i);
                 break;
             case R.id.action_item3:
@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_registro_foto) {
-            Intent i = new Intent(this,CadastroImagemActivity.class);
+            Intent i = new Intent(this,RegistroImagemActivity.class);
             startActivity(i);
 
         } else if (id == R.id.nav_registo_chuva) {

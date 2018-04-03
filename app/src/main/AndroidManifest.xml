@@ -80,7 +80,7 @@
             android:label="@string/title_activity_cadatro_usuario"
             android:parentActivityName=".ui.login.LoginActivity" />
         <activity
-            android:name=".ui.registroimagem.CadastroImagemActivity"
+            android:name=".ui.registroimagem.RegistroImagemActivity"
             android:label="@string/title_activity_cadastro_imagem" />
         <activity android:name=".ui.registroimagem.CameraFotoActivity" />
         <activity

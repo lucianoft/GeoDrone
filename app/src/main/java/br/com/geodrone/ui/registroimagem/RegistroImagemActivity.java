@@ -4,8 +4,10 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Location;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
@@ -18,8 +20,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.io.File;
@@ -33,10 +38,16 @@ import java.util.Date;
 import br.com.geodrone.BuildConfig;
 import br.com.geodrone.R;
 import br.com.geodrone.activity.utils.Constantes;
+import br.com.geodrone.model.TipoCultivo;
+import br.com.geodrone.model.constantes.FlagDirecao;
+import br.com.geodrone.ui.base.BaseActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.OnItemSelected;
 
-public class CadastroImagemActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class RegistroImagemActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener,
+                                                                    RegistroImagemPresenter.View {
 
     @BindView(R.id.bottom_nav_view_cad_imagem)
     BottomNavigationView bottomNavigationView;
@@ -47,17 +58,31 @@ public class CadastroImagemActivity extends AppCompatActivity implements BottomN
     @BindView(R.id.layout_cad_imagem_salvar)
     RelativeLayout layoutSalvar;
 
-    private String mCurrentPhotoPath;
+    @BindView(R.id.edit_text_obs_reg_imagem)
+    EditText editTextObservacao;
+
+    @BindView(R.id.spinner_direcao_reg_imagem)
+    Spinner spinnerDirecao;
+
+    private RegistroImagemPresenter registroImagemPresenter;
+
+    private String flagDirecao = null;
+    private File file = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cadastro_imagem);
+        setContentView(R.layout.activity_registro_imagem);
         ButterKnife.bind(this);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
 
+        registroImagemPresenter = new RegistroImagemPresenter(this);
+
+        ArrayAdapter<FlagDirecao> spinnerDirecaoAdapter = new ArrayAdapter<FlagDirecao>(this, android.R.layout.simple_spinner_item, FlagDirecao.values());
+        spinnerDirecao.setAdapter(spinnerDirecaoAdapter);
+        spinnerDirecaoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         layoutSalvar.setVisibility(View.INVISIBLE);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
@@ -65,12 +90,19 @@ public class CadastroImagemActivity extends AppCompatActivity implements BottomN
         getPermissions();
     }
 
+    @Override
+    public void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        registroImagemPresenter.takeView(this);
+        hideLoading();
+    }
+
     private void getPermissions() {
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
-                || ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
-                || ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA,
+        if (!hasPermission(Manifest.permission.CAMERA)
+                || !hasPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                || !hasPermission(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            requestPermissionsSafely(new String[]{Manifest.permission.CAMERA,
                             Manifest.permission.WRITE_EXTERNAL_STORAGE,
                             Manifest.permission.READ_EXTERNAL_STORAGE},
                     1);
@@ -89,7 +121,7 @@ public class CadastroImagemActivity extends AppCompatActivity implements BottomN
                 dispatchTakePictureIntent();
                 break;
             case R.id.action_galeria:
-                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 photoPickerIntent.setType("image/*");
                 startActivityForResult(Intent.createChooser(photoPickerIntent, "Selecione uma imagem"), Constantes.ACTIVITY_CODE_PICK_IMAGE);
                 break;
@@ -105,12 +137,7 @@ public class CadastroImagemActivity extends AppCompatActivity implements BottomN
         // Ensure that there's a camera activity to handle the intent
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             // Create the File where the photo should go
-            File photoFile = null;
-            try {
-                photoFile = createImageFile();
-            } catch (IOException ex) {
-                // Error occurred while creating the File
-            }
+            File photoFile = registroImagemPresenter.createImageFile();
             // Continue only if the File was successfully created
             if (photoFile != null) {
                 Uri photoURI = FileProvider.getUriForFile(this,
@@ -122,70 +149,24 @@ public class CadastroImagemActivity extends AppCompatActivity implements BottomN
         }
     }
 
-    private File createImageFile() throws IOException {
-        // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                storageDir      /* directory */
-        );
-
-        // Save a file: path for use with ACTION_VIEW intents
-        mCurrentPhotoPath = image.getAbsolutePath();
-        return image;
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        try {
-            if (resultCode != Activity.RESULT_CANCELED) {
-
-                if (requestCode == Constantes.ACTIVITY_REQUEST_TAKE_PHOTO) {
-                    Uri imageUri = Uri.parse(mCurrentPhotoPath);
-                    File file = new File(imageUri.getPath());
-                    try {
-                        InputStream ims = new FileInputStream(file);
-                        imageView.setImageBitmap(BitmapFactory.decodeStream(ims));
-                        layoutSalvar.setVisibility(View.VISIBLE);
-                    } catch (FileNotFoundException e) {
-                        return;
-                    }
-
-                    // ScanFile so it will be appeared on Gallery
-                    MediaScannerConnection.scanFile(CadastroImagemActivity.this,
-                            new String[]{imageUri.getPath()}, null,
-                            new MediaScannerConnection.OnScanCompletedListener() {
-                                public void onScanCompleted(String path, Uri uri) {
-                                }
-                            });
-                }else if (requestCode == Constantes.ACTIVITY_CODE_PICK_IMAGE) {
-                    final Uri imageUri = data.getData();
-                    mCurrentPhotoPath = imageUri.getPath();
-                    final InputStream imageStream = getContentResolver().openInputStream(imageUri);
-                    final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-                    imageView.setImageBitmap(selectedImage);
-                    layoutSalvar.setVisibility(View.VISIBLE);
-                    Toast.makeText(getApplicationContext(), imageUri.toString(), Toast.LENGTH_SHORT).show();
-                } else if (requestCode == Constantes.ACTIVITY_CODE_TIRAR_FOTO) {
-                    String campinhoImagem = data.getExtras().getString(Constantes.PARAM_CAMINHO_ARQUIVO);
-                }
-            }
+        try{
+            file = registroImagemPresenter.getFileOnActivityResult(requestCode, resultCode, data);
+            if (file != null) {
+                InputStream ims = new FileInputStream(file);
+                imageView.setImageBitmap(BitmapFactory.decodeStream(ims));
+                layoutSalvar.setVisibility(View.VISIBLE);
+           }
         }catch (Exception ex){
-            Toast.makeText(getApplicationContext(), ex.toString() , Toast.LENGTH_SHORT).show();
-
-            ex.printStackTrace();
+            this.onError(ex);
         }
     }
 
-    private void setPic() {
-        // Get the dimensions of the View
+    private void setPic(String mCurrentPhotoPath) {
         int targetW = imageView.getWidth();
         int targetH = imageView.getHeight();
-
-        // Get the dimensions of the bitmap
         BitmapFactory.Options bmOptions = new BitmapFactory.Options();
         bmOptions.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
@@ -202,4 +183,34 @@ public class CadastroImagemActivity extends AppCompatActivity implements BottomN
         Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
         imageView.setImageBitmap(bitmap);
     }
+
+    @OnClick(R.id.float_button_salvar_imagem)
+    public void salvarImagem(){
+        showLoading();
+        Location location = null;
+        FlagDirecao flagDirecao = (FlagDirecao) spinnerDirecao.getSelectedItem();
+        registroImagemPresenter.salvar(file, flagDirecao,  editTextObservacao.getText().toString(), location);
+        //imageView.setImageResource(-1);
+    }
+
+    @Override
+    public void onRegitroImagemSucesso(String message) {
+        imageView.setImageBitmap(null);
+        imageView.destroyDrawingCache();
+        hideLoading();
+        file = null;
+        layoutSalvar.setVisibility(View.INVISIBLE);
+        showMessage(message);
+    }
+
+    @Override
+    public void onRegitroImagemError(String message) {
+
+    }
+
+    /*@OnItemSelected(R.id.spinner_direcao_reg_imagem)
+    public void onChanceDirecao(int position) {
+        String flagDirecao = FlagDirecao.getValueByIndice(position);
+    }*/
+
 }

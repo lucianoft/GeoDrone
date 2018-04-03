@@ -34,6 +34,7 @@ public class DaoMaster extends AbstractDaoMaster {
         RegistroDoencaDao.createTable(db, ifNotExists);
         DispositivoDao.createTable(db, ifNotExists);
         RegistroPragaDao.createTable(db, ifNotExists);
+        RegistroImagemDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
@@ -51,6 +52,7 @@ public class DaoMaster extends AbstractDaoMaster {
         RegistroDoencaDao.dropTable(db, ifExists);
         DispositivoDao.dropTable(db, ifExists);
         RegistroPragaDao.dropTable(db, ifExists);
+        RegistroImagemDao.dropTable(db, ifExists);
     }
 
     /**
@@ -82,6 +84,7 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(RegistroDoencaDao.class);
         registerDaoClass(DispositivoDao.class);
         registerDaoClass(RegistroPragaDao.class);
+        registerDaoClass(RegistroImagemDao.class);
     }
 
     public DaoSession newSession() {

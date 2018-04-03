@@ -17,4 +17,4 @@ public enum FlagPerfilUsuario {
         return value;
     }
 
-    }
+}
