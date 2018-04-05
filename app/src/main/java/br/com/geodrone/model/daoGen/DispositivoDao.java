@@ -25,6 +25,9 @@ public class DispositivoDao extends AbstractDao<Dispositivo, Long> {
      */
     public static class Properties {
         public final static Property IdRef = new Property(0, Long.class, "idRef", true, "ID_DISPOSITIVO");
+        public final static Property DtInclusao = new Property(1, java.util.Date.class, "dtInclusao", false, "DT_INCLUSAO");
+        public final static Property DtAlteracao = new Property(2, java.util.Date.class, "dtAlteracao", false, "DT_ALTERACAO");
+        public final static Property VersaoSistema = new Property(3, Long.class, "versaoSistema", false, "VERSAO_SISTEMA");
     }
 
 
@@ -40,7 +43,10 @@ public class DispositivoDao extends AbstractDao<Dispositivo, Long> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"TB_DISPOSITIVO\" (" + //
-                "\"ID_DISPOSITIVO\" INTEGER PRIMARY KEY AUTOINCREMENT );"); // 0: idRef
+                "\"ID_DISPOSITIVO\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: idRef
+                "\"DT_INCLUSAO\" INTEGER NOT NULL ," + // 1: dtInclusao
+                "\"DT_ALTERACAO\" INTEGER NOT NULL ," + // 2: dtAlteracao
+                "\"VERSAO_SISTEMA\" INTEGER NOT NULL );"); // 3: versaoSistema
     }
 
     /** Drops the underlying database table. */
@@ -57,6 +63,9 @@ public class DispositivoDao extends AbstractDao<Dispositivo, Long> {
         if (idRef != null) {
             stmt.bindLong(1, idRef);
         }
+        stmt.bindLong(2, entity.getDtInclusao().getTime());
+        stmt.bindLong(3, entity.getDtAlteracao().getTime());
+        stmt.bindLong(4, entity.getVersaoSistema());
     }
 
     @Override
@@ -67,6 +76,9 @@ public class DispositivoDao extends AbstractDao<Dispositivo, Long> {
         if (idRef != null) {
             stmt.bindLong(1, idRef);
         }
+        stmt.bindLong(2, entity.getDtInclusao().getTime());
+        stmt.bindLong(3, entity.getDtAlteracao().getTime());
+        stmt.bindLong(4, entity.getVersaoSistema());
     }
 
     @Override
@@ -84,6 +96,9 @@ public class DispositivoDao extends AbstractDao<Dispositivo, Long> {
     @Override
     public void readEntity(Cursor cursor, Dispositivo entity, int offset) {
         entity.setIdRef(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
+        entity.setDtInclusao(new java.util.Date(cursor.getLong(offset + 1)));
+        entity.setDtAlteracao(new java.util.Date(cursor.getLong(offset + 2)));
+        entity.setVersaoSistema(cursor.getLong(offset + 3));
      }
     
     @Override

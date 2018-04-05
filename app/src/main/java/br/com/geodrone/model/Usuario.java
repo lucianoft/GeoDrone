@@ -8,14 +8,16 @@ import org.greenrobot.greendao.annotation.Generated;
 
 import java.io.Serializable;
 
+import br.com.geodrone.model.api.ClientModel;
+
 @Entity(generateConstructors = false, createInDb = true, nameInDb = "TB_USUARIO")
-public class Usuario implements Serializable {
+public class Usuario implements Serializable, ClientModel {
 
     private static final long serialVersionUID = 1L;
 
     @Id(autoincrement =  false)
-    @Property(nameInDb = "ID_USUARIO_REF")
-    private Long idUsuarioRef;
+    @Property(nameInDb = "ID_USUARIO")
+    private Long id;
 
     @Property(nameInDb = "NOME" )
     @NotNull
@@ -37,28 +39,18 @@ public class Usuario implements Serializable {
     private String senha;
 
     @NotNull
-    @Property(nameInDb = "ID_CLIENTE_REF")
-    private Long idClienteRef;
+    @Property(nameInDb = "ID_CLIENTE")
+    private Long idCliente;
 
     public Usuario() {
     }
 
-    public Usuario(Long idUsuarioRef, String nome, String sobrenome, String email, String telefone, String senha, Long idClienteRef) {
-        this.idUsuarioRef = idUsuarioRef;
-        this.nome = nome;
-        this.sobrenome = sobrenome;
-        this.email = email;
-        this.telefone = telefone;
-        this.senha = senha;
-        this.idClienteRef = idClienteRef;
+    public Long getId() {
+        return id;
     }
 
-    public Long getIdUsuarioRef() {
-        return idUsuarioRef;
-    }
-
-    public void setIdUsuarioRef(Long idUsuarioRef) {
-        this.idUsuarioRef = idUsuarioRef;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -101,12 +93,14 @@ public class Usuario implements Serializable {
         this.senha = senha;
     }
 
-    public Long getIdClienteRef() {
-        return idClienteRef;
+    @Override
+    public Long getIdCliente() {
+        return idCliente;
     }
 
-    public void setIdClienteRef(Long idClienteRef) {
-        this.idClienteRef = idClienteRef;
+    @Override
+    public void setIdCliente(Long idCliente) {
+        this.idCliente = idCliente;
     }
 
     @Override
@@ -116,11 +110,11 @@ public class Usuario implements Serializable {
 
         Usuario usuario = (Usuario) o;
 
-        return idUsuarioRef != null ? idUsuarioRef.equals(usuario.idUsuarioRef) : usuario.idUsuarioRef == null;
+        return id != null ? id.equals(usuario.id) : usuario.id == null;
     }
 
     @Override
     public int hashCode() {
-        return idUsuarioRef != null ? idUsuarioRef.hashCode() : 0;
+        return id != null ? id.hashCode() : 0;
     }
 }

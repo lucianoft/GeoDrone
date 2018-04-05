@@ -8,31 +8,30 @@ import org.greenrobot.greendao.annotation.Property;
 import java.io.Serializable;
 import java.util.Date;
 
-import br.com.geodrone.model.api.AuditApi;
-import br.com.geodrone.model.api.ClienteApi;
-import br.com.geodrone.model.api.DispositivoApi;
-
+import br.com.geodrone.model.api.AuditModel;
+import br.com.geodrone.model.api.ClientModel;
+import br.com.geodrone.model.api.DeviceModel;
 import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Created by fernandes on 19/03/2018.
  */
 @Entity(generateConstructors = false, generateGettersSetters = true,  nameInDb = "TB_REGISTRO_CHUVA")
-public class RegistroChuva implements AuditApi, ClienteApi, DispositivoApi, Serializable {
+public class RegistroChuva implements AuditModel, ClientModel, DeviceModel, Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id(autoincrement =  true)
-    @Property(nameInDb = "ID_REGISTRO_CHUVA")
-    private Long idRegistroChuva;
+    @Property(nameInDb = "ID_REGISTRO_CHUVA_DISP")
+    private Long id;
 
     @NotNull
     @Property(nameInDb = "ID_PONTO_COLETA_CHUVA")
     private Long idPontoColetaChuva;
 
     @NotNull
-    @Property(nameInDb = "ID_CLIENTE_REF")
-    private Long idClienteRef;
+    @Property(nameInDb = "ID_CLIENTE")
+    private Long idCliente;
 
     @Property(nameInDb = "OBSERVACAO")
     private String observacao;
@@ -40,6 +39,9 @@ public class RegistroChuva implements AuditApi, ClienteApi, DispositivoApi, Seri
     @NotNull
     @Property(nameInDb = "VOLUME")
     private Long volume;
+
+    @Property(nameInDb = "ID_REGISTRO_CHUVA")
+    private Long idRegistroChuva;
 
     @NotNull()
     @Property(nameInDb = "DT_INCLUSAO")
@@ -55,18 +57,19 @@ public class RegistroChuva implements AuditApi, ClienteApi, DispositivoApi, Seri
     @Property(nameInDb = "ID_DISPOSITIVO")
     private Long idDispositivo;
 
-    @Property(nameInDb = "ID_REGISTRO_CHUVA_REF")
-    private Long idRegistroChuvaRef;
+    @Property(nameInDb = "VERSAO_SISTEMA")
+    @NotNull
+    private Long versaoSistema;
 
     public RegistroChuva() {
     }
 
-    public Long getIdRegistroChuva() {
-        return idRegistroChuva;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdRegistroChuva(Long idRegistroChuva) {
-        this.idRegistroChuva = idRegistroChuva;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getIdPontoColetaChuva() {
@@ -78,13 +81,13 @@ public class RegistroChuva implements AuditApi, ClienteApi, DispositivoApi, Seri
     }
 
     @Override
-    public Long getIdClienteRef() {
-        return idClienteRef;
+    public Long getIdCliente() {
+        return idCliente;
     }
 
     @Override
-    public void setIdClienteRef(Long idClienteRef) {
-        this.idClienteRef = idClienteRef;
+    public void setIdCliente(Long idCliente) {
+        this.idCliente = idCliente;
     }
 
     public String getObservacao() {
@@ -101,6 +104,14 @@ public class RegistroChuva implements AuditApi, ClienteApi, DispositivoApi, Seri
 
     public void setVolume(Long volume) {
         this.volume = volume;
+    }
+
+    public Long getIdRegistroChuva() {
+        return idRegistroChuva;
+    }
+
+    public void setIdRegistroChuva(Long idRegistroChuva) {
+        this.idRegistroChuva = idRegistroChuva;
     }
 
     @Override
@@ -123,12 +134,10 @@ public class RegistroChuva implements AuditApi, ClienteApi, DispositivoApi, Seri
         this.dtAlteracao = dtAlteracao;
     }
 
-    @Override
     public Long getIdUsuario() {
         return idUsuario;
     }
 
-    @Override
     public void setIdUsuario(Long idUsuario) {
         this.idUsuario = idUsuario;
     }
@@ -143,12 +152,14 @@ public class RegistroChuva implements AuditApi, ClienteApi, DispositivoApi, Seri
         this.idDispositivo = idDispositivo;
     }
 
-    public Long getIdRegistroChuvaRef() {
-        return idRegistroChuvaRef;
+    @Override
+    public Long getVersaoSistema() {
+        return versaoSistema;
     }
 
-    public void setIdRegistroChuvaRef(Long idRegistroChuvaRef) {
-        this.idRegistroChuvaRef = idRegistroChuvaRef;
+    @Override
+    public void setVersaoSistema(Long versaoSistema) {
+        this.versaoSistema = versaoSistema;
     }
 
     @Override
@@ -158,11 +169,11 @@ public class RegistroChuva implements AuditApi, ClienteApi, DispositivoApi, Seri
 
         RegistroChuva that = (RegistroChuva) o;
 
-        return idRegistroChuva != null ? idRegistroChuva.equals(that.idRegistroChuva) : that.idRegistroChuva == null;
+        return id != null ? id.equals(that.id) : that.id == null;
     }
 
     @Override
     public int hashCode() {
-        return idRegistroChuva != null ? idRegistroChuva.hashCode() : 0;
+        return id != null ? id.hashCode() : 0;
     }
 }

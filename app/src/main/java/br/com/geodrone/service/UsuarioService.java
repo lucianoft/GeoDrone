@@ -9,8 +9,9 @@ import java.util.List;
 import br.com.geodrone.model.Usuario;
 import br.com.geodrone.repository.CrudRepository;
 import br.com.geodrone.repository.UsuarioRepository;
+import br.com.geodrone.service.util.CrudService;
 
-public class UsuarioService extends ServiceCrud<Usuario, Long>{
+public class UsuarioService extends CrudService<Usuario, Long> {
 
     UsuarioRepository usuarioRepository = null;
 
@@ -18,7 +19,7 @@ public class UsuarioService extends ServiceCrud<Usuario, Long>{
         usuarioRepository = new UsuarioRepository(ctx);
     }
 
-    public CrudRepository<Usuario, Long> getCrudRepository(){
+    public CrudRepository<Usuario, Long> getRepository(){
         return usuarioRepository;
     }
 

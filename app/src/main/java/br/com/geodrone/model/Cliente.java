@@ -1,17 +1,12 @@
 package br.com.geodrone.model;
 
-import org.greenrobot.greendao.annotation.Convert;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.Property;
-import org.greenrobot.greendao.annotation.Generated;
 
 import java.io.Serializable;
-
-import br.com.geodrone.model.constantes.FlagStatusCliente;
-import br.com.geodrone.model.converter.FlagPerfilUsuarioConverter;
-import br.com.geodrone.model.converter.FlagStatusClienteConverter;
+import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Created by fernandes on 13/03/2018.
@@ -22,11 +17,11 @@ public class Cliente implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id(autoincrement =  false)
-    @Property(nameInDb = "ID_CLIENTE_REF")
-    private Long idClienteRef;
+    @Property(nameInDb = "ID_CLIENTE")
+    private Long id;
 
     @Property(nameInDb = "IND_PESSOA_FISICA" )
-    @NotNull
+    @NotNull()
     private Integer indPessoaFisica;
 
     @Property(nameInDb = "NOME_RAZAO_SOCIAL" )
@@ -56,20 +51,18 @@ public class Cliente implements Serializable {
     private String celular;
 
     @Property(nameInDb = "FLAG_STATUS")
-    @Convert(converter = FlagStatusClienteConverter.class, columnType = String.class)
     @NotNull
-    private FlagStatusCliente flagStatus;
+    private String flagStatus;
 
     public Cliente() {
     }
 
-
-    public Long getIdClienteRef() {
-        return idClienteRef;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdClienteRef(Long idClienteRef) {
-        this.idClienteRef = idClienteRef;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Integer getIndPessoaFisica() {
@@ -144,11 +137,11 @@ public class Cliente implements Serializable {
         this.celular = celular;
     }
 
-    public FlagStatusCliente getFlagStatus() {
+    public String getFlagStatus() {
         return flagStatus;
     }
 
-    public void setFlagStatus(FlagStatusCliente flagStatus) {
+    public void setFlagStatus(String flagStatus) {
         this.flagStatus = flagStatus;
     }
 
@@ -159,11 +152,11 @@ public class Cliente implements Serializable {
 
         Cliente cliente = (Cliente) o;
 
-        return idClienteRef != null ? idClienteRef.equals(cliente.idClienteRef) : cliente.idClienteRef == null;
+        return id != null ? id.equals(cliente.id) : cliente.id == null;
     }
 
     @Override
     public int hashCode() {
-        return idClienteRef != null ? idClienteRef.hashCode() : 0;
+        return id != null ? id.hashCode() : 0;
     }
 }

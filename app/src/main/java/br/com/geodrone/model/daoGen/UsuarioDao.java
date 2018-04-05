@@ -24,13 +24,13 @@ public class UsuarioDao extends AbstractDao<Usuario, Long> {
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property IdUsuarioRef = new Property(0, Long.class, "idUsuarioRef", true, "ID_USUARIO_REF");
+        public final static Property Id = new Property(0, Long.class, "id", true, "ID_USUARIO");
         public final static Property Nome = new Property(1, String.class, "nome", false, "NOME");
         public final static Property Sobrenome = new Property(2, String.class, "sobrenome", false, "SOBRENOME");
         public final static Property Email = new Property(3, String.class, "email", false, "EMAIL");
         public final static Property Telefone = new Property(4, String.class, "telefone", false, "TELEFONE");
         public final static Property Senha = new Property(5, String.class, "senha", false, "SENHA");
-        public final static Property IdClienteRef = new Property(6, Long.class, "idClienteRef", false, "ID_CLIENTE_REF");
+        public final static Property IdCliente = new Property(6, Long.class, "idCliente", false, "ID_CLIENTE");
     }
 
 
@@ -46,13 +46,13 @@ public class UsuarioDao extends AbstractDao<Usuario, Long> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"TB_USUARIO\" (" + //
-                "\"ID_USUARIO_REF\" INTEGER PRIMARY KEY ," + // 0: idUsuarioRef
+                "\"ID_USUARIO\" INTEGER PRIMARY KEY ," + // 0: id
                 "\"NOME\" TEXT NOT NULL ," + // 1: nome
                 "\"SOBRENOME\" TEXT," + // 2: sobrenome
                 "\"EMAIL\" TEXT NOT NULL ," + // 3: email
                 "\"TELEFONE\" TEXT NOT NULL ," + // 4: telefone
                 "\"SENHA\" TEXT NOT NULL ," + // 5: senha
-                "\"ID_CLIENTE_REF\" INTEGER NOT NULL );"); // 6: idClienteRef
+                "\"ID_CLIENTE\" INTEGER NOT NULL );"); // 6: idCliente
     }
 
     /** Drops the underlying database table. */
@@ -65,9 +65,9 @@ public class UsuarioDao extends AbstractDao<Usuario, Long> {
     protected final void bindValues(DatabaseStatement stmt, Usuario entity) {
         stmt.clearBindings();
  
-        Long idUsuarioRef = entity.getIdUsuarioRef();
-        if (idUsuarioRef != null) {
-            stmt.bindLong(1, idUsuarioRef);
+        Long id = entity.getId();
+        if (id != null) {
+            stmt.bindLong(1, id);
         }
         stmt.bindString(2, entity.getNome());
  
@@ -78,16 +78,16 @@ public class UsuarioDao extends AbstractDao<Usuario, Long> {
         stmt.bindString(4, entity.getEmail());
         stmt.bindString(5, entity.getTelefone());
         stmt.bindString(6, entity.getSenha());
-        stmt.bindLong(7, entity.getIdClienteRef());
+        stmt.bindLong(7, entity.getIdCliente());
     }
 
     @Override
     protected final void bindValues(SQLiteStatement stmt, Usuario entity) {
         stmt.clearBindings();
  
-        Long idUsuarioRef = entity.getIdUsuarioRef();
-        if (idUsuarioRef != null) {
-            stmt.bindLong(1, idUsuarioRef);
+        Long id = entity.getId();
+        if (id != null) {
+            stmt.bindLong(1, id);
         }
         stmt.bindString(2, entity.getNome());
  
@@ -98,7 +98,7 @@ public class UsuarioDao extends AbstractDao<Usuario, Long> {
         stmt.bindString(4, entity.getEmail());
         stmt.bindString(5, entity.getTelefone());
         stmt.bindString(6, entity.getSenha());
-        stmt.bindLong(7, entity.getIdClienteRef());
+        stmt.bindLong(7, entity.getIdCliente());
     }
 
     @Override
@@ -115,25 +115,25 @@ public class UsuarioDao extends AbstractDao<Usuario, Long> {
      
     @Override
     public void readEntity(Cursor cursor, Usuario entity, int offset) {
-        entity.setIdUsuarioRef(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
+        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setNome(cursor.getString(offset + 1));
         entity.setSobrenome(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setEmail(cursor.getString(offset + 3));
         entity.setTelefone(cursor.getString(offset + 4));
         entity.setSenha(cursor.getString(offset + 5));
-        entity.setIdClienteRef(cursor.getLong(offset + 6));
+        entity.setIdCliente(cursor.getLong(offset + 6));
      }
     
     @Override
     protected final Long updateKeyAfterInsert(Usuario entity, long rowId) {
-        entity.setIdUsuarioRef(rowId);
+        entity.setId(rowId);
         return rowId;
     }
     
     @Override
     public Long getKey(Usuario entity) {
         if(entity != null) {
-            return entity.getIdUsuarioRef();
+            return entity.getId();
         } else {
             return null;
         }
@@ -141,7 +141,7 @@ public class UsuarioDao extends AbstractDao<Usuario, Long> {
 
     @Override
     public boolean hasKey(Usuario entity) {
-        return entity.getIdUsuarioRef() != null;
+        return entity.getId() != null;
     }
 
     @Override

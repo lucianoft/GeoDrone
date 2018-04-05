@@ -1,6 +1,5 @@
 package br.com.geodrone.model;
 
-import org.greenrobot.greendao.annotation.Convert;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.NotNull;
@@ -9,29 +8,27 @@ import org.greenrobot.greendao.annotation.Property;
 import java.io.Serializable;
 import java.util.Date;
 
-import br.com.geodrone.model.constantes.FlagPerfilUsuario;
-import br.com.geodrone.model.converter.FlagPerfilUsuarioConverter;
+import br.com.geodrone.model.api.AuditModel;
 import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Created by fernandes on 17/03/2018.
  */
 @Entity(generateConstructors = false, createInDb = true, nameInDb = "TB_PERFIL_USUARIO")
-public class PerfilUsuario implements Serializable {
+public class PerfilUsuario implements Serializable, AuditModel {
 
     private static final long serialVersionUID = 1L;
 
     @Id(autoincrement =  false)
-    @Property(nameInDb = "ID_PERFIL_USUARIO_REF")
-    private Long idPerfilUsuarioRef;
+    @Property(nameInDb = "ID_PERFIL_USUARIO")
+    private Long id;
 
     @Property(nameInDb = "DESCRICAO" )
     @NotNull
     private String descricao;
 
-    @Property(nameInDb = "FLAG_TIPO")
-    @Convert(converter = FlagPerfilUsuarioConverter.class, columnType = String.class)
-    private FlagPerfilUsuario flagTipo;
+    @Property(nameInDb = "FLAG_TIPO_PERFIL")
+    private String flagTipoPerfil;
 
     @NotNull()
     @Property(nameInDb = "DT_INCLUSAO")
@@ -41,58 +38,79 @@ public class PerfilUsuario implements Serializable {
     @Property(nameInDb = "DT_ALTERACAO")
     private Date dtAlteracao;
 
-    @Property(nameInDb = "ID_USUARIO_REF")
-    private Long idUsuario;
+    @Property(nameInDb = "VERSAO_SISTEMA")
+    @NotNull
+    private Long versaoSistema;
 
     public PerfilUsuario() {
     }
 
-    public Long getIdPerfilUsuarioRef() {
-        return this.idPerfilUsuarioRef;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdPerfilUsuarioRef(Long idPerfilUsuarioRef) {
-        this.idPerfilUsuarioRef = idPerfilUsuarioRef;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getDescricao() {
-        return this.descricao;
+        return descricao;
     }
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
 
-    public FlagPerfilUsuario getFlagTipo() {
-        return this.flagTipo;
+    public String getFlagTipoPerfil() {
+        return flagTipoPerfil;
     }
 
-    public void setFlagTipo(FlagPerfilUsuario flagTipo) {
-        this.flagTipo = flagTipo;
+    public void setFlagTipoPerfil(String flagTipoPerfil) {
+        this.flagTipoPerfil = flagTipoPerfil;
     }
 
+    @Override
     public Date getDtInclusao() {
-        return this.dtInclusao;
+        return dtInclusao;
     }
 
+    @Override
     public void setDtInclusao(Date dtInclusao) {
         this.dtInclusao = dtInclusao;
     }
 
+    @Override
     public Date getDtAlteracao() {
-        return this.dtAlteracao;
+        return dtAlteracao;
     }
 
+    @Override
     public void setDtAlteracao(Date dtAlteracao) {
         this.dtAlteracao = dtAlteracao;
     }
 
-    public Long getIdUsuario() {
-        return this.idUsuario;
+    @Override
+    public Long getVersaoSistema() {
+        return this.versaoSistema;
     }
 
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
+    @Override
+    public void setVersaoSistema(Long versaoSistema) {
+        this.versaoSistema = versaoSistema;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PerfilUsuario that = (PerfilUsuario) o;
+
+        return id != null ? id.equals(that.id) : that.id == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
+    }
 }

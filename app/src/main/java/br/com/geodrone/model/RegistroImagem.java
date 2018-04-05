@@ -10,14 +10,14 @@ import java.util.Date;
 
 import br.com.geodrone.model.api.AuditApi;
 import br.com.geodrone.model.api.ClienteApi;
-import br.com.geodrone.model.api.DispositivoApi;
+import br.com.geodrone.model.api.DeviceModel;
 import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Created by fernandes on 01/04/2018.
  */
 @Entity(generateConstructors = false, nameInDb = "TB_PONTO_COLETA_IMAGEM")
-public class RegistroImagem implements AuditApi, ClienteApi, DispositivoApi, Serializable {
+public class RegistroImagem implements AuditApi, ClienteApi, DeviceModel, Serializable {
 
     private static final long serialVersionUID = 1L;
 

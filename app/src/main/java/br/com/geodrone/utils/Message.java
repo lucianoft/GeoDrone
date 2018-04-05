@@ -1,48 +1,83 @@
 package br.com.geodrone.utils;
 
+import java.io.Serializable;
 
-public class Message {
-    private final Type type;
-    private final String content;
+public class Message implements Serializable {
 
-    public static Message info(String content){
-        return new Message(Type.INFO, content);
-    }
+	private static final long serialVersionUID = 1L;
 
-    public static Message warning(String content){
-        return new Message(Type.WARNING, content);
-    }
+	public static final int INFO = 1;
+	public static final int WARN = 2;
+	public static final int ERROR = 3;
+	public static final int CANCEL = 4;
 
-    public static Message error(String content){
-        return new Message(Type.ERROR, content);
-    }
+	private int level;
+	private String msg;
 
-    public Message(Type type, String content) {
-        if(type == null){
-            throw new IllegalArgumentException("Tipo da mensagem não pode ser nulo.");
-        }
+	public Message(int level, String msg) {
+		this.level = level;
+		this.msg = msg;
+	}
+	
+	public int getLevel() {
+		return level;
+	}
 
-        if(content == null){
-            throw new IllegalArgumentException("Conteúdo da mensagem não pode ser vazio.");
-        }
+	public String getMsg() {
+		return msg;
+	}
 
-        this.type = type;
-        this.content = content;
-    }
+	public boolean isInfo() {
+		if (level == Message.INFO) {
+			return true;
+		}
+		return false;
+	}
 
-    public Type getType() {
-        return type;
-    }
+	public boolean isWarn() {
+		if (level == Message.WARN) {
+			return true;
+		}
+		return false;
+	}
 
-    public String getContent() {
-        return content;
-    }
+	public boolean isError() {
+		if (level == Message.ERROR) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean isCancel() {
+		if (level == Message.CANCEL) {
+			return true;
+		}
+		return false;
+	}
 
-    public enum Type{
-        INFO,
-        WARNING,
-        ERROR
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
 
+		Message other = (Message) obj;
+		if (msg == null) {
+			if (other.msg == null) {
+				return true;
+			}
+			return false;
+		}
+		if (msg.equalsIgnoreCase(other.msg)) {
+			return true;
+		}
+		return false;
+	}
 
 }
