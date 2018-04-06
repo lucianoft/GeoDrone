@@ -137,9 +137,9 @@ public class RegistroPluviosidadePresenter extends BasePresenter<RegistroPluvios
             if (messenger == null || !messenger.isError()) {
                 NumberUtils numberUtils = new NumberUtils();
                 RegistroChuva registroChuva = new RegistroChuva();
-                registroChuva.setIdPontoColetaChuva(coletaPluviosidadeDto.getIdPontoColetaChuva());
+                registroChuva.setIdPontoColetaChuvaDisp(coletaPluviosidadeDto.getIdPontoColetaChuva());
                 registroChuva.setObservacao(observacao);
-                registroChuva.setVolume(numberUtils.parseLong(qtde));
+                registroChuva.setVolume(numberUtils.parseInt(qtde));
 
                 registroChuvaService.insert(registroChuva);
 

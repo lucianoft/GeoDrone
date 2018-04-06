@@ -109,7 +109,7 @@ public abstract class CrudService<T, ID extends Serializable> extends GenericSer
 	protected void configUserModel(T entity, Usuario usuario) {
 		if (entity instanceof UserModel) {
 			UserModel userModel = (UserModel) entity;
-			userModel.setIdUsuario(usuario.getId());
+			userModel.setIdUsuarioReg(usuario.getId());
 		}
 	}
 

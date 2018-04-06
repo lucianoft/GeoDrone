@@ -38,14 +38,10 @@ public class RegistroSemPraga extends BasePresenter<RegistroSemPraga.View> {
             boolean isOk = validar(location);
             if (isOk) {
                 RegistroPraga registroPraga = new RegistroPraga();
-                registroPraga.setIdPragaRef(null);
+                registroPraga.setIdPraga(null);
                 registroPraga.setLatitude(location != null ? location.getLatitude() : null);
                 registroPraga.setLongitude(location != null ? location.getLongitude() : null);
                 registroPraga.setQtde(0);
-                Cliente cliente = Session.getAttribute(PreferencesUtils.CHAVE_CLIENTE);
-
-                registroPraga.setIdClienteRef(cliente != null ? cliente.getIdClienteRef() : null);
-
                 this.registroPragaService.insert(registroPraga);
 
                 view.onSemRegistroPragaSucesso(activity.getString(R.string.msg_operacao_sucesso));

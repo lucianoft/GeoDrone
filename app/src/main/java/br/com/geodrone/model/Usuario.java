@@ -1,120 +1,217 @@
 package br.com.geodrone.model;
 
+import java.util.Date;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.Property;
 import org.greenrobot.greendao.annotation.Generated;
 
-import java.io.Serializable;
 
+import br.com.geodrone.model.api.AuditModel;
+import br.com.geodrone.model.api.ActiveModel;
 import br.com.geodrone.model.api.ClientModel;
 
-@Entity(generateConstructors = false, createInDb = true, nameInDb = "TB_USUARIO")
-public class Usuario implements Serializable, ClientModel {
 
-    private static final long serialVersionUID = 1L;
+@Entity(generateConstructors = false, nameInDb ="GEO_USUARIO")
+public class Usuario extends GenericModel implements AuditModel, ActiveModel, ClientModel {
 
-    @Id(autoincrement =  false)
-    @Property(nameInDb = "ID_USUARIO")
-    private Long id;
+	@Id
+	@Property(nameInDb = "ID_USUARIO")
+	private Long id;
 
-    @Property(nameInDb = "NOME" )
-    @NotNull
-    private String nome;
+	@Property(nameInDb = "NOME")
+	private String nome;
 
-    @Property(nameInDb = "SOBRENOME")
-    private String sobrenome;
+	@Property(nameInDb = "SOBRENOME")
+	private String sobrenome;
 
-    @Property(nameInDb = "EMAIL")
-    @NotNull
-    private String email;
+	@Property(nameInDb = "EMAIL")
+	private String email;
 
-    @Property(nameInDb = "TELEFONE" )
-    @NotNull
-    private String telefone;
+	@Property(nameInDb = "TELEFONE")
+	private String telefone;
 
-    @Property(nameInDb = "SENHA")
-    @NotNull
-    private String senha;
+	@Property(nameInDb = "SENHA")
+	private String senha;
 
-    @NotNull
-    @Property(nameInDb = "ID_CLIENTE")
-    private Long idCliente;
+	@Property(nameInDb = "FLAG_PERFIL")
+	private String flagPerfil;
 
-    public Usuario() {
-    }
+	@Property(nameInDb = "ID_CLIENTE")
+	@NotNull
+	private Long idCliente;
 
-    public Long getId() {
-        return id;
-    }
+	@Property(nameInDb = "IND_ATIVO")
+	@NotNull
+	private Integer indAtivo;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	@Property(nameInDb = "DT_INCLUSAO")
+	@NotNull
+	private Date dtInclusao;
 
-    public String getNome() {
-        return nome;
-    }
+	@Property(nameInDb = "DT_ALTERACAO")
+	@NotNull
+	private Date dtAlteracao;
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	@Property(nameInDb = "VERSAO_SISTEMA")
+	@NotNull
+	private Long versaoSistema;
 
-    public String getSobrenome() {
-        return sobrenome;
-    }
+	public Usuario() {
+	}
 
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
-    }
+	public Usuario(Long id, String nome, String sobrenome, String email, String telefone, String senha, String flagPerfil, Integer indAtivo) {
+		this.id = id;
+		this.nome = nome;
+		this.sobrenome = sobrenome;
+		this.email = email;
+		this.telefone = telefone;
+		this.senha = senha;
+		this.flagPerfil = flagPerfil;
+		this.indAtivo = indAtivo;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public Long getId() {
+		return this.id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public String getNome() {
+		return this.nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-    public String getTelefone() {
-        return telefone;
-    }
+	public String getSobrenome() {
+		return this.sobrenome;
+	}
+	public void setSobrenome(String sobrenome) {
+		this.sobrenome = sobrenome;
+	}
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
+	public String getEmail() {
+		return this.email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public String getSenha() {
-        return senha;
-    }
+	public String getTelefone() {
+		return this.telefone;
+	}
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
 
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
+	public String getSenha() {
+		return this.senha;
+	}
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
 
-    @Override
-    public Long getIdCliente() {
-        return idCliente;
-    }
+	public String getFlagPerfil() {
+		return this.flagPerfil;
+	}
+	public void setFlagPerfil(String flagPerfil) {
+		this.flagPerfil = flagPerfil;
+	}
 
-    @Override
-    public void setIdCliente(Long idCliente) {
-        this.idCliente = idCliente;
-    }
+	/** ***** from DomainCliente ****** */
+	@Override
+	public Long getIdCliente() {
+		return this.idCliente;
+	}
+	@Override
+	public void setIdCliente(Long idCliente) {
+		this.idCliente = idCliente;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+	/** ***** from ActiveDomain ***** */
+	@Override
+	public Integer getIndAtivo() {
+		return this.indAtivo;
+	}
+	@Override
+	public void setIndAtivo(Integer indAtivo) {
+		this.indAtivo = indAtivo;
+	}
 
-        Usuario usuario = (Usuario) o;
+	@Override
+	public boolean isAtivo() {
+		return (indAtivo != null && indAtivo.intValue() == 1);
+	}
+	/** ***************************** */
 
-        return id != null ? id.equals(usuario.id) : usuario.id == null;
-    }
+	/** ***** from AuditDomain ****** */
+	@Override
+	public Date getDtInclusao() {
+		return this.dtInclusao;
+	}
+	@Override
+	public void setDtInclusao(Date dtInclusao) {
+		this.dtInclusao = dtInclusao;
+	}
 
-    @Override
-    public int hashCode() {
-        return id != null ? id.hashCode() : 0;
-    }
+	@Override
+	public Date getDtAlteracao() {
+		return this.dtAlteracao;
+	}
+	@Override
+	public void setDtAlteracao(Date dtAlteracao) {
+		this.dtAlteracao = dtAlteracao;
+	}
+
+	@Override
+	public Long getVersaoSistema() {
+		return this.versaoSistema;
+	}
+	@Override
+	public void setVersaoSistema(Long versaoSistema) {
+		this.versaoSistema = versaoSistema;
+	}
+	/** ***************************** */
+
+	/** ******* from Object ********* */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+
+		final Usuario other = (Usuario) obj;
+		if (this.id == null || other.id == null) {
+			return false;
+		}
+		if (this.id.equals(other.id)) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public String toString() {
+		return (this.id == null ? "" : this.id.toString() );
+	}
+	/** ***************************** */
+
 }

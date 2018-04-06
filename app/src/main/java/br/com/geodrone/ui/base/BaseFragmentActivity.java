@@ -68,7 +68,7 @@ public class BaseFragmentActivity extends FragmentActivity implements BaseError{
     public void showMessenger(Messenger messenger){
         if (messenger != null && messenger.getMessages() != null)
             for (Message message : messenger.getMessages()) {
-                Toast.makeText(this, message.getContent(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, message.getMsg(), Toast.LENGTH_SHORT).show();
             }
     }
 }

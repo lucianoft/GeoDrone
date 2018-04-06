@@ -39,14 +39,9 @@ public class RegistroSemDoenca extends BasePresenter<RegistroSemDoenca.View> {
             boolean isOk = validar(location);
             if (isOk) {
                 RegistroDoenca registroDoenca = new RegistroDoenca();
-                registroDoenca.setIdDoencaRef(null);
+                registroDoenca.setIdDoenca(null);
                 registroDoenca.setLatitude(location != null ? location.getLatitude() : null);
                 registroDoenca.setLongitude(location != null ? location.getLongitude() : null);
-                registroDoenca.setQtde(0);
-                Cliente cliente = Session.getAttribute(PreferencesUtils.CHAVE_CLIENTE);
-
-                registroDoenca.setIdClienteRef(cliente != null ? cliente.getIdClienteRef() : null);
-
                 this.registroDoencaService.insert(registroDoenca);
 
                 view.onSemRegistroDoencaSucesso(activity.getString(R.string.msg_operacao_sucesso));

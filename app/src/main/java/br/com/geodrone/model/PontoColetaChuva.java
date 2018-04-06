@@ -1,181 +1,252 @@
 package br.com.geodrone.model;
 
+import java.util.Date;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.Property;
-
-import java.io.Serializable;
-import java.util.Date;
 import org.greenrobot.greendao.annotation.Generated;
 
 
-/**
- * Created by fernandes on 16/03/2018.
- */
-@Entity(generateConstructors = false, nameInDb = "TB_PONTO_COLETA_CHUVA")
-public class PontoColetaChuva implements Serializable {
+import br.com.geodrone.model.api.AuditModel;
+import br.com.geodrone.model.api.ActiveModel;
+import br.com.geodrone.model.api.ClientModel;
+import br.com.geodrone.model.api.DeviceModel;
+import br.com.geodrone.model.api.LocationModel;
+import br.com.geodrone.model.api.UserModel;
 
-    private static final long serialVersionUID = 1L;
 
-    @Id(autoincrement =  true)
-    @Property(nameInDb = "ID_PONTO_COLETA_CHUVA")
-    private Long idPontoColetaChuva;
+@Entity(generateConstructors = false, nameInDb ="GEO_PONTO_COLETA_CHUVA")
+public class PontoColetaChuva extends GenericModel implements AuditModel, ActiveModel, ClientModel, DeviceModel, UserModel, LocationModel {
 
-    @NotNull
-    @Property(nameInDb = "ID_CLIENTE_REF")
-    private Long idClienteRef;
+	@Id
+	@Property(nameInDb = "ID_PONTO_COLETA_CHUVA_DISP")
+	private Long id;
 
-    @NotNull
-    @Property(nameInDb = "DESCRICAO")
-    private String descricao;
+	@Property(nameInDb = "DESCRICAO")
+	private String descricao;
 
-    @NotNull
-    @Property(nameInDb = "LATITUDE")
-    private Double latitude;
+	@Property(nameInDb = "DT_INSTALACAO")
+	private Date dtInstalacao;
 
-    @NotNull
-    @Property(nameInDb = "LONGITUDE")
-    private Double longitude;
+	@Property(nameInDb = "ID_PONTO_COLETA_CHUVA")
+	private Long idPontoColetaChuva;
 
-    @NotNull
-    @Property(nameInDb = "DT_INSTALACAO")
-    private Date dtInstalacao;
+	@Property(nameInDb = "ID_CLIENTE")
+	@NotNull
+	private Long idCliente;
 
-    @NotNull()
-    @Property(nameInDb = "DT_INCLUSAO")
-    private Date dtInclusao;
+	@Property(nameInDb = "LATITUDE")
+	@NotNull
+	private Double latitude;
 
-    @NotNull()
-    @Property(nameInDb = "DT_ALTERACAO")
-    private Date dtAlteracao;
+	@Property(nameInDb = "LONGITUDE")
+	@NotNull
+	private Double longitude;
 
-    @Property(nameInDb = "ID_USUARIO_REF")
-    private Long idUsuarioRef;
+	@Property(nameInDb = "ID_DISPOSITIVO")
+	@NotNull
+	private Long idDispositivo;
 
-    @Property(nameInDb = "IND_ATIVO")
-    @NotNull
-    private Integer indAtivo;
+	@Property(nameInDb = "IND_ATIVO")
+	@NotNull
+	private Integer indAtivo;
 
-    @Property(nameInDb = "ID_PONTO_COLETA_CHUVA_REF")
-    private Long idPontoColetaChuvaRef;
+	@Property(nameInDb = "DT_INCLUSAO")
+	@NotNull
+	private Date dtInclusao;
 
-    public PontoColetaChuva(Long idClienteRef, String descricao, Double latitude, Double longitude, Date dtInstalacao, Date dtInclusao, Date dtAlteracao, Long idUsuarioRef, Integer indAtivo, Long idPontoColetaChuvaRef) {
-        this.idClienteRef = idClienteRef;
-        this.descricao = descricao;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.dtInstalacao = dtInstalacao;
-        this.dtInclusao = dtInclusao;
-        this.dtAlteracao = dtAlteracao;
-        this.idUsuarioRef = idUsuarioRef;
-        this.indAtivo = indAtivo;
-        this.idPontoColetaChuvaRef = idPontoColetaChuvaRef;
-    }
+	@Property(nameInDb = "DT_ALTERACAO")
+	@NotNull
+	private Date dtAlteracao;
 
-    public PontoColetaChuva() {
-    }
+	@Property(nameInDb = "VERSAO_SISTEMA")
+	@NotNull
+	private Long versaoSistema;
 
-    public Long getIdPontoColetaChuva() {
-        return idPontoColetaChuva;
-    }
+	@Property(nameInDb = "ID_USUARIO_REG")
+	@NotNull
+	private Long idUsuarioReg;
 
-    public void setIdPontoColetaChuva(Long idPontoColetaChuva) {
-        this.idPontoColetaChuva = idPontoColetaChuva;
-    }
+	public PontoColetaChuva(Long id, String descricao, Date dtInstalacao, Long idPontoColetaChuva, Long idCliente, Double latitude, Double longitude, Long idDispositivo, Integer indAtivo) {
+		this.id = id;
+		this.descricao = descricao;
+		this.dtInstalacao = dtInstalacao;
+		this.idPontoColetaChuva = idPontoColetaChuva;
+		this.idCliente = idCliente;
+		this.latitude = latitude;
+		this.longitude = longitude;
+		this.idDispositivo = idDispositivo;
+		this.indAtivo = indAtivo;
+	}
 
-    public Long getIdClienteRef() {
-        return idClienteRef;
-    }
+	public PontoColetaChuva() {
+	}
 
-    public void setIdClienteRef(Long idClienteRef) {
-        this.idClienteRef = idClienteRef;
-    }
 
-    public String getDescricao() {
-        return descricao;
-    }
+	public Long getId() {
+		return this.id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
+	public String getDescricao() {
+		return this.descricao;
+	}
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
 
-    public Double getLatitude() {
-        return latitude;
-    }
+	public Date getDtInstalacao() {
+		return this.dtInstalacao;
+	}
+	public void setDtInstalacao(Date dtInstalacao) {
+		this.dtInstalacao = dtInstalacao;
+	}
 
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
-    }
+	public Long getIdPontoColetaChuva() {
+		return this.idPontoColetaChuva;
+	}
+	public void setIdPontoColetaChuva(Long idPontoColetaChuva) {
+		this.idPontoColetaChuva = idPontoColetaChuva;
+	}
 
-    public Double getLongitude() {
-        return longitude;
-    }
 
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
-    }
+	/** ***** from DomainCliente ****** */
+	@Override
+	public Long getIdCliente() {
+		return this.idCliente;
+	}
+	@Override
+	public void setIdCliente(Long idCliente) {
+		this.idCliente = idCliente;
+	}
+	/** **** from LocationDomain ***** */
+	@Override
+	public Double getLongitude() {
+		return this.longitude;
+	}
+	@Override
+	public void setLongitude(Double longitude) {
+		this.longitude = longitude;
+	}
+	@Override
+	public Double getLatitude() {
+		return this.latitude;
+	}
+	@Override
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
+	/** ***************************** */
 
-    public Date getDtInstalacao() {
-        return dtInstalacao;
-    }
 
-    public void setDtInstalacao(Date dtInstalacao) {
-        this.dtInstalacao = dtInstalacao;
-    }
+	/** ***** from UserDomain ****** */
+	@Override
+	public Long getIdDispositivo() {
+		return this.idDispositivo;
+	}
+	@Override
+	public void setIdDispositivo(Long idDispositivo) {
+		this.idDispositivo = idDispositivo;
+	}
+	/** ***************************** */
 
-    public Date getDtInclusao() {
-        return dtInclusao;
-    }
 
-    public void setDtInclusao(Date dtInclusao) {
-        this.dtInclusao = dtInclusao;
-    }
+	/** ***** from ActiveDomain ***** */
+	@Override
+	public Integer getIndAtivo() {
+		return this.indAtivo;
+	}
+	@Override
+	public void setIndAtivo(Integer indAtivo) {
+		this.indAtivo = indAtivo;
+	}
 
-    public Date getDtAlteracao() {
-        return dtAlteracao;
-    }
+	@Override
+	public boolean isAtivo() {
+		return (indAtivo != null && indAtivo.intValue() == 1);
+	}
+	/** ***************************** */
 
-    public void setDtAlteracao(Date dtAlteracao) {
-        this.dtAlteracao = dtAlteracao;
-    }
+	/** ***** from AuditDomain ****** */
+	@Override
+	public Date getDtInclusao() {
+		return this.dtInclusao;
+	}
+	@Override
+	public void setDtInclusao(Date dtInclusao) {
+		this.dtInclusao = dtInclusao;
+	}
 
-    public Long getIdUsuarioRef() {
-        return idUsuarioRef;
-    }
+	@Override
+	public Date getDtAlteracao() {
+		return this.dtAlteracao;
+	}
+	@Override
+	public void setDtAlteracao(Date dtAlteracao) {
+		this.dtAlteracao = dtAlteracao;
+	}
 
-    public void setIdUsuarioRef(Long idUsuarioRef) {
-        this.idUsuarioRef = idUsuarioRef;
-    }
+	@Override
+	public Long getVersaoSistema() {
+		return this.versaoSistema;
+	}
+	@Override
+	public void setVersaoSistema(Long versaoSistema) {
+		this.versaoSistema = versaoSistema;
+	}
+	/** ***************************** */
 
-    public Integer getIndAtivo() {
-        return indAtivo;
-    }
 
-    public void setIndAtivo(Integer indAtivo) {
-        this.indAtivo = indAtivo;
-    }
+	/** ***** from UserDomain ****** */
+	@Override
+	public Long getIdUsuarioReg() {
+		return this.idUsuarioReg;
+	}
+	@Override
+	public void setIdUsuarioReg(Long idUsuarioReg) {
+		this.idUsuarioReg = idUsuarioReg;
+	}
+	/** ***************************** */
 
-    public Long getIdPontoColetaChuvaRef() {
-        return idPontoColetaChuvaRef;
-    }
+	/** ******* from Object ********* */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
+		return result;
+	}
 
-    public void setIdPontoColetaChuvaRef(Long idPontoColetaChuvaRef) {
-        this.idPontoColetaChuvaRef = idPontoColetaChuvaRef;
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+		final PontoColetaChuva other = (PontoColetaChuva) obj;
+		if (this.id == null || other.id == null) {
+			return false;
+		}
+		if (this.id.equals(other.id)) {
+			return true;
+		}
+		return false;
+	}
 
-        PontoColetaChuva that = (PontoColetaChuva) o;
+	@Override
+	public String toString() {
+		return (this.id == null ? "" : this.id.toString() );
+	}
+	/** ***************************** */
 
-        return idPontoColetaChuva != null ? idPontoColetaChuva.equals(that.idPontoColetaChuva) : that.idPontoColetaChuva == null;
-    }
-
-    @Override
-    public int hashCode() {
-        return idPontoColetaChuva != null ? idPontoColetaChuva.hashCode() : 0;
-    }
 }

@@ -12,7 +12,6 @@ import br.com.geodrone.model.Cliente;
 import br.com.geodrone.model.Configuracao;
 import br.com.geodrone.model.Dispositivo;
 import br.com.geodrone.model.Doenca;
-import br.com.geodrone.model.PerfilUsuario;
 import br.com.geodrone.model.PontoColetaChuva;
 import br.com.geodrone.model.Praga;
 import br.com.geodrone.model.RegistroChuva;
@@ -27,7 +26,6 @@ import br.com.geodrone.model.daoGen.ClienteDao;
 import br.com.geodrone.model.daoGen.ConfiguracaoDao;
 import br.com.geodrone.model.daoGen.DispositivoDao;
 import br.com.geodrone.model.daoGen.DoencaDao;
-import br.com.geodrone.model.daoGen.PerfilUsuarioDao;
 import br.com.geodrone.model.daoGen.PontoColetaChuvaDao;
 import br.com.geodrone.model.daoGen.PragaDao;
 import br.com.geodrone.model.daoGen.RegistroChuvaDao;
@@ -51,7 +49,6 @@ public class DaoSession extends AbstractDaoSession {
     private final DaoConfig configuracaoDaoConfig;
     private final DaoConfig dispositivoDaoConfig;
     private final DaoConfig doencaDaoConfig;
-    private final DaoConfig perfilUsuarioDaoConfig;
     private final DaoConfig pontoColetaChuvaDaoConfig;
     private final DaoConfig pragaDaoConfig;
     private final DaoConfig registroChuvaDaoConfig;
@@ -66,7 +63,6 @@ public class DaoSession extends AbstractDaoSession {
     private final ConfiguracaoDao configuracaoDao;
     private final DispositivoDao dispositivoDao;
     private final DoencaDao doencaDao;
-    private final PerfilUsuarioDao perfilUsuarioDao;
     private final PontoColetaChuvaDao pontoColetaChuvaDao;
     private final PragaDao pragaDao;
     private final RegistroChuvaDao registroChuvaDao;
@@ -92,9 +88,6 @@ public class DaoSession extends AbstractDaoSession {
 
         doencaDaoConfig = daoConfigMap.get(DoencaDao.class).clone();
         doencaDaoConfig.initIdentityScope(type);
-
-        perfilUsuarioDaoConfig = daoConfigMap.get(PerfilUsuarioDao.class).clone();
-        perfilUsuarioDaoConfig.initIdentityScope(type);
 
         pontoColetaChuvaDaoConfig = daoConfigMap.get(PontoColetaChuvaDao.class).clone();
         pontoColetaChuvaDaoConfig.initIdentityScope(type);
@@ -127,7 +120,6 @@ public class DaoSession extends AbstractDaoSession {
         configuracaoDao = new ConfiguracaoDao(configuracaoDaoConfig, this);
         dispositivoDao = new DispositivoDao(dispositivoDaoConfig, this);
         doencaDao = new DoencaDao(doencaDaoConfig, this);
-        perfilUsuarioDao = new PerfilUsuarioDao(perfilUsuarioDaoConfig, this);
         pontoColetaChuvaDao = new PontoColetaChuvaDao(pontoColetaChuvaDaoConfig, this);
         pragaDao = new PragaDao(pragaDaoConfig, this);
         registroChuvaDao = new RegistroChuvaDao(registroChuvaDaoConfig, this);
@@ -142,7 +134,6 @@ public class DaoSession extends AbstractDaoSession {
         registerDao(Configuracao.class, configuracaoDao);
         registerDao(Dispositivo.class, dispositivoDao);
         registerDao(Doenca.class, doencaDao);
-        registerDao(PerfilUsuario.class, perfilUsuarioDao);
         registerDao(PontoColetaChuva.class, pontoColetaChuvaDao);
         registerDao(Praga.class, pragaDao);
         registerDao(RegistroChuva.class, registroChuvaDao);
@@ -159,7 +150,6 @@ public class DaoSession extends AbstractDaoSession {
         configuracaoDaoConfig.clearIdentityScope();
         dispositivoDaoConfig.clearIdentityScope();
         doencaDaoConfig.clearIdentityScope();
-        perfilUsuarioDaoConfig.clearIdentityScope();
         pontoColetaChuvaDaoConfig.clearIdentityScope();
         pragaDaoConfig.clearIdentityScope();
         registroChuvaDaoConfig.clearIdentityScope();
@@ -185,10 +175,6 @@ public class DaoSession extends AbstractDaoSession {
 
     public DoencaDao getDoencaDao() {
         return doencaDao;
-    }
-
-    public PerfilUsuarioDao getPerfilUsuarioDao() {
-        return perfilUsuarioDao;
     }
 
     public PontoColetaChuvaDao getPontoColetaChuvaDao() {

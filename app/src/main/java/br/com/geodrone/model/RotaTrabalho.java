@@ -1,146 +1,197 @@
 package br.com.geodrone.model;
 
+import java.util.Date;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.Property;
-
-import java.util.Date;
-
-import br.com.geodrone.model.api.AuditApi;
-import br.com.geodrone.model.api.ClienteApi;
-import br.com.geodrone.model.api.DeviceModel;
 import org.greenrobot.greendao.annotation.Generated;
 
-/**
- * Created by fernandes on 25/03/2018.
- */
-@Entity(generateConstructors = false, createInDb = true, nameInDb = "TB_ROTA_TRABALHO")
-public class RotaTrabalho implements AuditApi, ClienteApi, DeviceModel {
 
-    @Id(autoincrement =  true)
-    @Property(nameInDb = "ID_ROTA_TRABALHO")
-    private Long idRotaTrabalho;
+import br.com.geodrone.model.api.AuditModel;
+import br.com.geodrone.model.api.ClientModel;
+import br.com.geodrone.model.api.DeviceModel;
+import br.com.geodrone.model.api.LocationModel;
+import br.com.geodrone.model.api.UserModel;
 
-    @NotNull
-    @Property(nameInDb = "ID_CLIENTE_REF")
-    private Long idClienteRef;
 
-    @NotNull
-    @Property(nameInDb = "LATITUDE")
-    private Double latitude;
+@Entity(generateConstructors = false, nameInDb ="GEO_ROTA_TRABALHO")
+public class RotaTrabalho extends GenericModel implements AuditModel, ClientModel, DeviceModel, UserModel, LocationModel {
 
-    @NotNull
-    @Property(nameInDb = "LONGITUDE")
-    private Double longitude;
+	@Id
+	@Property(nameInDb = "ID_ROTA_TRABALHO_DISP")
+	private Long id;
 
-    @Property(nameInDb = "ID_ROTA_TRABALHO_REF")
-    private Long idRotaTrabalhoRef;
+	@Property(nameInDb = "ID_ROTA_TRABALHO")
+	private Long idRotaTrabalho;
 
-    @Property(nameInDb = "ID_DISPOSITIVO")
-    private Long idDispositivo;
+	@Property(nameInDb = "ID_CLIENTE")
+	@NotNull
+	private Long idCliente;
 
-    @NotNull()
-    @Property(nameInDb = "DT_INCLUSAO")
-    private Date dtInclusao;
+	@Property(nameInDb = "LATITUDE")
+	@NotNull
+	private Double latitude;
 
-    @NotNull()
-    @Property(nameInDb = "DT_ALTERACAO")
-    private Date dtAlteracao;
+	@Property(nameInDb = "LONGITUDE")
+	@NotNull
+	private Double longitude;
 
-    @Property(nameInDb = "ID_USUARIO")
-    private Long idUsuario;
+	@Property(nameInDb = "ID_DISPOSITIVO")
+	@NotNull
+	private Long idDispositivo;
 
-    public RotaTrabalho() {
-    }
+	@Property(nameInDb = "DT_INCLUSAO")
+	@NotNull
+	private Date dtInclusao;
 
-    public Long getIdRotaTrabalho() {
-        return idRotaTrabalho;
-    }
+	@Property(nameInDb = "DT_ALTERACAO")
+	@NotNull
+	private Date dtAlteracao;
 
-    public void setIdRotaTrabalho(Long idRotaTrabalho) {
-        this.idRotaTrabalho = idRotaTrabalho;
-    }
+	@Property(nameInDb = "VERSAO_SISTEMA")
+	@NotNull
+	private Long versaoSistema;
 
-    public Long getIdClienteRef() {
-        return idClienteRef;
-    }
+	@Property(nameInDb = "ID_USUARIO_REG")
+	@NotNull
+	private Long idUsuarioReg;
 
-    public void setIdClienteRef(Long idClienteRef) {
-        this.idClienteRef = idClienteRef;
-    }
+	public RotaTrabalho() {
+	}
 
-    public Double getLatitude() {
-        return latitude;
-    }
+	public Long getId() {
+		return this.id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
-    }
+	public Long getIdRotaTrabalho() {
+		return this.idRotaTrabalho;
+	}
+	public void setIdRotaTrabalho(Long idRotaTrabalho) {
+		this.idRotaTrabalho = idRotaTrabalho;
+	}
 
-    public Double getLongitude() {
-        return longitude;
-    }
 
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
-    }
+	/** ***** from DomainCliente ****** */
+	@Override
+	public Long getIdCliente() {
+		return this.idCliente;
+	}
+	@Override
+	public void setIdCliente(Long idCliente) {
+		this.idCliente = idCliente;
+	}
+	/** **** from LocationDomain ***** */
+	@Override
+	public Double getLongitude() {
+		return this.longitude;
+	}
+	@Override
+	public void setLongitude(Double longitude) {
+		this.longitude = longitude;
+	}
+	@Override
+	public Double getLatitude() {
+		return this.latitude;
+	}
+	@Override
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
+	/** ***************************** */
 
-    public Date getDtInclusao() {
-        return dtInclusao;
-    }
 
-    public void setDtInclusao(Date dtInclusao) {
-        this.dtInclusao = dtInclusao;
-    }
+	/** ***** from UserDomain ****** */
+	@Override
+	public Long getIdDispositivo() {
+		return this.idDispositivo;
+	}
+	@Override
+	public void setIdDispositivo(Long idDispositivo) {
+		this.idDispositivo = idDispositivo;
+	}
+	/** ***************************** */
 
-    public Date getDtAlteracao() {
-        return dtAlteracao;
-    }
+	/** ***** from AuditDomain ****** */
+	@Override
+	public Date getDtInclusao() {
+		return this.dtInclusao;
+	}
+	@Override
+	public void setDtInclusao(Date dtInclusao) {
+		this.dtInclusao = dtInclusao;
+	}
 
-    public void setDtAlteracao(Date dtAlteracao) {
-        this.dtAlteracao = dtAlteracao;
-    }
+	@Override
+	public Date getDtAlteracao() {
+		return this.dtAlteracao;
+	}
+	@Override
+	public void setDtAlteracao(Date dtAlteracao) {
+		this.dtAlteracao = dtAlteracao;
+	}
 
-    @Override
-    public Long getIdUsuario() {
-        return this.idUsuario;
-    }
+	@Override
+	public Long getVersaoSistema() {
+		return this.versaoSistema;
+	}
+	@Override
+	public void setVersaoSistema(Long versaoSistema) {
+		this.versaoSistema = versaoSistema;
+	}
+	/** ***************************** */
 
-    @Override
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
 
-    }
+	/** ***** from UserDomain ****** */
+	@Override
+	public Long getIdUsuarioReg() {
+		return this.idUsuarioReg;
+	}
+	@Override
+	public void setIdUsuarioReg(Long idUsuarioReg) {
+		this.idUsuarioReg = idUsuarioReg;
+	}
+	/** ***************************** */
 
-    public Long getIdDispositivo() {
-        return idDispositivo;
-    }
+	/** ******* from Object ********* */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
+		return result;
+	}
 
-    public void setIdDispositivo(Long idDispositivo) {
-        this.idDispositivo = idDispositivo;
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
 
-    public Long getIdRotaTrabalhoRef() {
-        return idRotaTrabalhoRef;
-    }
+		final RotaTrabalho other = (RotaTrabalho) obj;
+		if (this.id == null || other.id == null) {
+			return false;
+		}
+		if (this.id.equals(other.id)) {
+			return true;
+		}
+		return false;
+	}
 
-    public void setIdRotaTrabalhoRef(Long idRotaTrabalhoRef) {
-        this.idRotaTrabalhoRef = idRotaTrabalhoRef;
-    }
+	@Override
+	public String toString() {
+		return (this.id == null ? "" : this.id.toString() );
+	}
+	/** ***************************** */
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        RotaTrabalho that = (RotaTrabalho) o;
-
-        return idRotaTrabalho != null ? idRotaTrabalho.equals(that.idRotaTrabalho) : that.idRotaTrabalho == null;
-    }
-
-    @Override
-    public int hashCode() {
-        return idRotaTrabalho != null ? idRotaTrabalho.hashCode() : 0;
-    }
 }

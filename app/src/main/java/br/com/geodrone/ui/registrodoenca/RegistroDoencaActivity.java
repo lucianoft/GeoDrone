@@ -113,8 +113,8 @@ public class RegistroDoencaActivity extends BaseActivity implements RegistroDoen
         doencaListFilter = new ArrayList<>();
         if (doencaList != null){
             for (Doenca doenca : doencaList){
-                if (doenca.getIdTipoCultivoRef() == null ||
-                        doenca.getIdTipoCultivoRef().equals(tipoCultivo.getIdTipoCultivoRef())){
+                if (doenca.getIdTipoCultivo() == null ||
+                        doenca.getIdTipoCultivo().equals(tipoCultivo.getId())){
                     doencaListFilter.add(doenca);
                 }
             }

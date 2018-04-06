@@ -1,94 +1,131 @@
 package br.com.geodrone.model;
 
+import java.util.Date;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.Property;
-
-import java.io.Serializable;
-import java.util.Date;
-
-import br.com.geodrone.model.api.AuditModel;
 import org.greenrobot.greendao.annotation.Generated;
 
-/**
- * Created by luciano on 31/03/2018.
- */
 
-@Entity(generateConstructors = false, createInDb = true, nameInDb = "TB_DISPOSITIVO")
-public class Dispositivo implements Serializable , AuditModel {
+import br.com.geodrone.model.api.AuditModel;
+import br.com.geodrone.model.api.DeviceModel;
 
-    private static final long serialVersionUID = 1L;
 
-    @Id(autoincrement =  true)
-    @Property(nameInDb = "ID_DISPOSITIVO")
-    private Long idRef;
+@Entity(generateConstructors = false, nameInDb ="GEO_DISPOSITIVO")
+public class Dispositivo extends GenericModel implements AuditModel {
 
-    @Property(nameInDb = "DT_INCLUSAO")
-    @NotNull
-    private Date dtInclusao;
+	@Id
+	@Property(nameInDb = "ID_DISPOSITIVO")
+	private Long id;
 
-    @Property(nameInDb = "DT_ALTERACAO")
-    @NotNull
-    private Date dtAlteracao;
+	@Property(nameInDb = "DT_SINCRONIZACAO")
+	private Date dtSincronizacao;
 
-    @Property(nameInDb = "VERSAO_SISTEMA")
-    @NotNull
-    private Long versaoSistema;
+	@Property(nameInDb = "ID_CLIENTE")
+	@NotNull
+	private Long idCliente;
 
-    public Dispositivo() {
-    }
+	@Property(nameInDb = "DT_INCLUSAO")
+	@NotNull
+	private Date dtInclusao;
 
-    public Long getIdRef() {
-        return idRef;
-    }
+	@Property(nameInDb = "DT_ALTERACAO")
+	@NotNull
+	private Date dtAlteracao;
 
-    public void setIdRef(Long idRef) {
-        this.idRef = idRef;
-    }
+	@Property(nameInDb = "VERSAO_SISTEMA")
+	@NotNull
+	private Long versaoSistema;
 
-    @Override
-    public Date getDtInclusao() {
-        return dtInclusao;
-    }
+	public Dispositivo() {
+	}
 
-    @Override
-    public void setDtInclusao(Date dtInclusao) {
-        this.dtInclusao = dtInclusao;
-    }
+	public Long getId() {
+		return this.id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    @Override
-    public Date getDtAlteracao() {
-        return dtAlteracao;
-    }
+	public Date getDtSincronizacao() {
+		return this.dtSincronizacao;
+	}
+	public void setDtSincronizacao(Date dtSincronizacao) {
+		this.dtSincronizacao = dtSincronizacao;
+	}
 
-    @Override
-    public void setDtAlteracao(Date dtAlteracao) {
-        this.dtAlteracao = dtAlteracao;
-    }
+	/** ***** from AuditDomain ****** */
+	@Override
+	public Date getDtInclusao() {
+		return this.dtInclusao;
+	}
+	@Override
+	public void setDtInclusao(Date dtInclusao) {
+		this.dtInclusao = dtInclusao;
+	}
 
-    @Override
-    public Long getVersaoSistema() {
-        return versaoSistema;
-    }
+	@Override
+	public Date getDtAlteracao() {
+		return this.dtAlteracao;
+	}
+	@Override
+	public void setDtAlteracao(Date dtAlteracao) {
+		this.dtAlteracao = dtAlteracao;
+	}
 
-    @Override
-    public void setVersaoSistema(Long versaoSistema) {
-        this.versaoSistema = versaoSistema;
-    }
+	@Override
+	public Long getVersaoSistema() {
+		return this.versaoSistema;
+	}
+	@Override
+	public void setVersaoSistema(Long versaoSistema) {
+		this.versaoSistema = versaoSistema;
+	}
+	/** ***************************** */
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+	/** ******* from Object ********* */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
+		return result;
+	}
 
-        Dispositivo that = (Dispositivo) o;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
 
-        return idRef != null ? idRef.equals(that.idRef) : that.idRef == null;
-    }
+		final Dispositivo other = (Dispositivo) obj;
+		if (this.id == null || other.id == null) {
+			return false;
+		}
+		if (this.id.equals(other.id)) {
+			return true;
+		}
+		return false;
+	}
 
-    @Override
-    public int hashCode() {
-        return idRef != null ? idRef.hashCode() : 0;
-    }
+	@Override
+	public String toString() {
+		return (this.id == null ? "" : this.id.toString() );
+	}
+	/** ***************************** */
+	public Long getIdCliente() {
+		return this.idCliente;
+	}
+	public void setIdCliente(Long idCliente) {
+		this.idCliente = idCliente;
+	}
+
 }

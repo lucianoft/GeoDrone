@@ -1,162 +1,201 @@
 package br.com.geodrone.model;
 
+import java.util.Date;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.Property;
 
-import java.io.Serializable;
+import br.com.geodrone.model.api.AuditModel;
 import org.greenrobot.greendao.annotation.Generated;
 
-/**
- * Created by fernandes on 13/03/2018.
- */
-@Entity(generateConstructors = false, nameInDb = "TB_CLIENTE")
-public class Cliente implements Serializable {
+@Entity(generateConstructors = false, nameInDb ="GEO_CLIENTE")
+public class Cliente extends GenericModel implements AuditModel {
 
-    private static final long serialVersionUID = 1L;
+	@Id
+	@NotNull
+	private Long id;
 
-    @Id(autoincrement =  false)
-    @Property(nameInDb = "ID_CLIENTE")
-    private Long id;
+	@Property(nameInDb = "NOME_RAZAO_SOCIAL")
+	private String nomeRazaoSocial;
 
-    @Property(nameInDb = "IND_PESSOA_FISICA" )
-    @NotNull()
-    private Integer indPessoaFisica;
+	@Property(nameInDb = "SOBRENOME")
+	private String sobrenome;
 
-    @Property(nameInDb = "NOME_RAZAO_SOCIAL" )
-    @NotNull
-    private String nomeRazaoSocial;
+	@Property(nameInDb = "IND_PESSOA_FISICA")
+	private Integer indPessoaFisica;
 
-    @Property(nameInDb = "CPF" )
-    private Long cfp;
+	@Property(nameInDb = "CPF")
+	private Long cpf;
 
-    @Property(nameInDb = "CNPJ" )
-    private Long cnpj;
+	@Property(nameInDb = "CNPJ")
+	private Long cnpj;
 
-    @Property(nameInDb = "SOBRENOME")
-    private String nomeFantasia;
+	@Property(nameInDb = "EMAIL")
+	private String email;
 
-    @Property(nameInDb = "SEGMENTO")
-    private String segmento;
+	@Property(nameInDb = "TELEFONE")
+	private String telefone;
 
-    @Property(nameInDb = "EMAIL")
-    @NotNull
-    private String email;
+	@Property(nameInDb = "CELULAR")
+	private String celular;
 
-    @Property(nameInDb = "TELEFONE")
-    private String telefone;
+	@Property(nameInDb = "FLAG_STATUS")
+	private String flagStatus;
 
-    @Property(nameInDb = "CELULAR")
-    private String celular;
+	@Property(nameInDb = "DT_INCLUSAO")
+	@NotNull
+	private Date dtInclusao;
 
-    @Property(nameInDb = "FLAG_STATUS")
-    @NotNull
-    private String flagStatus;
+	@Property(nameInDb = "DT_ALTERACAO")
+	@NotNull
+	private Date dtAlteracao;
 
-    public Cliente() {
-    }
+	@Property(nameInDb = "VERSAO_SISTEMA")
+	@NotNull
+	private Long versaoSistema;
 
-    public Long getId() {
-        return id;
-    }
+	public Cliente() {
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public Integer getIndPessoaFisica() {
-        return indPessoaFisica;
-    }
+	public String getNomeRazaoSocial() {
+		return this.nomeRazaoSocial;
+	}
+	public void setNomeRazaoSocial(String nomeRazaoSocial) {
+		this.nomeRazaoSocial = nomeRazaoSocial;
+	}
 
-    public void setIndPessoaFisica(Integer indPessoaFisica) {
-        this.indPessoaFisica = indPessoaFisica;
-    }
+	public String getSobrenome() {
+		return this.sobrenome;
+	}
+	public void setSobrenome(String sobrenome) {
+		this.sobrenome = sobrenome;
+	}
 
-    public String getNomeRazaoSocial() {
-        return nomeRazaoSocial;
-    }
+	public Integer getIndPessoaFisica() {
+		return this.indPessoaFisica;
+	}
+	public void setIndPessoaFisica(Integer indPessoaFisica) {
+		this.indPessoaFisica = indPessoaFisica;
+	}
+	public boolean isPessoaFisica() {
+		return (indPessoaFisica != null && indPessoaFisica.intValue() == 1);
+	}
 
-    public void setNomeRazaoSocial(String nomeRazaoSocial) {
-        this.nomeRazaoSocial = nomeRazaoSocial;
-    }
+	public Long getCpf() {
+		return this.cpf;
+	}
+	public void setCpf(Long cpf) {
+		this.cpf = cpf;
+	}
 
-    public Long getCfp() {
-        return cfp;
-    }
+	public Long getCnpj() {
+		return this.cnpj;
+	}
+	public void setCnpj(Long cnpj) {
+		this.cnpj = cnpj;
+	}
 
-    public void setCfp(Long cfp) {
-        this.cfp = cfp;
-    }
+	public String getEmail() {
+		return this.email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public Long getCnpj() {
-        return cnpj;
-    }
+	public String getTelefone() {
+		return this.telefone;
+	}
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
 
-    public void setCnpj(Long cnpj) {
-        this.cnpj = cnpj;
-    }
+	public String getCelular() {
+		return this.celular;
+	}
+	public void setCelular(String celular) {
+		this.celular = celular;
+	}
 
-    public String getNomeFantasia() {
-        return nomeFantasia;
-    }
+	public String getFlagStatus() {
+		return this.flagStatus;
+	}
+	public void setFlagStatus(String flagStatus) {
+		this.flagStatus = flagStatus;
+	}
 
-    public void setNomeFantasia(String nomeFantasia) {
-        this.nomeFantasia = nomeFantasia;
-    }
+	/** ***** from AuditDomain ****** */
+	@Override
+	public Date getDtInclusao() {
+		return this.dtInclusao;
+	}
+	@Override
+	public void setDtInclusao(Date dtInclusao) {
+		this.dtInclusao = dtInclusao;
+	}
 
-    public String getSegmento() {
-        return segmento;
-    }
+	@Override
+	public Date getDtAlteracao() {
+		return this.dtAlteracao;
+	}
+	@Override
+	public void setDtAlteracao(Date dtAlteracao) {
+		this.dtAlteracao = dtAlteracao;
+	}
 
-    public void setSegmento(String segmento) {
-        this.segmento = segmento;
-    }
+	@Override
+	public Long getVersaoSistema() {
+		return this.versaoSistema;
+	}
+	@Override
+	public void setVersaoSistema(Long versaoSistema) {
+		this.versaoSistema = versaoSistema;
+	}
+	/** ***************************** */
 
-    public String getEmail() {
-        return email;
-    }
+	/** ******* from Object ********* */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
+		return result;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
 
-    public String getTelefone() {
-        return telefone;
-    }
+		final Cliente other = (Cliente) obj;
+		if (this.id == null || other.id == null) {
+			return false;
+		}
+		if (this.id.equals(other.id)) {
+			return true;
+		}
+		return false;
+	}
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
+	@Override
+	public String toString() {
+		return (this.id == null ? "" : this.id.toString() );
+	}
+	/** ***************************** */
 
-    public String getCelular() {
-        return celular;
-    }
-
-    public void setCelular(String celular) {
-        this.celular = celular;
-    }
-
-    public String getFlagStatus() {
-        return flagStatus;
-    }
-
-    public void setFlagStatus(String flagStatus) {
-        this.flagStatus = flagStatus;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Cliente cliente = (Cliente) o;
-
-        return id != null ? id.equals(cliente.id) : cliente.id == null;
-    }
-
-    @Override
-    public int hashCode() {
-        return id != null ? id.hashCode() : 0;
-    }
 }

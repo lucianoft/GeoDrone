@@ -79,14 +79,9 @@ public class RegistroDoencaPresenter extends BasePresenter<RegistroDoencaPresent
 
             if (isOk) {
                 RegistroDoenca registroDoenca = new RegistroDoenca();
-                registroDoenca.setIdDoencaRef(doenca != null ? doenca.getIdDoencaRef() : null);
+                registroDoenca.setIdDoenca(doenca != null ? doenca.getId() : null);
                 registroDoenca.setLatitude(latitude);
                 registroDoenca.setLongitude(longitude);
-                registroDoenca.setQtde(Integer.parseInt(qtde));
-                Cliente cliente = Session.getAttribute(PreferencesUtils.CHAVE_CLIENTE);
-
-                registroDoenca.setIdClienteRef(cliente != null ? cliente.getIdClienteRef() : null);
-
                 this.registroDoencaService.insert(registroDoenca);
 
                 view.onRegitroDoencaSucesso(activity.getString(R.string.msg_operacao_sucesso));

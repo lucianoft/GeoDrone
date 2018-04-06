@@ -4,6 +4,7 @@ import br.com.geodrone.R;
 import br.com.geodrone.Session;
 import br.com.geodrone.model.Cliente;
 import br.com.geodrone.model.Usuario;
+import br.com.geodrone.model.constantes.FlagPerfilUsuario;
 import br.com.geodrone.ui.base.BaseActivity;
 import br.com.geodrone.ui.base.BasePresenter;
 import br.com.geodrone.service.UsuarioService;
@@ -87,8 +88,8 @@ public class UsuarioPresenter extends BasePresenter<UsuarioPresenter.View> {
             if (!isOk) {
             }
             Cliente cliente = Session.getAttribute(PreferencesUtils.CHAVE_CLIENTE);
-            Long idCliente = cliente != null ? cliente.getIdClienteRef() : null;
-            Usuario usuario = new Usuario(null, nome, sobrenome, email, telefone, senha, idCliente);
+            Long idCliente = cliente != null ? cliente.getId() : null;
+            Usuario usuario = new Usuario(null, nome, sobrenome, email, telefone, senha, FlagPerfilUsuario.ADM.value(), 1);
             usuario = usuarioService.insert(usuario);
 
             view.onCadastroSucesso(activity.getString(R.string.msg_operacao_sucesso));

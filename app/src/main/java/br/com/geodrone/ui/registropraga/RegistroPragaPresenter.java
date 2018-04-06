@@ -79,14 +79,10 @@ public class RegistroPragaPresenter extends BasePresenter<RegistroPragaPresenter
 
             if (isOk) {
                 RegistroPraga registroPraga = new RegistroPraga();
-                registroPraga.setIdPragaRef(praga != null ? praga.getIdPragaRef() : null);
+                registroPraga.setIdPraga(praga != null ? praga.getId() : null);
                 registroPraga.setLatitude(latitude);
                 registroPraga.setLongitude(longitude);
                 registroPraga.setQtde(Integer.parseInt(qtde));
-                Cliente cliente = Session.getAttribute(PreferencesUtils.CHAVE_CLIENTE);
-
-                registroPraga.setIdClienteRef(cliente != null ? cliente.getIdClienteRef() : null);
-
                 this.registroPragaService.insert(registroPraga);
 
                 view.onRegitroPragaSucesso(activity.getString(R.string.msg_operacao_sucesso));

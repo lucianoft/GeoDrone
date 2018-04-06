@@ -35,7 +35,7 @@ public class PragaRepository extends CrudRepository<Praga, Long>{
 
     public List<Praga> findByTipoCultivo(Long IdTipoCultivoRef) {
         QueryBuilder<Praga> qrBuilder = getDaoSession().getPragaDao().queryBuilder()
-                .where(PragaDao.Properties.IdTipoCultivoRef.eq(IdTipoCultivoRef))
+                .where(PragaDao.Properties.IdTipoCultivo.eq(IdTipoCultivoRef))
                 .orderAsc(PragaDao.Properties.Descricao);
 
         return qrBuilder.list();

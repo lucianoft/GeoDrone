@@ -111,8 +111,8 @@ public class RegistroPragaActivity extends BaseActivity implements RegistroPraga
         pragaListFilter = new ArrayList<>();
         if (pragaList != null){
             for (Praga praga : pragaList){
-                if (praga.getIdTipoCultivoRef() == null ||
-                        praga.getIdTipoCultivoRef().equals(tipoCultivo.getIdTipoCultivoRef())){
+                if (praga.getIdTipoCultivo() == null ||
+                        praga.getIdTipoCultivo().equals(tipoCultivo.getId())){
                     pragaListFilter.add(praga);
                 }
             }

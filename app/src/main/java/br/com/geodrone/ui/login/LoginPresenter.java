@@ -61,7 +61,7 @@ public class LoginPresenter extends BasePresenter<LoginPresenter.View> {
                 PreferencesUtils.putString(this.activity.getApplicationContext(), PreferencesUtils.CHAVE_EMAIL_USUARIO, login);
                 PreferencesUtils.putString(this.activity.getApplicationContext(), PreferencesUtils.CHAVE_SENHA_USUARIO, senha);
                 PreferencesUtils.putUsuario(this.activity.getApplicationContext(), usuario);
-                Cliente cliente = this.clienteService.findById(usuario.getIdClienteRef());
+                Cliente cliente = this.clienteService.findById(usuario.getIdCliente());
                 Session.setAttribute(PreferencesUtils.CHAVE_USUARIO, usuario);
                 Session.setAttribute(PreferencesUtils.CHAVE_CLIENTE, cliente);
                 view.onSuccessoLogin(activity.getString(R.string.msg_obr_login_sucesso));

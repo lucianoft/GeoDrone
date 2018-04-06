@@ -2,7 +2,7 @@ package br.com.geodrone.model.api;
 
 public interface UserModel {
 
-	public Long getIdUsuario();
-	public void setIdUsuario(Long idUsuario);
+	public Long getIdUsuarioReg();
+	public void setIdUsuarioReg(Long idUsuarioReg);
 
 }

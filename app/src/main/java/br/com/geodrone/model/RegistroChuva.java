@@ -1,179 +1,226 @@
 package br.com.geodrone.model;
 
+import java.util.Date;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.Property;
+import org.greenrobot.greendao.annotation.Generated;
 
-import java.io.Serializable;
-import java.util.Date;
 
 import br.com.geodrone.model.api.AuditModel;
 import br.com.geodrone.model.api.ClientModel;
 import br.com.geodrone.model.api.DeviceModel;
-import org.greenrobot.greendao.annotation.Generated;
+import br.com.geodrone.model.api.LocationModel;
+import br.com.geodrone.model.api.UserModel;
 
-/**
- * Created by fernandes on 19/03/2018.
- */
-@Entity(generateConstructors = false, generateGettersSetters = true,  nameInDb = "TB_REGISTRO_CHUVA")
-public class RegistroChuva implements AuditModel, ClientModel, DeviceModel, Serializable {
 
-    private static final long serialVersionUID = 1L;
+@Entity(generateConstructors = false, nameInDb ="GEO_REGISTRO_CHUVA")
+public class RegistroChuva extends GenericModel implements AuditModel, ClientModel, DeviceModel, UserModel, LocationModel {
 
-    @Id(autoincrement =  true)
-    @Property(nameInDb = "ID_REGISTRO_CHUVA_DISP")
-    private Long id;
+	@Id
+	@Property(nameInDb = "ID_REGISTRO_CHUVA_DISP")
+	private Long id;
 
-    @NotNull
-    @Property(nameInDb = "ID_PONTO_COLETA_CHUVA")
-    private Long idPontoColetaChuva;
+	@Property(nameInDb = "VOLUME")
+	private Integer volume;
 
-    @NotNull
-    @Property(nameInDb = "ID_CLIENTE")
-    private Long idCliente;
+	@Property(nameInDb = "OBSERVACAO")
+	private String observacao;
 
-    @Property(nameInDb = "OBSERVACAO")
-    private String observacao;
+	@Property(nameInDb = "ID_PONTO_COLETA_CHUVA_DISP")
+	private Long idPontoColetaChuvaDisp;
 
-    @NotNull
-    @Property(nameInDb = "VOLUME")
-    private Long volume;
+	@Property(nameInDb = "ID_REGISTRO_CHUVA")
+	private Long idRegistroChuva;
 
-    @Property(nameInDb = "ID_REGISTRO_CHUVA")
-    private Long idRegistroChuva;
+	@Property(nameInDb = "ID_CLIENTE")
+	@NotNull
+	private Long idCliente;
 
-    @NotNull()
-    @Property(nameInDb = "DT_INCLUSAO")
-    private Date dtInclusao;
+	@Property(nameInDb = "LATITUDE")
+	@NotNull
+	private Double latitude;
 
-    @NotNull()
-    @Property(nameInDb = "DT_ALTERACAO")
-    private Date dtAlteracao;
+	@Property(nameInDb = "LONGITUDE")
+	@NotNull
+	private Double longitude;
 
-    @Property(nameInDb = "ID_USUARIO")
-    private Long idUsuario;
+	@Property(nameInDb = "ID_DISPOSITIVO")
+	@NotNull
+	private Long idDispositivo;
 
-    @Property(nameInDb = "ID_DISPOSITIVO")
-    private Long idDispositivo;
+	@Property(nameInDb = "DT_INCLUSAO")
+	@NotNull
+	private Date dtInclusao;
 
-    @Property(nameInDb = "VERSAO_SISTEMA")
-    @NotNull
-    private Long versaoSistema;
+	@Property(nameInDb = "DT_ALTERACAO")
+	@NotNull
+	private Date dtAlteracao;
 
-    public RegistroChuva() {
-    }
+	@Property(nameInDb = "VERSAO_SISTEMA")
+	@NotNull
+	private Long versaoSistema;
 
-    public Long getId() {
-        return id;
-    }
+	@Property(nameInDb = "ID_USUARIO_REG")
+	@NotNull
+	private Long idUsuarioReg;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public RegistroChuva() {
+	}
 
-    public Long getIdPontoColetaChuva() {
-        return idPontoColetaChuva;
-    }
+	public Long getId() {
+		return this.id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setIdPontoColetaChuva(Long idPontoColetaChuva) {
-        this.idPontoColetaChuva = idPontoColetaChuva;
-    }
+	public Integer getVolume() {
+		return this.volume;
+	}
+	public void setVolume(Integer volume) {
+		this.volume = volume;
+	}
 
-    @Override
-    public Long getIdCliente() {
-        return idCliente;
-    }
+	public String getObservacao() {
+		return this.observacao;
+	}
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
+	}
 
-    @Override
-    public void setIdCliente(Long idCliente) {
-        this.idCliente = idCliente;
-    }
+	public Long getIdPontoColetaChuvaDisp() {
+		return this.idPontoColetaChuvaDisp;
+	}
+	public void setIdPontoColetaChuvaDisp(Long idPontoColetaChuvaDisp) {
+		this.idPontoColetaChuvaDisp = idPontoColetaChuvaDisp;
+	}
 
-    public String getObservacao() {
-        return observacao;
-    }
+	public Long getIdRegistroChuva() {
+		return this.idRegistroChuva;
+	}
+	public void setIdRegistroChuva(Long idRegistroChuva) {
+		this.idRegistroChuva = idRegistroChuva;
+	}
 
-    public void setObservacao(String observacao) {
-        this.observacao = observacao;
-    }
+	/** ***** from DomainCliente ****** */
+	@Override
+	public Long getIdCliente() {
+		return this.idCliente;
+	}
+	@Override
+	public void setIdCliente(Long idCliente) {
+		this.idCliente = idCliente;
+	}
+	/** **** from LocationDomain ***** */
+	@Override
+	public Double getLongitude() {
+		return this.longitude;
+	}
+	@Override
+	public void setLongitude(Double longitude) {
+		this.longitude = longitude;
+	}
+	@Override
+	public Double getLatitude() {
+		return this.latitude;
+	}
+	@Override
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
+	/** ***************************** */
 
-    public Long getVolume() {
-        return volume;
-    }
 
-    public void setVolume(Long volume) {
-        this.volume = volume;
-    }
+	/** ***** from UserDomain ****** */
+	@Override
+	public Long getIdDispositivo() {
+		return this.idDispositivo;
+	}
+	@Override
+	public void setIdDispositivo(Long idDispositivo) {
+		this.idDispositivo = idDispositivo;
+	}
+	/** ***************************** */
 
-    public Long getIdRegistroChuva() {
-        return idRegistroChuva;
-    }
+	/** ***** from AuditDomain ****** */
+	@Override
+	public Date getDtInclusao() {
+		return this.dtInclusao;
+	}
+	@Override
+	public void setDtInclusao(Date dtInclusao) {
+		this.dtInclusao = dtInclusao;
+	}
 
-    public void setIdRegistroChuva(Long idRegistroChuva) {
-        this.idRegistroChuva = idRegistroChuva;
-    }
+	@Override
+	public Date getDtAlteracao() {
+		return this.dtAlteracao;
+	}
+	@Override
+	public void setDtAlteracao(Date dtAlteracao) {
+		this.dtAlteracao = dtAlteracao;
+	}
 
-    @Override
-    public Date getDtInclusao() {
-        return dtInclusao;
-    }
+	@Override
+	public Long getVersaoSistema() {
+		return this.versaoSistema;
+	}
+	@Override
+	public void setVersaoSistema(Long versaoSistema) {
+		this.versaoSistema = versaoSistema;
+	}
+	/** ***************************** */
 
-    @Override
-    public void setDtInclusao(Date dtInclusao) {
-        this.dtInclusao = dtInclusao;
-    }
 
-    @Override
-    public Date getDtAlteracao() {
-        return dtAlteracao;
-    }
+	/** ***** from UserDomain ****** */
+	@Override
+	public Long getIdUsuarioReg() {
+		return this.idUsuarioReg;
+	}
+	@Override
+	public void setIdUsuarioReg(Long idUsuarioReg) {
+		this.idUsuarioReg = idUsuarioReg;
+	}
+	/** ***************************** */
 
-    @Override
-    public void setDtAlteracao(Date dtAlteracao) {
-        this.dtAlteracao = dtAlteracao;
-    }
+	/** ******* from Object ********* */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
+		return result;
+	}
 
-    public Long getIdUsuario() {
-        return idUsuario;
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
 
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
-    }
+		final RegistroChuva other = (RegistroChuva) obj;
+		if (this.id == null || other.id == null) {
+			return false;
+		}
+		if (this.id.equals(other.id)) {
+			return true;
+		}
+		return false;
+	}
 
-    @Override
-    public Long getIdDispositivo() {
-        return idDispositivo;
-    }
+	@Override
+	public String toString() {
+		return (this.id == null ? "" : this.id.toString() );
+	}
+	/** ***************************** */
 
-    @Override
-    public void setIdDispositivo(Long idDispositivo) {
-        this.idDispositivo = idDispositivo;
-    }
-
-    @Override
-    public Long getVersaoSistema() {
-        return versaoSistema;
-    }
-
-    @Override
-    public void setVersaoSistema(Long versaoSistema) {
-        this.versaoSistema = versaoSistema;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        RegistroChuva that = (RegistroChuva) o;
-
-        return id != null ? id.equals(that.id) : that.id == null;
-    }
-
-    @Override
-    public int hashCode() {
-        return id != null ? id.hashCode() : 0;
-    }
 }
