@@ -15,12 +15,25 @@ import br.com.geodrone.model.Usuario;
 import br.com.geodrone.model.constantes.FlagStatusCliente;
 import br.com.geodrone.model.daoGen.DaoMaster;
 import br.com.geodrone.model.daoGen.DaoSession;
+import br.com.geodrone.service.ClienteService;
+import br.com.geodrone.service.DoencaService;
+import br.com.geodrone.service.PontoColetaChuvaService;
+import br.com.geodrone.service.PragaService;
+import br.com.geodrone.service.TipoCultivoService;
+import br.com.geodrone.service.UsuarioService;
 import br.com.geodrone.utils.Constantes;
 
 
 public class GeoDroneApplication extends Application {
     public DaoSession daoSession;
     public static final boolean ENCRYPTED = false;
+
+    ClienteService clienteService;
+    UsuarioService usuarioService;
+    PontoColetaChuvaService pontoColetaChuvaService;
+    TipoCultivoService tipoCultivoService;
+    PragaService pragaService;
+    DoencaService doencaService;
 
     @Override
     public void onCreate() {
@@ -34,12 +47,20 @@ public class GeoDroneApplication extends Application {
         DaoMaster.createAllTables(db, false);
         daoSession = new DaoMaster(db).newSession();
 
+
+        clienteService = new ClienteService(this);
+        usuarioService = new UsuarioService(this);
+        pontoColetaChuvaService  new PontoColetaChuvaService(this);
+        tipoCultivoService = new TipoCultivoService(this);
+        pragaService = new PragaService(this);
+        doencaService = new DoencaService(this);
+
         /*DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, ENCRYPTED ? Constantes.BD_NOME : "notes-db");
         Database db = ENCRYPTED ? helper.getEncryptedWritableDb("super-secret") : helper.getWritableDb();
         daoSession = new DaoMaster(db).newSession();*/
         criarCliente();
         criarUsuario();
-        criarEstacao();
+        criarPontoColetaChuva();
         criarTipoCultivo();
         criarPragas();
         criarDoencas();
@@ -100,7 +121,7 @@ public class GeoDroneApplication extends Application {
         }
     }
 
-    private void criarEstacao() {
+    private void criarPontoColetaChuva() {
         if (daoSession.getPontoColetaChuvaDao().loadAll().size() == 0) {
 
             getDaoSession().getPontoColetaChuvaDao().insert(new PontoColetaChuva(
