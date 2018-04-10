@@ -20,7 +20,7 @@ import br.com.geodrone.model.api.UserModel;
 @Entity(generateConstructors = false, nameInDb ="GEO_PONTO_COLETA_CHUVA")
 public class PontoColetaChuva extends GenericModel implements AuditModel, ActiveModel, ClientModel, DeviceModel, UserModel, LocationModel {
 
-	@Id
+	@Id(autoincrement = true)
 	@Property(nameInDb = "ID_PONTO_COLETA_CHUVA_DISP")
 	private Long id;
 
@@ -69,21 +69,8 @@ public class PontoColetaChuva extends GenericModel implements AuditModel, Active
 	@NotNull
 	private Long idUsuarioReg;
 
-	public PontoColetaChuva(Long id, String descricao, Date dtInstalacao, Long idPontoColetaChuva, Long idCliente, Double latitude, Double longitude, Long idDispositivo, Integer indAtivo) {
-		this.id = id;
-		this.descricao = descricao;
-		this.dtInstalacao = dtInstalacao;
-		this.idPontoColetaChuva = idPontoColetaChuva;
-		this.idCliente = idCliente;
-		this.latitude = latitude;
-		this.longitude = longitude;
-		this.idDispositivo = idDispositivo;
-		this.indAtivo = indAtivo;
-	}
-
 	public PontoColetaChuva() {
 	}
-
 
 	public Long getId() {
 		return this.id;

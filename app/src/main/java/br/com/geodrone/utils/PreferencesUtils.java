@@ -41,6 +41,7 @@ public class PreferencesUtils {
     public static final String CHAVE_ID_CLIENTE    = "ID_CLIENTE";
     public static final String CHAVE_CLIENTE       = "CLIENTE";
     public static final String CHAVE_DISPOSITIVO   = "DISPOSITIVO";
+    public static final String CHAVE_LOCALIZACAO_ATUAL      = "LOCALIZACAO_ATUAL";
 
     private static String PREFERENCE_NAME = "geodroneContext";
 

@@ -49,7 +49,7 @@ public class RotaTrabalhoDao extends AbstractDao<RotaTrabalho, Long> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"GEO_ROTA_TRABALHO\" (" + //
-                "\"ID_ROTA_TRABALHO_DISP\" INTEGER PRIMARY KEY ," + // 0: id
+                "\"ID_ROTA_TRABALHO_DISP\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"ID_ROTA_TRABALHO\" INTEGER," + // 1: idRotaTrabalho
                 "\"ID_CLIENTE\" INTEGER NOT NULL ," + // 2: idCliente
                 "\"LATITUDE\" REAL NOT NULL ," + // 3: latitude

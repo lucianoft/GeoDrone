@@ -1,5 +1,8 @@
 package br.com.geodrone.service.util;
 
+import android.location.Location;
+import android.support.annotation.NonNull;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -12,6 +15,8 @@ import br.com.geodrone.model.Dispositivo;
 import br.com.geodrone.model.Usuario;
 import br.com.geodrone.model.api.AuditModel;
 import br.com.geodrone.model.api.ClientModel;
+import br.com.geodrone.model.api.DeviceModel;
+import br.com.geodrone.model.api.LocationModel;
 import br.com.geodrone.model.api.UserModel;
 import br.com.geodrone.repository.CrudRepository;
 import br.com.geodrone.utils.DateUtils;
@@ -46,15 +51,18 @@ public abstract class CrudService<T, ID extends Serializable> extends GenericSer
 		Usuario usuario = Session.getAttribute(PreferencesUtils.CHAVE_USUARIO);
 		Cliente cliente = Session.getAttribute(PreferencesUtils.CHAVE_CLIENTE);
 		Dispositivo dispositivo = Session.getAttribute(PreferencesUtils.CHAVE_DISPOSITIVO);
+		Location location = Session.getAttribute(PreferencesUtils.CHAVE_LOCALIZACAO_ATUAL);
+
 
 		configAuditModel(entity, operacaoCrud);
 		configUserModel(entity, usuario);
 		configClienteModel(entity, cliente);
+		configLocationModel(entity, location);
+		configLocationModel(entity, dispositivo);
 		preValidateModel(entity, operacaoCrud);
 		validateModel(entity, operacaoCrud);
 		posValidateModel(entity, operacaoCrud);
 	}
-
 
 	public void delete(T entity) {
 		if (entity != null) {
@@ -117,6 +125,21 @@ public abstract class CrudService<T, ID extends Serializable> extends GenericSer
 		if (entity instanceof ClientModel) {
 			ClientModel empresaModel = (ClientModel) entity;
 			empresaModel.setIdCliente(cliente.getId());
+		}
+	}
+
+	private void configLocationModel(T entity, @NonNull Location location) {
+		if (entity instanceof LocationModel) {
+			LocationModel locationModel = (LocationModel) entity;
+			locationModel.setLatitude(location.getLatitude());
+			locationModel.setLongitude(location.getLongitude());
+		}
+	}
+
+	private void configLocationModel(T entity, @NonNull Dispositivo dispositivo) {
+		if (entity instanceof DeviceModel) {
+			DeviceModel deviceModel = (DeviceModel) entity;
+			deviceModel.setIdDispositivo(dispositivo != null ? dispositivo.getId() : null);
 		}
 	}
 

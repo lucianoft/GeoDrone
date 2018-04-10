@@ -13,8 +13,8 @@ import org.greenrobot.greendao.annotation.Generated;
 @Entity(generateConstructors = false, nameInDb ="GEO_CLIENTE")
 public class Cliente extends GenericModel implements AuditModel {
 
-	@Id
-	@NotNull
+	@Id(autoincrement = false)
+	@Property(nameInDb = "ID_CLIENTE")
 	private Long id;
 
 	@Property(nameInDb = "NOME_RAZAO_SOCIAL")

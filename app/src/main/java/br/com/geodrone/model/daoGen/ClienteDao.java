@@ -24,7 +24,7 @@ public class ClienteDao extends AbstractDao<Cliente, Long> {
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property Id = new Property(0, Long.class, "id", true, "_id");
+        public final static Property Id = new Property(0, Long.class, "id", true, "ID_CLIENTE");
         public final static Property NomeRazaoSocial = new Property(1, String.class, "nomeRazaoSocial", false, "NOME_RAZAO_SOCIAL");
         public final static Property Sobrenome = new Property(2, String.class, "sobrenome", false, "SOBRENOME");
         public final static Property IndPessoaFisica = new Property(3, Integer.class, "indPessoaFisica", false, "IND_PESSOA_FISICA");
@@ -52,7 +52,7 @@ public class ClienteDao extends AbstractDao<Cliente, Long> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"GEO_CLIENTE\" (" + //
-                "\"_id\" INTEGER PRIMARY KEY NOT NULL ," + // 0: id
+                "\"ID_CLIENTE\" INTEGER PRIMARY KEY ," + // 0: id
                 "\"NOME_RAZAO_SOCIAL\" TEXT," + // 1: nomeRazaoSocial
                 "\"SOBRENOME\" TEXT," + // 2: sobrenome
                 "\"IND_PESSOA_FISICA\" INTEGER," + // 3: indPessoaFisica
@@ -76,7 +76,11 @@ public class ClienteDao extends AbstractDao<Cliente, Long> {
     @Override
     protected final void bindValues(DatabaseStatement stmt, Cliente entity) {
         stmt.clearBindings();
-        stmt.bindLong(1, entity.getId());
+ 
+        Long id = entity.getId();
+        if (id != null) {
+            stmt.bindLong(1, id);
+        }
  
         String nomeRazaoSocial = entity.getNomeRazaoSocial();
         if (nomeRazaoSocial != null) {
@@ -130,7 +134,11 @@ public class ClienteDao extends AbstractDao<Cliente, Long> {
     @Override
     protected final void bindValues(SQLiteStatement stmt, Cliente entity) {
         stmt.clearBindings();
-        stmt.bindLong(1, entity.getId());
+ 
+        Long id = entity.getId();
+        if (id != null) {
+            stmt.bindLong(1, id);
+        }
  
         String nomeRazaoSocial = entity.getNomeRazaoSocial();
         if (nomeRazaoSocial != null) {
@@ -183,7 +191,7 @@ public class ClienteDao extends AbstractDao<Cliente, Long> {
 
     @Override
     public Long readKey(Cursor cursor, int offset) {
-        return cursor.getLong(offset + 0);
+        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
     }    
 
     @Override
@@ -195,7 +203,7 @@ public class ClienteDao extends AbstractDao<Cliente, Long> {
      
     @Override
     public void readEntity(Cursor cursor, Cliente entity, int offset) {
-        entity.setId(cursor.getLong(offset + 0));
+        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setNomeRazaoSocial(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setSobrenome(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setIndPessoaFisica(cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3));
@@ -227,7 +235,7 @@ public class ClienteDao extends AbstractDao<Cliente, Long> {
 
     @Override
     public boolean hasKey(Cliente entity) {
-        throw new UnsupportedOperationException("Unsupported for entities with a non-null key");
+        return entity.getId() != null;
     }
 
     @Override

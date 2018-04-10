@@ -34,9 +34,10 @@ public abstract class CrudRepository<T, ID> {
         return getCrudDao().load(id);
     }
 
-    public T insert(T T) {
-        getCrudDao().save(T);
-        return T;
+    public T insert(T t) {
+        getCrudDao().insert(t);
+
+        return t;
     }
 
     public T update(T T) {

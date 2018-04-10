@@ -19,7 +19,7 @@ import br.com.geodrone.model.api.UserModel;
 @Entity(generateConstructors = false, nameInDb ="GEO_REGISTRO_PRAGA")
 public class RegistroPraga extends GenericModel implements AuditModel, ClientModel, DeviceModel, UserModel, LocationModel {
 
-	@Id
+	@Id(autoincrement = true)
 	@Property(nameInDb = "ID_REGISTRO_PRAGA_DISP")
 	private Long id;
 

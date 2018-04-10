@@ -51,7 +51,7 @@ public class RegistroDoencaDao extends AbstractDao<RegistroDoenca, Long> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"GEO_REGISTRO_DOENCA\" (" + //
-                "\"ID_REGISTRO_DOENCA_DISP\" INTEGER PRIMARY KEY ," + // 0: id
+                "\"ID_REGISTRO_DOENCA_DISP\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"OBSERVACAO\" TEXT," + // 1: observacao
                 "\"ID_DOENCA\" INTEGER," + // 2: idDoenca
                 "\"ID_REGISTRO_DOENCA\" INTEGER," + // 3: idRegistroDoenca

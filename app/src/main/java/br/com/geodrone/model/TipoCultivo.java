@@ -16,7 +16,7 @@ import br.com.geodrone.model.api.ActiveModel;
 @Entity(generateConstructors = false, nameInDb ="GEO_TIPO_CULTIVO")
 public class TipoCultivo extends GenericModel implements AuditModel, ActiveModel {
 
-	@Id
+	@Id(autoincrement = false)
 	@Property(nameInDb = "ID_TIPO_CULTIVO")
 	private Long id;
 
@@ -141,7 +141,8 @@ public class TipoCultivo extends GenericModel implements AuditModel, ActiveModel
 
 	@Override
 	public String toString() {
-		return (this.id == null ? "" : this.id.toString() );
+
+		return (this.descricao == null ? "" : this.descricao.toString() );
 	}
 	/** ***************************** */
 

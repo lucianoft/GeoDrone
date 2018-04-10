@@ -52,7 +52,7 @@ public class RegistroPragaDao extends AbstractDao<RegistroPraga, Long> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"GEO_REGISTRO_PRAGA\" (" + //
-                "\"ID_REGISTRO_PRAGA_DISP\" INTEGER PRIMARY KEY ," + // 0: id
+                "\"ID_REGISTRO_PRAGA_DISP\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"QTDE\" INTEGER," + // 1: qtde
                 "\"OBSERVACAO\" TEXT," + // 2: observacao
                 "\"ID_PRAGA\" INTEGER," + // 3: idPraga

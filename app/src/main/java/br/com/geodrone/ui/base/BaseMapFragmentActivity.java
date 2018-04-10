@@ -17,8 +17,10 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import br.com.geodrone.Session;
 import br.com.geodrone.activity.utils.GPSTracker;
 import br.com.geodrone.ui.monitoramento.MonitoramentoActivity;
+import br.com.geodrone.utils.PreferencesUtils;
 
 /**
  * Created by fernandes on 01/04/2018.
@@ -52,6 +54,7 @@ public abstract class BaseMapFragmentActivity extends BaseFragmentActivity imple
             public void onLocationChanged(Location location) {
                 super.onLocationChanged(location);
                 onChangeLocation(location);
+                Session.setAttribute(PreferencesUtils.CHAVE_LOCALIZACAO_ATUAL, location);
             }
         };
 

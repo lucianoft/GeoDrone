@@ -1,12 +1,14 @@
 package br.com.geodrone;
 
 import android.app.Application;
+import android.database.sqlite.SQLiteDatabase;
 
 import org.greenrobot.greendao.database.Database;
 
 import java.util.Date;
 
 import br.com.geodrone.model.Cliente;
+import br.com.geodrone.model.Dispositivo;
 import br.com.geodrone.model.Doenca;
 import br.com.geodrone.model.PontoColetaChuva;
 import br.com.geodrone.model.Praga;
@@ -16,54 +18,37 @@ import br.com.geodrone.model.constantes.FlagStatusCliente;
 import br.com.geodrone.model.daoGen.DaoMaster;
 import br.com.geodrone.model.daoGen.DaoSession;
 import br.com.geodrone.service.ClienteService;
+import br.com.geodrone.service.DispositivoService;
 import br.com.geodrone.service.DoencaService;
 import br.com.geodrone.service.PontoColetaChuvaService;
 import br.com.geodrone.service.PragaService;
 import br.com.geodrone.service.TipoCultivoService;
 import br.com.geodrone.service.UsuarioService;
 import br.com.geodrone.utils.Constantes;
+import br.com.geodrone.utils.PreferencesUtils;
 
 
 public class GeoDroneApplication extends Application {
     public DaoSession daoSession;
     public static final boolean ENCRYPTED = false;
 
-    ClienteService clienteService;
-    UsuarioService usuarioService;
-    PontoColetaChuvaService pontoColetaChuvaService;
-    TipoCultivoService tipoCultivoService;
-    PragaService pragaService;
-    DoencaService doencaService;
-
     @Override
     public void onCreate() {
         super.onCreate();
 
-        //daoSession = new DaoMaster(new DbOpenHelper(this, "movies-db").getWritableDb()).newSession();
-
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, Constantes.BD_NOME); //The users-db here is the name of our database.
         Database db = helper.getWritableDb();
-        DaoMaster.dropAllTables(db, true);
-        DaoMaster.createAllTables(db, false);
         daoSession = new DaoMaster(db).newSession();
 
-
-        clienteService = new ClienteService(this);
-        usuarioService = new UsuarioService(this);
-        pontoColetaChuvaService  new PontoColetaChuvaService(this);
-        tipoCultivoService = new TipoCultivoService(this);
-        pragaService = new PragaService(this);
-        doencaService = new DoencaService(this);
-
-        /*DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, ENCRYPTED ? Constantes.BD_NOME : "notes-db");
-        Database db = ENCRYPTED ? helper.getEncryptedWritableDb("super-secret") : helper.getWritableDb();
-        daoSession = new DaoMaster(db).newSession();*/
         criarCliente();
+        criarDispositivo();
         criarUsuario();
         criarPontoColetaChuva();
         criarTipoCultivo();
         criarPragas();
         criarDoencas();
+
+
     }
 
     private void criarCliente() {
@@ -80,7 +65,8 @@ public class GeoDroneApplication extends Application {
                     "9999",
                     "1222",
                     FlagStatusCliente.AGUARDANDO_APROVACAO);
-            daoSession.getClienteDao().insert(cliente);
+            getDaoSession().getClienteDao().insert(cliente);
+            Session.setAttribute(PreferencesUtils.CHAVE_CLIENTE, cliente);
         }
     }
 
@@ -100,6 +86,10 @@ public class GeoDroneApplication extends Application {
         cliente.setTelefone(telefone);
         cliente.setCelular(celular);
         cliente.setFlagStatus(flagStatus.value());
+        cliente.setDtInclusao(new Date());
+        cliente.setDtAlteracao(new Date());
+        cliente.setVersaoSistema(1L);
+
         return cliente;
     }
 
@@ -117,109 +107,170 @@ public class GeoDroneApplication extends Application {
             usuario.setSenha("admin");
             usuario.setTelefone("9999-9999");
             usuario.setIdCliente(1L);
+            usuario.setDtInclusao(new Date());
+            usuario.setDtAlteracao(new Date());
+            usuario.setVersaoSistema(1L);
+            usuario.setIndAtivo(1);
             daoSession.getUsuarioDao().insert(usuario);
+
+            Session.setAttribute(PreferencesUtils.CHAVE_USUARIO, usuario);
+
         }
     }
 
+    private void criarDispositivo(){
+        if (daoSession.getDispositivoDao().loadAll().size() == 0) {
+            Dispositivo dispositivo = new Dispositivo();
+            dispositivo.setId(1L);
+            dispositivo.setIdCliente(1L);
+            dispositivo.setDtSincronizacao(new Date());
+            dispositivo.setDtInclusao(new Date());
+            dispositivo.setDtAlteracao(new Date());
+            dispositivo.setVersaoSistema(1L);
+
+            getDaoSession().getDispositivoDao().insert(dispositivo);
+            Session.setAttribute(PreferencesUtils.CHAVE_DISPOSITIVO, dispositivo);
+        }
+    }
     private void criarPontoColetaChuva() {
         if (daoSession.getPontoColetaChuvaDao().loadAll().size() == 0) {
 
-            getDaoSession().getPontoColetaChuvaDao().insert(new PontoColetaChuva(
-                    1L,
-                    "AP",
-                    new Date(),
-                    1L,
-                    1L,
-                    -18.92272265,
-                    -48.24413374,
-                    1L,
-                    1));
-
-            getDaoSession().getPontoColetaChuvaDao().insert(new PontoColetaChuva(
-                    2L,
+            getDaoSession().getPontoColetaChuvaDao().insert(criarPontoColetaChuva(1L,"AP", new Date(), 1L,-18.92272265,-48.24413374,1L));
+            getDaoSession().getPontoColetaChuvaDao().insert(criarPontoColetaChuva(2L,
                     "CDN",
                     new Date(),
                     1L,
-                    1L,
                     -18.929408,
                     -48.2413727,
-                    1L,
-                    1));
+                    1L));
 
-            getDaoSession().getPontoColetaChuvaDao().insert(new PontoColetaChuva(
-                    3L,
+            getDaoSession().getPontoColetaChuvaDao().insert(criarPontoColetaChuva(3L,
                     "MARIA DE NAZARE",
                     new Date(),
                     1L,
-                    1L,
                     -18.915298,
                     -48.23462,
-                    1L,
-                    1));
-
-            getDaoSession().getPontoColetaChuvaDao().insert(new PontoColetaChuva(
-                    4L,
+                    1L));
+            getDaoSession().getPontoColetaChuvaDao().insert(criarPontoColetaChuva(4L,
                     "CASA DAS MASSAS",
                     new Date(),
                     1L,
-                    1L,
                     -18.9267564,
                     -48.2536422,
-                    1L,
-                    1));
+                    1L));
         }
 
     }
     private void criarTipoCultivo() {
         if (daoSession.getTipoCultivoDao().loadAll().size() == 0) {
-            getDaoSession().getTipoCultivoDao().insert(new TipoCultivo(1L, "Soja", 1));
-            getDaoSession().getTipoCultivoDao().insert(new TipoCultivo(2L, "Feijao", 1));
-            getDaoSession().getTipoCultivoDao().insert(new TipoCultivo(3L, "Algodao", 1));
-            getDaoSession().getTipoCultivoDao().insert(new TipoCultivo(4L, "Milho", 1));
+            daoSession.getTipoCultivoDao().insert(criarTipoCultivo(1L, "Soja"));
+            daoSession.getTipoCultivoDao().insert(criarTipoCultivo(2L, "Feijao"));
+            daoSession.getTipoCultivoDao().insert(criarTipoCultivo(3L, "Algodao"));
+            daoSession.getTipoCultivoDao().insert(criarTipoCultivo(4L, "Milho"));
         }
     }
 
+    private TipoCultivo criarTipoCultivo(Long id, String descricao){
+        TipoCultivo tipoCultivo = new TipoCultivo();
+        tipoCultivo.setId(id);
+        tipoCultivo.setDescricao(descricao);
+        tipoCultivo.setIndAtivo(1);
+        tipoCultivo.setDtInclusao(new Date());
+        tipoCultivo.setDtAlteracao(new Date());
+        tipoCultivo.setVersaoSistema(1L);
+        return tipoCultivo;
+    }
+
+    private PontoColetaChuva criarPontoColetaChuva(Long id, String descricao,
+                                                   Date dtInstalacao,
+                                                   Long idCliente,
+                                                   Double latitude, Double longitude, Long idDispositivo) {
+        PontoColetaChuva pontoColetaChuva = new PontoColetaChuva();
+        pontoColetaChuva.setId(id);
+        pontoColetaChuva.setDescricao(descricao);
+        pontoColetaChuva.setDtInstalacao(dtInstalacao);
+        pontoColetaChuva.setIdPontoColetaChuva(null);
+        pontoColetaChuva.setIdCliente(idCliente);
+        pontoColetaChuva.setLatitude(latitude);
+        pontoColetaChuva.setLongitude(longitude);
+        pontoColetaChuva.setIdDispositivo(idDispositivo);
+        pontoColetaChuva.setIdUsuarioReg(1L);
+        pontoColetaChuva.setIndAtivo(1);
+        pontoColetaChuva.setDtInclusao(new Date());
+        pontoColetaChuva.setDtAlteracao(new Date());
+        pontoColetaChuva.setVersaoSistema(1L);
+
+        return pontoColetaChuva;
+    }
 
     private void criarPragas() {
         if (daoSession.getPragaDao().loadAll().size() == 0) {
-            getDaoSession().getPragaDao().insert(new Praga(1L, "Acaro Rajado",	"Tetranychus urticae", 1L, 1));
-            getDaoSession().getPragaDao().insert(new Praga(2L, "Acaro-branco",	"Polyphagotarsonemus latus", 1L, 1));
-            getDaoSession().getPragaDao().insert(new Praga(3L, "Bicudo-da-soja",	"Sternechus subsignatus", 1L, 1));
-            getDaoSession().getPragaDao().insert(new Praga(4L, "Broca-das-axilas",	"Epinotia aporema", 1L, 1));
+            daoSession.getPragaDao().insert(criarPraga(1L, "Acaro Rajado",	"Tetranychus urticae", 1L));
+            daoSession.getPragaDao().insert(criarPraga(2L, "Acaro-branco",	"Polyphagotarsonemus latus", 1L));
+            daoSession.getPragaDao().insert(criarPraga(3L, "Bicudo-da-soja",	"Sternechus subsignatus", 1L));
+            daoSession.getPragaDao().insert(criarPraga(4L, "Broca-das-axilas",	"Epinotia aporema", 1L));
 
 
-            getDaoSession().getPragaDao().insert(new Praga(5L, "Acaro branco",	"Polyphagotarsonemus latus",3L, 1));
-            getDaoSession().getPragaDao().insert(new Praga(6L, "Acaro rajado e vermelho",	"Tetranychus urticae", 3L,1));
-            getDaoSession().getPragaDao().insert(new Praga(7L, "Bicudo do Algodoeiro",	"Anthonomus grandis", 3L,1));
-            getDaoSession().getPragaDao().insert(new Praga(8L, "Broca da Haste", "Conotrachelus denieri", 3L,1));
-            getDaoSession().getPragaDao().insert(new Praga(9L, "Broca da Raiz", "Eutinobothrus brasiliensis", 3L,1));
+            daoSession.getPragaDao().insert(criarPraga(5L, "Acaro branco",	"Polyphagotarsonemus latus",3L));
+            daoSession.getPragaDao().insert(criarPraga(6L, "Acaro rajado e vermelho",	"Tetranychus urticae", 3L));
+            daoSession.getPragaDao().insert(criarPraga(7L, "Bicudo do Algodoeiro",	"Anthonomus grandis", 3L));
+            daoSession.getPragaDao().insert(criarPraga(8L, "Broca da Haste", "Conotrachelus denieri", 3L));
+            daoSession.getPragaDao().insert(criarPraga(9L, "Broca da Raiz", "Eutinobothrus brasiliensis", 3L));
 
-            getDaoSession().getPragaDao().insert(new Praga(10L, "Cigarrinha-das-raízes",	"Mahanarva fimbriolata", 4L,1));
-            getDaoSession().getPragaDao().insert(new Praga(11L, "Coro-das-pastagens", 	"Diloboderus abderus", 4L,1));
-            getDaoSession().getPragaDao().insert(new Praga(12L, "Coro-da-soja", 	"Phyllophaga cuyabana", 4L,1));
-            getDaoSession().getPragaDao().insert(new Praga(13L, "Coro-do-trigo", 	"Phyllophaga triticophaga", 4L,1));
+            daoSession.getPragaDao().insert(criarPraga(10L, "Cigarrinha-das-raízes",	"Mahanarva fimbriolata", 4L));
+            daoSession.getPragaDao().insert(criarPraga(11L, "Coro-das-pastagens", 	"Diloboderus abderus", 4L));
+            daoSession.getPragaDao().insert(criarPraga(12L, "Coro-da-soja", 	"Phyllophaga cuyabana", 4L));
+            daoSession.getPragaDao().insert(criarPraga(13L, "Coro-do-trigo", 	"Phyllophaga triticophaga", 4L));
         }
     }
 
+    private Praga criarPraga(Long id, String descricao, String descricaoCientifica, Long idTipoCultivo){
+        Praga praga = new Praga();
+        praga.setId(id);
+        praga.setDescricao(descricao);
+        praga.setDescricaoCientifica(descricaoCientifica);
+        praga.setIdTipoCultivo(idTipoCultivo);
+        praga.setIndAtivo(1);
+        praga.setDtInclusao(new Date());
+        praga.setDtAlteracao(new Date());
+        praga.setVersaoSistema(1L);
+        return praga;
+    }
+
+    
     private void criarDoencas() {
         if (daoSession.getDoencaDao().loadAll().size() == 0) {
-            getDaoSession().getDoencaDao().insert(new Doenca(1L, "Acaro Rajado",	"Tetranychus urticae", 1L, 1));
-            getDaoSession().getDoencaDao().insert(new Doenca(2L, "Acaro-branco",	"Polyphagotarsonemus latus", 1L, 1));
-            getDaoSession().getDoencaDao().insert(new Doenca(3L, "Bicudo-da-soja",	"Sternechus subsignatus", 1L, 1));
-            getDaoSession().getDoencaDao().insert(new Doenca(4L, "Broca-das-axilas",	"Epinotia aporema", 1L, 1));
+            daoSession.getDoencaDao().insert(criarDoenca(1L, "Acaro Rajado",	"Tetranychus urticae", 1L));
+            daoSession.getDoencaDao().insert(criarDoenca(2L, "Acaro-branco",	"Polyphagotarsonemus latus", 1L));
+            daoSession.getDoencaDao().insert(criarDoenca(3L, "Bicudo-da-soja",	"Sternechus subsignatus", 1L));
+            daoSession.getDoencaDao().insert(criarDoenca(4L, "Broca-das-axilas",	"Epinotia aporema", 1L));
 
 
-            getDaoSession().getDoencaDao().insert(new Doenca(5L, "Acaro branco",	"Polyphagotarsonemus latus",3L, 1));
-            getDaoSession().getDoencaDao().insert(new Doenca(6L, "Acaro rajado e vermelho",	"Tetranychus urticae", 3L,1));
-            getDaoSession().getDoencaDao().insert(new Doenca(7L, "Bicudo do Algodoeiro",	"Anthonomus grandis", 3L,1));
-            getDaoSession().getDoencaDao().insert(new Doenca(8L, "Broca da Haste", "Conotrachelus denieri", 3L,1));
-            getDaoSession().getDoencaDao().insert(new Doenca(9L, "Broca da Raiz", "Eutinobothrus brasiliensis", 3L,1));
+            daoSession.getDoencaDao().insert(criarDoenca(5L, "Acaro branco",	"Polyphagotarsonemus latus",3L));
+            daoSession.getDoencaDao().insert(criarDoenca(6L, "Acaro rajado e vermelho",	"Tetranychus urticae", 3L));
+            daoSession.getDoencaDao().insert(criarDoenca(7L, "Bicudo do Algodoeiro",	"Anthonomus grandis", 3L));
+            daoSession.getDoencaDao().insert(criarDoenca(8L, "Broca da Haste", "Conotrachelus denieri", 3L));
+            daoSession.getDoencaDao().insert(criarDoenca(9L, "Broca da Raiz", "Eutinobothrus brasiliensis", 3L));
 
-            getDaoSession().getDoencaDao().insert(new Doenca(10L, "Cigarrinha-das-raízes",	"Mahanarva fimbriolata", 4L,1));
-            getDaoSession().getDoencaDao().insert(new Doenca(11L, "Coro-das-pastagens", 	"Diloboderus abderus", 4L,1));
-            getDaoSession().getDoencaDao().insert(new Doenca(12L, "Coro-da-soja", 	"Phyllophaga cuyabana", 4L,1));
-            getDaoSession().getDoencaDao().insert(new Doenca(13L, "Coro-do-trigo", 	"Phyllophaga triticophaga", 4L,1));
+            daoSession.getDoencaDao().insert(criarDoenca(10L, "Cigarrinha-das-raízes",	"Mahanarva fimbriolata", 4L));
+            daoSession.getDoencaDao().insert(criarDoenca(11L, "Coro-das-pastagens", 	"Diloboderus abderus", 4L));
+            daoSession.getDoencaDao().insert(criarDoenca(12L, "Coro-da-soja", 	"Phyllophaga cuyabana", 4L));
+            daoSession.getDoencaDao().insert(criarDoenca(13L, "Coro-do-trigo", 	"Phyllophaga triticophaga", 4L));
         }
     }
+
+    private Doenca criarDoenca(Long id, String descricao, String descricaoCientifica, Long idTipoCultivo){
+        Doenca doenca = new Doenca();
+        doenca.setId(id);
+        doenca.setDescricao(descricao);
+        doenca.setDescricaoCientifica(descricaoCientifica);
+        doenca.setIdTipoCultivo(idTipoCultivo);
+        doenca.setIndAtivo(1);
+        doenca.setDtInclusao(new Date());
+        doenca.setDtAlteracao(new Date());
+        doenca.setVersaoSistema(1L);
+        return doenca;
+    }
+
 
 }

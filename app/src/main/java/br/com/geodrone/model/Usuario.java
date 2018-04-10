@@ -6,18 +6,18 @@ import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.Property;
-import org.greenrobot.greendao.annotation.Generated;
 
 
 import br.com.geodrone.model.api.AuditModel;
 import br.com.geodrone.model.api.ActiveModel;
 import br.com.geodrone.model.api.ClientModel;
+import org.greenrobot.greendao.annotation.Generated;
 
 
 @Entity(generateConstructors = false, nameInDb ="GEO_USUARIO")
 public class Usuario extends GenericModel implements AuditModel, ActiveModel, ClientModel {
 
-	@Id
+	@Id(autoincrement = false)
 	@Property(nameInDb = "ID_USUARIO")
 	private Long id;
 

@@ -19,7 +19,7 @@ import br.com.geodrone.model.api.UserModel;
 @Entity(generateConstructors = false, nameInDb ="GEO_ROTA_TRABALHO")
 public class RotaTrabalho extends GenericModel implements AuditModel, ClientModel, DeviceModel, UserModel, LocationModel {
 
-	@Id
+	@Id(autoincrement = true)
 	@Property(nameInDb = "ID_ROTA_TRABALHO_DISP")
 	private Long id;
 

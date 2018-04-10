@@ -16,7 +16,7 @@ import br.com.geodrone.model.api.DeviceModel;
 @Entity(generateConstructors = false, nameInDb ="GEO_DISPOSITIVO")
 public class Dispositivo extends GenericModel implements AuditModel {
 
-	@Id
+	@Id(autoincrement = false)
 	@Property(nameInDb = "ID_DISPOSITIVO")
 	private Long id;
 

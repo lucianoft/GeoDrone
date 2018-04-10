@@ -22,7 +22,7 @@ public class UsuarioRepository extends CrudRepository<Usuario, Long>{
     }
 
     public Usuario findByEmail(String email) {
-        QueryBuilder<Usuario> qrBuilder = getDaoSession().getUsuarioDao().queryBuilder().where(UsuarioDao.Properties.Email.eq(email));
+        QueryBuilder<Usuario> qrBuilder = getCrudDao().queryBuilder().where(UsuarioDao.Properties.Email.eq(email));
         return qrBuilder.unique();
     }
 }

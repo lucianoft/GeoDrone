@@ -16,7 +16,7 @@ import br.com.geodrone.model.api.ActiveModel;
 @Entity(generateConstructors = false, nameInDb ="GEO_PRAGA")
 public class Praga extends GenericModel implements AuditModel, ActiveModel {
 
-	@Id
+	@Id(autoincrement = false)
 	@Property(nameInDb = "ID_PRAGA")
 	private Long id;
 

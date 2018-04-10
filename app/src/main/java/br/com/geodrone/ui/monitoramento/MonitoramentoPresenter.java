@@ -41,13 +41,11 @@ public class MonitoramentoPresenter extends BasePresenter<MonitoramentoPresenter
         try {
             if (locationOld != null || distancia(location) > 10f) {
                 RotaTrabalho rotaTrabalho = new RotaTrabalho();
-                rotaTrabalho.setLatitude(location.getLatitude());
-                rotaTrabalho.setLongitude(location.getLongitude());
                 rotaTrabalhoService.insert(rotaTrabalho);
             }
             Log.i(TAG, "Rota de trabalho grava com sucesso");
         }catch (Exception ex){
-            Log.i(TAG, "Erro ao gravar Rota de trabalho");
+            Log.e(TAG, "Erro ao gravar Rota de trabalho", ex);
         }
         locationOld = location;
 

@@ -51,7 +51,7 @@ public class RegistroImagemDao extends AbstractDao<RegistroImagem, Long> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"GEO_REGISTRO_IMAGEM\" (" + //
-                "\"ID_REGISTRO_IMAGEM_DISP\" INTEGER PRIMARY KEY ," + // 0: id
+                "\"ID_REGISTRO_IMAGEM_DISP\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"OBSERVACAO\" TEXT," + // 1: observacao
                 "\"IMAGEM\" BLOB NOT NULL ," + // 2: imagem
                 "\"ID_REGISTRO_IMAGEM\" INTEGER," + // 3: idRegistroImagem

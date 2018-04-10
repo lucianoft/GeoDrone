@@ -52,7 +52,7 @@ public class PontoColetaChuvaDao extends AbstractDao<PontoColetaChuva, Long> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"GEO_PONTO_COLETA_CHUVA\" (" + //
-                "\"ID_PONTO_COLETA_CHUVA_DISP\" INTEGER PRIMARY KEY ," + // 0: id
+                "\"ID_PONTO_COLETA_CHUVA_DISP\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"DESCRICAO\" TEXT," + // 1: descricao
                 "\"DT_INSTALACAO\" INTEGER," + // 2: dtInstalacao
                 "\"ID_PONTO_COLETA_CHUVA\" INTEGER," + // 3: idPontoColetaChuva
