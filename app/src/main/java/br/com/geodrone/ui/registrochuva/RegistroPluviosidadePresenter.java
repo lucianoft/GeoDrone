@@ -71,6 +71,7 @@ public class RegistroPluviosidadePresenter extends BasePresenter<RegistroPluvios
             Log.i(TAG, "Rota de trabalho grava com sucesso");
         }catch (Exception ex){
             Log.i(TAG, "Erro ao gravar Rota de trabalho");
+            Log.e(TAG, ex.toString(), ex);
         }
         onShowPontoColeta(location);
         locationOld = location;
@@ -148,6 +149,7 @@ public class RegistroPluviosidadePresenter extends BasePresenter<RegistroPluvios
                 this.fragmentActivity.showMessenger(messenger);
             }
         }catch (Exception ex){
+            Log.e(TAG, ex.toString(), ex);
             this.fragmentActivity.onError(ex);
         }
     }
