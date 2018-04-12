@@ -15,6 +15,7 @@ import br.com.geodrone.model.Usuario;
 import br.com.geodrone.oauth.APIClient;
 import br.com.geodrone.oauth.ServiceGenerator;
 import br.com.geodrone.oauth.dto.AccessToken;
+import br.com.geodrone.resource.SincronizacaoResource;
 import br.com.geodrone.service.DispositivoService;
 import br.com.geodrone.ui.base.BaseActivity;
 import br.com.geodrone.ui.base.BasePresenter;
@@ -91,7 +92,6 @@ public class LoginPresenter extends BasePresenter<LoginPresenter.View> {
                     view.onSuccessoLogin(activity.getString(R.string.msg_obr_login_sucesso));
                 } else {
                     activity.onError(activity.getString(R.string.msg_inv_login));
-                    view.onSuccessoLogin(activity.getString(R.string.msg_obr_login_sucesso));
                 }
             }
             this.activity.hideLoading();
@@ -121,7 +121,7 @@ public class LoginPresenter extends BasePresenter<LoginPresenter.View> {
                     prefs.edit().putString("oauth.accesstoken", token.getAccessToken()).apply();
                     prefs.edit().putString("oauth.refreshtoken", token.getRefreshToken()).apply();
                     prefs.edit().putString("oauth.tokentype", token.getTokenType()).apply();
-
+                    sincronizacao(token);
                     // TODO Show the user they are logged in
                 } else {
                     // TODO Handle errors on a failed response
@@ -133,5 +133,37 @@ public class LoginPresenter extends BasePresenter<LoginPresenter.View> {
                 Log.e("erro", t.toString(), t);
             }
         });
+    }
+
+    private void sincronizacao(AccessToken accessToken){
+        final SharedPreferences prefs = this.activity.getSharedPreferences(
+                BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE);
+
+        try {
+            APIClient client = ServiceGenerator.createServiceWithAuth(APIClient.class, accessToken);
+            SincronizacaoResource sincronizacaoResource = new SincronizacaoResource();
+            Call<SincronizacaoResource> call = client.getSincronizacao(sincronizacaoResource);
+            call.enqueue(new Callback<SincronizacaoResource>() {
+                @Override
+                public void onResponse(Call<SincronizacaoResource> call, Response<SincronizacaoResource> response) {
+                    int statusCode = response.code();
+                    if(statusCode == 200) {
+                        SincronizacaoResource sincronizacaoResource = response.body();
+                        // TODO Show the user they are logged in
+                    } else {
+                        // TODO Handle errors on a failed response
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<SincronizacaoResource> call, Throwable t) {
+                    Log.e("erro", t.toString(), t);
+                }
+            });
+
+        }catch (Exception ex){
+            Log.e(TAG, ex.toString(), ex);
+
+        }
     }
 }
