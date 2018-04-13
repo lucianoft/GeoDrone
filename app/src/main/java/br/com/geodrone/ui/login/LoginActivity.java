@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import br.com.geodrone.R;
 import br.com.geodrone.ui.base.BaseActivity;
+import br.com.geodrone.ui.helper.GenericProgress;
 import br.com.geodrone.ui.usuario.CadatroUsuarioActivity;
 import br.com.geodrone.ui.main.MainActivity;
 import br.com.geodrone.utils.KeyboardUtils;
@@ -29,14 +30,17 @@ public class LoginActivity extends BaseActivity implements LoginPresenter.View{
     @BindView(R.id.edit_text_email_login) EditText editTextEmail;
     @BindView(R.id.edit_text_senha_login) EditText editTextSenha;
     @BindView(R.id.button_olho) Button buttonOlho;
-    @BindView(R.id.progressBar_login) ProgressBar progressBar;
+
+    private GenericProgress progressBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        setProgressBar(progressBar);
+        setProgressBar(new GenericProgress(this));
+
+        progressBar = new GenericProgress(this);
         loginPresenter = new LoginPresenter(this);
         editTextEmail.setText(PreferencesUtils.getString(getApplicationContext(), PreferencesUtils.CHAVE_EMAIL_USUARIO, ""));
         editTextSenha.setText(PreferencesUtils.getString(getApplicationContext(), PreferencesUtils.CHAVE_SENHA_USUARIO, ""));
@@ -75,6 +79,7 @@ public class LoginActivity extends BaseActivity implements LoginPresenter.View{
     @OnClick(R.id.button_login)
     public void onClickLogin() {
         showLoading();
+        progressBar.show();
         loginPresenter.login(editTextEmail.getText().toString(), editTextSenha.getText().toString());
     }
 

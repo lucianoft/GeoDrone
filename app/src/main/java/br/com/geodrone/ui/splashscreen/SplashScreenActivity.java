@@ -13,14 +13,13 @@ import br.com.geodrone.BuildConfig;
 import br.com.geodrone.R;
 import br.com.geodrone.ui.base.BaseActivity;
 import br.com.geodrone.ui.login.LoginActivity;
+import br.com.geodrone.ui.primeirologin.PrimeiroLoginActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SplashScreenActivity extends BaseActivity implements SplashScreenPresenter.View {
 
     @BindView(R.id.text_view_versao)TextView txtViewVersao;
-    @BindView(R.id.progressBar_abertura)
-    ProgressBar progressBar;
 
     SplashScreenPresenter splashScreenPresenter;
 
@@ -31,7 +30,6 @@ public class SplashScreenActivity extends BaseActivity implements SplashScreenPr
         ButterKnife.bind(this);
         splashScreenPresenter = new SplashScreenPresenter(this);
         txtViewVersao.setText("Versão "+ BuildConfig.VERSION_NAME);
-        progressBar.setVisibility(View.VISIBLE);
         Handler handle = new Handler();
         handle.postDelayed(new Runnable() {
             @Override
@@ -51,8 +49,12 @@ public class SplashScreenActivity extends BaseActivity implements SplashScreenPr
 
     @Override
     public void onLoadLogin() {
-        progressBar.setVisibility(View.INVISIBLE);
-        Intent i = new Intent(this,LoginActivity.class);
+        Intent i = null;
+        if (!splashScreenPresenter.isPrimeiroLogin()){
+            i = new Intent(this,LoginActivity.class);
+        }else{
+            i = new Intent(this,PrimeiroLoginActivity.class);
+        }
         startActivity(i);
         finish();
     }

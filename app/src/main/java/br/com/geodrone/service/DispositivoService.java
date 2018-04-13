@@ -24,5 +24,9 @@ public class DispositivoService extends CrudService<Dispositivo, Long> {
     public Dispositivo findOne(){
         return dispositivoRepository.findOne();
     }
+
+    public boolean isPrimeiroLogin(){
+        return findOne() == null;
+    }
 }
 

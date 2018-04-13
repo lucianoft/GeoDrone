@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.login.LoginActivity"
+    tools:context=".ui.primeirologin.PrimeiroLoginActivity"
     android:orientation="vertical"
     >
 
@@ -36,7 +36,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp">
-                <EditText android:id="@+id/edit_text_email_login"
+                <EditText android:id="@+id/edit_text_url_pri_login"
+                    style="@style/TextLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textUri"
+                    android:hint="@string/lb_email" />
+            </android.support.design.widget.TextInputLayout>
+
+            <!--  Email Label -->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
+                <EditText android:id="@+id/edit_text_email_pri_login"
                     style="@style/TextLabel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -55,7 +69,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp">
-                    <EditText android:id="@+id/edit_text_senha_login"
+                    <EditText android:id="@+id/edit_text_senha_pri_login"
                         style="@style/TextLabel"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -73,20 +87,12 @@
             </RelativeLayout>
 
             <Button
-                android:id="@+id/button_login"
+                android:id="@+id/button_pri_login"
                 style="@style/CustomStyleButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="@string/lb_login"/>
-
-            <TextView android:id="@+id/text_view_criar_usuario"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/lb_criar_usuario"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
-                android:textSize="16dip"/>
 
         </LinearLayout>
     </ScrollView>

@@ -11,15 +11,16 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import br.com.geodrone.R;
+import br.com.geodrone.ui.helper.GenericProgress;
 import br.com.geodrone.utils.Message;
 import br.com.geodrone.utils.Messenger;
 
 public abstract class BaseActivity extends AppCompatActivity implements BaseError{
 
 
-    private ProgressBar progressBar;
+    private GenericProgress progressBar;
 
-    public void setProgressBar(ProgressBar progressBar) {
+    public void setProgressBar(GenericProgress progressBar) {
         this.progressBar = progressBar;
     }
 
@@ -39,13 +40,13 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseErro
     public void showLoading() {
         hideLoading();
         if (this.progressBar != null) {
-            this.progressBar.setVisibility(View.VISIBLE);
+            this.progressBar.show();
         }
     }
 
     public void hideLoading() {
         if (this.progressBar != null) {
-            this.progressBar.setVisibility(View.INVISIBLE);
+            this.progressBar.hide();;
         }
     }
 
