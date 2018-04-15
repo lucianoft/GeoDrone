@@ -31,16 +31,15 @@ public class LoginActivity extends BaseActivity implements LoginPresenter.View{
     @BindView(R.id.edit_text_senha_login) EditText editTextSenha;
     @BindView(R.id.button_olho) Button buttonOlho;
 
-    private GenericProgress progressBar;
+    private GenericProgress mProgress;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        setProgressBar(new GenericProgress(this));
 
-        progressBar = new GenericProgress(this);
+        mProgress = new GenericProgress(this);
         loginPresenter = new LoginPresenter(this);
         editTextEmail.setText(PreferencesUtils.getString(getApplicationContext(), PreferencesUtils.CHAVE_EMAIL_USUARIO, ""));
         editTextSenha.setText(PreferencesUtils.getString(getApplicationContext(), PreferencesUtils.CHAVE_SENHA_USUARIO, ""));
@@ -52,7 +51,6 @@ public class LoginActivity extends BaseActivity implements LoginPresenter.View{
     public void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         loginPresenter.takeView(this);
-        hideLoading();
     }
 
     @OnClick(R.id.text_view_criar_usuario)
@@ -79,13 +77,12 @@ public class LoginActivity extends BaseActivity implements LoginPresenter.View{
     @OnClick(R.id.button_login)
     public void onClickLogin() {
         showLoading();
-        progressBar.show();
         loginPresenter.login(editTextEmail.getText().toString(), editTextSenha.getText().toString());
     }
 
     @Override
     public void onSuccessoLogin(String message) {
-        hideLoading();
+
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         PreferencesUtils.putString(getApplicationContext(), PreferencesUtils.CHAVE_EMAIL_USUARIO, editTextEmail.getText().toString());
         PreferencesUtils.putString(getApplicationContext(), PreferencesUtils.CHAVE_SENHA_USUARIO, editTextSenha.getText().toString());
@@ -104,5 +101,17 @@ public class LoginActivity extends BaseActivity implements LoginPresenter.View{
     public void onErrorSenha(String message) {
         hideLoading();
         editTextSenha.setError(message);
+    }
+
+    @Override
+    public void showLoading() {
+        mProgress.show();
+
+    }
+
+    @Override
+    public void hideLoading() {
+        mProgress.hide();
+
     }
 }

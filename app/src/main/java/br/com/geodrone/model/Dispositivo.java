@@ -20,6 +20,9 @@ public class Dispositivo extends GenericModel implements AuditModel {
 	@Property(nameInDb = "ID_DISPOSITIVO")
 	private Long id;
 
+	@Property(nameInDb = "DESCRICAO")
+	private String descricao;
+
 	@Property(nameInDb = "DT_SINCRONIZACAO")
 	private Date dtSincronizacao;
 
@@ -47,6 +50,14 @@ public class Dispositivo extends GenericModel implements AuditModel {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	public Date getDtSincronizacao() {

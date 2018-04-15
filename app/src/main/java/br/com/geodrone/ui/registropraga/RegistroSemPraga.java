@@ -4,13 +4,10 @@ import android.location.Location;
 import android.util.Log;
 
 import br.com.geodrone.R;
-import br.com.geodrone.Session;
-import br.com.geodrone.model.Cliente;
 import br.com.geodrone.model.RegistroPraga;
 import br.com.geodrone.service.RegistroPragaService;
 import br.com.geodrone.ui.base.BaseFragmentActivity;
 import br.com.geodrone.ui.base.BasePresenter;
-import br.com.geodrone.utils.PreferencesUtils;
 
 /**
  * Created by fernandes on 31/03/2018.

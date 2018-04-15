@@ -58,4 +58,14 @@ public class SplashScreenActivity extends BaseActivity implements SplashScreenPr
         startActivity(i);
         finish();
     }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
 }

@@ -20,6 +20,7 @@ import br.com.geodrone.R;
 import br.com.geodrone.model.Doenca;
 import br.com.geodrone.model.TipoCultivo;
 import br.com.geodrone.ui.base.BaseActivity;
+import br.com.geodrone.ui.helper.GenericProgress;
 import br.com.geodrone.utils.NumberUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,6 +49,8 @@ public class RegistroDoencaActivity extends BaseActivity implements RegistroDoen
     private TipoCultivo tipoCultivo = null;
     private Doenca doenca = null;
 
+    private GenericProgress mProgress;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +59,8 @@ public class RegistroDoencaActivity extends BaseActivity implements RegistroDoen
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
+
+        mProgress = new GenericProgress(this);
 
         Intent it = getIntent();
         location = it.getParcelableExtra("localizacao");
@@ -146,4 +151,15 @@ public class RegistroDoencaActivity extends BaseActivity implements RegistroDoen
         onError(message);
     }
 
+    @Override
+    public void showLoading() {
+        mProgress.show();
+
+    }
+
+    @Override
+    public void hideLoading() {
+        mProgress.hide();
+
+    }
 }

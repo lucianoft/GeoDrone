@@ -16,7 +16,7 @@ import br.com.geodrone.model.api.DeviceModel;
 @Entity(generateConstructors = false, nameInDb ="GEO_CONFIGURACAO")
 public class Configuracao extends GenericModel implements AuditModel, DeviceModel {
 
-	@Id(autoincrement = false)
+	@Id(autoincrement = true)
 	@Property(nameInDb = "ID_CONFIGURACAO")
 	private Long id;
 
@@ -30,7 +30,6 @@ public class Configuracao extends GenericModel implements AuditModel, DeviceMode
 	private Date dtSincronizacao;
 
 	@Property(nameInDb = "ID_CLIENTE")
-	@NotNull
 	private Long idCliente;
 
 	@Property(nameInDb = "DT_INCLUSAO")

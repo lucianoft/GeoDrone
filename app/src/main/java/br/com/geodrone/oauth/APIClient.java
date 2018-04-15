@@ -1,16 +1,14 @@
 package br.com.geodrone.oauth;
 
 import br.com.geodrone.oauth.dto.AccessToken;
-import br.com.geodrone.resource.SincronizacaoResource;
+import br.com.geodrone.resource.InstallerResource;
+import br.com.geodrone.resource.SincronizacaoRetResource;
 import retrofit2.Call;
-import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.HEAD;
-import retrofit2.http.Header;
-import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface APIClient {
 
@@ -30,9 +28,14 @@ public interface APIClient {
             @Field("grant_type") String grantType,
             @Field("refresh_token") String refreshToken);
 
-    @Headers({ "Content-Type: application/json;charset=UTF-8"})
-    @POST("sincronizacaos")
-    Call<SincronizacaoResource> getSincronizacao(@Body() SincronizacaoResource sincronizacaoResource);
+    @POST("/geoodrone/install/{idUsuario}/{idCliente}/{descDispositivo}")
+    public Call<InstallerResource> instalarAplicativo(@Path("idUsuario") Long idUsuario,
+                                                                @Path("idCliente")    Long idCliente,
+                                                                @Path("descDispositivo") String descDispositivo);
 
-
+    @GET("/sincronizacao/{idUsuario}/{idCliente}/{idDispositivo}/{dtSincronizacao}")
+    public Call<SincronizacaoRetResource> getAtualizacoes(@Path("idUsuario")  Long idUsuario,
+                                                    @Path("idCliente")  Long idCliente,
+                                                    @Path("idDispositivo") Long idDispositivo,
+                                                    @Path("dtSincronizacao") String dtSincronizacao) ;
 }

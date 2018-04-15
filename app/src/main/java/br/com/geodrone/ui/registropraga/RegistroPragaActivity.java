@@ -18,6 +18,7 @@ import br.com.geodrone.R;
 import br.com.geodrone.model.Praga;
 import br.com.geodrone.model.TipoCultivo;
 import br.com.geodrone.ui.base.BaseActivity;
+import br.com.geodrone.ui.helper.GenericProgress;
 import br.com.geodrone.utils.NumberUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,6 +47,8 @@ public class RegistroPragaActivity extends BaseActivity implements RegistroPraga
     private TipoCultivo tipoCultivo = null;
     private Praga praga = null;
 
+    private GenericProgress mProgress;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +57,8 @@ public class RegistroPragaActivity extends BaseActivity implements RegistroPraga
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
+
+        mProgress = new GenericProgress(this);
 
         Intent it = getIntent();
         location = it.getParcelableExtra("localizacao");
@@ -144,4 +149,13 @@ public class RegistroPragaActivity extends BaseActivity implements RegistroPraga
         onError(message);
     }
 
+    @Override
+    public void showLoading() {
+        mProgress.show();
+    }
+
+    @Override
+    public void hideLoading() {
+        mProgress.hide();
+    }
 }

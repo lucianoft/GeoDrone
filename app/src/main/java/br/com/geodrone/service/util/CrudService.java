@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 
-import br.com.geodrone.Session;
+import br.com.geodrone.SessionGeooDrone;
 import br.com.geodrone.exception.BusinessException;
 import br.com.geodrone.model.Cliente;
 import br.com.geodrone.model.Dispositivo;
@@ -48,11 +48,10 @@ public abstract class CrudService<T, ID extends Serializable> extends GenericSer
 	}
 
 	private void config(T entity, OperacaoCrud operacaoCrud) throws BusinessException {
-		Usuario usuario = Session.getAttribute(PreferencesUtils.CHAVE_USUARIO);
-		Cliente cliente = Session.getAttribute(PreferencesUtils.CHAVE_CLIENTE);
-		Dispositivo dispositivo = Session.getAttribute(PreferencesUtils.CHAVE_DISPOSITIVO);
-		Location location = Session.getAttribute(PreferencesUtils.CHAVE_LOCALIZACAO_ATUAL);
-
+		Usuario usuario = SessionGeooDrone.getAttribute(SessionGeooDrone.CHAVE_USUARIO);
+		Cliente cliente = SessionGeooDrone.getAttribute(SessionGeooDrone.CHAVE_CLIENTE);
+		Dispositivo dispositivo = SessionGeooDrone.getAttribute(SessionGeooDrone.CHAVE_DISPOSITIVO);
+		Location location = SessionGeooDrone.getAttribute(PreferencesUtils.CHAVE_LOCALIZACAO_ATUAL);
 
 		configAuditModel(entity, operacaoCrud);
 		configUserModel(entity, usuario);

@@ -41,7 +41,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textUri"
-                    android:hint="@string/lb_email" />
+                    android:hint="@string/lb_url" />
             </android.support.design.widget.TextInputLayout>
 
             <!--  Email Label -->
@@ -78,7 +78,7 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <Button
-                    android:id="@+id/button_olho"
+                    android:id="@+id/button_pri_olho"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_alignParentRight="true"

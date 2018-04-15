@@ -2,6 +2,7 @@ package br.com.geodrone.utils;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
@@ -11,15 +12,15 @@ import android.text.TextUtils;
  * Created by fernandes on 12/04/2018.
  */
 public class AndroidInformation {
-    private Activity activity;
+    private Context activity;
 
-    public static String getDeviceInformations(Activity activity) {
+    public static String getDeviceInformations(Context activity) {
         String device = getDeviceName();
         String serial = getSerial(activity);
         return serial + " - " + device;
     }
 
-    private static String getSerial(Activity activity) {
+    private static String getSerial(Context activity) {
         String serial;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {

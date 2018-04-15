@@ -9,6 +9,8 @@ public class AccessToken {
     private String scope;
     private String client_id;
     private String client_secret;
+    private Long id_cliente;
+    private Long id_usuario;
 
     public String getAccessToken() {
         return access_token;
@@ -71,4 +73,19 @@ public class AccessToken {
         this.client_secret = client_secret;
     }
 
+    public Long getIdCliente() {
+        return id_cliente;
+    }
+
+    public void setIdCliente(Long id_cliente) {
+        this.id_cliente = id_cliente;
+    }
+
+    public Long getIdUsuario() {
+        return id_usuario;
+    }
+
+    public void setIdUsuario(Long id_usuario) {
+        this.id_usuario = id_usuario;
+    }
 }

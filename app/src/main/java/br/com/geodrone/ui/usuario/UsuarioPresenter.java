@@ -1,7 +1,7 @@
 package br.com.geodrone.ui.usuario;
 
 import br.com.geodrone.R;
-import br.com.geodrone.Session;
+import br.com.geodrone.SessionGeooDrone;
 import br.com.geodrone.model.Cliente;
 import br.com.geodrone.model.Usuario;
 import br.com.geodrone.model.constantes.FlagPerfilUsuario;
@@ -87,7 +87,7 @@ public class UsuarioPresenter extends BasePresenter<UsuarioPresenter.View> {
             boolean isOk = validarSalvar(nome, sobrenome, telefone, email, senha, confirmSenha);
             if (!isOk) {
             }
-            Cliente cliente = Session.getAttribute(PreferencesUtils.CHAVE_CLIENTE);
+            Cliente cliente = SessionGeooDrone.getAttribute(SessionGeooDrone.CHAVE_CLIENTE);
             Long idCliente = cliente != null ? cliente.getId() : null;
             Usuario usuario = new Usuario(null, nome, sobrenome, email, telefone, senha, FlagPerfilUsuario.ADM.value(), 1);
             usuario = usuarioService.insert(usuario);

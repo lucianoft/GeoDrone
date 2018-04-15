@@ -11,6 +11,7 @@ import android.widget.EditText;
 import br.com.geodrone.R;
 import br.com.geodrone.activity.utils.Mask;
 import br.com.geodrone.ui.base.BaseActivity;
+import br.com.geodrone.ui.helper.GenericProgress;
 import br.com.geodrone.ui.login.LoginPresenter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,6 +27,7 @@ public class CadatroUsuarioActivity extends BaseActivity implements UsuarioPrese
     @BindView(R.id.input_senha_usuario) EditText editTextSenha;
     @BindView(R.id.input_confirmar_senha_usuario) EditText editTextConfirmarSenha;
 
+    private GenericProgress mProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class CadatroUsuarioActivity extends BaseActivity implements UsuarioPrese
         setContentView(R.layout.activity_cadatro_usuario);
         ButterKnife.bind(this);
 
+        mProgress = new GenericProgress(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
 
@@ -98,5 +101,18 @@ public class CadatroUsuarioActivity extends BaseActivity implements UsuarioPrese
     @Override
     public void onErrorConfirmSenha(String message) {
         editTextConfirmarSenha.setError(message);
+    }
+
+
+    @Override
+    public void showLoading() {
+        mProgress.show();
+
+    }
+
+    @Override
+    public void hideLoading() {
+        mProgress.hide();
+
     }
 }

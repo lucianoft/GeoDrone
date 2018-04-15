@@ -47,11 +47,11 @@ public class ConfiguracaoDao extends AbstractDao<Configuracao, Long> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"GEO_CONFIGURACAO\" (" + //
-                "\"ID_CONFIGURACAO\" INTEGER PRIMARY KEY ," + // 0: id
+                "\"ID_CONFIGURACAO\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"URL\" TEXT," + // 1: url
                 "\"ID_DISPOSITIVO\" INTEGER," + // 2: idDispositivo
                 "\"DT_SINCRONIZACAO\" INTEGER," + // 3: dtSincronizacao
-                "\"ID_CLIENTE\" INTEGER NOT NULL ," + // 4: idCliente
+                "\"ID_CLIENTE\" INTEGER," + // 4: idCliente
                 "\"DT_INCLUSAO\" INTEGER NOT NULL ," + // 5: dtInclusao
                 "\"DT_ALTERACAO\" INTEGER NOT NULL ," + // 6: dtAlteracao
                 "\"VERSAO_SISTEMA\" INTEGER NOT NULL );"); // 7: versaoSistema
@@ -86,7 +86,11 @@ public class ConfiguracaoDao extends AbstractDao<Configuracao, Long> {
         if (dtSincronizacao != null) {
             stmt.bindLong(4, dtSincronizacao.getTime());
         }
-        stmt.bindLong(5, entity.getIdCliente());
+ 
+        Long idCliente = entity.getIdCliente();
+        if (idCliente != null) {
+            stmt.bindLong(5, idCliente);
+        }
         stmt.bindLong(6, entity.getDtInclusao().getTime());
         stmt.bindLong(7, entity.getDtAlteracao().getTime());
         stmt.bindLong(8, entity.getVersaoSistema());
@@ -115,7 +119,11 @@ public class ConfiguracaoDao extends AbstractDao<Configuracao, Long> {
         if (dtSincronizacao != null) {
             stmt.bindLong(4, dtSincronizacao.getTime());
         }
-        stmt.bindLong(5, entity.getIdCliente());
+ 
+        Long idCliente = entity.getIdCliente();
+        if (idCliente != null) {
+            stmt.bindLong(5, idCliente);
+        }
         stmt.bindLong(6, entity.getDtInclusao().getTime());
         stmt.bindLong(7, entity.getDtAlteracao().getTime());
         stmt.bindLong(8, entity.getVersaoSistema());
@@ -139,7 +147,7 @@ public class ConfiguracaoDao extends AbstractDao<Configuracao, Long> {
         entity.setUrl(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setIdDispositivo(cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2));
         entity.setDtSincronizacao(cursor.isNull(offset + 3) ? null : new java.util.Date(cursor.getLong(offset + 3)));
-        entity.setIdCliente(cursor.getLong(offset + 4));
+        entity.setIdCliente(cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4));
         entity.setDtInclusao(new java.util.Date(cursor.getLong(offset + 5)));
         entity.setDtAlteracao(new java.util.Date(cursor.getLong(offset + 6)));
         entity.setVersaoSistema(cursor.getLong(offset + 7));

@@ -37,6 +37,7 @@
     <string name="lb_doenca">Doenca</string>
     <string name="lb_qtd_doencas">Qtde</string>
     <string name="lb_volume_chuva">Volume</string>
+    <string name="lb_url">URL</string>
 
     <string name="lb_btn_salvar">Salvar</string>
     <string name="lb_possui_registro_doenca">Possui registro de doença?</string>

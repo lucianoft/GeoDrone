@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import com.google.gson.Gson;
 
 import br.com.geodrone.model.Usuario;
+import br.com.geodrone.oauth.dto.AccessToken;
 
 /**
  * PreferencesUtils, easy to get or put data
@@ -34,14 +35,12 @@ import br.com.geodrone.model.Usuario;
  */
 public class PreferencesUtils {
 
+    public static final String CHAVE_ACESS_TOKEN = "ACESS_TOKEN";
     public static final String CHAVE_USUARIO = "USUARIO";
     public static final String CHAVE_EMAIL_USUARIO = "EMAIL_USUARIO";
     public static final String CHAVE_SENHA_USUARIO = "SENHA_USUARIO";
-    public static final String CHAVE_NOME_USUARIO  = "NOME_USUARIO";
-    public static final String CHAVE_ID_CLIENTE    = "ID_CLIENTE";
-    public static final String CHAVE_CLIENTE       = "CLIENTE";
-    public static final String CHAVE_DISPOSITIVO   = "DISPOSITIVO";
     public static final String CHAVE_LOCALIZACAO_ATUAL      = "LOCALIZACAO_ATUAL";
+
 
     private static String PREFERENCE_NAME = "geodroneContext";
 
@@ -273,5 +272,22 @@ public class PreferencesUtils {
         String usuarioStr = settings.getString(PreferencesUtils.CHAVE_USUARIO, "");
         Gson gson = new Gson();
         return gson.fromJson(usuarioStr, Usuario.class);
+    }
+
+
+    public static boolean putAccessToken(Context context, AccessToken accessToken) {
+        Gson gson = new Gson();
+        String value = gson.toJson(accessToken);
+        SharedPreferences settings = context.getSharedPreferences(PreferencesUtils.PREFERENCE_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString(PreferencesUtils.CHAVE_ACESS_TOKEN, value);
+        return editor.commit();
+    }
+
+    public static AccessToken getAccessToken(Context context) {
+        SharedPreferences settings = context.getSharedPreferences(PreferencesUtils.PREFERENCE_NAME, Context.MODE_PRIVATE);
+        String accessTokenStr = settings.getString(PreferencesUtils.CHAVE_ACESS_TOKEN, "");
+        Gson gson = new Gson();
+        return gson.fromJson(accessTokenStr, AccessToken.class);
     }
 }

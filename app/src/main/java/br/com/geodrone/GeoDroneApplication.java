@@ -1,13 +1,13 @@
 package br.com.geodrone;
 
 import android.app.Application;
-import android.database.sqlite.SQLiteDatabase;
 
 import org.greenrobot.greendao.database.Database;
 
 import java.util.Date;
 
 import br.com.geodrone.model.Cliente;
+import br.com.geodrone.model.Configuracao;
 import br.com.geodrone.model.Dispositivo;
 import br.com.geodrone.model.Doenca;
 import br.com.geodrone.model.PontoColetaChuva;
@@ -17,13 +17,6 @@ import br.com.geodrone.model.Usuario;
 import br.com.geodrone.model.constantes.FlagStatusCliente;
 import br.com.geodrone.model.daoGen.DaoMaster;
 import br.com.geodrone.model.daoGen.DaoSession;
-import br.com.geodrone.service.ClienteService;
-import br.com.geodrone.service.DispositivoService;
-import br.com.geodrone.service.DoencaService;
-import br.com.geodrone.service.PontoColetaChuvaService;
-import br.com.geodrone.service.PragaService;
-import br.com.geodrone.service.TipoCultivoService;
-import br.com.geodrone.service.UsuarioService;
 import br.com.geodrone.utils.Constantes;
 import br.com.geodrone.utils.PreferencesUtils;
 
@@ -41,17 +34,28 @@ public class GeoDroneApplication extends Application {
 
         daoSession = new DaoMaster(db).newSession();
 
-        criarCliente();
+        /*criarCliente();
         criarDispositivo();
         criarUsuario();
         criarPontoColetaChuva();
         criarTipoCultivo();
         criarPragas();
-        criarDoencas();
-
-
+        criarDoencas();*/
     }
 
+    private void criarConfiguracao() {
+        if (daoSession.getConfiguracaoDao().loadAll().size() == 0) {
+
+            Configuracao configuracao = new Configuracao();
+            configuracao.setUrl(Constantes.API_LOGIN_URL);
+            configuracao.setDtInclusao(new Date());
+            configuracao.setDtAlteracao(new Date());
+            configuracao.setVersaoSistema(1L);
+
+            getDaoSession().getConfiguracaoDao().insert(configuracao);
+            SessionGeooDrone.setAttribute(SessionGeooDrone.CHAVE_URL_BASE, Constantes.API_LOGIN_URL);
+        }
+    }
     private void criarCliente() {
         if (daoSession.getClienteDao().loadAll().size() == 0) {
 
@@ -67,7 +71,7 @@ public class GeoDroneApplication extends Application {
                     "1222",
                     FlagStatusCliente.AGUARDANDO_APROVACAO);
             getDaoSession().getClienteDao().insert(cliente);
-            Session.setAttribute(PreferencesUtils.CHAVE_CLIENTE, cliente);
+            SessionGeooDrone.setAttribute(SessionGeooDrone.CHAVE_CLIENTE, cliente);
         }
     }
 
@@ -114,7 +118,7 @@ public class GeoDroneApplication extends Application {
             usuario.setIndAtivo(1);
             daoSession.getUsuarioDao().insert(usuario);
 
-            Session.setAttribute(PreferencesUtils.CHAVE_USUARIO, usuario);
+            SessionGeooDrone.setAttribute(SessionGeooDrone.CHAVE_USUARIO, usuario);
 
         }
     }
@@ -130,7 +134,7 @@ public class GeoDroneApplication extends Application {
             dispositivo.setVersaoSistema(1L);
 
             getDaoSession().getDispositivoDao().insert(dispositivo);
-            Session.setAttribute(PreferencesUtils.CHAVE_DISPOSITIVO, dispositivo);
+            SessionGeooDrone.setAttribute(SessionGeooDrone.CHAVE_DISPOSITIVO, dispositivo);
         }
     }
     private void criarPontoColetaChuva() {

@@ -18,12 +18,6 @@ import br.com.geodrone.utils.Messenger;
 public abstract class BaseActivity extends AppCompatActivity implements BaseError{
 
 
-    private GenericProgress progressBar;
-
-    public void setProgressBar(GenericProgress progressBar) {
-        this.progressBar = progressBar;
-    }
-
     @TargetApi(Build.VERSION_CODES.M)
     public void requestPermissionsSafely(String[] permissions, int requestCode) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -37,26 +31,19 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseErro
                 checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED;
     }
 
-    public void showLoading() {
-        hideLoading();
-        if (this.progressBar != null) {
-            this.progressBar.show();
-        }
-    }
+    public abstract  void showLoading();
 
-    public void hideLoading() {
-        if (this.progressBar != null) {
-            this.progressBar.hide();;
-        }
-    }
+    public abstract void hideLoading();
 
     @Override
     public void onError(String message){
+        hideLoading();
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onError(Exception ex){
+        hideLoading();
         Toast.makeText(this, ex.toString(), Toast.LENGTH_SHORT).show();
     }
 

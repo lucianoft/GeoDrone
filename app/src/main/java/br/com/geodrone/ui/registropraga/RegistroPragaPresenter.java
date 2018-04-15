@@ -1,13 +1,9 @@
 package br.com.geodrone.ui.registropraga;
 
-import android.app.Activity;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.geodrone.R;
-import br.com.geodrone.Session;
-import br.com.geodrone.model.Cliente;
 import br.com.geodrone.model.Praga;
 import br.com.geodrone.model.RegistroPraga;
 import br.com.geodrone.model.TipoCultivo;
@@ -16,7 +12,6 @@ import br.com.geodrone.ui.base.BasePresenter;
 import br.com.geodrone.service.PragaService;
 import br.com.geodrone.service.RegistroPragaService;
 import br.com.geodrone.service.TipoCultivoService;
-import br.com.geodrone.utils.PreferencesUtils;
 import br.com.geodrone.utils.StringUtils;
 
 /**

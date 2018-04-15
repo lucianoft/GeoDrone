@@ -41,6 +41,7 @@ import br.com.geodrone.activity.utils.Constantes;
 import br.com.geodrone.model.TipoCultivo;
 import br.com.geodrone.model.constantes.FlagDirecao;
 import br.com.geodrone.ui.base.BaseActivity;
+import br.com.geodrone.ui.helper.GenericProgress;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -69,11 +70,15 @@ public class RegistroImagemActivity extends BaseActivity implements BottomNaviga
     private String flagDirecao = null;
     private File file = null;
 
+    private GenericProgress mProgress;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_imagem);
         ButterKnife.bind(this);
+
+        mProgress = new GenericProgress(this);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
@@ -213,4 +218,13 @@ public class RegistroImagemActivity extends BaseActivity implements BottomNaviga
         String flagDirecao = FlagDirecao.getValueByIndice(position);
     }*/
 
+    @Override
+    public void showLoading() {
+        mProgress.show();
+    }
+
+    @Override
+    public void hideLoading() {
+        mProgress.hide();
+    }
 }

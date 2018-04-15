@@ -17,23 +17,33 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServiceGenerator {
 
-    public static final String API_BASE_URL = "http://192.168.1.109:8080/geoodrone/";
+    private static ServiceGenerator uniqueInstance;
 
-    private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+    private OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+    private static Retrofit.Builder builder = null;
+    private static Retrofit retrofit = null;
 
-    private static Retrofit.Builder builder =
-            new Retrofit.Builder()
-                    .baseUrl(API_BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create());
+    public static ServiceGenerator getInstance(String API_BASE_URL) {
 
-    private static Retrofit retrofit = builder.build();
+        uniqueInstance = new ServiceGenerator();
 
-    public static <S> S createService(Class<S> serviceClass) {
+        builder = new Retrofit.Builder()
+                        .baseUrl(API_BASE_URL)
+                        .addConverterFactory(GsonConverterFactory.create());
+        retrofit = builder.build();
+        return uniqueInstance;
+    }
+
+    private ServiceGenerator(){
+
+    }
+
+    public <S> S createService(Class<S> serviceClass) {
         return createService(serviceClass, null, null);
     }
 
-    public static <S> S createService(
-            Class<S> serviceClass, String username, String password) {
+    public <S> S createService(Class<S> serviceClass,
+                                      String username, String password) {
 
         final String authToken = Credentials.basic(username, password);
         Interceptor interceptor = new Interceptor() {
@@ -64,7 +74,7 @@ public class ServiceGenerator {
         return createService(serviceClass, null);*/
     }
 
-    public static <S> S createService(
+    public <S> S createService(
             Class<S> serviceClass, final String authToken) {
         if (!TextUtils.isEmpty(authToken)) {
             AuthenticationInterceptor interceptor =
@@ -81,7 +91,7 @@ public class ServiceGenerator {
         return retrofit.create(serviceClass);
     }
 
-    public static <S> S createServiceWithAuth(Class<S> serviceClass, final AccessToken accessToken) {
+    public <S> S createServiceWithAuth(Class<S> serviceClass, final AccessToken accessToken) {
         Interceptor interceptor = new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
