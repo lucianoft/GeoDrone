@@ -33,7 +33,7 @@ public interface APIClient {
                                                                 @Path("idCliente")    Long idCliente,
                                                                 @Path("descDispositivo") String descDispositivo);
 
-    @GET("/sincronizacao/{idUsuario}/{idCliente}/{idDispositivo}/{dtSincronizacao}")
+    @GET("/geoodrone/sincronizacao/{idUsuario}/{idCliente}/{idDispositivo}/{dtSincronizacao}")
     public Call<SincronizacaoRetResource> getAtualizacoes(@Path("idUsuario")  Long idUsuario,
                                                     @Path("idCliente")  Long idCliente,
                                                     @Path("idDispositivo") Long idDispositivo,

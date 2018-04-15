@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import br.com.geodrone.R;
+import br.com.geodrone.SessionGeooDrone;
 import br.com.geodrone.ui.base.BaseActivity;
 import br.com.geodrone.ui.helper.GenericProgress;
 import br.com.geodrone.ui.sincronizacao.SincronizacaoActivity;
@@ -69,16 +70,6 @@ public class PrimeiroLoginActivity extends BaseActivity implements PrimeiroLogin
         primeiroLoginPresenter.login(editTextUrl.getText().toString(), editTextEmail.getText().toString(), editTextSenha.getText().toString());
     }
 
-    @Override
-    public void onSuccessoLogin(String message) {
-        hideLoading();
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-        PreferencesUtils.putString(getApplicationContext(), PreferencesUtils.CHAVE_EMAIL_USUARIO, editTextEmail.getText().toString());
-        PreferencesUtils.putString(getApplicationContext(), PreferencesUtils.CHAVE_SENHA_USUARIO, editTextSenha.getText().toString());
-        Intent i = new Intent(this, SincronizacaoActivity.class);
-        startActivity(i);
-        finish();
-    }
 
     @Override
     public void onErrorEmail(String message) {
@@ -94,7 +85,16 @@ public class PrimeiroLoginActivity extends BaseActivity implements PrimeiroLogin
 
     @Override
     public void onDispositivoInstaladoSucesso(String message) {
-
+        hideLoading();
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        PreferencesUtils.putString(getApplicationContext(), PreferencesUtils.CHAVE_EMAIL_USUARIO, editTextEmail.getText().toString());
+        PreferencesUtils.putString(getApplicationContext(), PreferencesUtils.CHAVE_SENHA_USUARIO, editTextSenha.getText().toString());
+        Intent intent = new Intent(this, SincronizacaoActivity.class);
+        Bundle b = new Bundle();
+        b.putString(br.com.geodrone.activity.utils.Constantes.CHAVE_UI_ORIGEM, br.com.geodrone.activity.utils.Constantes.ACTIVITY_PRIMEIRO_LOGIN); //Your id
+        intent.putExtras(b); //Put your id to your next Intent
+        startActivity(intent);
+        finish();
     }
 
     @Override

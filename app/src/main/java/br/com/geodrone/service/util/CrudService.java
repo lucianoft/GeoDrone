@@ -78,11 +78,16 @@ public abstract class CrudService<T, ID extends Serializable> extends GenericSer
 	}
 
 	public T findById(ID id) {
+		T domain = findById(id, false);
+		return domain;
+	}
+
+	public T findById(ID id, boolean isThrowException) {
 		T domain = null;
 		if (id != null) {
 			domain = getRepository().findById(id);
 		}
-		if (domain == null) {
+		if (domain == null && isThrowException) {
 			throw new RuntimeException("Not Found");
 		}
 		return domain;

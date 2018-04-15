@@ -19,4 +19,8 @@ public interface Constantes {
 
 
     public static final String PARAM_CAMINHO_ARQUIVO = "pathImagem";
+
+    public static final String CHAVE_UI_ORIGEM = "CHAVE_UI_ORIGEM";
+    public static final String ACTIVITY_PRIMEIRO_LOGIN = "ACTIVITY_PRIMEIRO_LOGIN";
+
 }

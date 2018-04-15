@@ -15,4 +15,6 @@ public interface Constantes {
     public static final String API_OAUTH_CLIENTID = "angular";
     public static final String API_OAUTH_CLIENTSECRET = "@ngul@r0";//"@ngul@r0";
     public static final String API_OAUTH_GRANT_TYPE = "password";
+
+
 }

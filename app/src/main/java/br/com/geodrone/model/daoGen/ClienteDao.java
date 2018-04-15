@@ -33,10 +33,19 @@ public class ClienteDao extends AbstractDao<Cliente, Long> {
         public final static Property Email = new Property(6, String.class, "email", false, "EMAIL");
         public final static Property Telefone = new Property(7, String.class, "telefone", false, "TELEFONE");
         public final static Property Celular = new Property(8, String.class, "celular", false, "CELULAR");
-        public final static Property FlagStatus = new Property(9, String.class, "flagStatus", false, "FLAG_STATUS");
-        public final static Property DtInclusao = new Property(10, java.util.Date.class, "dtInclusao", false, "DT_INCLUSAO");
-        public final static Property DtAlteracao = new Property(11, java.util.Date.class, "dtAlteracao", false, "DT_ALTERACAO");
-        public final static Property VersaoSistema = new Property(12, Long.class, "versaoSistema", false, "VERSAO_SISTEMA");
+        public final static Property Segmento = new Property(9, String.class, "segmento", false, "SEGMENTO");
+        public final static Property Logradouro = new Property(10, String.class, "logradouro", false, "LOGRADOURO");
+        public final static Property Bairro = new Property(11, String.class, "bairro", false, "BAIRRO");
+        public final static Property Cidade = new Property(12, String.class, "cidade", false, "CIDADE");
+        public final static Property Numero = new Property(13, String.class, "numero", false, "NUMERO");
+        public final static Property Complemento = new Property(14, String.class, "complemento", false, "COMPLEMENTO");
+        public final static Property Uf = new Property(15, String.class, "uf", false, "UF");
+        public final static Property Cep = new Property(16, Long.class, "cep", false, "CEP");
+        public final static Property QtdeEstacoes = new Property(17, Long.class, "qtdeEstacoes", false, "QTDE_ESTACOES");
+        public final static Property FlagStatus = new Property(18, String.class, "flagStatus", false, "FLAG_STATUS");
+        public final static Property DtInclusao = new Property(19, java.util.Date.class, "dtInclusao", false, "DT_INCLUSAO");
+        public final static Property DtAlteracao = new Property(20, java.util.Date.class, "dtAlteracao", false, "DT_ALTERACAO");
+        public final static Property VersaoSistema = new Property(21, Long.class, "versaoSistema", false, "VERSAO_SISTEMA");
     }
 
 
@@ -61,10 +70,19 @@ public class ClienteDao extends AbstractDao<Cliente, Long> {
                 "\"EMAIL\" TEXT," + // 6: email
                 "\"TELEFONE\" TEXT," + // 7: telefone
                 "\"CELULAR\" TEXT," + // 8: celular
-                "\"FLAG_STATUS\" TEXT," + // 9: flagStatus
-                "\"DT_INCLUSAO\" INTEGER NOT NULL ," + // 10: dtInclusao
-                "\"DT_ALTERACAO\" INTEGER NOT NULL ," + // 11: dtAlteracao
-                "\"VERSAO_SISTEMA\" INTEGER NOT NULL );"); // 12: versaoSistema
+                "\"SEGMENTO\" TEXT," + // 9: segmento
+                "\"LOGRADOURO\" TEXT," + // 10: logradouro
+                "\"BAIRRO\" TEXT," + // 11: bairro
+                "\"CIDADE\" TEXT," + // 12: cidade
+                "\"NUMERO\" TEXT," + // 13: numero
+                "\"COMPLEMENTO\" TEXT," + // 14: complemento
+                "\"UF\" TEXT," + // 15: uf
+                "\"CEP\" INTEGER," + // 16: cep
+                "\"QTDE_ESTACOES\" INTEGER," + // 17: qtdeEstacoes
+                "\"FLAG_STATUS\" TEXT," + // 18: flagStatus
+                "\"DT_INCLUSAO\" INTEGER NOT NULL ," + // 19: dtInclusao
+                "\"DT_ALTERACAO\" INTEGER NOT NULL ," + // 20: dtAlteracao
+                "\"VERSAO_SISTEMA\" INTEGER NOT NULL );"); // 21: versaoSistema
     }
 
     /** Drops the underlying database table. */
@@ -122,13 +140,58 @@ public class ClienteDao extends AbstractDao<Cliente, Long> {
             stmt.bindString(9, celular);
         }
  
+        String segmento = entity.getSegmento();
+        if (segmento != null) {
+            stmt.bindString(10, segmento);
+        }
+ 
+        String logradouro = entity.getLogradouro();
+        if (logradouro != null) {
+            stmt.bindString(11, logradouro);
+        }
+ 
+        String bairro = entity.getBairro();
+        if (bairro != null) {
+            stmt.bindString(12, bairro);
+        }
+ 
+        String cidade = entity.getCidade();
+        if (cidade != null) {
+            stmt.bindString(13, cidade);
+        }
+ 
+        String numero = entity.getNumero();
+        if (numero != null) {
+            stmt.bindString(14, numero);
+        }
+ 
+        String complemento = entity.getComplemento();
+        if (complemento != null) {
+            stmt.bindString(15, complemento);
+        }
+ 
+        String uf = entity.getUf();
+        if (uf != null) {
+            stmt.bindString(16, uf);
+        }
+ 
+        Long cep = entity.getCep();
+        if (cep != null) {
+            stmt.bindLong(17, cep);
+        }
+ 
+        Long qtdeEstacoes = entity.getQtdeEstacoes();
+        if (qtdeEstacoes != null) {
+            stmt.bindLong(18, qtdeEstacoes);
+        }
+ 
         String flagStatus = entity.getFlagStatus();
         if (flagStatus != null) {
-            stmt.bindString(10, flagStatus);
+            stmt.bindString(19, flagStatus);
         }
-        stmt.bindLong(11, entity.getDtInclusao().getTime());
-        stmt.bindLong(12, entity.getDtAlteracao().getTime());
-        stmt.bindLong(13, entity.getVersaoSistema());
+        stmt.bindLong(20, entity.getDtInclusao().getTime());
+        stmt.bindLong(21, entity.getDtAlteracao().getTime());
+        stmt.bindLong(22, entity.getVersaoSistema());
     }
 
     @Override
@@ -180,13 +243,58 @@ public class ClienteDao extends AbstractDao<Cliente, Long> {
             stmt.bindString(9, celular);
         }
  
+        String segmento = entity.getSegmento();
+        if (segmento != null) {
+            stmt.bindString(10, segmento);
+        }
+ 
+        String logradouro = entity.getLogradouro();
+        if (logradouro != null) {
+            stmt.bindString(11, logradouro);
+        }
+ 
+        String bairro = entity.getBairro();
+        if (bairro != null) {
+            stmt.bindString(12, bairro);
+        }
+ 
+        String cidade = entity.getCidade();
+        if (cidade != null) {
+            stmt.bindString(13, cidade);
+        }
+ 
+        String numero = entity.getNumero();
+        if (numero != null) {
+            stmt.bindString(14, numero);
+        }
+ 
+        String complemento = entity.getComplemento();
+        if (complemento != null) {
+            stmt.bindString(15, complemento);
+        }
+ 
+        String uf = entity.getUf();
+        if (uf != null) {
+            stmt.bindString(16, uf);
+        }
+ 
+        Long cep = entity.getCep();
+        if (cep != null) {
+            stmt.bindLong(17, cep);
+        }
+ 
+        Long qtdeEstacoes = entity.getQtdeEstacoes();
+        if (qtdeEstacoes != null) {
+            stmt.bindLong(18, qtdeEstacoes);
+        }
+ 
         String flagStatus = entity.getFlagStatus();
         if (flagStatus != null) {
-            stmt.bindString(10, flagStatus);
+            stmt.bindString(19, flagStatus);
         }
-        stmt.bindLong(11, entity.getDtInclusao().getTime());
-        stmt.bindLong(12, entity.getDtAlteracao().getTime());
-        stmt.bindLong(13, entity.getVersaoSistema());
+        stmt.bindLong(20, entity.getDtInclusao().getTime());
+        stmt.bindLong(21, entity.getDtAlteracao().getTime());
+        stmt.bindLong(22, entity.getVersaoSistema());
     }
 
     @Override
@@ -212,10 +320,19 @@ public class ClienteDao extends AbstractDao<Cliente, Long> {
         entity.setEmail(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
         entity.setTelefone(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
         entity.setCelular(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
-        entity.setFlagStatus(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
-        entity.setDtInclusao(new java.util.Date(cursor.getLong(offset + 10)));
-        entity.setDtAlteracao(new java.util.Date(cursor.getLong(offset + 11)));
-        entity.setVersaoSistema(cursor.getLong(offset + 12));
+        entity.setSegmento(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
+        entity.setLogradouro(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
+        entity.setBairro(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
+        entity.setCidade(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
+        entity.setNumero(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
+        entity.setComplemento(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
+        entity.setUf(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
+        entity.setCep(cursor.isNull(offset + 16) ? null : cursor.getLong(offset + 16));
+        entity.setQtdeEstacoes(cursor.isNull(offset + 17) ? null : cursor.getLong(offset + 17));
+        entity.setFlagStatus(cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18));
+        entity.setDtInclusao(new java.util.Date(cursor.getLong(offset + 19)));
+        entity.setDtAlteracao(new java.util.Date(cursor.getLong(offset + 20)));
+        entity.setVersaoSistema(cursor.getLong(offset + 21));
      }
     
     @Override

@@ -11,6 +11,8 @@ public class SincronizacaoRetResource implements Serializable {
 	private Long idCliente;
 	private Long idDispositivo;
 
+	private ClienteResource clienteResource;
+	private UsuarioResource usuarioResource;
 	private List<TipoCultivoResource> tipoCultivos;
 	private List<DoencaResource> doencas;
 	private List<PragaResource> pragas;
@@ -37,6 +39,22 @@ public class SincronizacaoRetResource implements Serializable {
 
 	public void setIdDispositivo(Long idDispositivo) {
 		this.idDispositivo = idDispositivo;
+	}
+
+	public ClienteResource getClienteResource() {
+		return clienteResource;
+	}
+
+	public void setClienteResource(ClienteResource clienteResource) {
+		this.clienteResource = clienteResource;
+	}
+
+	public UsuarioResource getUsuarioResource() {
+		return usuarioResource;
+	}
+
+	public void setUsuarioResource(UsuarioResource usuarioResource) {
+		this.usuarioResource = usuarioResource;
 	}
 
 	public List<TipoCultivoResource> getTipoCultivos() {

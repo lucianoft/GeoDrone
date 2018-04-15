@@ -40,8 +40,6 @@ public class PrimeiroLoginPresenter extends BasePresenter<PrimeiroLoginPresenter
 
         void onClickLogin();
 
-        void onSuccessoLogin(String message);
-
         void onErrorEmail(String message);
 
         void onErrorSenha(String message);
@@ -83,7 +81,7 @@ public class PrimeiroLoginPresenter extends BasePresenter<PrimeiroLoginPresenter
         return isOk;
     }
 
-    public void login(final String url, String email, String senha){
+    public void login(final String url, final String email, final String senha){
         APIClient client = ServiceGenerator.getInstance(url).createService(APIClient.class,
                                                           Constantes.API_OAUTH_CLIENTID,
                                                           Constantes.API_OAUTH_CLIENTSECRET);
@@ -96,6 +94,9 @@ public class PrimeiroLoginPresenter extends BasePresenter<PrimeiroLoginPresenter
             public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
                 int statusCode = response.code();
                 if(statusCode == 200) {
+                    PreferencesUtils.putString(activity.getApplicationContext(), PreferencesUtils.CHAVE_EMAIL_USUARIO, email);
+                    PreferencesUtils.putString(activity.getApplicationContext(), PreferencesUtils.CHAVE_SENHA_USUARIO, senha);
+
                     AccessToken accessToken = response.body();
                     PreferencesUtils.putAccessToken(activity, accessToken);
                     atualizarUrlBase(url);
@@ -125,7 +126,7 @@ public class PrimeiroLoginPresenter extends BasePresenter<PrimeiroLoginPresenter
                 @Override
                 public void onResponse(Call<InstallerResource> call, Response<InstallerResource> response) {
                     int statusCode = response.code();
-                    if(statusCode == 200) {
+                    if(response.isSuccessful()) {
                         InstallerResource sincronizacaoResource = response.body();
                         sincronizacaoService.instalarAplicativo(URL_BASE, sincronizacaoResource);
                         view.onDispositivoInstaladoSucesso(activity.getString(R.string.msg_operacao_sucesso));

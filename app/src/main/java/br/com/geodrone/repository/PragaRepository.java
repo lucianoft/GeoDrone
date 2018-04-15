@@ -8,8 +8,10 @@ import org.greenrobot.greendao.query.QueryBuilder;
 import java.util.List;
 
 import br.com.geodrone.model.Praga;
+import br.com.geodrone.model.TipoCultivo;
 import br.com.geodrone.model.Usuario;
 import br.com.geodrone.model.daoGen.PragaDao;
+import br.com.geodrone.model.daoGen.TipoCultivoDao;
 import br.com.geodrone.model.daoGen.UsuarioDao;
 
 /**
@@ -39,5 +41,10 @@ public class PragaRepository extends CrudRepository<Praga, Long>{
                 .orderAsc(PragaDao.Properties.Descricao);
 
         return qrBuilder.list();
+    }
+
+    public Praga findOne(Long idPraga) {
+        QueryBuilder<Praga> qrBuilder = getCrudDao().queryBuilder().where(PragaDao.Properties.Id.eq(idPraga));
+        return qrBuilder.unique();
     }
 }

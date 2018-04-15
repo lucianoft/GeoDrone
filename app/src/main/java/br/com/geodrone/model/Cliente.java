@@ -17,31 +17,58 @@ public class Cliente extends GenericModel implements AuditModel {
 	@Property(nameInDb = "ID_CLIENTE")
 	private Long id;
 
-	@Property(nameInDb = "NOME_RAZAO_SOCIAL")
+	@Property(nameInDb =  "NOME_RAZAO_SOCIAL")
 	private String nomeRazaoSocial;
 
-	@Property(nameInDb = "SOBRENOME")
+	@Property(nameInDb =  "SOBRENOME")
 	private String sobrenome;
 
-	@Property(nameInDb = "IND_PESSOA_FISICA")
+	@Property(nameInDb =  "IND_PESSOA_FISICA")
 	private Integer indPessoaFisica;
 
-	@Property(nameInDb = "CPF")
+	@Property(nameInDb =  "CPF")
 	private Long cpf;
 
-	@Property(nameInDb = "CNPJ")
+	@Property(nameInDb =  "CNPJ")
 	private Long cnpj;
 
-	@Property(nameInDb = "EMAIL")
+	@Property(nameInDb =  "EMAIL")
 	private String email;
 
-	@Property(nameInDb = "TELEFONE")
+	@Property(nameInDb =  "TELEFONE")
 	private String telefone;
 
-	@Property(nameInDb = "CELULAR")
+	@Property(nameInDb =  "CELULAR")
 	private String celular;
 
-	@Property(nameInDb = "FLAG_STATUS")
+	@Property(nameInDb =  "SEGMENTO")
+	private String segmento;
+
+	@Property(nameInDb =  "LOGRADOURO")
+	private String logradouro;
+
+	@Property(nameInDb =  "BAIRRO")
+	private String bairro;
+
+	@Property(nameInDb =  "CIDADE")
+	private String cidade;
+
+	@Property(nameInDb =  "NUMERO")
+	private String numero;
+
+	@Property(nameInDb =  "COMPLEMENTO")
+	private String complemento;
+
+	@Property(nameInDb =  "UF")
+	private String uf;
+
+	@Property(nameInDb =  "CEP")
+	private Long cep;
+
+	@Property(nameInDb =  "QTDE_ESTACOES")
+	private Long qtdeEstacoes;
+
+	@Property(nameInDb =  "FLAG_STATUS")
 	private String flagStatus;
 
 	@Property(nameInDb = "DT_INCLUSAO")
@@ -69,6 +96,7 @@ public class Cliente extends GenericModel implements AuditModel {
 	public String getNomeRazaoSocial() {
 		return this.nomeRazaoSocial;
 	}
+
 	public void setNomeRazaoSocial(String nomeRazaoSocial) {
 		this.nomeRazaoSocial = nomeRazaoSocial;
 	}
@@ -76,6 +104,7 @@ public class Cliente extends GenericModel implements AuditModel {
 	public String getSobrenome() {
 		return this.sobrenome;
 	}
+
 	public void setSobrenome(String sobrenome) {
 		this.sobrenome = sobrenome;
 	}
@@ -83,16 +112,15 @@ public class Cliente extends GenericModel implements AuditModel {
 	public Integer getIndPessoaFisica() {
 		return this.indPessoaFisica;
 	}
+
 	public void setIndPessoaFisica(Integer indPessoaFisica) {
 		this.indPessoaFisica = indPessoaFisica;
-	}
-	public boolean isPessoaFisica() {
-		return (indPessoaFisica != null && indPessoaFisica.intValue() == 1);
 	}
 
 	public Long getCpf() {
 		return this.cpf;
 	}
+
 	public void setCpf(Long cpf) {
 		this.cpf = cpf;
 	}
@@ -100,6 +128,7 @@ public class Cliente extends GenericModel implements AuditModel {
 	public Long getCnpj() {
 		return this.cnpj;
 	}
+
 	public void setCnpj(Long cnpj) {
 		this.cnpj = cnpj;
 	}
@@ -107,6 +136,7 @@ public class Cliente extends GenericModel implements AuditModel {
 	public String getEmail() {
 		return this.email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -114,6 +144,7 @@ public class Cliente extends GenericModel implements AuditModel {
 	public String getTelefone() {
 		return this.telefone;
 	}
+
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
@@ -121,13 +152,87 @@ public class Cliente extends GenericModel implements AuditModel {
 	public String getCelular() {
 		return this.celular;
 	}
+
 	public void setCelular(String celular) {
 		this.celular = celular;
+	}
+
+	public String getSegmento() {
+		return this.segmento;
+	}
+
+	public void setSegmento(String segmento) {
+		this.segmento = segmento;
+	}
+
+	public String getLogradouro() {
+		return this.logradouro;
+	}
+
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
+	}
+
+	public String getBairro() {
+		return this.bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getCidade() {
+		return this.cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public String getNumero() {
+		return this.numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	public String getComplemento() {
+		return this.complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+
+	public String getUf() {
+		return this.uf;
+	}
+
+	public void setUf(String uf) {
+		this.uf = uf;
+	}
+
+	public Long getCep() {
+		return this.cep;
+	}
+
+	public void setCep(Long cep) {
+		this.cep = cep;
+	}
+
+	public Long getQtdeEstacoes() {
+		return this.qtdeEstacoes;
+	}
+
+	public void setQtdeEstacoes(Long qtdeEstacoes) {
+		this.qtdeEstacoes = qtdeEstacoes;
 	}
 
 	public String getFlagStatus() {
 		return this.flagStatus;
 	}
+
 	public void setFlagStatus(String flagStatus) {
 		this.flagStatus = flagStatus;
 	}
