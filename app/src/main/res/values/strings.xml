@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">GeoDrone</string>
+    <string name="title_activity_primeiro_login">Primeiro Login</string>
     <string name="title_activity_login">Login</string>
     <string name="title_activity_main">Menu Principal</string>
     <string name="title_activity_env_img_camera">EnvImgCameraActivity</string>
@@ -82,8 +83,7 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_maps2">Map</string>
     <string name="title_activity_registro_pragas">Registro de Pagras</string>
-
-    <string name="widget_labelled_spinner_errorText">You must choose an item.</string>
+    <string name="title_activity_registro_doenca">Registro de Doencas</string>
 
     <string name="menu_registro_chuva">Registro Chuva</string>
     <string name="menu_registro_foto">Registro Fotos</string>

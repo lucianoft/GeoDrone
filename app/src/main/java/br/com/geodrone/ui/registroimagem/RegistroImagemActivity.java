@@ -80,8 +80,8 @@ public class RegistroImagemActivity extends BaseActivity implements BottomNaviga
 
         mProgress = new GenericProgress(this);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
-        getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
+        //getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
 
         registroImagemPresenter = new RegistroImagemPresenter(this);
 

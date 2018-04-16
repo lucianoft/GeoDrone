@@ -40,6 +40,7 @@ public class LoginActivity extends BaseActivity implements LoginPresenter.View{
         ButterKnife.bind(this);
 
         mProgress = new GenericProgress(this);
+
         loginPresenter = new LoginPresenter(this);
         editTextEmail.setText(PreferencesUtils.getString(getApplicationContext(), PreferencesUtils.CHAVE_EMAIL_USUARIO, ""));
         editTextSenha.setText(PreferencesUtils.getString(getApplicationContext(), PreferencesUtils.CHAVE_SENHA_USUARIO, ""));
@@ -71,7 +72,6 @@ public class LoginActivity extends BaseActivity implements LoginPresenter.View{
         }
         editTextSenha.setSelection(editTextSenha.getText().length());
     }
-
 
     @Override
     @OnClick(R.id.button_login)
@@ -106,12 +106,10 @@ public class LoginActivity extends BaseActivity implements LoginPresenter.View{
     @Override
     public void showLoading() {
         mProgress.show();
-
     }
 
     @Override
     public void hideLoading() {
         mProgress.hide();
-
     }
 }

@@ -57,8 +57,8 @@ public class RegistroDoencaActivity extends BaseActivity implements RegistroDoen
         setContentView(R.layout.activity_registro_doenca);
         ButterKnife.bind(this);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
-        getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
+        //getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
 
         mProgress = new GenericProgress(this);
 
@@ -73,7 +73,6 @@ public class RegistroDoencaActivity extends BaseActivity implements RegistroDoen
     public void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         registroDoencaPresenter.takeView(this);
-        hideLoading();
     }
 
     private void initComponentes() {
@@ -110,7 +109,6 @@ public class RegistroDoencaActivity extends BaseActivity implements RegistroDoen
     public void salvar() {
         showLoading();
         registroDoencaPresenter.salvar(doenca, editTextObservacao.getText().toString(), location.getLatitude(), location.getLongitude(), editTextQtdeDoencas.getText().toString());
-        hideLoading();
     }
 
     @Override
@@ -132,22 +130,26 @@ public class RegistroDoencaActivity extends BaseActivity implements RegistroDoen
 
     @Override
     public void onErrorQtde(String message) {
+        hideLoading();
         editTextQtdeDoencas.setError(message);
     }
 
     @Override
     public void onErrorDoenca(String message) {
+        hideLoading();
         autoCompleteDoenca.setError(message);
     }
 
     @Override
     public void onRegitroDoencaSucesso(String message) {
         showMessage(message);
+        hideLoading();
         finish();
     }
 
     @Override
     public void onErrorRegitroDoenca(String message) {
+        hideLoading();
         onError(message);
     }
 

@@ -55,8 +55,8 @@ public class RegistroPragaActivity extends BaseActivity implements RegistroPraga
         setContentView(R.layout.activity_registro_praga);
         ButterKnife.bind(this);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
-        getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
+        //getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
 
         mProgress = new GenericProgress(this);
 
@@ -95,7 +95,6 @@ public class RegistroPragaActivity extends BaseActivity implements RegistroPraga
     public void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         registroPragaPresenter.takeView(this);
-        hideLoading();
     }
 
     @OnItemSelected(R.id.spinner_tipo_cultivo_praga)
@@ -108,7 +107,6 @@ public class RegistroPragaActivity extends BaseActivity implements RegistroPraga
     public void salvar() {
         showLoading();
         registroPragaPresenter.salvar(praga, editTextObservacao.getText().toString(), location.getLatitude(), location.getLongitude(), editTextQtdePragas.getText().toString());
-        hideLoading();
     }
 
     @Override
@@ -130,11 +128,13 @@ public class RegistroPragaActivity extends BaseActivity implements RegistroPraga
 
     @Override
     public void onErrorQtde(String message) {
+        hideLoading();
         editTextQtdePragas.setError(message);
     }
 
     @Override
     public void onErrorPraga(String message) {
+       hideLoading();
         autoCompletePraga.setError(message);
     }
 
@@ -146,6 +146,7 @@ public class RegistroPragaActivity extends BaseActivity implements RegistroPraga
 
     @Override
     public void onErrorRegitroPraga(String message) {
+        hideLoading();
         onError(message);
     }
 

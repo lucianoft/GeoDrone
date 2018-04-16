@@ -46,8 +46,8 @@ public class SincronizacaoService extends GenericService {
         tipoCultivoService = new TipoCultivoService(ctx);
         doencaService = new DoencaService(ctx);
         pragaService = new PragaService(ctx);
+        usuarioService = new UsuarioService(ctx);
         clienteService = new ClienteService(ctx);
-        pragaService = new PragaService(ctx);
     }
 
     public void instalarAplicativo (String url, InstallerResource installerResource)  {
@@ -156,8 +156,9 @@ public class SincronizacaoService extends GenericService {
             cliente = clienteService.update(cliente);
         }
 
-        PreferencesUtils.getString(ctx, PreferencesUtils.CHAVE_USUARIO);
+        SessionGeooDrone.setAttribute(SessionGeooDrone.CHAVE_CLIENTE, cliente);
     }
+
     private void salvarUsuario(UsuarioResource usuarioResource) {
         boolean bInsert = false;
         Usuario usuario = usuarioService.findById(usuarioResource.getId());
@@ -184,7 +185,7 @@ public class SincronizacaoService extends GenericService {
             usuario = usuarioService.update(usuario);
         }
 
-        PreferencesUtils.getString(ctx, PreferencesUtils.CHAVE_USUARIO);
+        SessionGeooDrone.setAttribute(SessionGeooDrone.CHAVE_USUARIO, usuario);
     }
 
 

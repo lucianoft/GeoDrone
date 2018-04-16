@@ -86,13 +86,15 @@ public class RegistroPluviosidadePresenter extends BasePresenter<RegistroPluvios
 
 
         ColetaPluviosidadeDto coletaPluviosidadeDto = LocationUtils.localLessDistance(location, this.coletaPluviosidadeDtos);
-        Location locationMenor = LocationUtils.createNewLocation(coletaPluviosidadeDto.getLatitude(), coletaPluviosidadeDto.getLongitude());
-        double distancia = LocationUtils.calculateDistance(location, locationMenor);
-        if (distancia <= 10){
-            if (coletaPluviosidadeDtoOld == null || !coletaPluviosidadeDto.equals(coletaPluviosidadeDtoOld)){
-                view.onShowDialogInfPluviosidade(coletaPluviosidadeDto);
+        if ( coletaPluviosidadeDto != null) {
+            Location locationMenor = LocationUtils.createNewLocation(coletaPluviosidadeDto.getLatitude(), coletaPluviosidadeDto.getLongitude());
+            double distancia = LocationUtils.calculateDistance(location, locationMenor);
+            if (distancia <= 10) {
+                if (coletaPluviosidadeDtoOld == null || !coletaPluviosidadeDto.equals(coletaPluviosidadeDtoOld)) {
+                    view.onShowDialogInfPluviosidade(coletaPluviosidadeDto);
+                }
+                coletaPluviosidadeDtoOld = coletaPluviosidadeDto;
             }
-            coletaPluviosidadeDtoOld = coletaPluviosidadeDto;
         }
     }
 

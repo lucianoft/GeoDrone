@@ -3,6 +3,7 @@ package br.com.geodrone.oauth;
 import android.text.TextUtils;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import br.com.geodrone.oauth.dto.AccessToken;
 import okhttp3.Credentials;
@@ -19,7 +20,10 @@ public class ServiceGenerator {
 
     private static ServiceGenerator uniqueInstance;
 
-    private OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+    private OkHttpClient.Builder httpClient = new OkHttpClient.Builder().connectTimeout(20, TimeUnit.SECONDS)
+    .writeTimeout(20, TimeUnit.SECONDS)
+    .readTimeout(30, TimeUnit.SECONDS);
+
     private static Retrofit.Builder builder = null;
     private static Retrofit retrofit = null;
 
@@ -56,7 +60,7 @@ public class ServiceGenerator {
                 return chain.proceed(request);
             }
         };
-        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        //OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.addInterceptor(interceptor);
         OkHttpClient client = httpClient.build();
 
@@ -102,7 +106,7 @@ public class ServiceGenerator {
                 return chain.proceed(request);
             }
         };
-        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        //OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.addInterceptor(interceptor);
         OkHttpClient client = httpClient.build();
         builder.client(httpClient.build());
@@ -132,7 +136,9 @@ public class ServiceGenerator {
                 return chain.proceed(request);
             }
         };
-        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder().connectTimeout(20, TimeUnit.SECONDS)
+                .writeTimeout(20, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS);
         httpClient.addInterceptor(interceptor);
         OkHttpClient client = httpClient.build();
 
