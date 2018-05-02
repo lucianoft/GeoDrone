@@ -2,11 +2,17 @@ package br.com.geodrone.service;
 
 import android.content.Context;
 
+import org.greenrobot.greendao.annotation.NotNull;
+import org.greenrobot.greendao.annotation.Property;
+
+import java.util.Date;
+
 import br.com.geodrone.SessionGeooDrone;
 import br.com.geodrone.model.Cliente;
 import br.com.geodrone.model.Configuracao;
 import br.com.geodrone.model.Dispositivo;
 import br.com.geodrone.model.Doenca;
+import br.com.geodrone.model.PontoColetaChuva;
 import br.com.geodrone.model.Praga;
 import br.com.geodrone.model.TipoCultivo;
 import br.com.geodrone.model.Usuario;
@@ -16,12 +22,14 @@ import br.com.geodrone.oauth.dto.AccessToken;
 import br.com.geodrone.resource.ClienteResource;
 import br.com.geodrone.resource.DoencaResource;
 import br.com.geodrone.resource.InstallerResource;
+import br.com.geodrone.resource.PontoColetaChuvaResource;
 import br.com.geodrone.resource.PragaResource;
 import br.com.geodrone.resource.SincronizacaoRetResource;
 import br.com.geodrone.resource.TipoCultivoResource;
 import br.com.geodrone.resource.UsuarioResource;
 import br.com.geodrone.service.util.GenericService;
 import br.com.geodrone.utils.Constantes;
+import br.com.geodrone.utils.NumberUtils;
 import br.com.geodrone.utils.PreferencesUtils;
 
 /**
@@ -37,6 +45,7 @@ public class SincronizacaoService extends GenericService {
     PragaService pragaService = null;
     UsuarioService usuarioService = null;
     ClienteService clienteService = null;
+    PontoColetaChuvaService pontoColetaChuvaService = null;
 
     private Context ctx = null;
     public SincronizacaoService(Context ctx){
@@ -48,6 +57,7 @@ public class SincronizacaoService extends GenericService {
         pragaService = new PragaService(ctx);
         usuarioService = new UsuarioService(ctx);
         clienteService = new ClienteService(ctx);
+        pontoColetaChuvaService = new PontoColetaChuvaService(ctx);
     }
 
     public void instalarAplicativo (String url, InstallerResource installerResource)  {
@@ -98,6 +108,18 @@ public class SincronizacaoService extends GenericService {
         if (sincronizacaoRetResource.getDoencas() != null && !sincronizacaoRetResource.getDoencas().isEmpty()){
             for (DoencaResource doencaResource : sincronizacaoRetResource.getDoencas()) {
                 salvarDoenca(doencaResource);
+            }
+        }
+
+        if (sincronizacaoRetResource.getDoencas() != null && !sincronizacaoRetResource.getDoencas().isEmpty()){
+            for (DoencaResource doencaResource : sincronizacaoRetResource.getDoencas()) {
+                salvarDoenca(doencaResource);
+            }
+        }
+
+        if (sincronizacaoRetResource.getPontoColetaChuvas() != null && !sincronizacaoRetResource.getPontoColetaChuvas().isEmpty()){
+            for (PontoColetaChuvaResource pontoColetaChuvaResource : sincronizacaoRetResource.getPontoColetaChuvas()) {
+                salvarPontoColetaChuva(pontoColetaChuvaResource);
             }
         }
 
@@ -226,6 +248,39 @@ public class SincronizacaoService extends GenericService {
             doencaService.insert(doenca);
         }else{
             doencaService.update(doenca);
+        }
+    }
+
+    private void salvarPontoColetaChuva(PontoColetaChuvaResource pontoColetaChuvaResource) {
+        boolean bInsert = false;
+        NumberUtils numberUtils = new NumberUtils();
+
+        Dispositivo dispositivo = SessionGeooDrone.getAttribute(SessionGeooDrone.CHAVE_DISPOSITIVO);
+        boolean isMesmoDispositivo = pontoColetaChuvaResource.getIdDispositivo() != null && numberUtils.isEqualsLong(pontoColetaChuvaResource.getIdDispositivo(), dispositivo.getId());
+
+        PontoColetaChuva pontoColetaChuva = null;
+        if (isMesmoDispositivo) {
+            pontoColetaChuva = pontoColetaChuvaService.findById(pontoColetaChuvaResource.getIdPontoColetaChuvaDispositivo());
+        }else{
+            pontoColetaChuva = pontoColetaChuvaService.findByIdPontoColetaChuvaWeb(pontoColetaChuvaResource.getIdPontoColetaChuva());
+        }
+        if (pontoColetaChuva == null) {
+            bInsert = true;
+            pontoColetaChuva = new PontoColetaChuva();
+        }
+
+        pontoColetaChuva.setIdPontoColetaChuva(pontoColetaChuvaResource.getIdPontoColetaChuva());
+        pontoColetaChuva.setDescricao(pontoColetaChuvaResource.getDescricao());
+        pontoColetaChuva.setDtInstalacao(pontoColetaChuvaResource.getDtInstalacao());
+        pontoColetaChuva.setIdCliente(pontoColetaChuvaResource.getIdCliente());
+        pontoColetaChuva.setLatitude(pontoColetaChuvaResource.getLatitude());
+        pontoColetaChuva.setLongitude(pontoColetaChuvaResource.getLongitude());
+        pontoColetaChuva.setIndAtivo(pontoColetaChuvaResource.getIndAtivo());
+
+        if (bInsert){
+            pontoColetaChuvaService.insert(pontoColetaChuva);
+        }else{
+            pontoColetaChuvaService.update(pontoColetaChuva);
         }
     }
 }

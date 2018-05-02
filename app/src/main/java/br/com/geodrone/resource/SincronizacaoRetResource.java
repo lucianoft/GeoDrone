@@ -16,6 +16,7 @@ public class SincronizacaoRetResource implements Serializable {
 	private List<TipoCultivoResource> tipoCultivos;
 	private List<DoencaResource> doencas;
 	private List<PragaResource> pragas;
+	private List<PontoColetaChuvaResource> pontoColetaChuvas;
 
 	public Long getIdUsuario() {
 		return idUsuario;
@@ -81,4 +82,11 @@ public class SincronizacaoRetResource implements Serializable {
 		this.pragas = pragas;
 	}
 
+    public List<PontoColetaChuvaResource> getPontoColetaChuvas() {
+        return pontoColetaChuvas;
+    }
+
+    public void setPontoColetaChuvas(List<PontoColetaChuvaResource> pontoColetaChuvas) {
+        this.pontoColetaChuvas = pontoColetaChuvas;
+    }
 }

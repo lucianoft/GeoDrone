@@ -32,21 +32,14 @@ public abstract class BaseMapFragmentActivity extends BaseFragmentActivity imple
 
     public GoogleMap mMap;
     public GPSTracker tracker;
-    private static final int REQ_LOCATION_PERMISSION = 101;
+    public static final int REQ_LOCATION_PERMISSION = 101;
     private static final int REQ_OPEN_SETTING = 102;
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
+            finish();
         }
 
         tracker = new GPSTracker(this, mMap) {
@@ -76,10 +69,11 @@ public abstract class BaseMapFragmentActivity extends BaseFragmentActivity imple
     private void setMyLocation() {
         if (tracker.getLatitude() != 0 && tracker.getLongitude() != 0) {
             LatLng myLocation = new LatLng(tracker.getLatitude(), tracker.getLongitude());
-            mMap.clear();
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 14f));
+        /*
             mMap.addMarker(new MarkerOptions().position(myLocation).title("You are at Here!!"));
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 14f));
-        }
+ */       }
     }
 
     private AlertDialog locationAlertDialog;
@@ -87,14 +81,14 @@ public abstract class BaseMapFragmentActivity extends BaseFragmentActivity imple
         if (null == locationAlertDialog)
             locationAlertDialog = new AlertDialog.Builder(this, Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ? android.R.style.Theme_Material_Light_Dialog_Alert : -1)
                     .setCancelable(false)
-                    .setMessage("This demo application would like to access your location")
+                    .setMessage("Voce deve habilitar serviço de Localização para utilizar essa funçao")
                     .setPositiveButton("Settings", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
                             Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                             startActivityForResult(intent, REQ_OPEN_SETTING);
                         }
-                    }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
                         }

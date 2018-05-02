@@ -2,6 +2,7 @@ package br.com.geodrone;
 
 import android.app.Application;
 
+import org.greenrobot.greendao.AbstractDaoMaster;
 import org.greenrobot.greendao.database.Database;
 
 import java.util.Date;
@@ -31,8 +32,9 @@ public class GeoDroneApplication extends Application {
 
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, Constantes.BD_NOME); //The users-db here is the name of our database.
         Database db = helper.getWritableDb();
-
+        //DaoMaster.dropAllTables(db, true);
         daoSession = new DaoMaster(db).newSession();
+        DaoMaster.createAllTables(db, true);
 
         /*criarCliente();
         criarDispositivo();

@@ -7,7 +7,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-
 import br.com.geodrone.SessionGeooDrone;
 import br.com.geodrone.exception.BusinessException;
 import br.com.geodrone.model.Cliente;
@@ -15,6 +14,7 @@ import br.com.geodrone.model.Dispositivo;
 import br.com.geodrone.model.Usuario;
 import br.com.geodrone.model.api.AuditModel;
 import br.com.geodrone.model.api.ClientModel;
+import br.com.geodrone.model.api.DateRegistryModel;
 import br.com.geodrone.model.api.DeviceModel;
 import br.com.geodrone.model.api.LocationModel;
 import br.com.geodrone.model.api.UserModel;
@@ -58,6 +58,7 @@ public abstract class CrudService<T, ID extends Serializable> extends GenericSer
 		configClienteModel(entity, cliente);
 		configLocationModel(entity, location);
 		configLocationModel(entity, dispositivo);
+        configDateRegistryModel(entity);
 		preValidateModel(entity, operacaoCrud);
 		validateModel(entity, operacaoCrud);
 		posValidateModel(entity, operacaoCrud);
@@ -128,15 +129,19 @@ public abstract class CrudService<T, ID extends Serializable> extends GenericSer
 	protected void configClienteModel(T entity, Cliente cliente) {
 		if (entity instanceof ClientModel) {
 			ClientModel empresaModel = (ClientModel) entity;
-			empresaModel.setIdCliente(cliente.getId());
+			if (empresaModel.getIdCliente() == null) {
+				empresaModel.setIdCliente(cliente.getId());
+			}
 		}
 	}
 
 	private void configLocationModel(T entity, @NonNull Location location) {
 		if (entity instanceof LocationModel) {
 			LocationModel locationModel = (LocationModel) entity;
-			locationModel.setLatitude(location.getLatitude());
-			locationModel.setLongitude(location.getLongitude());
+            if (locationModel.getLatitude() == null || locationModel.getLongitude() == null) {
+                locationModel.setLatitude(location.getLatitude());
+                locationModel.setLongitude(location.getLongitude());
+            }
 		}
 	}
 
@@ -146,6 +151,15 @@ public abstract class CrudService<T, ID extends Serializable> extends GenericSer
 			deviceModel.setIdDispositivo(dispositivo != null ? dispositivo.getId() : null);
 		}
 	}
+
+    private void configDateRegistryModel(T entity) {
+        if (entity instanceof DateRegistryModel) {
+            DateRegistryModel dateRegistryModel = (DateRegistryModel) entity;
+            if (dateRegistryModel != null && dateRegistryModel.getDtRegistro() == null){
+                dateRegistryModel.setDtRegistro(new DateUtils().now());
+            }
+        }
+    }
 
 	protected void preValidateModel(T entity, OperacaoCrud operacaoCrud) {
 		// Sobrescrever este método para implementar regras adicionais.

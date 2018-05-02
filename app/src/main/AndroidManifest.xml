@@ -84,7 +84,7 @@
             android:label="@string/title_activity_cadastro_imagem" />
         <activity android:name=".ui.registroimagem.CameraFotoActivity" />
         <activity
-            android:name=".activity.MensagemActivity"
+            android:name=".ui.mensagem.MensagemActivity"
             android:parentActivityName=".ui.main.MainActivity" />
         <activity
             android:name=".activity.ForunActivity"

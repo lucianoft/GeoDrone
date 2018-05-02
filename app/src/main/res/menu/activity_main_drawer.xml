@@ -9,20 +9,16 @@
         <menu>
             <item
                 android:id="@+id/nav_registo_chuva"
-                android:icon="@drawable/ic_pluviosidade"
                 android:title="@string/menu_registro_chuva" />
             <item
                 android:id="@+id/nav_registro_foto"
-                android:icon="@drawable/ic_menu_camera"
                 android:title="@string/menu_registro_foto" />
             <item
-                android:id="@+id/nav_slideshow"
-                android:icon="@drawable/ic_menu_slideshow"
-                android:title="Monitoramento" />
+                android:id="@+id/nav_registro_condicoes_tempo"
+                android:title="@string/menu_registro_condicoes_tempo" />
             <item
-                android:id="@+id/nav_manage"
-                android:icon="@drawable/ic_menu_manage"
-                android:title="Tools" />
+                android:id="@+id/nav_forum_geoodrone"
+                android:title="@string/menu_forum" />
         </menu>
     </item>
 
@@ -30,11 +26,9 @@
         <menu>
             <item
                 android:id="@+id/menu_item_monitoramento_campo"
-                android:icon="@drawable/ic_monitoramento"
                 android:title="@string/menu_monitoramento" />
             <item
                 android:id="@+id/menu_item_requisitar_arquivos_pragas"
-                android:icon="@drawable/ic_arquivo_black_24dp"
                 android:title="@string/menu_requisitar_arquivos_pragas" />
 
         </menu>
@@ -44,12 +38,19 @@
         <menu>
             <item
                 android:id="@+id/nav_mensagem"
-                android:icon="@drawable/ic_menu_mensagem"
                 android:title="@string/menu_mensagem" />
             <item
                 android:id="@+id/nav_forum"
-                android:icon="@drawable/ic_menu_forum"
                 android:title="@string/menu_forum" />
+
+        </menu>
+    </item>
+
+    <item android:title="@string/menu_configuracao">
+        <menu>
+            <item
+                android:id="@+id/nav_sincronizacao"
+                android:title="@string/menu_sincronizacao" />
 
         </menu>
     </item>

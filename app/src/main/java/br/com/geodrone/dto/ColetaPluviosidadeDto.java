@@ -18,6 +18,7 @@ public class ColetaPluviosidadeDto {
     private Double longitudeLeitura;
 
     private String ultimaLeitura;
+    private Integer indColetaDia;
 
     public Long getIdPontoColetaChuva() {
         return idPontoColetaChuva;
@@ -81,6 +82,19 @@ public class ColetaPluviosidadeDto {
 
     public void setUltimaLeitura(String ultimaLeitura) {
         this.ultimaLeitura = ultimaLeitura;
+    }
+
+
+    public Integer getIndColetaDia() {
+        return indColetaDia;
+    }
+
+    public void setIndColetaDia(Integer indColetaDia) {
+        this.indColetaDia = indColetaDia;
+    }
+
+    public boolean isColetouDia(){
+      return this.indColetaDia != null && this.indColetaDia == 1;
     }
 
     @Override

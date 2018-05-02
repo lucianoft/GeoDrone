@@ -60,11 +60,11 @@ public class RegistroPluviosidadeActivity extends BaseMapFragmentActivity implem
         setContentView(R.layout.activity_cadastro_pluviosidade);
         ButterKnife.bind(this);
 
-        ActivityHelper activityHelper = new ActivityHelper();
-        if (!activityHelper.checkPermissionsLocation(this)){
-            return;
+        if (!hasPermission(Manifest.permission.ACCESS_COARSE_LOCATION) ||
+                !hasPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {
+            requestPermissionsSafely(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.ACCESS_FINE_LOCATION}, REQ_LOCATION_PERMISSION);
         }
-
         registroPluviosidadePresenter = new RegistroPluviosidadePresenter(this);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -75,26 +75,7 @@ public class RegistroPluviosidadeActivity extends BaseMapFragmentActivity implem
     public void onMapReady(GoogleMap googleMap) {
         super.onMapReady(googleMap);
         mMap.setOnMarkerClickListener(this);
-
-        List<ColetaPluviosidadeDto> coletaPluviosidadeDtos = registroPluviosidadePresenter.getPontosColeta();
-        for(ColetaPluviosidadeDto pluviosidadeDiariaDto : coletaPluviosidadeDtos) {
-            LatLng position = new LatLng(pluviosidadeDiariaDto.getLatitude(), pluviosidadeDiariaDto.getLongitude());
-
-            BitmapDescriptor icon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE);
-            Marker marker = mMap.addMarker(new MarkerOptions().position(position)
-                                              .title(pluviosidadeDiariaDto.getDescricao())
-                                              .snippet(pluviosidadeDiariaDto.getUltimaLeitura())
-                                              .icon(icon));
-            marker.showInfoWindow();
-        }
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener(){
-            @Override
-            public void onMapClick(LatLng point) {
-            showMessage(point.toString());
-            }
-
-
-        });
+        carregarPontosColeta();
     }
 
     @Override
@@ -102,6 +83,36 @@ public class RegistroPluviosidadeActivity extends BaseMapFragmentActivity implem
         super.onPostCreate(savedInstanceState);
         registroPluviosidadePresenter.takeView(this);
         hideLoading();
+    }
+
+    private void carregarPontosColeta(){
+        try {
+            mMap.clear();
+            List<ColetaPluviosidadeDto> coletaPluviosidadeDtos = registroPluviosidadePresenter.getPontosColeta();
+            for (ColetaPluviosidadeDto pluviosidadeDiariaDto : coletaPluviosidadeDtos) {
+                LatLng position = new LatLng(pluviosidadeDiariaDto.getLatitude(), pluviosidadeDiariaDto.getLongitude());
+
+                float defaultMarker = pluviosidadeDiariaDto.isColetouDia() ? BitmapDescriptorFactory.HUE_AZURE : BitmapDescriptorFactory.HUE_RED;
+                BitmapDescriptor icon = BitmapDescriptorFactory.defaultMarker(defaultMarker);
+
+                MarkerOptions markerOptions = new MarkerOptions().position(position)
+                        .title(pluviosidadeDiariaDto.getDescricao())
+                        .snippet(pluviosidadeDiariaDto.getUltimaLeitura())
+                        .icon(icon);
+                Marker marker = mMap.addMarker(markerOptions);
+                marker.showInfoWindow();
+            }
+            mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                @Override
+                public void onMapClick(LatLng point) {
+                    showMessage(point.toString());
+                }
+
+
+            });
+        }catch (Exception ex){
+            onError(ex);
+        }
     }
 
     @Override
@@ -138,7 +149,6 @@ public class RegistroPluviosidadeActivity extends BaseMapFragmentActivity implem
 
     }
 
-    AlertDialog alerta;
     @Override
     public void onShowDialogInfPluviosidade(final ColetaPluviosidadeDto coletaPluviosidadeDto) {
         LayoutInflater li = getLayoutInflater();
@@ -147,25 +157,28 @@ public class RegistroPluviosidadeActivity extends BaseMapFragmentActivity implem
         final EditText editTextObservacaoPonto = view.findViewById(R.id.edit_text_observacao_registro_chuva);
         final EditText editTextQtdePonto = view.findViewById(R.id.edit_text_qtde_registro_chuva);
         editTextDescricaoPonto.setText(coletaPluviosidadeDto.getDescricao());
-        view.findViewById(R.id.btn_salvar_registro_chuva).setOnClickListener(new View.OnClickListener() {
-            public void onClick(View arg0) {
-                registroPluviosidadePresenter.salvar(coletaPluviosidadeDto,
-                                                     editTextObservacaoPonto.getText().toString(),
-                                                     editTextQtdePonto.getText().toString());
-                alerta.dismiss();
+        final AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle(coletaPluviosidadeDto.getUltimaLeitura());
+        alert.setView(view);
+        alert.setCancelable(false);
+        alert.setNegativeButton(R.string.lb_cancelar, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
             }
         });
-        view.findViewById(R.id.btn_cancelar_registro_chuva).setOnClickListener(new View.OnClickListener() {
-            public void onClick(View arg0) {
-                alerta.dismiss();
-            }
-        });
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Titulo");
-        builder.setView(view);
-        alerta = builder.create();
-        alerta.show();
 
+        alert.setPositiveButton(R.string.lb_confirmar, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                registroPluviosidadePresenter.salvar(coletaPluviosidadeDto,
+                        editTextObservacaoPonto.getText().toString(),
+                        editTextQtdePonto.getText().toString());
+                dialog.dismiss();
+            }
+        });
+        AlertDialog dialog = alert.create();
+        dialog.show();
     }
 
     @Override

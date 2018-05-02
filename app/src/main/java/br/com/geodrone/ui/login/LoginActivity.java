@@ -83,7 +83,7 @@ public class LoginActivity extends BaseActivity implements LoginPresenter.View{
     @Override
     public void onSuccessoLogin(String message) {
 
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        showMessage(message);
         PreferencesUtils.putString(getApplicationContext(), PreferencesUtils.CHAVE_EMAIL_USUARIO, editTextEmail.getText().toString());
         PreferencesUtils.putString(getApplicationContext(), PreferencesUtils.CHAVE_SENHA_USUARIO, editTextSenha.getText().toString());
         Intent i = new Intent(this,MainActivity.class);

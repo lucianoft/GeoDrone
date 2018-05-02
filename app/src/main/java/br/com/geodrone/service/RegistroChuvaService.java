@@ -2,6 +2,9 @@ package br.com.geodrone.service;
 
 import android.content.Context;
 
+import java.util.List;
+
+import br.com.geodrone.model.PontoColetaChuva;
 import br.com.geodrone.model.RegistroChuva;
 import br.com.geodrone.repository.CrudRepository;
 import br.com.geodrone.repository.RegistroChuvaRepository;
@@ -20,5 +23,10 @@ public class RegistroChuvaService extends CrudService<RegistroChuva, Long> {
 
     public CrudRepository<RegistroChuva, Long> getRepository(){
         return registroChuvaRepository;
+    }
+
+
+    public RegistroChuva findOneByPontoColetaChuva(Long idPontoColetaChuvaDisp){
+        return registroChuvaRepository.findOneByPontoColetaChuva(idPontoColetaChuvaDisp);
     }
 }

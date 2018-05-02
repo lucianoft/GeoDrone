@@ -30,5 +30,13 @@ public class PontoColetaChuvaRepository extends CrudRepository<PontoColetaChuva,
                                                           .where(PontoColetaChuvaDao.Properties.IdCliente.eq(IdClienteRef));
         return qrBuilder.list();
     }
+
+    public PontoColetaChuva findByIdPontoColetaChuvaWeb(Long idPontoColetaChuva) {
+        QueryBuilder<PontoColetaChuva> qrBuilder = getCrudDao()
+                .queryBuilder()
+                .where(PontoColetaChuvaDao.Properties.IdPontoColetaChuva.eq(idPontoColetaChuva))
+                .limit(1);
+        return qrBuilder.unique();
+    }
 }
 

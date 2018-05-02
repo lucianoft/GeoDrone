@@ -33,9 +33,22 @@ public class DateUtils {
 	 */
 	public Date trunc(Date date) {
 		if (date != null) {
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(date);
+			cal.set(Calendar.HOUR_OF_DAY, 0);
+			cal.set(Calendar.MINUTE, 0);
+			cal.set(Calendar.SECOND, 0);
+			cal.set(Calendar.MILLISECOND, 0);
+			date = cal.getTime();
 		}
 		return date;
 	}
-	
+
+	public boolean equals(Date date, Date anotherDate){
+		if (date == null){
+			return anotherDate == null;
+		}
+		return date.compareTo(anotherDate) == 0;
+	}
 
 }

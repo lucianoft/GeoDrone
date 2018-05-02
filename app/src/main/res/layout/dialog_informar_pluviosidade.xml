@@ -3,21 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:layout_marginTop="15dp"
-    android:layout_marginBottom="15dp"
-    android:layout_marginLeft="15dp"
-    android:layout_marginRight="15dp"
+    android:padding="15dp"
     >
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/text_input_layout_ponto_coleta_chuva_registro_chuva"
-        style="@style/TextLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp">
         <EditText android:id="@+id/edit_text_ponto_coleta_chuva_registro_chuva"
-            style="@style/TextLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
@@ -29,13 +24,11 @@
     <android.support.design.widget.TextInputLayout
         android:id="@+id/text_input_layout_observacao_registro_chuva"
         android:layout_below="@+id/text_input_layout_ponto_coleta_chuva_registro_chuva"
-        style="@style/TextLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp">
         <EditText android:id="@+id/edit_text_observacao_registro_chuva"
-            style="@style/TextLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
@@ -45,45 +38,15 @@
     <android.support.design.widget.TextInputLayout
         android:id="@+id/text_input_layout_qtde_registro_chuva"
         android:layout_below="@+id/text_input_layout_observacao_registro_chuva"
-        style="@style/TextLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp">
         <EditText android:id="@+id/edit_text_qtde_registro_chuva"
-            style="@style/TextLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
             android:hint="@string/lb_volume_chuva" />
     </android.support.design.widget.TextInputLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/text_input_layout_qtde_registro_chuva"
-        android:orientation="horizontal"
-        android:background="#C4C4C4"
-        android:paddingTop="4dp"
-        android:layout_marginTop="10dp">
-
-        <Button
-            android:id="@+id/btn_salvar_registro_chuva"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            style="@style/CustomStyleButton"
-            android:text="Confirmar" />
-
-        <Button
-            android:id="@+id/btn_cancelar_registro_chuva"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            style="@style/CustomStyleButton"
-            android:text="Cancelar" />
-    </LinearLayout>
 
 </RelativeLayout>

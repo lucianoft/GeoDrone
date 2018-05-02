@@ -1,5 +1,6 @@
 package br.com.geodrone.ui.main;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,23 +9,22 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 import br.com.geodrone.R;
+import br.com.geodrone.ui.base.BaseActivity;
 import br.com.geodrone.ui.registroimagem.RegistroImagemActivity;
 import br.com.geodrone.ui.registrochuva.RegistroPluviosidadeActivity;
 import br.com.geodrone.activity.ForunActivity;
-import br.com.geodrone.activity.MensagemActivity;
+import br.com.geodrone.ui.mensagem.MensagemActivity;
 import br.com.geodrone.ui.monitoramento.MonitoramentoActivity;
-import br.com.geodrone.ui.registropraga.RegistroPragaActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener /*BottomNavigationView.OnNavigationItemSelectedListener*/ {
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener /*BottomNavigationView.OnNavigationItemSelectedListener*/ {
 
 
     @BindView(R.id.main_activity_coordinator_layout)
@@ -138,20 +138,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_registro_foto) {
+            getPermissionsCamera();
             Intent i = new Intent(this,RegistroImagemActivity.class);
             startActivity(i);
 
         } else if (id == R.id.nav_registo_chuva) {
-            Intent i = new Intent(this,RegistroPluviosidadeActivity.class);
-            startActivity(i);
-        } else if (id == R.id.nav_slideshow) {
-            Intent i = new Intent(this,MonitoramentoActivity.class);
-            startActivity(i);
-
-        } else if (id == R.id.nav_manage) {
-            Intent i = new Intent(this,RegistroPragaActivity.class);
-            startActivity(i);
-        } else if (id == R.id.menu_item_monitoramento_campo) {
+            getPermissionsGpsRegistroPluviosidade();
+        }  else if (id == R.id.menu_item_monitoramento_campo) {
+            //getPermissionsGps();
             Intent i = new Intent(this,MonitoramentoActivity.class);
             startActivity(i);
 
@@ -168,5 +162,45 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    private void getPermissionsCamera() {
+
+        if (!hasPermission(Manifest.permission.CAMERA)
+                || !hasPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                || !hasPermission(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            requestPermissionsSafely(new String[]{Manifest.permission.CAMERA,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.READ_EXTERNAL_STORAGE},
+                    1);
+        }
+    }
+
+    private void getPermissionsGpsRegistroPluviosidade() {
+
+        if (!hasPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
+                || !hasPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {
+            requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
+                            Manifest.permission.ACCESS_FINE_LOCATION},
+                    1);
+        }else{
+            Intent i = new Intent(this,RegistroPluviosidadeActivity.class);
+            startActivity(i);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+
     }
 }

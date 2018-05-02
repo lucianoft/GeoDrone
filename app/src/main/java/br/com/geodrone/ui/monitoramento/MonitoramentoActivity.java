@@ -4,33 +4,16 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.Location;
-import android.os.Build;
-import android.provider.Settings;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import br.com.geodrone.R;
-import br.com.geodrone.ui.base.BaseFragmentActivity;
 import br.com.geodrone.ui.base.BaseMapFragmentActivity;
-import br.com.geodrone.ui.main.MainActivity;
-import br.com.geodrone.ui.registrochuva.RegistroPluviosidadeActivity;
-import br.com.geodrone.activity.utils.ActivityHelper;
-import br.com.geodrone.activity.utils.GPSTracker;
 import br.com.geodrone.ui.registrodoenca.RegistroDoencaActivity;
 import br.com.geodrone.ui.registrodoenca.RegistroSemDoenca;
 import br.com.geodrone.ui.registropraga.RegistroPragaActivity;
@@ -65,9 +48,10 @@ public class MonitoramentoActivity extends BaseMapFragmentActivity implements Bo
         registroSemPraga = new RegistroSemPraga(this);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
-        ActivityHelper activityHelper = new ActivityHelper();
-        if (!activityHelper.checkPermissionsLocation(this)) {
-            return;
+        if (!hasPermission(Manifest.permission.ACCESS_COARSE_LOCATION) ||
+                !hasPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {
+            requestPermissionsSafely(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.ACCESS_FINE_LOCATION}, REQ_LOCATION_PERMISSION);
         }
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map_monitoramento);

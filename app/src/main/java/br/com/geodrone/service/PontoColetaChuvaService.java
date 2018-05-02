@@ -23,4 +23,8 @@ public class PontoColetaChuvaService extends CrudService<PontoColetaChuva, Long>
     public List<PontoColetaChuva> findAllByCliente(Long idCliente){
         return pontoColetaChuvaRepository.findAllByCliente(idCliente);
     }
+
+    public PontoColetaChuva findByIdPontoColetaChuvaWeb(Long idPontoColetaChuva) {
+        return pontoColetaChuvaRepository.findByIdPontoColetaChuvaWeb(idPontoColetaChuva);
+    }
 }

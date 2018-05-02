@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import br.com.geodrone.R;
 import br.com.geodrone.ui.helper.GenericProgress;
+import br.com.geodrone.ui.helper.MessageUI;
 import br.com.geodrone.utils.Message;
 import br.com.geodrone.utils.Messenger;
 
@@ -38,25 +39,25 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseErro
     @Override
     public void onError(String message){
         hideLoading();
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        MessageUI.showMessage(this, message);
     }
 
     @Override
     public void onError(Exception ex){
         hideLoading();
-        Toast.makeText(this, ex.toString(), Toast.LENGTH_SHORT).show();
+        MessageUI.showMessage(this, ex.toString());
     }
 
     @Override
     public void showMessage(String message){
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        MessageUI.showMessage(this, message);
     }
 
     @Override
     public void showMessenger(Messenger messenger){
         if (messenger != null && messenger.getMessages() != null)
             for (Message message : messenger.getMessages()) {
-                Toast.makeText(this, message.getMsg(), Toast.LENGTH_SHORT).show();
+                MessageUI.showMessage(this, message.getMsg());
             }
     }
 }

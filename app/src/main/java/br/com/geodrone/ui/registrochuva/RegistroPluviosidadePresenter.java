@@ -9,8 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.geodrone.R;
+import br.com.geodrone.SessionGeooDrone;
 import br.com.geodrone.activity.utils.LocationUtils;
 import br.com.geodrone.dto.ColetaPluviosidadeDto;
+import br.com.geodrone.model.Cliente;
 import br.com.geodrone.model.PontoColetaChuva;
 import br.com.geodrone.model.RegistroChuva;
 import br.com.geodrone.model.RotaTrabalho;
@@ -19,6 +21,7 @@ import br.com.geodrone.service.RegistroChuvaService;
 import br.com.geodrone.service.RotaTrabalhoService;
 import br.com.geodrone.ui.base.BaseFragmentActivity;
 import br.com.geodrone.ui.base.BasePresenter;
+import br.com.geodrone.utils.DateUtils;
 import br.com.geodrone.utils.Messenger;
 import br.com.geodrone.utils.NumberUtils;
 import br.com.geodrone.utils.StringUtils;
@@ -113,13 +116,16 @@ public class RegistroPluviosidadePresenter extends BasePresenter<RegistroPluvios
     }
 
     public List<ColetaPluviosidadeDto> getPontosColeta(){
-        List<PontoColetaChuva> estacaoPluviometricas = estacaoPluviometricaPresenter.findAllByCliente(1L);
+        DateUtils dateUtils = new DateUtils();
+        Cliente cliente = SessionGeooDrone.getAttribute(SessionGeooDrone.CHAVE_CLIENTE);
+
+        List<PontoColetaChuva> estacaoPluviometricas = estacaoPluviometricaPresenter.findAllByCliente(cliente.getId());
         for (PontoColetaChuva pontoColetaChuva : estacaoPluviometricas){
 
             Location locationAtual = view.getLocalizacaoAtual();
 
             ColetaPluviosidadeDto pluviosidadeDiariaDto = new ColetaPluviosidadeDto();
-            pluviosidadeDiariaDto.setIdPontoColetaChuva(pontoColetaChuva.getIdPontoColetaChuva());
+            pluviosidadeDiariaDto.setIdPontoColetaChuva(pontoColetaChuva.getId());
             pluviosidadeDiariaDto.setDescricao(pontoColetaChuva.getDescricao());
             pluviosidadeDiariaDto.setLatitude(pontoColetaChuva.getLatitude());
             pluviosidadeDiariaDto.setLongitude(pontoColetaChuva.getLongitude());
@@ -127,6 +133,13 @@ public class RegistroPluviosidadePresenter extends BasePresenter<RegistroPluvios
                 pluviosidadeDiariaDto.setLatitudeLeitura(locationAtual.getLatitude());
                 pluviosidadeDiariaDto.setLongitudeLeitura(locationAtual.getLongitude());
 
+            }
+            RegistroChuva registroChuva = registroChuvaService.findOneByPontoColetaChuva(pontoColetaChuva.getIdPontoColetaChuva());
+            if (registroChuva != null){
+                pluviosidadeDiariaDto.setDtLeitura(registroChuva.getDtRegistro());
+                if (dateUtils.equals(dateUtils.nowTrunc(), dateUtils.trunc(registroChuva.getDtRegistro()))){
+                    pluviosidadeDiariaDto.setIndColetaDia(1);
+                }
             }
             coletaPluviosidadeDtos.add(pluviosidadeDiariaDto);
         }
