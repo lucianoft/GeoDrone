@@ -56,8 +56,8 @@ public abstract class CrudService<T, ID extends Serializable> extends GenericSer
 		configAuditModel(entity, operacaoCrud);
 		configUserModel(entity, usuario);
 		configClienteModel(entity, cliente);
-		configLocationModel(entity, location);
-		configLocationModel(entity, dispositivo);
+		configDeviceModelModel(entity, location);
+		configDeviceModelModel(entity, dispositivo);
         configDateRegistryModel(entity);
 		preValidateModel(entity, operacaoCrud);
 		validateModel(entity, operacaoCrud);
@@ -135,8 +135,8 @@ public abstract class CrudService<T, ID extends Serializable> extends GenericSer
 		}
 	}
 
-	private void configLocationModel(T entity, @NonNull Location location) {
-		if (entity instanceof LocationModel) {
+	private void configDeviceModelModel(T entity, @NonNull Location location) {
+		if (entity instanceof LocationModel && location != null) {
 			LocationModel locationModel = (LocationModel) entity;
             if (locationModel.getLatitude() == null || locationModel.getLongitude() == null) {
                 locationModel.setLatitude(location.getLatitude());
@@ -145,7 +145,7 @@ public abstract class CrudService<T, ID extends Serializable> extends GenericSer
 		}
 	}
 
-	private void configLocationModel(T entity, @NonNull Dispositivo dispositivo) {
+	private void configDeviceModelModel(T entity, @NonNull Dispositivo dispositivo) {
 		if (entity instanceof DeviceModel) {
 			DeviceModel deviceModel = (DeviceModel) entity;
 			deviceModel.setIdDispositivo(dispositivo != null ? dispositivo.getId() : null);

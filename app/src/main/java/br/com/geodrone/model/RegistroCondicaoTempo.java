@@ -15,63 +15,54 @@ import br.com.geodrone.model.api.LocationModel;
 import br.com.geodrone.model.api.UserModel;
 import org.greenrobot.greendao.annotation.Generated;
 
-
-@Entity(generateConstructors = false, nameInDb ="GEO_REGISTRO_CHUVA")
-public class RegistroChuva extends GenericModel implements AuditModel, ClientModel, DeviceModel, UserModel, LocationModel, DateRegistryModel {
+@Entity(generateConstructors = false, nameInDb ="GEO_REGISTRO_COND_TEMPO")
+public class RegistroCondicaoTempo extends GenericModel implements AuditModel, UserModel, ClientModel, DateRegistryModel, LocationModel, DeviceModel {
 
 	@Id(autoincrement = true)
-	@Property(nameInDb = "ID_REGISTRO_CHUVA_DISP")
+	@Property(nameInDb = "ID_REGISTRO_COND_TEMPO_DISP")
 	private Long id;
 
-	@Property(nameInDb = "VOLUME")
-	private Integer volume;
+	@Property(nameInDb = "FLAG_DIRECAO")
+	private String flagDirecao;
+
+	@Property(nameInDb = "FLAG_CONDICAO_TEMPO")
+	private String flagCondicaoTempo;
 
 	@Property(nameInDb = "OBSERVACAO")
 	private String observacao;
 
-	@Property(nameInDb = "ID_PONTO_COLETA_CHUVA_DISP")
-	private Long idPontoColetaChuvaDisp;
-
-	@Property(nameInDb = "ID_REGISTRO_CHUVA")
-	private Long idRegistroChuva;
-
-	@Property(nameInDb = "DT_REGISTRO")
-	@NotNull
-	private Date dtRegistro;
+	@Property(nameInDb = "ID_REGISTRO_COND_TEMPO")
+	private Long idRegistroCondTempo;
 
 	@Property(nameInDb = "ID_CLIENTE")
-	@NotNull
 	private Long idCliente;
 
 	@Property(nameInDb = "LATITUDE")
-	@NotNull
 	private Double latitude;
 
 	@Property(nameInDb = "LONGITUDE")
-	@NotNull
 	private Double longitude;
 
+	@Property(nameInDb = "DT_REGISTRO")
+	private Date dtRegistro;
+
 	@Property(nameInDb = "ID_DISPOSITIVO")
-	@NotNull
 	private Long idDispositivo;
 
-	@Property(nameInDb = "DT_INCLUSAO")
-	@NotNull
+    @Property(nameInDb = "VERSAO_SISTEMA")
+    @NotNull
+    private Long versaoSistema;
+
+    @Property(nameInDb = "DT_INCLUSAO")
 	private Date dtInclusao;
 
 	@Property(nameInDb = "DT_ALTERACAO")
-	@NotNull
 	private Date dtAlteracao;
 
-	@Property(nameInDb = "VERSAO_SISTEMA")
-	@NotNull
-	private Long versaoSistema;
-
 	@Property(nameInDb = "ID_USUARIO_REG")
-	@NotNull
 	private Long idUsuarioReg;
 
-	public RegistroChuva() {
+	public RegistroCondicaoTempo() {
 	}
 
 	public Long getId() {
@@ -81,11 +72,18 @@ public class RegistroChuva extends GenericModel implements AuditModel, ClientMod
 		this.id = id;
 	}
 
-	public Integer getVolume() {
-		return this.volume;
+	public String getFlagDirecao() {
+		return this.flagDirecao;
 	}
-	public void setVolume(Integer volume) {
-		this.volume = volume;
+	public void setFlagDirecao(String flagDirecao) {
+		this.flagDirecao = flagDirecao;
+	}
+
+	public String getFlagCondicaoTempo() {
+		return this.flagCondicaoTempo;
+	}
+	public void setFlagCondicaoTempo(String flagCondicaoTempo) {
+		this.flagCondicaoTempo = flagCondicaoTempo;
 	}
 
 	public String getObservacao() {
@@ -95,34 +93,8 @@ public class RegistroChuva extends GenericModel implements AuditModel, ClientMod
 		this.observacao = observacao;
 	}
 
-	public Long getIdPontoColetaChuvaDisp() {
-		return this.idPontoColetaChuvaDisp;
-	}
-	public void setIdPontoColetaChuvaDisp(Long idPontoColetaChuvaDisp) {
-		this.idPontoColetaChuvaDisp = idPontoColetaChuvaDisp;
-	}
 
-	public Long getIdRegistroChuva() {
-		return this.idRegistroChuva;
-	}
-	public void setIdRegistroChuva(Long idRegistroChuva) {
-		this.idRegistroChuva = idRegistroChuva;
-	}
-
-    /** ***** from DateRegistryModel ****** */
-    @Override
-    public Date getDtRegistro() {
-        return dtRegistro;
-    }
-
-    @Override
-    public void setDtRegistro(Date dtRegistro) {
-        this.dtRegistro = dtRegistro;
-    }
-    /** ***** from DateRegistryModel ****** */
-
-
-    /** ***** from DomainCliente ****** */
+	/** ***** from DomainCliente ****** */
 	@Override
 	public Long getIdCliente() {
 		return this.idCliente;
@@ -159,6 +131,17 @@ public class RegistroChuva extends GenericModel implements AuditModel, ClientMod
 	@Override
 	public void setIdDispositivo(Long idDispositivo) {
 		this.idDispositivo = idDispositivo;
+	}
+	/** ***************************** */
+
+	/** **** from DateRegistryModel ***** */
+	@Override
+	public Date getDtRegistro() {
+		return this.dtRegistro;
+	}
+	@Override
+	public void setDtRegistro(Date dtRegistro) {
+		this.dtRegistro = dtRegistro;
 	}
 	/** ***************************** */
 
@@ -224,7 +207,7 @@ public class RegistroChuva extends GenericModel implements AuditModel, ClientMod
 			return false;
 		}
 
-		final RegistroChuva other = (RegistroChuva) obj;
+		final RegistroCondicaoTempo other = (RegistroCondicaoTempo) obj;
 		if (this.id == null || other.id == null) {
 			return false;
 		}
@@ -239,5 +222,11 @@ public class RegistroChuva extends GenericModel implements AuditModel, ClientMod
 		return (this.id == null ? "" : this.id.toString() );
 	}
 	/** ***************************** */
+	public Long getIdRegistroCondTempo() {
+		return this.idRegistroCondTempo;
+	}
+	public void setIdRegistroCondTempo(Long idRegistroCondTempo) {
+		this.idRegistroCondTempo = idRegistroCondTempo;
+	}
 
 }

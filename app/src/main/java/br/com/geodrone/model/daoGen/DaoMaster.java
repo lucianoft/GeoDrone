@@ -28,6 +28,7 @@ public class DaoMaster extends AbstractDaoMaster {
         PontoColetaChuvaDao.createTable(db, ifNotExists);
         PragaDao.createTable(db, ifNotExists);
         RegistroChuvaDao.createTable(db, ifNotExists);
+        RegistroCondicaoTempoDao.createTable(db, ifNotExists);
         RegistroDoencaDao.createTable(db, ifNotExists);
         RegistroImagemDao.createTable(db, ifNotExists);
         RegistroPragaDao.createTable(db, ifNotExists);
@@ -45,6 +46,7 @@ public class DaoMaster extends AbstractDaoMaster {
         PontoColetaChuvaDao.dropTable(db, ifExists);
         PragaDao.dropTable(db, ifExists);
         RegistroChuvaDao.dropTable(db, ifExists);
+        RegistroCondicaoTempoDao.dropTable(db, ifExists);
         RegistroDoencaDao.dropTable(db, ifExists);
         RegistroImagemDao.dropTable(db, ifExists);
         RegistroPragaDao.dropTable(db, ifExists);
@@ -76,6 +78,7 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(PontoColetaChuvaDao.class);
         registerDaoClass(PragaDao.class);
         registerDaoClass(RegistroChuvaDao.class);
+        registerDaoClass(RegistroCondicaoTempoDao.class);
         registerDaoClass(RegistroDoencaDao.class);
         registerDaoClass(RegistroImagemDao.class);
         registerDaoClass(RegistroPragaDao.class);

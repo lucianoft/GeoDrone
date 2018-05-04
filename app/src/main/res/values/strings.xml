@@ -86,6 +86,7 @@
     <string name="title_activity_maps2">Map</string>
     <string name="title_activity_registro_pragas">Registro de Pagras</string>
     <string name="title_activity_registro_doenca">Registro de Doencas</string>
+    <string name="title_activity_registro_condicao_tempo">Registro de Condicao do tempo</string>
 
     <string name="menu_registro_chuva">Registro Chuva</string>
     <string name="menu_registro_foto">Registro Fotos</string>

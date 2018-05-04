@@ -1,23 +1,22 @@
 package br.com.geodrone.model.constantes;
 
-/**
- * Created by fernandes on 02/04/2018.
- */
+public enum FlagEstadoTempo {
 
-public enum FlagDirecao {
-    //Norte, Sul, Leste, Oeste
-    NORTE("N", "Norte"),
-    NORDESTE("NE", "Nordeste"),
-    LESTE("L", "Leste"),
-    SUDESTE("SE", "Sudeste"),
-    SUDOESTE("SO", "Sudoeste"),
-    OESTE("O", "Oeste"),
-    NOROESTE("NO", "Noroeste");
+    //céu de brigadeiro, ensolarado, parcialmente nublado, nublado, garoa, chuva, invernado, tempestade
+
+    CEU_BRIGADEIRO("BRI", "Céu de brigadeiro"),
+    ENSOLARADO("ENS", "Ensolarado"),
+    PARCIALMENTE_NUBLADO("PARC", "Parcialmente nublado"),
+    NUBLADO("NUB", "Nublado"),
+    GAROA("GAR", "Garoa"),
+    CHUVA("CHU", "Chuva"),
+    INVERNADO("INV", "Invernado"),
+    TEMPESTADE("TEM", "Tempestade");
 
     private final String value;
     private final String bundle;
 
-    FlagDirecao(String value, String bundle) {
+    private FlagEstadoTempo(String value, String bundle) {
         this.value = value;
         this.bundle = bundle;
     }
@@ -37,7 +36,7 @@ public enum FlagDirecao {
 
     public static String getValueByIndice(int ord) {
         try {
-            return FlagDirecao.values()[ord].value; // less safe
+            return FlagEstadoTempo.values()[ord].value; // less safe
         }catch (Exception ex){
         }
         return null;
@@ -45,7 +44,7 @@ public enum FlagDirecao {
 
     public static String getBundleValueByIndice(int ord) {
         try {
-            return FlagDirecao.values()[ord].bundle; // less safe
+            return FlagEstadoTempo.values()[ord].bundle; // less safe
         }catch (Exception ex){
         }
         return null;

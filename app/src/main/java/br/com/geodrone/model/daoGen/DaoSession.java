@@ -15,6 +15,7 @@ import br.com.geodrone.model.Doenca;
 import br.com.geodrone.model.PontoColetaChuva;
 import br.com.geodrone.model.Praga;
 import br.com.geodrone.model.RegistroChuva;
+import br.com.geodrone.model.RegistroCondicaoTempo;
 import br.com.geodrone.model.RegistroDoenca;
 import br.com.geodrone.model.RegistroImagem;
 import br.com.geodrone.model.RegistroPraga;
@@ -29,6 +30,7 @@ import br.com.geodrone.model.daoGen.DoencaDao;
 import br.com.geodrone.model.daoGen.PontoColetaChuvaDao;
 import br.com.geodrone.model.daoGen.PragaDao;
 import br.com.geodrone.model.daoGen.RegistroChuvaDao;
+import br.com.geodrone.model.daoGen.RegistroCondicaoTempoDao;
 import br.com.geodrone.model.daoGen.RegistroDoencaDao;
 import br.com.geodrone.model.daoGen.RegistroImagemDao;
 import br.com.geodrone.model.daoGen.RegistroPragaDao;
@@ -52,6 +54,7 @@ public class DaoSession extends AbstractDaoSession {
     private final DaoConfig pontoColetaChuvaDaoConfig;
     private final DaoConfig pragaDaoConfig;
     private final DaoConfig registroChuvaDaoConfig;
+    private final DaoConfig registroCondicaoTempoDaoConfig;
     private final DaoConfig registroDoencaDaoConfig;
     private final DaoConfig registroImagemDaoConfig;
     private final DaoConfig registroPragaDaoConfig;
@@ -66,6 +69,7 @@ public class DaoSession extends AbstractDaoSession {
     private final PontoColetaChuvaDao pontoColetaChuvaDao;
     private final PragaDao pragaDao;
     private final RegistroChuvaDao registroChuvaDao;
+    private final RegistroCondicaoTempoDao registroCondicaoTempoDao;
     private final RegistroDoencaDao registroDoencaDao;
     private final RegistroImagemDao registroImagemDao;
     private final RegistroPragaDao registroPragaDao;
@@ -98,6 +102,9 @@ public class DaoSession extends AbstractDaoSession {
         registroChuvaDaoConfig = daoConfigMap.get(RegistroChuvaDao.class).clone();
         registroChuvaDaoConfig.initIdentityScope(type);
 
+        registroCondicaoTempoDaoConfig = daoConfigMap.get(RegistroCondicaoTempoDao.class).clone();
+        registroCondicaoTempoDaoConfig.initIdentityScope(type);
+
         registroDoencaDaoConfig = daoConfigMap.get(RegistroDoencaDao.class).clone();
         registroDoencaDaoConfig.initIdentityScope(type);
 
@@ -123,6 +130,7 @@ public class DaoSession extends AbstractDaoSession {
         pontoColetaChuvaDao = new PontoColetaChuvaDao(pontoColetaChuvaDaoConfig, this);
         pragaDao = new PragaDao(pragaDaoConfig, this);
         registroChuvaDao = new RegistroChuvaDao(registroChuvaDaoConfig, this);
+        registroCondicaoTempoDao = new RegistroCondicaoTempoDao(registroCondicaoTempoDaoConfig, this);
         registroDoencaDao = new RegistroDoencaDao(registroDoencaDaoConfig, this);
         registroImagemDao = new RegistroImagemDao(registroImagemDaoConfig, this);
         registroPragaDao = new RegistroPragaDao(registroPragaDaoConfig, this);
@@ -137,6 +145,7 @@ public class DaoSession extends AbstractDaoSession {
         registerDao(PontoColetaChuva.class, pontoColetaChuvaDao);
         registerDao(Praga.class, pragaDao);
         registerDao(RegistroChuva.class, registroChuvaDao);
+        registerDao(RegistroCondicaoTempo.class, registroCondicaoTempoDao);
         registerDao(RegistroDoenca.class, registroDoencaDao);
         registerDao(RegistroImagem.class, registroImagemDao);
         registerDao(RegistroPraga.class, registroPragaDao);
@@ -153,6 +162,7 @@ public class DaoSession extends AbstractDaoSession {
         pontoColetaChuvaDaoConfig.clearIdentityScope();
         pragaDaoConfig.clearIdentityScope();
         registroChuvaDaoConfig.clearIdentityScope();
+        registroCondicaoTempoDaoConfig.clearIdentityScope();
         registroDoencaDaoConfig.clearIdentityScope();
         registroImagemDaoConfig.clearIdentityScope();
         registroPragaDaoConfig.clearIdentityScope();
@@ -187,6 +197,10 @@ public class DaoSession extends AbstractDaoSession {
 
     public RegistroChuvaDao getRegistroChuvaDao() {
         return registroChuvaDao;
+    }
+
+    public RegistroCondicaoTempoDao getRegistroCondicaoTempoDao() {
+        return registroCondicaoTempoDao;
     }
 
     public RegistroDoencaDao getRegistroDoencaDao() {

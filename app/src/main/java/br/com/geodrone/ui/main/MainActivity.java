@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import br.com.geodrone.R;
 import br.com.geodrone.ui.base.BaseActivity;
+import br.com.geodrone.ui.registrocondicaotempo.RegistroCondicoesTempoActivity;
 import br.com.geodrone.ui.registroimagem.RegistroImagemActivity;
 import br.com.geodrone.ui.registrochuva.RegistroPluviosidadeActivity;
 import br.com.geodrone.activity.ForunActivity;
@@ -61,7 +62,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        //bottomNavigationView.setOnNavigationItemSelectedListener(this);
         navigationView.setNavigationItemSelectedListener(this);
 
     }
@@ -71,17 +71,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
-        /*View header = LayoutInflater.from(this).inflate(R.id.linear_layout_nav_bar_main, null);
-        navigationView.addHeaderView(header);
-        nomeUsuario = (TextView) header.findViewById(R.id.textView_nome_usuario_main);
-        emailUsuario = (TextView) header.findViewById(R.id.textView_email_usuario_main);
-
-        Usuario usuario = PreferencesUtils.getUsuario(getApplicationContext());
-        if (usuario != null){
-            nomeUsuario.setText(usuario.getNome());
-            emailUsuario.setText(usuario.getEmail());
-        }*/
-    }
+      }
 
     @Override
     public void onBackPressed() {
@@ -110,27 +100,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         return super.onOptionsItemSelected(item);
     }
 
-    /*@Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_item1:
-                Intent i = new Intent(this,CadImagemActivity.class);
-                startActivity(i);
-                break;
-            case R.id.action_item2:
-                i = new Intent(this,RegistroImagemActivity.class);
-                startActivity(i);
-                break;
-            case R.id.action_item3:
-                i = new Intent(this,RegistroPluviosidadeActivity.class);
-                startActivity(i);
-                break;
-            default:
-                break;
-        }
-        return true;
-    }*/
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -142,6 +111,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             Intent i = new Intent(this,RegistroImagemActivity.class);
             startActivity(i);
 
+        } else if (id == R.id.nav_registro_condicoes_tempo){
+            Intent i = new Intent(this,RegistroCondicoesTempoActivity.class);
+            startActivity(i);
         } else if (id == R.id.nav_registo_chuva) {
             getPermissionsGpsRegistroPluviosidade();
         }  else if (id == R.id.menu_item_monitoramento_campo) {

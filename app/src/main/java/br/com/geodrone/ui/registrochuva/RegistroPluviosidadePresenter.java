@@ -3,6 +3,7 @@ package br.com.geodrone.ui.registrochuva;
 import android.location.Location;
 import android.util.Log;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
@@ -82,11 +83,11 @@ public class RegistroPluviosidadePresenter extends BasePresenter<RegistroPluvios
     }
 
     private void onShowPontoColeta(Location location) {
-        double lat = location.getLatitude();
-        double lng = location.getLongitude();
-        LatLng locAtual = new LatLng(lat, lng);
-        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(locAtual, Constantes.ZOOM_MAP));
-
+        if (location != null) {
+            double lat = location.getLatitude();
+            double lng = location.getLongitude();
+            LatLng locAtual = new LatLng(lat, lng);
+        }
 
         ColetaPluviosidadeDto coletaPluviosidadeDto = LocationUtils.localLessDistance(location, this.coletaPluviosidadeDtos);
         if ( coletaPluviosidadeDto != null) {
