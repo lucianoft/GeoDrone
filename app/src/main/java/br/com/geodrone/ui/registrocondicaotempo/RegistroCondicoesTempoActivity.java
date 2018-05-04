@@ -1,5 +1,8 @@
 package br.com.geodrone.ui.registrocondicaotempo;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +16,8 @@ import br.com.geodrone.R;
 import br.com.geodrone.model.constantes.FlagDirecao;
 import br.com.geodrone.ui.base.BaseActivity;
 import br.com.geodrone.ui.helper.GenericProgress;
+import br.com.geodrone.ui.monitoramento.MonitoramentoActivity;
+import br.com.geodrone.ui.registrodoenca.RegistroDoencaActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnItemSelected;
@@ -60,13 +65,12 @@ public class RegistroCondicoesTempoActivity extends BaseActivity implements Regi
         carRecyclerView.addOnItemTouchListener(new RecyclerItemListener(getApplicationContext(), carRecyclerView,
                 new RecyclerItemListener.RecyclerTouchListener() {
                     public void onClickItem(View v, int position) {
-                        showLoading();
-                        registroCondicaoTempoPresenter.salvar(flagDirecao , position);
+                        dialogConfirmRegistroCondicaoTempo(flagDirecao , position);
                     }
 
                     public void onLongClickItem(View v, int position) {
                         showLoading();
-                        registroCondicaoTempoPresenter.salvar(flagDirecao , position);
+                        dialogConfirmRegistroCondicaoTempo(flagDirecao , position);
                     }
                 }));
     }
@@ -104,5 +108,31 @@ public class RegistroCondicoesTempoActivity extends BaseActivity implements Regi
     public void onRegistroCondicaoTempoErro(String message) {
         showMessage(message);
         hideLoading();
+    }
+
+    private void dialogConfirmRegistroCondicaoTempo(final String flagDirecao, final int position) {
+        final AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle(R.string.lb_registro_condicao_tempo);
+        alert.setMessage(R.string.lb_confirma_registro_condicao_tempo);
+        alert.setCancelable(false);
+        alert.setNegativeButton(R.string.lb_cancelar, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                hideLoading();
+            }
+        });
+
+        alert.setPositiveButton(R.string.lb_confirmar, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                showLoading();
+                registroCondicaoTempoPresenter.salvar(flagDirecao , position);
+                dialog.dismiss();
+                hideLoading();
+            }
+        });
+        AlertDialog dialog = alert.create();
+        dialog.show();
     }
 }
