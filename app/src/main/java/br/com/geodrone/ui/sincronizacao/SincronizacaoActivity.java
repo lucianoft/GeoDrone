@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import br.com.geodrone.R;
+import br.com.geodrone.activity.utils.Constantes;
 import br.com.geodrone.ui.base.BaseActivity;
 import br.com.geodrone.ui.helper.GenericProgress;
 import br.com.geodrone.ui.main.MainActivity;
@@ -27,6 +28,8 @@ public class SincronizacaoActivity extends BaseActivity implements Sincronizacao
 
         Bundle b = getIntent().getExtras();
         activityOrigem = b.getString(br.com.geodrone.activity.utils.Constantes.CHAVE_UI_ORIGEM);
+
+        showLoading();
     }
 
     @Override
@@ -50,8 +53,11 @@ public class SincronizacaoActivity extends BaseActivity implements Sincronizacao
     public void onAtualizacaoSucesso(String msg) {
         hideLoading();
         showMessage(msg);
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        hideLoading();
+        if (Constantes.ACTIVITY_PRIMEIRO_LOGIN.equals(activityOrigem)) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
         finish();
     }
 

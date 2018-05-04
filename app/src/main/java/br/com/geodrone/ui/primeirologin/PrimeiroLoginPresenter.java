@@ -66,21 +66,6 @@ public class PrimeiroLoginPresenter extends BasePresenter<PrimeiroLoginPresenter
         configuracaoService = new ConfiguracaoService(activity);
     }
 
-    private boolean validarLogin(String login, String senha) {
-        boolean isOk = true;
-        if (hasView()) {
-            if (login == null){
-                isOk = false;
-                view.onErrorEmail(activity.getString(R.string.msg_obr_email));
-            }
-            if (senha == null){
-                isOk = false;
-                view.onErrorSenha(activity.getString(R.string.msg_obr_senha));
-            }
-        }
-        return isOk;
-    }
-
     public void login(final String url, final String email, final String senha){
         APIClient client = ServiceGenerator.getInstance(url).createService(APIClient.class,
                                                           Constantes.API_OAUTH_CLIENTID,

@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import br.com.geodrone.R;
+import br.com.geodrone.activity.utils.Constantes;
 import br.com.geodrone.ui.base.BaseActivity;
 import br.com.geodrone.ui.registrocondicaotempo.RegistroCondicoesTempoActivity;
 import br.com.geodrone.ui.registroimagem.RegistroImagemActivity;
@@ -22,6 +23,7 @@ import br.com.geodrone.ui.registrochuva.RegistroPluviosidadeActivity;
 import br.com.geodrone.activity.ForunActivity;
 import br.com.geodrone.ui.mensagem.MensagemActivity;
 import br.com.geodrone.ui.monitoramento.MonitoramentoActivity;
+import br.com.geodrone.ui.sincronizacao.SincronizacaoActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -129,6 +131,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             Intent i = new Intent(this,ForunActivity.class);
             startActivity(i);
 
+        } else if (id == R.id.nav_sincronizacao){
+            Intent intent = new Intent(this, SincronizacaoActivity.class);
+            Bundle b = new Bundle();
+            b.putString(br.com.geodrone.activity.utils.Constantes.CHAVE_UI_ORIGEM, Constantes.ACTIVITY_MAIN); //Your id
+            intent.putExtras(b); //Put your id to your next Intent
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
