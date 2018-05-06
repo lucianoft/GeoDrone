@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="br.com.geodrone.ui.pontocoletachuva.PontoColetaChuvaActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <fragment
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/bottom_navigation_maps"
+            class="com.google.android.gms.maps.SupportMapFragment"
+            tools:context="br.com.geodrone.ui.pontocoletachuva.PontoColetaChuvaActivity"/>
+
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/bottom_navigation_maps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            app:menu="@menu/activity_main_bottom_navigation_items"
+            app:itemTextColor="@color/colorPrimary"
+            app:itemIconTint="@color/colorWhite"
+            android:background="@color/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways|snap"
+            />
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

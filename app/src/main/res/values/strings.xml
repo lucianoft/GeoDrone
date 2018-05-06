@@ -10,14 +10,21 @@
     <string name="title_activity_cadatrar_usuario">CadatrarUsuarioActivity</string>
     <string name="title_activity_cadatro_usuario">Cadastrar Usuario</string>
     <string name="title_activity_cadastro_imagem">Enviar Foto</string>
+    <string name="title_dialog_cadastro_ponto_coleta_chuva">Cadastro Ponto Coleta Chuva</string>
 
     <!-- Strings related to login -->
+    <string name="lb_cpf">cpf</string>
+    <string name="lb_cnpj">cnpj</string>
+    <string name="lb_cpf_cnpj">Cpf/Cnpj</string>
     <string name="lb_nome">Nome</string>
     <string name="lb_sobrenome">Sobrenome</string>
+    <string name="lb_celular">Celular</string>
     <string name="lb_telefone">Telefone</string>
     <string name="lb_email">Email</string>
     <string name="lb_senha">Senha</string>
     <string name="lb_confirmar">Confirmar</string>
+    <string name="lb_inserir">Inserir</string>
+    <string name="lb_alterar">Alterar</string>
     <string name="lb_cancelar">Cancelar</string>
     <string name="lb_confirmar_senha">Confirmar Senha</string>
     <string name="lb_login">Login</string>
@@ -35,12 +42,21 @@
     <string name="lb_qtd_pragas">Qtde</string>
     <string name="lb_latitude">Latitude</string>
     <string name="lb_longitude">Longitude</string>
-    <string name="lb_ponto_registro_pluviosidade">Ponto Pluviometro</string>
+    <string name="lb_ponto_registro_pluviosidade">Ponto de Coleta</string>
     <string name="lb_pesquisar_item">Pesquisar Item</string>
     <string name="lb_doenca">Doenca</string>
     <string name="lb_qtd_doencas">Qtde</string>
     <string name="lb_volume_chuva">Volume</string>
     <string name="lb_url">URL</string>
+    <string name="lb_segmento">Segmento</string>
+    <string name="lb_logradouro">Logradouro</string>
+    <string name="lb_bairro">Bairro</string>
+    <string name="lb_localidade">Localidade</string>
+    <string name="lb_numero">Numero</string>
+    <string name="lb_complemento">Complemento</string>
+    <string name="lb_cep">Cep</string>
+    <string name="lb_descricao">Descricao</string>
+    <string name="lb_ativo">Ativo</string>
 
     <string name="lb_btn_salvar">Salvar</string>
     <string name="lb_possui_registro_doenca">Possui registro de doença?</string>
@@ -80,6 +96,7 @@
     <string name="permission_rationale">Contacts permissions are needed for providing emailcompletions."</string>
 
     <string name="lb_criar_usuario">Criar Usuario</string>
+    <string name="lb_cadastrar_cliente">Cadastrar Cliente</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -90,6 +107,7 @@
     <string name="title_activity_registro_doenca">Registro de Doencas</string>
     <string name="title_activity_registro_condicao_tempo">Registro de Condicao do tempo</string>
 
+    <string name="menu_ponto_coleta_chuva">Ponto Coleta Chuva</string>
     <string name="menu_registro_chuva">Registro Chuva</string>
     <string name="menu_registro_foto">Registro Fotos</string>
     <string name="menu_registro_condicoes_tempo">Registro Condiçoes Tempo</string>

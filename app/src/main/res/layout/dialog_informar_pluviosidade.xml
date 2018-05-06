@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:inputType="text"
             android:focusable="false"
-            android:hint="@string/lb_observacao" />
+            android:hint="@string/lb_ponto_registro_pluviosidade" />
     </android.support.design.widget.TextInputLayout>
 
 

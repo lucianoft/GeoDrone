@@ -234,6 +234,7 @@ public class PontoColetaChuva extends GenericModel implements AuditModel, Active
 	public String toString() {
 		return (this.id == null ? "" : this.id.toString() );
 	}
-	/** ***************************** */
+
+    /** ***************************** */
 
 }

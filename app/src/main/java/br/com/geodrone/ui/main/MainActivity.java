@@ -17,6 +17,7 @@ import android.widget.TextView;
 import br.com.geodrone.R;
 import br.com.geodrone.activity.utils.Constantes;
 import br.com.geodrone.ui.base.BaseActivity;
+import br.com.geodrone.ui.pontocoletachuva.PontoColetaChuvaActivity;
 import br.com.geodrone.ui.registrocondicaotempo.RegistroCondicoesTempoActivity;
 import br.com.geodrone.ui.registroimagem.RegistroImagemActivity;
 import br.com.geodrone.ui.registrochuva.RegistroPluviosidadeActivity;
@@ -113,6 +114,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             Intent i = new Intent(this,RegistroImagemActivity.class);
             startActivity(i);
 
+        } else if (id == R.id.nav_ponto_coleta_chuva){
+            Intent i = new Intent(this,PontoColetaChuvaActivity.class);
+            startActivity(i);
         } else if (id == R.id.nav_registro_condicoes_tempo){
             Intent i = new Intent(this,RegistroCondicoesTempoActivity.class);
             startActivity(i);

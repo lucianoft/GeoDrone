@@ -38,6 +38,10 @@ public class ServiceGenerator {
         return uniqueInstance;
     }
 
+    public Retrofit getRetrofit(){
+        return retrofit;
+    }
+
     private ServiceGenerator(){
 
     }
@@ -115,6 +119,13 @@ public class ServiceGenerator {
         return retrofit.create(serviceClass);
     }
 
+    public <S> S createServiceWithoutAuth(Class<S> serviceClass) {
+        OkHttpClient client = httpClient.build();
+        builder.client(httpClient.build());
+        retrofit = builder.build();
+
+        return retrofit.create(serviceClass);
+    }
 
 
     /*public static <S> S basicService(Class<S> serviceClass) {

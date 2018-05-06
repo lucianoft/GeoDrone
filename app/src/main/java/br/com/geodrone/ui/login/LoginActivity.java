@@ -9,10 +9,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import br.com.geodrone.R;
 import br.com.geodrone.ui.base.BaseActivity;
+import br.com.geodrone.ui.cliente.CadastroClienteActivity;
 import br.com.geodrone.ui.helper.GenericProgress;
 import br.com.geodrone.ui.usuario.CadatroUsuarioActivity;
 import br.com.geodrone.ui.main.MainActivity;
@@ -30,6 +32,8 @@ public class LoginActivity extends BaseActivity implements LoginPresenter.View{
     @BindView(R.id.edit_text_email_login) EditText editTextEmail;
     @BindView(R.id.edit_text_senha_login) EditText editTextSenha;
     @BindView(R.id.button_olho) Button buttonOlho;
+    @BindView(R.id.text_view_cadastrar_cliente)
+    TextView textViewCadastrarCliente;
 
     private GenericProgress mProgress;
 
@@ -54,9 +58,9 @@ public class LoginActivity extends BaseActivity implements LoginPresenter.View{
         loginPresenter.takeView(this);
     }
 
-    @OnClick(R.id.text_view_criar_usuario)
+    @OnClick(R.id.text_view_cadastrar_cliente)
     public void onClickNovoUsuario() {
-        Intent i = new Intent(LoginActivity.this ,CadatroUsuarioActivity.class);
+        Intent i = new Intent(LoginActivity.this ,CadastroClienteActivity.class);
         startActivity(i);
     }
 

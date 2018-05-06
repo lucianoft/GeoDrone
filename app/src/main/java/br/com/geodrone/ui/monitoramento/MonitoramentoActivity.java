@@ -52,6 +52,8 @@ public class MonitoramentoActivity extends BaseMapFragmentActivity implements Bo
                 !hasPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {
             requestPermissionsSafely(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
                     Manifest.permission.ACCESS_FINE_LOCATION}, REQ_LOCATION_PERMISSION);
+        }else {
+            checkLocation();
         }
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map_monitoramento);

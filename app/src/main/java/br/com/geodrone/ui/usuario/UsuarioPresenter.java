@@ -85,15 +85,15 @@ public class UsuarioPresenter extends BasePresenter<UsuarioPresenter.View> {
         try {
 
             boolean isOk = validarSalvar(nome, sobrenome, telefone, email, senha, confirmSenha);
-            if (!isOk) {
-            }
-            Cliente cliente = SessionGeooDrone.getAttribute(SessionGeooDrone.CHAVE_CLIENTE);
-            Long idCliente = cliente != null ? cliente.getId() : null;
-            Usuario usuario = new Usuario(null, nome, sobrenome, email, telefone, senha, FlagPerfilUsuario.ADM.value(), 1);
-            usuario = usuarioService.insert(usuario);
+            if (isOk) {
+                Cliente cliente = SessionGeooDrone.getAttribute(SessionGeooDrone.CHAVE_CLIENTE);
+                Long idCliente = cliente != null ? cliente.getId() : null;
+                Usuario usuario = new Usuario(null, nome, sobrenome, email, telefone, senha, FlagPerfilUsuario.ADM.value(), 1);
+                usuario = usuarioService.insert(usuario);
 
-            view.onCadastroSucesso(activity.getString(R.string.msg_operacao_sucesso));
-            return usuario;
+                view.onCadastroSucesso(activity.getString(R.string.msg_operacao_sucesso));
+                return usuario;
+            }
         }catch (Exception ex){
             activity.onError(ex);
         }

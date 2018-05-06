@@ -8,6 +8,9 @@
     <item android:title="@string/menu_geooDrone">
         <menu>
             <item
+                android:id="@+id/nav_ponto_coleta_chuva"
+                android:title="@string/menu_ponto_coleta_chuva" />
+            <item
                 android:id="@+id/nav_registo_chuva"
                 android:title="@string/menu_registro_chuva" />
             <item

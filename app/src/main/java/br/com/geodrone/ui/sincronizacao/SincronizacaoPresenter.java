@@ -25,7 +25,7 @@ import retrofit2.Response;
  */
 public class SincronizacaoPresenter extends BasePresenter<SincronizacaoPresenter.View> {
 
-    private static  String TAG = SincronizacaoPresenter.class.getName();
+    private static String TAG = SincronizacaoPresenter.class.getName();
 
     interface View {
         void onAtualizacaoSucesso(String msg);

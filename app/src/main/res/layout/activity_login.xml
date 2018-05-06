@@ -80,10 +80,10 @@
                 android:layout_marginTop="20dp"
                 android:text="@string/lb_login"/>
 
-            <TextView android:id="@+id/text_view_criar_usuario"
+            <TextView android:id="@+id/text_view_cadastrar_cliente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/lb_criar_usuario"
+                android:text="@string/lb_cadastrar_cliente"
                 android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:textSize="16dip"/>

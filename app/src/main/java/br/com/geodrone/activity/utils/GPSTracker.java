@@ -14,6 +14,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 
+import br.com.geodrone.utils.NetworkUtils;
+
 
 @SuppressWarnings("ResourceType")
 public class GPSTracker implements LocationListener {
@@ -75,7 +77,7 @@ public class GPSTracker implements LocationListener {
             Log.v("isGPSEnabled", "=" + isGPSEnabled);
 
             // getting network status
-            isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+            isNetworkEnabled = NetworkUtils.isNetworkConnected(this.mContext) && locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
             Log.v("isNetworkEnabled", "=" + isNetworkEnabled);
 
             if (isGPSEnabled || isNetworkEnabled) {

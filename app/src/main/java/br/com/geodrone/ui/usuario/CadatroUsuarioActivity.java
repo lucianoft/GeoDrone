@@ -36,9 +36,6 @@ public class CadatroUsuarioActivity extends BaseActivity implements UsuarioPrese
         ButterKnife.bind(this);
 
         mProgress = new GenericProgress(this);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
-        getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
-
         usuarioPresenter = new UsuarioPresenter(this);
         editTextTelefone.addTextChangedListener(Mask.insert("(##)#####-####", editTextTelefone));
 

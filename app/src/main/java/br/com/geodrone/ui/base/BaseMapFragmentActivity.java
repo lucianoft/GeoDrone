@@ -118,7 +118,7 @@ public abstract class BaseMapFragmentActivity extends BaseFragmentActivity imple
         }
     }
 
-    private void checkLocation() {
+    public void checkLocation() {
         if (tracker.canGetLocation)
             setMyLocation();
         else

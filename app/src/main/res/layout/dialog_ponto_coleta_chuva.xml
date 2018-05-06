@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="15dp"
+    >
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/text_input_layout_ponto_coleta_chuva_descricao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp">
+        <EditText android:id="@+id/edit_text_ponto_coleta_chuva_descricao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="@string/lb_descricao" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/text_layout_ponto_coleta_chuva_latitude"
+        android:layout_below="@+id/text_input_layout_ponto_coleta_chuva_descricao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp">
+        <EditText android:id="@+id/edit_text_ponto_coleta_chuva_latitude"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:hint="@string/lb_latitude" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/text_layout_ponto_coleta_chuva_longitude"
+        android:layout_below="@+id/text_layout_ponto_coleta_chuva_latitude"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp">
+        <EditText android:id="@+id/edit_text_ponto_coleta_chuva_longitude"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:hint="@string/lb_longitude" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text= "@string/lb_ativo"
+        android:id="@+id/text_view_ponto_coleta_chuva_ativo"
+        android:layout_below="@+id/text_layout_ponto_coleta_chuva_longitude"
+        />
+
+    <Spinner
+        style="@style/Widget.AppCompat.Spinner.Underlined"
+        android:id="@+id/spinner_ponto_coleta_chuva_ativo"
+
+        android:layout_below="@+id/text_view_ponto_coleta_chuva_ativo"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>

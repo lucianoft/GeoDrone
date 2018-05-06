@@ -1,9 +1,11 @@
 package br.com.geodrone.oauth;
 
 import br.com.geodrone.oauth.dto.AccessToken;
+import br.com.geodrone.resource.ClienteResource;
 import br.com.geodrone.resource.InstallerResource;
 import br.com.geodrone.resource.SincronizacaoRetResource;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -37,5 +39,9 @@ public interface APIClient {
     public Call<SincronizacaoRetResource> getAtualizacoes(@Path("idUsuario")  Long idUsuario,
                                                     @Path("idCliente")  Long idCliente,
                                                     @Path("idDispositivo") Long idDispositivo,
-                                                    @Path("dtSincronizacao") String dtSincronizacao) ;
+                                                    @Path("dtSincronizacao") String dtSincronizacao);
+
+
+    @POST("/geoodrone/cliente/cadastro-inicial")
+    public Call<ClienteResource> cadastrarCliente(@Body ClienteResource ClienteResource);
 }

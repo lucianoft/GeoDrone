@@ -16,7 +16,7 @@
         android:layout_weight="0.03">
 
         <ImageView
-            android:src="@drawable/img_geodrone"
+            android:src="@drawable/ic_geodrone"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
