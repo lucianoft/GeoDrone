@@ -10,7 +10,6 @@ import retrofit2.Response;
 /**
  * Created by fernandes on 05/05/2018.
  */
-
 public class ErrorUtils {
     public static Messenger parseError(Response<?> response, String url) {
         Converter<ResponseBody, Messenger> converter =
@@ -20,7 +19,12 @@ public class ErrorUtils {
         Messenger error;
 
         try {
-            error = converter.convert(response.errorBody());
+            if (response.code() == 404){
+                error = new Messenger();
+                error.addError("Erro de conexão com serviço");
+            }else {
+                error = converter.convert(response.errorBody());
+            }
         } catch (Exception e) {
             return new Messenger();
         }

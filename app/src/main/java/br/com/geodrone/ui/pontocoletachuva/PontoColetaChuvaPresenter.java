@@ -2,7 +2,11 @@ package br.com.geodrone.ui.pontocoletachuva;
 
 import android.location.Location;
 
+import org.greenrobot.greendao.annotation.NotNull;
+import org.greenrobot.greendao.annotation.Property;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import br.com.geodrone.SessionGeooDrone;
@@ -70,10 +74,10 @@ public class PontoColetaChuvaPresenter extends BasePresenter<PontoColetaChuvaPre
                 pluviosidadeDiariaDto.setLongitudeLeitura(locationAtual.getLongitude());
 
             }
-            RegistroChuva registroChuva = registroChuvaService.findOneByPontoColetaChuva(pontoColetaChuva.getIdPontoColetaChuva());
-            if (registroChuva != null){
+            RegistroChuva registroChuva = registroChuvaService.findOneByPontoColetaChuva(pontoColetaChuva.getId());
+            if (registroChuva != null) {
                 pluviosidadeDiariaDto.setDtLeitura(registroChuva.getDtRegistro());
-                if (dateUtils.equals(dateUtils.nowTrunc(), dateUtils.trunc(registroChuva.getDtRegistro()))){
+                if (dateUtils.equals(dateUtils.nowTrunc(), dateUtils.trunc(registroChuva.getDtRegistro()))) {
                     pluviosidadeDiariaDto.setIndColetaDia(1);
                 }
             }
@@ -94,5 +98,35 @@ public class PontoColetaChuvaPresenter extends BasePresenter<PontoColetaChuvaPre
         }
         return null;
 
+    }
+
+    public PontoColetaChuva salvar(Long id,
+                                   String descricao,
+                                   String latitudeStr,
+                                   String longitudeStr,
+                                   Integer indAtivo){
+        NumberUtils numberUtils = new NumberUtils();
+        Double latitude = numberUtils.parseDouble(latitudeStr);
+        Double longitude = numberUtils.parseDouble(longitudeStr);
+
+        PontoColetaChuva pontoColetaChuva = null;
+        if (id != null) {
+            pontoColetaChuva = pontoColetaChuvaService.findById(id);
+        }
+        boolean isInsert = pontoColetaChuva == null;
+        if (isInsert){
+            pontoColetaChuva = new PontoColetaChuva();
+            pontoColetaChuva.setDtInstalacao(new DateUtils().now());
+        }
+        pontoColetaChuva.setDescricao(descricao);
+        pontoColetaChuva.setLatitude(latitude);
+        pontoColetaChuva.setLongitude(longitude);
+        pontoColetaChuva.setIndAtivo(indAtivo);
+        if (isInsert){
+            pontoColetaChuva = pontoColetaChuvaService.insert(pontoColetaChuva);
+        }else{
+            pontoColetaChuva = pontoColetaChuvaService.update(pontoColetaChuva);
+        }
+        return pontoColetaChuva;
     }
 }

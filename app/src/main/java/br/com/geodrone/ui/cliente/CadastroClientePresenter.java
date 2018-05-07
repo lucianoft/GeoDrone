@@ -166,7 +166,7 @@ public class CadastroClientePresenter  extends BasePresenter<CadastroClientePres
 
             if (isOk) {
                 ClienteResource clienteResource = criarCliente(nome, cpf, email, segmento, telefone, celular, logradouro, bairro, localidade, numero, complemento, cep);
-                Configuracao configuracao = null/*configuracaoService.getConfiguracao()*/;
+                Configuracao configuracao = configuracaoService.getOneConfiguracao();
                 String URL_BASE = configuracao != null ? configuracao.getUrl() : url;
                 if (URL_BASE == null) {
                     URL_BASE = Constantes.API_LOGIN_URL;

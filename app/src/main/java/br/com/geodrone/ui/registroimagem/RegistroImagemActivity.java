@@ -47,6 +47,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemSelected;
 
+import static br.com.geodrone.ui.base.BaseMapFragmentActivity.REQ_LOCATION_PERMISSION;
+
 public class RegistroImagemActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener,
                                                                     RegistroImagemPresenter.View {
 
@@ -80,9 +82,6 @@ public class RegistroImagemActivity extends BaseActivity implements BottomNaviga
 
         mProgress = new GenericProgress(this);
 
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
-        //getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
-
         registroImagemPresenter = new RegistroImagemPresenter(this);
 
         ArrayAdapter<FlagDirecao> spinnerDirecaoAdapter = new ArrayAdapter<FlagDirecao>(this, android.R.layout.simple_spinner_item, FlagDirecao.values());
@@ -111,6 +110,13 @@ public class RegistroImagemActivity extends BaseActivity implements BottomNaviga
                             Manifest.permission.WRITE_EXTERNAL_STORAGE,
                             Manifest.permission.READ_EXTERNAL_STORAGE},
                     1);
+        }
+
+        if (!hasPermission(Manifest.permission.ACCESS_COARSE_LOCATION) ||
+                !hasPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {
+            requestPermissionsSafely(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.ACCESS_FINE_LOCATION},
+                    REQ_LOCATION_PERMISSION);
         }
     }
     @Override
@@ -210,13 +216,8 @@ public class RegistroImagemActivity extends BaseActivity implements BottomNaviga
 
     @Override
     public void onRegitroImagemError(String message) {
-
+        showMessage(message);
     }
-
-    /*@OnItemSelected(R.id.spinner_direcao_reg_imagem)
-    public void onChanceDirecao(int position) {
-        String flagDirecao = FlagDirecao.getValueByIndice(position);
-    }*/
 
     @Override
     public void showLoading() {

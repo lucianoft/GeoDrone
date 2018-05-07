@@ -1019,4 +1019,11 @@ public class NumberUtils implements Serializable{
 		} 
 	}*/
 
+	public Double parseDouble(String value) {
+		if (value == null || "".equals(value)) {
+			return null;
+		}
+
+		return new Double(value);
+	}
 }

@@ -10,9 +10,12 @@ import android.widget.Toast;
 import br.com.geodrone.R;
 import br.com.geodrone.SessionGeooDrone;
 import br.com.geodrone.ui.base.BaseActivity;
+import br.com.geodrone.ui.cliente.CadastroClienteActivity;
 import br.com.geodrone.ui.helper.GenericProgress;
+import br.com.geodrone.ui.login.LoginActivity;
 import br.com.geodrone.ui.sincronizacao.SincronizacaoActivity;
 import br.com.geodrone.utils.Constantes;
+import br.com.geodrone.utils.Messenger;
 import br.com.geodrone.utils.PreferencesUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -104,6 +107,12 @@ public class PrimeiroLoginActivity extends BaseActivity implements PrimeiroLogin
     }
 
     @Override
+    public void onDispositivoInstaladoError(Messenger messenger) {
+        hideLoading();
+        showMessenger(messenger);
+    }
+
+    @Override
     public void showLoading() {
         mProgress.show();
 
@@ -113,5 +122,11 @@ public class PrimeiroLoginActivity extends BaseActivity implements PrimeiroLogin
     public void hideLoading() {
         mProgress.hide();
 
+    }
+
+    @OnClick(R.id.text_view_cadastrar_cliente_pri_login)
+    public void onClickNovoUsuario() {
+        Intent i = new Intent(PrimeiroLoginActivity.this ,CadastroClienteActivity.class);
+        startActivity(i);
     }
 }

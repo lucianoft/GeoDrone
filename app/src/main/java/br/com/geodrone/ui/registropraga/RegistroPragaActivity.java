@@ -54,10 +54,6 @@ public class RegistroPragaActivity extends BaseActivity implements RegistroPraga
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_praga);
         ButterKnife.bind(this);
-
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
-        //getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
-
         mProgress = new GenericProgress(this);
 
         Intent it = getIntent();

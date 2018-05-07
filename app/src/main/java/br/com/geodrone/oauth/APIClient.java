@@ -4,6 +4,7 @@ import br.com.geodrone.oauth.dto.AccessToken;
 import br.com.geodrone.resource.ClienteResource;
 import br.com.geodrone.resource.InstallerResource;
 import br.com.geodrone.resource.SincronizacaoRetResource;
+import br.com.geodrone.utils.Constantes;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -30,18 +31,18 @@ public interface APIClient {
             @Field("grant_type") String grantType,
             @Field("refresh_token") String refreshToken);
 
-    @POST("/geoodrone/install/{idUsuario}/{idCliente}/{descDispositivo}")
+    @POST(Constantes.API_URL_PREFIXO + "install/{idUsuario}/{idCliente}/{descDispositivo}")
     public Call<InstallerResource> instalarAplicativo(@Path("idUsuario") Long idUsuario,
                                                                 @Path("idCliente")    Long idCliente,
                                                                 @Path("descDispositivo") String descDispositivo);
 
-    @GET("/geoodrone/sincronizacao/{idUsuario}/{idCliente}/{idDispositivo}/{dtSincronizacao}")
+    @GET(Constantes.API_URL_PREFIXO + "sincronizacao/{idUsuario}/{idCliente}/{idDispositivo}/{dtSincronizacao}")
     public Call<SincronizacaoRetResource> getAtualizacoes(@Path("idUsuario")  Long idUsuario,
                                                     @Path("idCliente")  Long idCliente,
                                                     @Path("idDispositivo") Long idDispositivo,
                                                     @Path("dtSincronizacao") String dtSincronizacao);
 
 
-    @POST("/geoodrone/cliente/cadastro-inicial")
+    @POST(Constantes.API_URL_PREFIXO + "cliente/cadastro-inicial")
     public Call<ClienteResource> cadastrarCliente(@Body ClienteResource ClienteResource);
 }

@@ -108,20 +108,25 @@
             android:label="@string/title_activity_registro_doenca"
             android:parentActivityName=".ui.main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity android:name=".ui.sincronizacao.SincronizacaoActivity"
-            android:parentActivityName=".ui.main.MainActivity"/>
-
-        <activity android:name=".ui.registrocondicaotempo.RegistroCondicoesTempoActivity"
+        <activity
+            android:name=".ui.sincronizacao.SincronizacaoActivity"
+            android:parentActivityName=".ui.main.MainActivity" />
+        <activity
+            android:name=".ui.registrocondicaotempo.RegistroCondicoesTempoActivity"
             android:label="@string/title_activity_registro_condicao_tempo"
             android:parentActivityName=".ui.main.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-
-        <activity android:name=".ui.pontocoletachuva.PontoColetaChuvaActivity"
-            android:label="@string/title_activity_registro_condicao_tempo"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.pontocoletachuva.PontoColetaChuvaActivity"
+            android:label="@string/title_dialog_cadastro_ponto_coleta_chuva"
             android:parentActivityName=".ui.main.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.cliente.CadastroClienteActivity"
+            android:label="@string/title_activity_cadatro_cliente"
+            android:parentActivityName=".ui.main.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.logout.LogoutActivity"></activity>
     </application>
 
 </manifest>

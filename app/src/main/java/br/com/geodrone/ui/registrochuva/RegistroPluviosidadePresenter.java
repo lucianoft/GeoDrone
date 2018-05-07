@@ -3,7 +3,6 @@ package br.com.geodrone.ui.registrochuva;
 import android.location.Location;
 import android.util.Log;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
@@ -11,7 +10,7 @@ import java.util.List;
 
 import br.com.geodrone.R;
 import br.com.geodrone.SessionGeooDrone;
-import br.com.geodrone.activity.utils.LocationUtils;
+import br.com.geodrone.utils.LocationUtils;
 import br.com.geodrone.dto.ColetaPluviosidadeDto;
 import br.com.geodrone.model.Cliente;
 import br.com.geodrone.model.PontoColetaChuva;
@@ -135,7 +134,7 @@ public class RegistroPluviosidadePresenter extends BasePresenter<RegistroPluvios
                 pluviosidadeDiariaDto.setLongitudeLeitura(locationAtual.getLongitude());
 
             }
-            RegistroChuva registroChuva = registroChuvaService.findOneByPontoColetaChuva(pontoColetaChuva.getIdPontoColetaChuva());
+            RegistroChuva registroChuva = registroChuvaService.findOneByPontoColetaChuva(pontoColetaChuva.getId());
             if (registroChuva != null){
                 pluviosidadeDiariaDto.setDtLeitura(registroChuva.getDtRegistro());
                 if (dateUtils.equals(dateUtils.nowTrunc(), dateUtils.trunc(registroChuva.getDtRegistro()))){

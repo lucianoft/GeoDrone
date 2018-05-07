@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">GeoDrone</string>
+
     <string name="title_activity_primeiro_login">Primeiro Login</string>
     <string name="title_activity_login">Login</string>
     <string name="title_activity_main">Menu Principal</string>
@@ -9,8 +10,21 @@
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_cadatrar_usuario">CadatrarUsuarioActivity</string>
     <string name="title_activity_cadatro_usuario">Cadastrar Usuario</string>
+    <string name="title_activity_cadatro_cliente">Cadastrar Cliente</string>
     <string name="title_activity_cadastro_imagem">Enviar Foto</string>
     <string name="title_dialog_cadastro_ponto_coleta_chuva">Cadastro Ponto Coleta Chuva</string>
+    <string name="title_activity_maps2">Map</string>
+    <string name="title_activity_registro_pragas">Registro de Pagras</string>
+    <string name="title_activity_registro_doenca">Registro de Doencas</string>
+    <string name="title_activity_registro_condicao_tempo">Registro de Condicao do tempo</string>
+    <string name="title_dialog_confirmar_doenca">Registro de doença</string>
+    <string name="title_dialog_confirmar_praga">Registro de praga</string>
+
+    <string name="title_activity_monitoramento">Monitoramento</string>
+    <string name="title_activity_mon">Teste</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 
     <!-- Strings related to login -->
     <string name="lb_cpf">cpf</string>
@@ -57,6 +71,7 @@
     <string name="lb_cep">Cep</string>
     <string name="lb_descricao">Descricao</string>
     <string name="lb_ativo">Ativo</string>
+    <string name="lbl_pressionarparasair">Pressione novamente para sair</string>
 
     <string name="lb_btn_salvar">Salvar</string>
     <string name="lb_possui_registro_doenca">Possui registro de doença?</string>
@@ -101,11 +116,6 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_maps2">Map</string>
-    <string name="title_activity_registro_pragas">Registro de Pagras</string>
-    <string name="title_activity_registro_doenca">Registro de Doencas</string>
-    <string name="title_activity_registro_condicao_tempo">Registro de Condicao do tempo</string>
 
     <string name="menu_ponto_coleta_chuva">Ponto Coleta Chuva</string>
     <string name="menu_registro_chuva">Registro Chuva</string>
@@ -127,12 +137,7 @@
     <string name="menu_registro_de_doenca">Registro Doenca</string>
     <string name="menu_sem_registro_de_doenca">Doenca</string>
 
-    <string name="title_dialog_confirmar_doenca">Registro de doença</string>
-    <string name="title_dialog_confirmar_praga">Registro de praga</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_logout">Logout</string>
 
-    <string name="title_activity_monitoramento">Monitoramento</string>
-    <string name="title_activity_mon">Teste</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
 </resources>

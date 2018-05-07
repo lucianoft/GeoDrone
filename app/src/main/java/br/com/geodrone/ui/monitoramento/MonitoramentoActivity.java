@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.view.MenuItem;
 
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 
 import br.com.geodrone.R;
@@ -52,8 +53,6 @@ public class MonitoramentoActivity extends BaseMapFragmentActivity implements Bo
                 !hasPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {
             requestPermissionsSafely(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
                     Manifest.permission.ACCESS_FINE_LOCATION}, REQ_LOCATION_PERMISSION);
-        }else {
-            checkLocation();
         }
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map_monitoramento);
@@ -67,6 +66,12 @@ public class MonitoramentoActivity extends BaseMapFragmentActivity implements Bo
         registroSemDoenca.takeView(this);
         registroSemPraga.takeView(this);
         hideLoading();
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        super.onMapReady(googleMap);
+        checkLocation();
     }
 
     @Override

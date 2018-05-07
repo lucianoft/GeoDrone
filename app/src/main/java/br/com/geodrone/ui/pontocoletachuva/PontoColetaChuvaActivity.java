@@ -7,6 +7,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -30,6 +31,7 @@ import br.com.geodrone.model.constantes.FlagSimNao;
 import br.com.geodrone.ui.base.BaseMapFragmentActivity;
 import br.com.geodrone.ui.registrochuva.RegistroPluviosidadeActivity;
 import br.com.geodrone.ui.registrochuva.RegistroPluviosidadePresenter;
+import br.com.geodrone.utils.DateUtils;
 import br.com.geodrone.utils.NumberUtils;
 import butterknife.ButterKnife;
 
@@ -101,6 +103,7 @@ public class PontoColetaChuvaActivity extends BaseMapFragmentActivity implements
                 marker.showInfoWindow();
             }
         }catch (Exception ex){
+            Log.e(TAG, ex.toString(), ex);
             onError(ex);
         }
     }
@@ -132,10 +135,11 @@ public class PontoColetaChuvaActivity extends BaseMapFragmentActivity implements
     }
 
     @Override
-    public void onShowDialogInfPluviosidade(ColetaPluviosidadeDto coletaPluviosidadeDto) {
+    public void onShowDialogInfPluviosidade(final ColetaPluviosidadeDto coletaPluviosidadeDto) {
         LayoutInflater li = getLayoutInflater();
         View view = li.inflate(R.layout.dialog_ponto_coleta_chuva, null);
-        EditText editTextDescricaoPonto = view.findViewById(R.id.edit_text_ponto_coleta_chuva_descricao);
+
+        final EditText editTextDescricaoPonto = view.findViewById(R.id.edit_text_ponto_coleta_chuva_descricao);
         final EditText editTextLatitude = view.findViewById(R.id.edit_text_ponto_coleta_chuva_latitude);
         final EditText editTextLongitude = view.findViewById(R.id.edit_text_ponto_coleta_chuva_longitude);
         final Spinner spinnerAtivo = view.findViewById(R.id.spinner_ponto_coleta_chuva_ativo);
@@ -159,7 +163,12 @@ public class PontoColetaChuvaActivity extends BaseMapFragmentActivity implements
         alert.setPositiveButton(R.string.lb_alterar, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                FlagSimNao flagSimNao = (FlagSimNao) spinnerAtivo.getSelectedItem();
+                salvar(coletaPluviosidadeDto.getIdPontoColetaChuva(),
+                        editTextDescricaoPonto.getText().toString(),
+                        editTextLatitude.getText().toString(),
+                        editTextLongitude.getText().toString(),
+                        flagSimNao.value());
                 dialog.dismiss();
             }
         });
@@ -172,7 +181,7 @@ public class PontoColetaChuvaActivity extends BaseMapFragmentActivity implements
 
         LayoutInflater li = getLayoutInflater();
         View view = li.inflate(R.layout.dialog_ponto_coleta_chuva, null);
-        EditText editTextDescricaoPonto = view.findViewById(R.id.edit_text_ponto_coleta_chuva_descricao);
+        final EditText editTextDescricaoPonto = view.findViewById(R.id.edit_text_ponto_coleta_chuva_descricao);
         final EditText editTextLatitude = view.findViewById(R.id.edit_text_ponto_coleta_chuva_latitude);
         final EditText editTextLongitude = view.findViewById(R.id.edit_text_ponto_coleta_chuva_longitude);
         final Spinner spinnerAtivo = view.findViewById(R.id.spinner_ponto_coleta_chuva_ativo);
@@ -196,8 +205,13 @@ public class PontoColetaChuvaActivity extends BaseMapFragmentActivity implements
         alert.setPositiveButton(R.string.lb_inserir, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
-                dialog.dismiss();
+                FlagSimNao flagSimNao = (FlagSimNao) spinnerAtivo.getSelectedItem();
+                salvar(null,
+                    editTextDescricaoPonto.getText().toString(),
+                    editTextLatitude.getText().toString(),
+                    editTextLongitude.getText().toString(),
+                    flagSimNao.value());
+            dialog.dismiss();
             }
         });
         AlertDialog dialog = alert.create();
@@ -222,5 +236,19 @@ public class PontoColetaChuvaActivity extends BaseMapFragmentActivity implements
     @Override
     public void onMapLongClick(LatLng latLng) {
         onShowDialogInfPluviosidade(latLng);
+    }
+
+    public void salvar(Long id,
+                       String descricao,
+                       String latitude,
+                       String longitude,
+                       Integer indAtivo){
+        try {
+            pontoColetaChuvaPresenter.salvar(id, descricao, latitude, longitude, indAtivo);
+            carregarPontosColeta();
+        }catch (Exception ex){
+            Log.e(TAG, ex.toString(), ex);
+            onError(ex);
+        }
     }
 }

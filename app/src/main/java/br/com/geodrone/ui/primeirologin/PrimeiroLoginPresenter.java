@@ -23,6 +23,8 @@ import br.com.geodrone.ui.base.BasePresenter;
 import br.com.geodrone.ui.login.LoginPresenter;
 import br.com.geodrone.utils.AndroidInformation;
 import br.com.geodrone.utils.Constantes;
+import br.com.geodrone.utils.ErrorUtils;
+import br.com.geodrone.utils.Messenger;
 import br.com.geodrone.utils.PreferencesUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,6 +48,7 @@ public class PrimeiroLoginPresenter extends BasePresenter<PrimeiroLoginPresenter
 
         void onDispositivoInstaladoSucesso(String message);
         void onDispositivoInstaladoError(String message);
+        void onDispositivoInstaladoError(Messenger messenger);
 
     }
 
@@ -116,6 +119,8 @@ public class PrimeiroLoginPresenter extends BasePresenter<PrimeiroLoginPresenter
                         sincronizacaoService.instalarAplicativo(URL_BASE, sincronizacaoResource);
                         view.onDispositivoInstaladoSucesso(activity.getString(R.string.msg_operacao_sucesso));
                     } else {
+                        Messenger messenger = ErrorUtils.parseError(response, URL_BASE);
+                        view.onDispositivoInstaladoError(messenger);
                         view.onDispositivoInstaladoError("x");
                     }
                 }

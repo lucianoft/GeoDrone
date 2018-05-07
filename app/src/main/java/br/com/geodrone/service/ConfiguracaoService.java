@@ -30,6 +30,10 @@ public class ConfiguracaoService extends CrudService<Configuracao, Long> {
         return configuracaoRepository.findOne(dispositivo.getId());
     }
 
+    public Configuracao getOneConfiguracao(){
+        return configuracaoRepository.findOne();
+    }
+
     public void atualizarUrlBase(String url){
         Configuracao configuracao = configuracaoRepository.findOne();
         if (configuracao != null){
