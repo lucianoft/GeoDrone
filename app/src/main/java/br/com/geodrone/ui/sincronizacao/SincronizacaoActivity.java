@@ -28,14 +28,13 @@ public class SincronizacaoActivity extends BaseActivity implements Sincronizacao
 
         Bundle b = getIntent().getExtras();
         activityOrigem = b.getString(br.com.geodrone.activity.utils.Constantes.CHAVE_UI_ORIGEM);
-
-        showLoading();
     }
 
     @Override
     public void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         sincronizacaoPresenter.takeView(this);
+        showLoading();
         sincronizacaoPresenter.getAtualizacoes();
     }
 
@@ -54,7 +53,7 @@ public class SincronizacaoActivity extends BaseActivity implements Sincronizacao
         hideLoading();
         showMessage(msg);
         hideLoading();
-        if (Constantes.ACTIVITY_PRIMEIRO_LOGIN.equals(activityOrigem)) {
+        if (Constantes.ACTIVITY_PRIMEIRO_LOGIN.equals(activityOrigem) || Constantes.ACTIVITY_LOGIN.equals(activityOrigem)) {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }

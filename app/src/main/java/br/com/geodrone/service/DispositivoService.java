@@ -21,12 +21,16 @@ public class DispositivoService extends CrudService<Dispositivo, Long> {
         return dispositivoRepository;
     }
 
-    public Dispositivo findOne(){
-        return dispositivoRepository.findOne();
+    public Dispositivo findOneByCliente(Long idCliente){
+        return dispositivoRepository.findOneByCliente(idCliente);
     }
 
     public boolean isPrimeiroLogin(){
-        return findOne() == null;
+        return dispositivoRepository.isPrimeiroLogin();
+    }
+
+    public boolean isClienteJaPossuiDispositivo(Long idCliente){
+        return findOneByCliente(idCliente) != null;
     }
 }
 

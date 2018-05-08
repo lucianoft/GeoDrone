@@ -23,11 +23,6 @@ public class ConfiguracaoRepository extends CrudRepository<Configuracao, Long>{
         return getDaoSession().getConfiguracaoDao();
     }
 
-    public Configuracao findOne(Long idDispositivo) {
-        QueryBuilder<Configuracao> qrBuilder = getCrudDao().queryBuilder().where(ConfiguracaoDao.Properties.IdDispositivo.eq(idDispositivo));
-        return qrBuilder.unique();
-    }
-
     public Configuracao findOne() {
         QueryBuilder<Configuracao> qrBuilder = getCrudDao().queryBuilder();
         return qrBuilder.unique();

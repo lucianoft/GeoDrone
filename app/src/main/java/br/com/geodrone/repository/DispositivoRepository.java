@@ -5,8 +5,11 @@ import android.content.Context;
 import org.greenrobot.greendao.AbstractDao;
 import org.greenrobot.greendao.query.QueryBuilder;
 
+import br.com.geodrone.model.Configuracao;
 import br.com.geodrone.model.Dispositivo;
 import br.com.geodrone.model.Usuario;
+import br.com.geodrone.model.daoGen.ConfiguracaoDao;
+import br.com.geodrone.model.daoGen.DispositivoDao;
 import br.com.geodrone.model.daoGen.UsuarioDao;
 
 /**
@@ -22,8 +25,15 @@ public class DispositivoRepository extends CrudRepository<Dispositivo, Long>{
         return getDaoSession().getDispositivoDao();
     }
 
-    public Dispositivo findOne() {
+    public boolean isPrimeiroLogin() {
         QueryBuilder<Dispositivo> qrBuilder = getCrudDao().queryBuilder();
+        Dispositivo dispositivo = qrBuilder.unique();
+
+        return dispositivo == null;
+    }
+
+    public Dispositivo findOneByCliente(Long idCliente) {
+        QueryBuilder<Dispositivo> qrBuilder = getCrudDao().queryBuilder().where(DispositivoDao.Properties.IdCliente.eq(idCliente)).limit(1);
         return qrBuilder.unique();
     }
 }

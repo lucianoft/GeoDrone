@@ -130,7 +130,7 @@ public class GeoDroneApplication extends Application {
             Dispositivo dispositivo = new Dispositivo();
             dispositivo.setId(1L);
             dispositivo.setIdCliente(1L);
-            dispositivo.setDtSincronizacao(new Date());
+            //dispositivo.setDtSincronizacao(new Date());
             dispositivo.setDtInclusao(new Date());
             dispositivo.setDtAlteracao(new Date());
             dispositivo.setVersaoSistema(1L);

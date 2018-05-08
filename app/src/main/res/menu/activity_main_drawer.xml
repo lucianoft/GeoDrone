@@ -19,10 +19,7 @@
             <item
                 android:id="@+id/nav_registro_condicoes_tempo"
                 android:title="@string/menu_registro_condicoes_tempo" />
-            <item
-                android:id="@+id/nav_forum_geoodrone"
-                android:title="@string/menu_forum" />
-        </menu>
+          </menu>
     </item>
 
     <item android:title="@string/menu_geoomonitora">

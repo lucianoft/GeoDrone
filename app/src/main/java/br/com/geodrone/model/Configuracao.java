@@ -14,7 +14,7 @@ import br.com.geodrone.model.api.DeviceModel;
 
 
 @Entity(generateConstructors = false, nameInDb ="GEO_CONFIGURACAO")
-public class Configuracao extends GenericModel implements AuditModel, DeviceModel {
+public class Configuracao extends GenericModel implements AuditModel {
 
 	@Id(autoincrement = true)
 	@Property(nameInDb = "ID_CONFIGURACAO")
@@ -22,15 +22,6 @@ public class Configuracao extends GenericModel implements AuditModel, DeviceMode
 
 	@Property(nameInDb = "URL")
 	private String url;
-
-	@Property(nameInDb = "ID_DISPOSITIVO")
-	private Long idDispositivo;
-
-	@Property(nameInDb = "DT_SINCRONIZACAO")
-	private Date dtSincronizacao;
-
-	@Property(nameInDb = "ID_CLIENTE")
-	private Long idCliente;
 
 	@Property(nameInDb = "DT_INCLUSAO")
 	@NotNull
@@ -61,23 +52,6 @@ public class Configuracao extends GenericModel implements AuditModel, DeviceMode
 		this.url = url;
 	}
 
-	public Date getDtSincronizacao() {
-		return this.dtSincronizacao;
-	}
-	public void setDtSincronizacao(Date dtSincronizacao) {
-		this.dtSincronizacao = dtSincronizacao;
-	}
-
-
-	/** ***** from DeviceDomain ****** */
-	@Override
-	public Long getIdDispositivo() {
-		return this.idDispositivo;
-	}
-	@Override
-	public void setIdDispositivo(Long idDispositivo) {
-		this.idDispositivo = idDispositivo;
-	}
 	/** ***************************** */
 
 	/** ***** from AuditDomain ****** */
@@ -145,11 +119,5 @@ public class Configuracao extends GenericModel implements AuditModel, DeviceMode
 		return (this.id == null ? "" : this.id.toString() );
 	}
 	/** ***************************** */
-	public Long getIdCliente() {
-		return this.idCliente;
-	}
-	public void setIdCliente(Long idCliente) {
-		this.idCliente = idCliente;
-	}
 
 }

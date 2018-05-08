@@ -74,12 +74,12 @@ public class SincronizacaoService extends GenericService {
 
         SessionGeooDrone.setAttribute(SessionGeooDrone.CHAVE_DISPOSITIVO, dispositivo);
 
-        Configuracao configuracao = new Configuracao();
-        configuracao.setIdCliente(accessToken.getIdCliente());
-        configuracao.setIdDispositivo(dispositivo.getId());
-        configuracao.setUrl(url);
-        configuracao = configuracaoService.insert(configuracao);
-
+        Configuracao configuracao = configuracaoService.getOneConfiguracao();
+        if (configuracao == null) {
+            configuracao = new Configuracao();
+            configuracao.setUrl(url);
+            configuracao = configuracaoService.insert(configuracao);
+        }
         SessionGeooDrone.setAttribute(SessionGeooDrone.CHAVE_URL_BASE, url);
 
     }

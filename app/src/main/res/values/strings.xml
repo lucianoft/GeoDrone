@@ -80,6 +80,8 @@
     <string name="lb_nao">Não</string>
     <string name="lb_registro_condicao_tempo">Condição do Tempo</string>
     <string name="lb_confirma_registro_condicao_tempo">Confirma registro de Condição do Tempo?</string>
+    <string name="lb_aceite_usuario">Aceitar Contrato de uso</string>
+    <string name="lb_check_aceite_usuario">Li e concordo com termos do contrato</string>
 
 
     <string name="msg_obr_nome">É obrigatorio informar o campo nome</string>

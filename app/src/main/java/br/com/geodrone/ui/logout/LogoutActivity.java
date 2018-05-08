@@ -45,5 +45,7 @@ public class LogoutActivity extends BaseActivity implements LogoutPresenter.View
     public void finishApp(){
         hideLoading();
         finishAffinity();
+        android.os.Process.killProcess(android.os.Process.myPid());
+        super.onDestroy();
     }
 }

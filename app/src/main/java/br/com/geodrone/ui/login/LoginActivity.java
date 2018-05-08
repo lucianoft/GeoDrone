@@ -16,9 +16,11 @@ import br.com.geodrone.R;
 import br.com.geodrone.ui.base.BaseActivity;
 import br.com.geodrone.ui.cliente.CadastroClienteActivity;
 import br.com.geodrone.ui.helper.GenericProgress;
+import br.com.geodrone.ui.sincronizacao.SincronizacaoActivity;
 import br.com.geodrone.ui.usuario.CadatroUsuarioActivity;
 import br.com.geodrone.ui.main.MainActivity;
 import br.com.geodrone.utils.KeyboardUtils;
+import br.com.geodrone.utils.Messenger;
 import br.com.geodrone.utils.PreferencesUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -106,6 +108,33 @@ public class LoginActivity extends BaseActivity implements LoginPresenter.View{
         hideLoading();
         editTextSenha.setError(message);
     }
+
+    @Override
+    public void onDispositivoInstaladoSucesso(String message) {
+        hideLoading();
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        PreferencesUtils.putString(getApplicationContext(), PreferencesUtils.CHAVE_EMAIL_USUARIO, editTextEmail.getText().toString());
+        PreferencesUtils.putString(getApplicationContext(), PreferencesUtils.CHAVE_SENHA_USUARIO, editTextSenha.getText().toString());
+        Intent intent = new Intent(this, SincronizacaoActivity.class);
+        Bundle b = new Bundle();
+        b.putString(br.com.geodrone.activity.utils.Constantes.CHAVE_UI_ORIGEM, br.com.geodrone.activity.utils.Constantes.ACTIVITY_LOGIN); //Your id
+        intent.putExtras(b); //Put your id to your next Intent
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onDispositivoInstaladoError(String message) {
+        hideLoading();
+        onError(message);
+    }
+
+    @Override
+    public void onDispositivoInstaladoError(Messenger messenger) {
+        hideLoading();
+        showMessenger(messenger);
+    }
+
 
     @Override
     public void showLoading() {

@@ -5,12 +5,14 @@ import android.util.Log;
 import br.com.geodrone.R;
 import br.com.geodrone.SessionGeooDrone;
 import br.com.geodrone.model.Configuracao;
+import br.com.geodrone.model.Dispositivo;
 import br.com.geodrone.oauth.APIClient;
 import br.com.geodrone.oauth.ServiceGenerator;
 import br.com.geodrone.oauth.dto.AccessToken;
 import br.com.geodrone.resource.InstallerResource;
 import br.com.geodrone.resource.SincronizacaoRetResource;
 import br.com.geodrone.service.ConfiguracaoService;
+import br.com.geodrone.service.DispositivoService;
 import br.com.geodrone.service.SincronizacaoService;
 import br.com.geodrone.ui.base.BaseActivity;
 import br.com.geodrone.ui.base.BasePresenter;
@@ -34,6 +36,7 @@ public class SincronizacaoPresenter extends BasePresenter<SincronizacaoPresenter
 
     SincronizacaoService sincronizacaoService = null;
     ConfiguracaoService configuracaoService = null;
+    DispositivoService dispositivoService = null;
 
     private BaseActivity activity;
 
@@ -41,17 +44,19 @@ public class SincronizacaoPresenter extends BasePresenter<SincronizacaoPresenter
         this.activity = activity;
         this.sincronizacaoService = new SincronizacaoService(activity);
         this.configuracaoService = new ConfiguracaoService(activity);
+        dispositivoService = new DispositivoService(activity);
     }
 
     public void getAtualizacoes(){
         try {
-            Configuracao configuracao = configuracaoService.getConfiguracao();
-            String URL_BASE = configuracao.getUrl();
             AccessToken accessToken = PreferencesUtils.getAccessToken(this.activity);
+            Configuracao configuracao = configuracaoService.getOneConfiguracao();
+            Dispositivo dispositivo = dispositivoService.findOneByCliente(accessToken.getIdCliente());
+            String URL_BASE = configuracao.getUrl();
             APIClient client = ServiceGenerator.getInstance(URL_BASE).createServiceWithAuth(APIClient.class, accessToken);
             Call<SincronizacaoRetResource> call = client.getAtualizacoes(accessToken.getIdUsuario(),
-                                                                  accessToken.getIdCliente(),
-                                                                  configuracao.getIdDispositivo(),
+                                                                    accessToken.getIdCliente(),
+                                                                    dispositivo.getId(),
                                                                    "2000-01-01");
             call.enqueue(new Callback<SincronizacaoRetResource>() {
                 @Override

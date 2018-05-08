@@ -25,11 +25,6 @@ public class ConfiguracaoService extends CrudService<Configuracao, Long> {
         return configuracaoRepository;
     }
 
-    public Configuracao getConfiguracao(){
-        Dispositivo dispositivo = SessionGeooDrone.getAttribute(SessionGeooDrone.CHAVE_DISPOSITIVO);
-        return configuracaoRepository.findOne(dispositivo.getId());
-    }
-
     public Configuracao getOneConfiguracao(){
         return configuracaoRepository.findOne();
     }

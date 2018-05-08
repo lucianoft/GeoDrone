@@ -23,8 +23,11 @@ public class Dispositivo extends GenericModel implements AuditModel {
 	@Property(nameInDb = "DESCRICAO")
 	private String descricao;
 
-	@Property(nameInDb = "DT_SINCRONIZACAO")
-	private Date dtSincronizacao;
+	@Property(nameInDb = "DT_SINCRONIZACAO_ANDROID")
+	private Date dtSincronizacaoAndroid;
+
+	@Property(nameInDb = "DT_SINCRONIZACAO_ERP")
+	private Date dtSincronizacaoErp;
 
 	@Property(nameInDb = "ID_CLIENTE")
 	@NotNull
@@ -60,11 +63,20 @@ public class Dispositivo extends GenericModel implements AuditModel {
 		this.descricao = descricao;
 	}
 
-	public Date getDtSincronizacao() {
-		return this.dtSincronizacao;
+	public Date getDtSincronizacaoAndroid() {
+		return dtSincronizacaoAndroid;
 	}
-	public void setDtSincronizacao(Date dtSincronizacao) {
-		this.dtSincronizacao = dtSincronizacao;
+
+	public void setDtSincronizacaoAndroid(Date dtSincronizacaoAndroid) {
+		this.dtSincronizacaoAndroid = dtSincronizacaoAndroid;
+	}
+
+	public Date getDtSincronizacaoErp() {
+		return dtSincronizacaoErp;
+	}
+
+	public void setDtSincronizacaoErp(Date dtSincronizacaoErp) {
+		this.dtSincronizacaoErp = dtSincronizacaoErp;
 	}
 
 	/** ***** from AuditDomain ****** */

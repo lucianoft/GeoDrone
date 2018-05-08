@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import br.com.geodrone.R;
 import br.com.geodrone.activity.utils.Constantes;
+import br.com.geodrone.ui.aceiteusuario.AceiteUsuarioActivity;
 import br.com.geodrone.ui.base.BaseActivity;
 import br.com.geodrone.ui.logout.LogoutActivity;
 import br.com.geodrone.ui.pontocoletachuva.PontoColetaChuvaActivity;
@@ -136,7 +137,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             startActivity(i);
 
         } else if (id == R.id.nav_forum) {
-            Intent i = new Intent(this,ForunActivity.class);
+            Intent i = new Intent(this,AceiteUsuarioActivity.class);
             startActivity(i);
 
         } else if (id == R.id.nav_sincronizacao){
