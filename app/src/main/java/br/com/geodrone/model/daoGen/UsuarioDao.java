@@ -32,10 +32,11 @@ public class UsuarioDao extends AbstractDao<Usuario, Long> {
         public final static Property Senha = new Property(5, String.class, "senha", false, "SENHA");
         public final static Property FlagPerfil = new Property(6, String.class, "flagPerfil", false, "FLAG_PERFIL");
         public final static Property IdCliente = new Property(7, Long.class, "idCliente", false, "ID_CLIENTE");
-        public final static Property IndAtivo = new Property(8, Integer.class, "indAtivo", false, "IND_ATIVO");
-        public final static Property DtInclusao = new Property(9, java.util.Date.class, "dtInclusao", false, "DT_INCLUSAO");
-        public final static Property DtAlteracao = new Property(10, java.util.Date.class, "dtAlteracao", false, "DT_ALTERACAO");
-        public final static Property VersaoSistema = new Property(11, Long.class, "versaoSistema", false, "VERSAO_SISTEMA");
+        public final static Property IndAceite = new Property(8, Integer.class, "indAceite", false, "IND_ACEITE");
+        public final static Property IndAtivo = new Property(9, Integer.class, "indAtivo", false, "IND_ATIVO");
+        public final static Property DtInclusao = new Property(10, java.util.Date.class, "dtInclusao", false, "DT_INCLUSAO");
+        public final static Property DtAlteracao = new Property(11, java.util.Date.class, "dtAlteracao", false, "DT_ALTERACAO");
+        public final static Property VersaoSistema = new Property(12, Long.class, "versaoSistema", false, "VERSAO_SISTEMA");
     }
 
 
@@ -59,10 +60,11 @@ public class UsuarioDao extends AbstractDao<Usuario, Long> {
                 "\"SENHA\" TEXT," + // 5: senha
                 "\"FLAG_PERFIL\" TEXT," + // 6: flagPerfil
                 "\"ID_CLIENTE\" INTEGER NOT NULL ," + // 7: idCliente
-                "\"IND_ATIVO\" INTEGER NOT NULL ," + // 8: indAtivo
-                "\"DT_INCLUSAO\" INTEGER NOT NULL ," + // 9: dtInclusao
-                "\"DT_ALTERACAO\" INTEGER NOT NULL ," + // 10: dtAlteracao
-                "\"VERSAO_SISTEMA\" INTEGER NOT NULL );"); // 11: versaoSistema
+                "\"IND_ACEITE\" INTEGER," + // 8: indAceite
+                "\"IND_ATIVO\" INTEGER NOT NULL ," + // 9: indAtivo
+                "\"DT_INCLUSAO\" INTEGER NOT NULL ," + // 10: dtInclusao
+                "\"DT_ALTERACAO\" INTEGER NOT NULL ," + // 11: dtAlteracao
+                "\"VERSAO_SISTEMA\" INTEGER NOT NULL );"); // 12: versaoSistema
     }
 
     /** Drops the underlying database table. */
@@ -110,10 +112,15 @@ public class UsuarioDao extends AbstractDao<Usuario, Long> {
             stmt.bindString(7, flagPerfil);
         }
         stmt.bindLong(8, entity.getIdCliente());
-        stmt.bindLong(9, entity.getIndAtivo());
-        stmt.bindLong(10, entity.getDtInclusao().getTime());
-        stmt.bindLong(11, entity.getDtAlteracao().getTime());
-        stmt.bindLong(12, entity.getVersaoSistema());
+ 
+        Integer indAceite = entity.getIndAceite();
+        if (indAceite != null) {
+            stmt.bindLong(9, indAceite);
+        }
+        stmt.bindLong(10, entity.getIndAtivo());
+        stmt.bindLong(11, entity.getDtInclusao().getTime());
+        stmt.bindLong(12, entity.getDtAlteracao().getTime());
+        stmt.bindLong(13, entity.getVersaoSistema());
     }
 
     @Override
@@ -155,10 +162,15 @@ public class UsuarioDao extends AbstractDao<Usuario, Long> {
             stmt.bindString(7, flagPerfil);
         }
         stmt.bindLong(8, entity.getIdCliente());
-        stmt.bindLong(9, entity.getIndAtivo());
-        stmt.bindLong(10, entity.getDtInclusao().getTime());
-        stmt.bindLong(11, entity.getDtAlteracao().getTime());
-        stmt.bindLong(12, entity.getVersaoSistema());
+ 
+        Integer indAceite = entity.getIndAceite();
+        if (indAceite != null) {
+            stmt.bindLong(9, indAceite);
+        }
+        stmt.bindLong(10, entity.getIndAtivo());
+        stmt.bindLong(11, entity.getDtInclusao().getTime());
+        stmt.bindLong(12, entity.getDtAlteracao().getTime());
+        stmt.bindLong(13, entity.getVersaoSistema());
     }
 
     @Override
@@ -183,10 +195,11 @@ public class UsuarioDao extends AbstractDao<Usuario, Long> {
         entity.setSenha(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
         entity.setFlagPerfil(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
         entity.setIdCliente(cursor.getLong(offset + 7));
-        entity.setIndAtivo(cursor.getInt(offset + 8));
-        entity.setDtInclusao(new java.util.Date(cursor.getLong(offset + 9)));
-        entity.setDtAlteracao(new java.util.Date(cursor.getLong(offset + 10)));
-        entity.setVersaoSistema(cursor.getLong(offset + 11));
+        entity.setIndAceite(cursor.isNull(offset + 8) ? null : cursor.getInt(offset + 8));
+        entity.setIndAtivo(cursor.getInt(offset + 9));
+        entity.setDtInclusao(new java.util.Date(cursor.getLong(offset + 10)));
+        entity.setDtAlteracao(new java.util.Date(cursor.getLong(offset + 11)));
+        entity.setVersaoSistema(cursor.getLong(offset + 12));
      }
     
     @Override

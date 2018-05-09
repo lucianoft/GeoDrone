@@ -5,7 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import br.com.geodrone.R;
+import br.com.geodrone.SessionGeooDrone;
 import br.com.geodrone.activity.utils.Constantes;
+import br.com.geodrone.model.Usuario;
+import br.com.geodrone.ui.aceiteusuario.AceiteUsuarioActivity;
 import br.com.geodrone.ui.base.BaseActivity;
 import br.com.geodrone.ui.helper.GenericProgress;
 import br.com.geodrone.ui.main.MainActivity;
@@ -54,7 +57,13 @@ public class SincronizacaoActivity extends BaseActivity implements Sincronizacao
         showMessage(msg);
         hideLoading();
         if (Constantes.ACTIVITY_PRIMEIRO_LOGIN.equals(activityOrigem) || Constantes.ACTIVITY_LOGIN.equals(activityOrigem)) {
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = null;
+            Usuario usuario = SessionGeooDrone.getAttribute(SessionGeooDrone.CHAVE_USUARIO);
+            if (usuario.getIndAceite() == null || usuario.getIndAceite() == 0){
+                intent = new Intent(this, AceiteUsuarioActivity.class);
+            }else{
+                intent = new Intent(this, MainActivity.class);
+            }
             startActivity(intent);
         }
         finish();

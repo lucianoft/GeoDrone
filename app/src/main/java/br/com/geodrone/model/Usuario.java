@@ -43,6 +43,9 @@ public class Usuario extends GenericModel implements AuditModel, ActiveModel, Cl
 	@NotNull
 	private Long idCliente;
 
+	@Property(nameInDb = "IND_ACEITE")
+	private Integer indAceite;
+
 	@Property(nameInDb = "IND_ATIVO")
 	@NotNull
 	private Integer indAtivo;
@@ -132,7 +135,16 @@ public class Usuario extends GenericModel implements AuditModel, ActiveModel, Cl
 		this.idCliente = idCliente;
 	}
 
-	/** ***** from ActiveDomain ***** */
+
+    public Integer getIndAceite() {
+        return indAceite;
+    }
+
+    public void setIndAceite(Integer indAceite) {
+        this.indAceite = indAceite;
+    }
+
+    /** ***** from ActiveDomain ***** */
 	@Override
 	public Integer getIndAtivo() {
 		return this.indAtivo;

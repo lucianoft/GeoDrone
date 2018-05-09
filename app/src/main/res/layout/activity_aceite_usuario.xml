@@ -20,6 +20,7 @@
         android:layout_alignParentBottom="true"
         android:orientation="vertical">
         <CheckBox
+            android:id="@+id/checkbox_aceite_usuario"
             android:layout_above="@+id/button_aceite_usuario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

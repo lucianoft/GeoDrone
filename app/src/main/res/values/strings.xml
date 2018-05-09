@@ -96,6 +96,7 @@
     <string name="msg_obr_qtde">É obrigatorio informar o campo qtde</string>
     <string name="msg_obr_volume">É obrigatorio informar o campo volume</string>
     <string name="msg_obr_ponto_coleta_chuva">É obrigatorio informar o Ponto de Coleta de Chuva</string>
+    <string name="msg_obr_aceite_usuario">É obrigatorio selecionar o campo de aceite</string>
 
     <string name="msg_inv_senha_dif_confirmar_senha">Campo confirmar senha diferente do campo senha</string>
 
