@@ -8,10 +8,13 @@ public enum FlagEstadoTempo {
     ENSOLARADO("ENS", "Ensolarado"),
     PARCIALMENTE_NUBLADO("PARC", "Parcialmente nublado"),
     NUBLADO("NUB", "Nublado"),
+    NBELINA("NEB", "Neblina"),
     GAROA("GAR", "Garoa"),
     CHUVA("CHU", "Chuva"),
     INVERNADO("INV", "Invernado"),
-    TEMPESTADE("TEM", "Tempestade");
+    TROVEJANDO("TRO", "Trovejando"),
+    TEMPESTADE("TEM", "Tempestade"),
+    GRANIZO("GRA", "Granizo");
 
     private final String value;
     private final String bundle;

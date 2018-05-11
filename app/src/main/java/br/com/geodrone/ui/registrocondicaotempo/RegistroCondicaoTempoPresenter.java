@@ -39,14 +39,18 @@ public class RegistroCondicaoTempoPresenter extends BasePresenter<RegistroCondic
     public List<RegistroCondicaoTempoRecyclerViewItem> getRegistroCondicaoTempoRecyclerViewItem()
     {
         List<RegistroCondicaoTempoRecyclerViewItem> carItemList = new ArrayList<RegistroCondicaoTempoRecyclerViewItem>();
-            carItemList.add(new RegistroCondicaoTempoRecyclerViewItem(FlagEstadoTempo.CEU_BRIGADEIRO.getBundle(), R.mipmap.ic_ceu_brigadeiro));
-            carItemList.add(new RegistroCondicaoTempoRecyclerViewItem(FlagEstadoTempo.ENSOLARADO.getBundle(), R.mipmap.ic_ensolarado));
-            carItemList.add(new RegistroCondicaoTempoRecyclerViewItem(FlagEstadoTempo.PARCIALMENTE_NUBLADO.getBundle(), R.mipmap.ic_parcialmente_nublado));
-            carItemList.add(new RegistroCondicaoTempoRecyclerViewItem(FlagEstadoTempo.NUBLADO.getBundle(), R.mipmap.ic_chuva));
-            carItemList.add(new RegistroCondicaoTempoRecyclerViewItem(FlagEstadoTempo.GAROA.getBundle(), R.mipmap.ic_chuva));
-            carItemList.add(new RegistroCondicaoTempoRecyclerViewItem(FlagEstadoTempo.CHUVA.getBundle(), R.mipmap.ic_chuva));
-            carItemList.add(new RegistroCondicaoTempoRecyclerViewItem(FlagEstadoTempo.INVERNADO.getBundle(), R.mipmap.ic_invernado));
-            carItemList.add(new RegistroCondicaoTempoRecyclerViewItem(FlagEstadoTempo.TEMPESTADE.getBundle(), R.mipmap.ic_tempestade));
+        carItemList.add(new RegistroCondicaoTempoRecyclerViewItem(FlagEstadoTempo.CEU_BRIGADEIRO.getBundle(), R.mipmap.ic_ceu_brigadeiro));
+        carItemList.add(new RegistroCondicaoTempoRecyclerViewItem(FlagEstadoTempo.ENSOLARADO.getBundle(), R.drawable.ic_ensolarado));
+        carItemList.add(new RegistroCondicaoTempoRecyclerViewItem(FlagEstadoTempo.PARCIALMENTE_NUBLADO.getBundle(), R.drawable.ic_parcialmente_nublado));
+        carItemList.add(new RegistroCondicaoTempoRecyclerViewItem(FlagEstadoTempo.NUBLADO.getBundle(), R.drawable.ic_nublado));
+        carItemList.add(new RegistroCondicaoTempoRecyclerViewItem(FlagEstadoTempo.NBELINA.getBundle(), R.drawable.ic_neblina));
+        carItemList.add(new RegistroCondicaoTempoRecyclerViewItem(FlagEstadoTempo.GAROA.getBundle(), R.drawable.ic_garoa));
+        carItemList.add(new RegistroCondicaoTempoRecyclerViewItem(FlagEstadoTempo.CHUVA.getBundle(), R.drawable.ic_chuva));
+        carItemList.add(new RegistroCondicaoTempoRecyclerViewItem(FlagEstadoTempo.INVERNADO.getBundle(), R.drawable.ic_invernado));
+        carItemList.add(new RegistroCondicaoTempoRecyclerViewItem(FlagEstadoTempo.TROVEJANDO.getBundle(), R.drawable.ic_trovejando));
+        carItemList.add(new RegistroCondicaoTempoRecyclerViewItem(FlagEstadoTempo.TEMPESTADE.getBundle(), R.drawable.ic_tempestade));
+        carItemList.add(new RegistroCondicaoTempoRecyclerViewItem(FlagEstadoTempo.GRANIZO.getBundle(), R.drawable.ic_granizo));
+
         return carItemList;
     }
 
