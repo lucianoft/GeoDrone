@@ -133,14 +133,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         }  else if (id == R.id.menu_item_monitoramento_campo) {
             getPermissionsGpsMonitoramento();
         } else if (id == R.id.nav_mensagem) {
-            Intent i = new Intent(this,MensagemActivity.class);
-            startActivity(i);
 
         } else if (id == R.id.nav_forum) {
-            Intent i = new Intent(this,AceiteUsuarioActivity.class);
-            startActivity(i);
-
-        } else if (id == R.id.nav_sincronizacao){
+         } else if (id == R.id.nav_sincronizacao){
             Intent intent = new Intent(this, SincronizacaoActivity.class);
             Bundle b = new Bundle();
             b.putString(br.com.geodrone.activity.utils.Constantes.CHAVE_UI_ORIGEM, Constantes.ACTIVITY_MAIN); //Your id

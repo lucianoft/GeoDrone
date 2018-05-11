@@ -39,7 +39,7 @@ public class RegistroCondicaoTempoPresenter extends BasePresenter<RegistroCondic
     public List<RegistroCondicaoTempoRecyclerViewItem> getRegistroCondicaoTempoRecyclerViewItem()
     {
         List<RegistroCondicaoTempoRecyclerViewItem> carItemList = new ArrayList<RegistroCondicaoTempoRecyclerViewItem>();
-        carItemList.add(new RegistroCondicaoTempoRecyclerViewItem(FlagEstadoTempo.CEU_BRIGADEIRO.getBundle(), R.mipmap.ic_ceu_brigadeiro));
+        carItemList.add(new RegistroCondicaoTempoRecyclerViewItem(FlagEstadoTempo.CEU_BRIGADEIRO.getBundle(), R.drawable.ic_ceu_brigadeiro));
         carItemList.add(new RegistroCondicaoTempoRecyclerViewItem(FlagEstadoTempo.ENSOLARADO.getBundle(), R.drawable.ic_ensolarado));
         carItemList.add(new RegistroCondicaoTempoRecyclerViewItem(FlagEstadoTempo.PARCIALMENTE_NUBLADO.getBundle(), R.drawable.ic_parcialmente_nublado));
         carItemList.add(new RegistroCondicaoTempoRecyclerViewItem(FlagEstadoTempo.NUBLADO.getBundle(), R.drawable.ic_nublado));
