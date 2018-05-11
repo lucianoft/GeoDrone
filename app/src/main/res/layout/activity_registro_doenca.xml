@@ -95,7 +95,7 @@
         android:id="@+id/btn_salvar_doenca"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/text_input_layout_qtde_doenca"
+        android:layout_below="@+id/text_input_layout_obs_doenca"
         android:layout_marginTop="15dp"
         style="@style/CustomStyleButton"
         android:text="@string/lb_btn_salvar" />
