@@ -54,10 +54,27 @@
     </LinearLayout>
     <!--NEW LINE!-->
 
+    <!--  qtde -->
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/text_input_layout_qtde_praga"
+        android:layout_below="@+id/linear_layout_pagra"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp">
+        <EditText
+            android:id="@+id/edit_text_qtde_praga"
+            style="@style/TextLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="@string/lb_qtd_pragas" />
+    </android.support.design.widget.TextInputLayout>
+
     <!--  Observacao -->
     <android.support.design.widget.TextInputLayout
         android:id="@+id/text_input_layout_obs_praga"
-        android:layout_below="@+id/linear_layout_pagra"
+        android:layout_below="@+id/text_input_layout_qtde_praga"
         style="@style/TextLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -71,22 +88,7 @@
             android:hint="@string/lb_observacao" />
     </android.support.design.widget.TextInputLayout>
 
-    <!--  Observacao -->
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/text_input_layout_qtde_praga"
-        android:layout_below="@+id/text_input_layout_obs_praga"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp">
-        <EditText
-            android:id="@+id/edit_text_qtde_praga"
-            style="@style/TextLabel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="@string/lb_qtd_pragas" />
-    </android.support.design.widget.TextInputLayout>
+
 
     <!--NEW LINE!-->
     <Button
