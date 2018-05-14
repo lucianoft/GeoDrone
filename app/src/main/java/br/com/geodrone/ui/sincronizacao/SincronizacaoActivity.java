@@ -57,7 +57,7 @@ public class SincronizacaoActivity extends BaseActivity implements Sincronizacao
         hideLoading();
         showMessage(msg);
         showLoading();
-        sincronizacaoPresenter.sincronizacaoToWeb();;
+        sincronizacaoPresenter.sincronizacaoToWeb();
     }
 
     @Override

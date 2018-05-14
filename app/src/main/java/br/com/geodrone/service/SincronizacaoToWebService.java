@@ -12,18 +12,21 @@ import br.com.geodrone.model.Configuracao;
 import br.com.geodrone.model.Dispositivo;
 import br.com.geodrone.model.PontoColetaChuva;
 import br.com.geodrone.model.RegistroChuva;
+import br.com.geodrone.model.RegistroCondicaoTempo;
 import br.com.geodrone.model.RegistroDoenca;
 import br.com.geodrone.model.RegistroImagem;
 import br.com.geodrone.model.RegistroPraga;
 import br.com.geodrone.model.Usuario;
 import br.com.geodrone.repository.PontoColetaChuvaRepository;
 import br.com.geodrone.repository.RegistroChuvaRepository;
+import br.com.geodrone.repository.RegistroCondicaoTempoRepository;
 import br.com.geodrone.repository.RegistroDoencaRepository;
 import br.com.geodrone.repository.RegistroImagemRepository;
 import br.com.geodrone.repository.RegistroPragaRepository;
 import br.com.geodrone.resource.ClienteResource;
 import br.com.geodrone.resource.PontoColetaChuvaResource;
 import br.com.geodrone.resource.RegistroChuvaResource;
+import br.com.geodrone.resource.RegistroCondicaoTempoResource;
 import br.com.geodrone.resource.RegistroDoencaResource;
 import br.com.geodrone.resource.RegistroImagemResource;
 import br.com.geodrone.resource.RegistroPragaResource;
@@ -54,6 +57,8 @@ public class SincronizacaoToWebService extends GenericService {
     RegistroPragaRepository registroPragaRepository = null;
     RegistroDoencaService registroDoencaService = null;
     RegistroDoencaRepository registroDoencaRepository = null;
+    RegistroCondicaoTempoService registroCondicaoTempoService = null;
+    RegistroCondicaoTempoRepository registroCondicaoTempoRepository = null;
 
     private Context ctx = null;
 
@@ -76,6 +81,8 @@ public class SincronizacaoToWebService extends GenericService {
         registroPragaRepository = new RegistroPragaRepository(ctx);
         registroDoencaService = new RegistroDoencaService(ctx);
         registroDoencaRepository = new RegistroDoencaRepository(ctx);
+        registroCondicaoTempoService = new RegistroCondicaoTempoService(ctx);
+        registroCondicaoTempoRepository = new RegistroCondicaoTempoRepository(ctx);
     }
 
     public SincronizacaoWebResource sincronizarWeb() {
@@ -93,6 +100,7 @@ public class SincronizacaoToWebService extends GenericService {
         sincronizacaoWebResource.setRegistroImagems(getRegistroImagemResources());
         sincronizacaoWebResource.setRegistroPragas(getRegistroPragaResources());
         sincronizacaoWebResource.setRegistroDoencas(getRegistroDoencaResources());
+        sincronizacaoWebResource.setRegistroCondicaoTempos(getRegistroCondicaoTempoResources());
 
         return sincronizacaoWebResource;
 
@@ -247,23 +255,25 @@ public class SincronizacaoToWebService extends GenericService {
         List<RegistroPragaResource> registroPragaResources = new ArrayList<>();
 
         List<RegistroPraga> registroPragas = registroPragaRepository.findAllByClienteToSincronizar(cliente.getId(), dtSincronizacaoErp);
-        for (RegistroPraga registroPraga: registroPragas) {
+        if (registroPragas != null) {
+            for (RegistroPraga registroPraga : registroPragas) {
 
-            RegistroPragaResource registroPragaResource = new RegistroPragaResource();
+                RegistroPragaResource registroPragaResource = new RegistroPragaResource();
 
-            registroPragaResource.setIdRegistroPraga(registroPraga.getIdRegistroPraga());
-            registroPragaResource.setIdRegistroPragaDisp(registroPraga.getId());
-            registroPragaResource.setIdPraga(registroPraga.getIdPraga());
-            registroPragaResource.setObservacao(registroPraga.getObservacao());
-            registroPragaResource.setQtde(registroPraga.getQtde());
-            registroPragaResource.setIdCliente(registroPraga.getIdCliente());
-            registroPragaResource.setLatitude(registroPraga.getLatitude());
-            registroPragaResource.setLongitude(registroPraga.getLongitude());
-            registroPragaResource.setDtRegistro(registroPraga.getDtRegistro());
-            registroPragaResource.setIdDispositivo(registroPraga.getIdDispositivo());
-            registroPragaResource.setIdUsuarioReg(registroPraga.getIdUsuarioReg());
+                registroPragaResource.setIdRegistroPraga(registroPraga.getIdRegistroPraga());
+                registroPragaResource.setIdRegistroPragaDisp(registroPraga.getId());
+                registroPragaResource.setIdPraga(registroPraga.getIdPraga());
+                registroPragaResource.setObservacao(registroPraga.getObservacao());
+                registroPragaResource.setQtde(registroPraga.getQtde());
+                registroPragaResource.setIdCliente(registroPraga.getIdCliente());
+                registroPragaResource.setLatitude(registroPraga.getLatitude());
+                registroPragaResource.setLongitude(registroPraga.getLongitude());
+                registroPragaResource.setDtRegistro(registroPraga.getDtRegistro());
+                registroPragaResource.setIdDispositivo(registroPraga.getIdDispositivo());
+                registroPragaResource.setIdUsuarioReg(registroPraga.getIdUsuarioReg());
 
-            registroPragaResources.add(registroPragaResource);
+                registroPragaResources.add(registroPragaResource);
+            }
         }
         return registroPragaResources;
     }
@@ -278,24 +288,60 @@ public class SincronizacaoToWebService extends GenericService {
         List<RegistroDoencaResource> registroDoencaResources = new ArrayList<>();
 
         List<RegistroDoenca> registroDoencas = registroDoencaRepository.findAllByClienteToSincronizar(cliente.getId(), dtSincronizacaoErp);
-        for (RegistroDoenca registroDoenca: registroDoencas) {
+        if (registroDoencas != null) {
+            for (RegistroDoenca registroDoenca : registroDoencas) {
 
-            RegistroDoencaResource registroDoencaResource = new RegistroDoencaResource();
+                RegistroDoencaResource registroDoencaResource = new RegistroDoencaResource();
 
-            registroDoencaResource.setIdRegistroDoenca(registroDoenca.getIdRegistroDoenca());
-            registroDoencaResource.setIdRegistroDoencaDisp(registroDoenca.getId());
-            registroDoencaResource.setIdDoenca(registroDoenca.getIdDoenca());
-            registroDoencaResource.setObservacao(registroDoenca.getObservacao());
-            //registroDoencaResource.setQtde(registroDoenca.getQtde());
-            registroDoencaResource.setIdCliente(registroDoenca.getIdCliente());
-            registroDoencaResource.setLatitude(registroDoenca.getLatitude());
-            registroDoencaResource.setLongitude(registroDoenca.getLongitude());
-            registroDoencaResource.setDtRegistro(registroDoenca.getDtRegistro());
-            registroDoencaResource.setIdDispositivo(registroDoenca.getIdDispositivo());
-            registroDoencaResource.setIdUsuarioReg(registroDoenca.getIdUsuarioReg());
+                registroDoencaResource.setIdRegistroDoenca(registroDoenca.getIdRegistroDoenca());
+                registroDoencaResource.setIdRegistroDoencaDisp(registroDoenca.getId());
+                registroDoencaResource.setIdDoenca(registroDoenca.getIdDoenca());
+                registroDoencaResource.setObservacao(registroDoenca.getObservacao());
+                //registroDoencaResource.setQtde(registroDoenca.getQtde());
+                registroDoencaResource.setIdCliente(registroDoenca.getIdCliente());
+                registroDoencaResource.setLatitude(registroDoenca.getLatitude());
+                registroDoencaResource.setLongitude(registroDoenca.getLongitude());
+                registroDoencaResource.setDtRegistro(registroDoenca.getDtRegistro());
+                registroDoencaResource.setIdDispositivo(registroDoenca.getIdDispositivo());
+                registroDoencaResource.setIdUsuarioReg(registroDoenca.getIdUsuarioReg());
 
-            registroDoencaResources.add(registroDoencaResource);
+                registroDoencaResources.add(registroDoencaResource);
+            }
         }
         return registroDoencaResources;
+    }
+
+    private List<RegistroCondicaoTempoResource> getRegistroCondicaoTempoResources() {
+        Cliente cliente = SessionGeooDrone.getAttribute(SessionGeooDrone.CHAVE_CLIENTE);
+        Dispositivo dispositivo = SessionGeooDrone.getAttribute(SessionGeooDrone.CHAVE_DISPOSITIVO);
+
+        Date date = new DateUtils().now();
+        Date dtSincronizacaoErp = dispositivo.getDtSincronizacaoErp() != null ? dispositivo.getDtSincronizacaoErp() : date;
+
+        List<RegistroCondicaoTempoResource> registroCondicaoTempoResources = new ArrayList<>();
+
+        List<RegistroCondicaoTempo> registroCondicaoTempos = registroCondicaoTempoRepository.findAllByClienteToSincronizar(cliente.getId(), dtSincronizacaoErp);
+
+        if (registroCondicaoTempos != null) {
+            for (RegistroCondicaoTempo registroCondicaoTempo : registroCondicaoTempos) {
+
+                RegistroCondicaoTempoResource registroCondicaoTempoResource = new RegistroCondicaoTempoResource();
+
+                registroCondicaoTempoResource.setIdRegistroCondicaoTempo(registroCondicaoTempo.getIdRegistroCondTempo());
+                registroCondicaoTempoResource.setIdRegistroCondicaoTempoDisp(registroCondicaoTempo.getId());
+                registroCondicaoTempoResource.setFlagCondicaoTempo(registroCondicaoTempo.getFlagCondicaoTempo());
+                registroCondicaoTempoResource.setFlagDirecao(registroCondicaoTempo.getFlagDirecao());
+                registroCondicaoTempoResource.setObservacao(registroCondicaoTempo.getObservacao());
+                registroCondicaoTempoResource.setIdCliente(registroCondicaoTempo.getIdCliente());
+                registroCondicaoTempoResource.setLatitude(registroCondicaoTempo.getLatitude());
+                registroCondicaoTempoResource.setLongitude(registroCondicaoTempo.getLongitude());
+                registroCondicaoTempoResource.setDtRegistro(registroCondicaoTempo.getDtRegistro());
+                registroCondicaoTempoResource.setIdDispositivo(registroCondicaoTempo.getIdDispositivo());
+                registroCondicaoTempoResource.setIdUsuarioReg(registroCondicaoTempo.getIdUsuarioReg());
+
+                registroCondicaoTempoResources.add(registroCondicaoTempoResource);
+            }
+        }
+        return registroCondicaoTempoResources;
     }
 }

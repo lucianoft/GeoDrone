@@ -4,7 +4,7 @@ import android.content.Context;
 
 import br.com.geodrone.model.RegistroCondicaoTempo;
 import br.com.geodrone.repository.CrudRepository;
-import br.com.geodrone.repository.RegistroCondicoesTempoRepository;
+import br.com.geodrone.repository.RegistroCondicaoTempoRepository;
 import br.com.geodrone.service.util.CrudService;
 
 /**
@@ -12,10 +12,10 @@ import br.com.geodrone.service.util.CrudService;
  */
 
 public class RegistroCondicaoTempoService extends CrudService<RegistroCondicaoTempo, Long> {
-    RegistroCondicoesTempoRepository registroChuvaRepository = null;
+    RegistroCondicaoTempoRepository registroChuvaRepository = null;
 
     public RegistroCondicaoTempoService(Context ctx){
-        registroChuvaRepository = new RegistroCondicoesTempoRepository(ctx);
+        registroChuvaRepository = new RegistroCondicaoTempoRepository(ctx);
     }
 
     public CrudRepository<RegistroCondicaoTempo, Long> getRepository(){

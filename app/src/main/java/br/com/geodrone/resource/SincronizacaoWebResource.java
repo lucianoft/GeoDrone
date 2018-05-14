@@ -15,6 +15,7 @@ public class SincronizacaoWebResource implements Serializable {
     private List<RegistroImagemResource> registroImagems;
     private List<RegistroPragaResource> registroPragas;
     private List<RegistroDoencaResource> registroDoencas;
+    private List<RegistroCondicaoTempoResource> registroCondicaoTempos;
 
     public ClienteResource getClienteResource() {
         return clienteResource;
@@ -70,5 +71,13 @@ public class SincronizacaoWebResource implements Serializable {
 
     public void setRegistroDoencas(List<RegistroDoencaResource> registroDoencas) {
         this.registroDoencas = registroDoencas;
+    }
+
+    public List<RegistroCondicaoTempoResource> getRegistroCondicaoTempos() {
+        return registroCondicaoTempos;
+    }
+
+    public void setRegistroCondicaoTempos(List<RegistroCondicaoTempoResource> registroCondicaoTempos) {
+        this.registroCondicaoTempos = registroCondicaoTempos;
     }
 }
