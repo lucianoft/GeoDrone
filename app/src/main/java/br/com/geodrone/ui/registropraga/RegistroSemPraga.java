@@ -38,7 +38,7 @@ public class RegistroSemPraga extends BasePresenter<RegistroSemPraga.View> {
                 registroPraga.setIdPraga(null);
                 registroPraga.setLatitude(location != null ? location.getLatitude() : null);
                 registroPraga.setLongitude(location != null ? location.getLongitude() : null);
-                registroPraga.setQtde(0);
+                registroPraga.setQtde(0L);
                 this.registroPragaService.insert(registroPraga);
 
                 view.onSemRegistroPragaSucesso(activity.getString(R.string.msg_operacao_sucesso));

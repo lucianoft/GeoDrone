@@ -77,7 +77,7 @@ public class RegistroPragaPresenter extends BasePresenter<RegistroPragaPresenter
                 registroPraga.setIdPraga(praga != null ? praga.getId() : null);
                 registroPraga.setLatitude(latitude);
                 registroPraga.setLongitude(longitude);
-                registroPraga.setQtde(Integer.parseInt(qtde));
+                registroPraga.setQtde(Long.parseLong(qtde));
                 this.registroPragaService.insert(registroPraga);
 
                 view.onRegitroPragaSucesso(activity.getString(R.string.msg_operacao_sucesso));

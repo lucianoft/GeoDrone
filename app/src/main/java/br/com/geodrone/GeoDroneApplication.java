@@ -1,6 +1,7 @@
 package br.com.geodrone;
 
 import android.app.Application;
+import android.database.sqlite.SQLiteDatabase;
 
 import org.greenrobot.greendao.AbstractDaoMaster;
 import org.greenrobot.greendao.database.Database;
@@ -30,6 +31,7 @@ public class GeoDroneApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+        clearDatabase("db_geodrone");
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, Constantes.BD_NOME); //The users-db here is the name of our database.
         Database db = helper.getWritableDb();
         //DaoMaster.dropAllTables(db, true);
@@ -43,6 +45,14 @@ public class GeoDroneApplication extends Application {
         criarTipoCultivo();
         criarPragas();
         criarDoencas();*/
+    }
+
+    public void clearDatabase(String databaseName) {
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, databaseName);
+        Database db = helper.getWritableDb();
+        daoSession = new DaoMaster(db).newSession();
+        DaoMaster.createAllTables(db, true);
+
     }
 
     private void criarConfiguracao() {

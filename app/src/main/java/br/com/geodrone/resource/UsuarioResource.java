@@ -15,6 +15,7 @@ public class UsuarioResource implements Serializable {
     private String flagPerfil;
     private Long idCliente;
     private Integer indAtivo;
+    private Integer indAceite;
 
     public Long getId() {
         return id;
@@ -86,5 +87,13 @@ public class UsuarioResource implements Serializable {
 
     public void setIndAtivo(Integer indAtivo) {
         this.indAtivo = indAtivo;
+    }
+
+    public Integer getIndAceite() {
+        return indAceite;
+    }
+
+    public void setIndAceite(Integer indAceite) {
+        this.indAceite = indAceite;
     }
 }

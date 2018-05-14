@@ -2,7 +2,13 @@ package br.com.geodrone.service;
 
 import android.content.Context;
 
+import org.greenrobot.greendao.query.QueryBuilder;
+
+import java.util.Date;
+import java.util.List;
+
 import br.com.geodrone.model.RegistroImagem;
+import br.com.geodrone.model.daoGen.RegistroImagemDao;
 import br.com.geodrone.repository.CrudRepository;
 import br.com.geodrone.repository.RegistroImagemRepository;
 import br.com.geodrone.service.util.CrudService;
@@ -21,4 +27,6 @@ public class RegistroImagemService extends CrudService<RegistroImagem, Long> {
     public CrudRepository<RegistroImagem, Long> getRepository(){
         return registroImagemRepository;
     }
+
+
 }

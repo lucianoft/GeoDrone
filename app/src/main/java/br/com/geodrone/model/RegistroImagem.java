@@ -11,13 +11,14 @@ import org.greenrobot.greendao.annotation.Generated;
 
 import br.com.geodrone.model.api.AuditModel;
 import br.com.geodrone.model.api.ClientModel;
+import br.com.geodrone.model.api.DateRegistryModel;
 import br.com.geodrone.model.api.DeviceModel;
 import br.com.geodrone.model.api.LocationModel;
 import br.com.geodrone.model.api.UserModel;
 
 
 @Entity(generateConstructors = false, nameInDb ="GEO_REGISTRO_IMAGEM")
-public class RegistroImagem extends GenericModel implements AuditModel, ClientModel, DeviceModel, UserModel, LocationModel {
+public class RegistroImagem extends GenericModel implements AuditModel, ClientModel, DeviceModel, UserModel, LocationModel, DateRegistryModel {
 
 	@Id(autoincrement = true)
 	@Property(nameInDb = "ID_REGISTRO_IMAGEM_DISP")
@@ -32,6 +33,10 @@ public class RegistroImagem extends GenericModel implements AuditModel, ClientMo
 
 	@Property(nameInDb = "ID_REGISTRO_IMAGEM")
 	private Long idRegistroImagem;
+
+	@Property(nameInDb = "DT_REGISTRO")
+	@NotNull
+	private Date dtRegistro;
 
 	@Property(nameInDb = "ID_CLIENTE")
 	@NotNull
@@ -96,7 +101,6 @@ public class RegistroImagem extends GenericModel implements AuditModel, ClientMo
 		this.idRegistroImagem = idRegistroImagem;
 	}
 
-
 	/** ***** from DomainCliente ****** */
 	@Override
 	public Long getIdCliente() {
@@ -107,37 +111,50 @@ public class RegistroImagem extends GenericModel implements AuditModel, ClientMo
 		this.idCliente = idCliente;
 	}
 	/** **** from LocationDomain ***** */
-	@Override
-	public Double getLongitude() {
-		return this.longitude;
-	}
-	@Override
-	public void setLongitude(Double longitude) {
-		this.longitude = longitude;
-	}
-	@Override
-	public Double getLatitude() {
-		return this.latitude;
-	}
-	@Override
-	public void setLatitude(Double latitude) {
-		this.latitude = latitude;
-	}
-	/** ***************************** */
+    /** ***** from DateRegistryModel ****** */
+    @Override
+    public Date getDtRegistro() {
+        return dtRegistro;
+    }
+
+    @Override
+    public void setDtRegistro(Date dtRegistro) {
+        this.dtRegistro = dtRegistro;
+    }
+    /** ***** from DateRegistryModel ****** */
+
+    @Override
+    public Double getLongitude() {
+        return this.longitude;
+    }
+    @Override
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+    @Override
+    public Double getLatitude() {
+        return this.latitude;
+    }
+    @Override
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+    /** ***************************** */
 
 
-	/** ***** from UserDomain ****** */
-	@Override
-	public Long getIdDispositivo() {
-		return this.idDispositivo;
-	}
-	@Override
-	public void setIdDispositivo(Long idDispositivo) {
-		this.idDispositivo = idDispositivo;
-	}
-	/** ***************************** */
+    /** ***** from DeviceDomain ****** */
+    @Override
+    public Long getIdDispositivo() {
+        return this.idDispositivo;
+    }
+    @Override
+    public void setIdDispositivo(Long idDispositivo) {
+        this.idDispositivo = idDispositivo;
+    }
+    /** ***************************** */
 
-	/** ***** from AuditDomain ****** */
+
+    /** ***** from AuditDomain ****** */
 	@Override
 	public Date getDtInclusao() {
 		return this.dtInclusao;

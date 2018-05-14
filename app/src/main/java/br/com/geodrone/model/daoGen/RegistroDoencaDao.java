@@ -28,14 +28,15 @@ public class RegistroDoencaDao extends AbstractDao<RegistroDoenca, Long> {
         public final static Property Observacao = new Property(1, String.class, "observacao", false, "OBSERVACAO");
         public final static Property IdDoenca = new Property(2, Long.class, "idDoenca", false, "ID_DOENCA");
         public final static Property IdRegistroDoenca = new Property(3, Long.class, "idRegistroDoenca", false, "ID_REGISTRO_DOENCA");
-        public final static Property IdCliente = new Property(4, Long.class, "idCliente", false, "ID_CLIENTE");
-        public final static Property Latitude = new Property(5, Double.class, "latitude", false, "LATITUDE");
-        public final static Property Longitude = new Property(6, Double.class, "longitude", false, "LONGITUDE");
-        public final static Property IdDispositivo = new Property(7, Long.class, "idDispositivo", false, "ID_DISPOSITIVO");
-        public final static Property DtInclusao = new Property(8, java.util.Date.class, "dtInclusao", false, "DT_INCLUSAO");
-        public final static Property DtAlteracao = new Property(9, java.util.Date.class, "dtAlteracao", false, "DT_ALTERACAO");
-        public final static Property VersaoSistema = new Property(10, Long.class, "versaoSistema", false, "VERSAO_SISTEMA");
-        public final static Property IdUsuarioReg = new Property(11, Long.class, "idUsuarioReg", false, "ID_USUARIO_REG");
+        public final static Property DtRegistro = new Property(4, java.util.Date.class, "dtRegistro", false, "DT_REGISTRO");
+        public final static Property IdCliente = new Property(5, Long.class, "idCliente", false, "ID_CLIENTE");
+        public final static Property Latitude = new Property(6, Double.class, "latitude", false, "LATITUDE");
+        public final static Property Longitude = new Property(7, Double.class, "longitude", false, "LONGITUDE");
+        public final static Property IdDispositivo = new Property(8, Long.class, "idDispositivo", false, "ID_DISPOSITIVO");
+        public final static Property DtInclusao = new Property(9, java.util.Date.class, "dtInclusao", false, "DT_INCLUSAO");
+        public final static Property DtAlteracao = new Property(10, java.util.Date.class, "dtAlteracao", false, "DT_ALTERACAO");
+        public final static Property VersaoSistema = new Property(11, Long.class, "versaoSistema", false, "VERSAO_SISTEMA");
+        public final static Property IdUsuarioReg = new Property(12, Long.class, "idUsuarioReg", false, "ID_USUARIO_REG");
     }
 
 
@@ -55,14 +56,15 @@ public class RegistroDoencaDao extends AbstractDao<RegistroDoenca, Long> {
                 "\"OBSERVACAO\" TEXT," + // 1: observacao
                 "\"ID_DOENCA\" INTEGER," + // 2: idDoenca
                 "\"ID_REGISTRO_DOENCA\" INTEGER," + // 3: idRegistroDoenca
-                "\"ID_CLIENTE\" INTEGER NOT NULL ," + // 4: idCliente
-                "\"LATITUDE\" REAL NOT NULL ," + // 5: latitude
-                "\"LONGITUDE\" REAL NOT NULL ," + // 6: longitude
-                "\"ID_DISPOSITIVO\" INTEGER NOT NULL ," + // 7: idDispositivo
-                "\"DT_INCLUSAO\" INTEGER NOT NULL ," + // 8: dtInclusao
-                "\"DT_ALTERACAO\" INTEGER NOT NULL ," + // 9: dtAlteracao
-                "\"VERSAO_SISTEMA\" INTEGER NOT NULL ," + // 10: versaoSistema
-                "\"ID_USUARIO_REG\" INTEGER NOT NULL );"); // 11: idUsuarioReg
+                "\"DT_REGISTRO\" INTEGER NOT NULL ," + // 4: dtRegistro
+                "\"ID_CLIENTE\" INTEGER NOT NULL ," + // 5: idCliente
+                "\"LATITUDE\" REAL NOT NULL ," + // 6: latitude
+                "\"LONGITUDE\" REAL NOT NULL ," + // 7: longitude
+                "\"ID_DISPOSITIVO\" INTEGER NOT NULL ," + // 8: idDispositivo
+                "\"DT_INCLUSAO\" INTEGER NOT NULL ," + // 9: dtInclusao
+                "\"DT_ALTERACAO\" INTEGER NOT NULL ," + // 10: dtAlteracao
+                "\"VERSAO_SISTEMA\" INTEGER NOT NULL ," + // 11: versaoSistema
+                "\"ID_USUARIO_REG\" INTEGER NOT NULL );"); // 12: idUsuarioReg
     }
 
     /** Drops the underlying database table. */
@@ -94,14 +96,15 @@ public class RegistroDoencaDao extends AbstractDao<RegistroDoenca, Long> {
         if (idRegistroDoenca != null) {
             stmt.bindLong(4, idRegistroDoenca);
         }
-        stmt.bindLong(5, entity.getIdCliente());
-        stmt.bindDouble(6, entity.getLatitude());
-        stmt.bindDouble(7, entity.getLongitude());
-        stmt.bindLong(8, entity.getIdDispositivo());
-        stmt.bindLong(9, entity.getDtInclusao().getTime());
-        stmt.bindLong(10, entity.getDtAlteracao().getTime());
-        stmt.bindLong(11, entity.getVersaoSistema());
-        stmt.bindLong(12, entity.getIdUsuarioReg());
+        stmt.bindLong(5, entity.getDtRegistro().getTime());
+        stmt.bindLong(6, entity.getIdCliente());
+        stmt.bindDouble(7, entity.getLatitude());
+        stmt.bindDouble(8, entity.getLongitude());
+        stmt.bindLong(9, entity.getIdDispositivo());
+        stmt.bindLong(10, entity.getDtInclusao().getTime());
+        stmt.bindLong(11, entity.getDtAlteracao().getTime());
+        stmt.bindLong(12, entity.getVersaoSistema());
+        stmt.bindLong(13, entity.getIdUsuarioReg());
     }
 
     @Override
@@ -127,14 +130,15 @@ public class RegistroDoencaDao extends AbstractDao<RegistroDoenca, Long> {
         if (idRegistroDoenca != null) {
             stmt.bindLong(4, idRegistroDoenca);
         }
-        stmt.bindLong(5, entity.getIdCliente());
-        stmt.bindDouble(6, entity.getLatitude());
-        stmt.bindDouble(7, entity.getLongitude());
-        stmt.bindLong(8, entity.getIdDispositivo());
-        stmt.bindLong(9, entity.getDtInclusao().getTime());
-        stmt.bindLong(10, entity.getDtAlteracao().getTime());
-        stmt.bindLong(11, entity.getVersaoSistema());
-        stmt.bindLong(12, entity.getIdUsuarioReg());
+        stmt.bindLong(5, entity.getDtRegistro().getTime());
+        stmt.bindLong(6, entity.getIdCliente());
+        stmt.bindDouble(7, entity.getLatitude());
+        stmt.bindDouble(8, entity.getLongitude());
+        stmt.bindLong(9, entity.getIdDispositivo());
+        stmt.bindLong(10, entity.getDtInclusao().getTime());
+        stmt.bindLong(11, entity.getDtAlteracao().getTime());
+        stmt.bindLong(12, entity.getVersaoSistema());
+        stmt.bindLong(13, entity.getIdUsuarioReg());
     }
 
     @Override
@@ -155,14 +159,15 @@ public class RegistroDoencaDao extends AbstractDao<RegistroDoenca, Long> {
         entity.setObservacao(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setIdDoenca(cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2));
         entity.setIdRegistroDoenca(cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3));
-        entity.setIdCliente(cursor.getLong(offset + 4));
-        entity.setLatitude(cursor.getDouble(offset + 5));
-        entity.setLongitude(cursor.getDouble(offset + 6));
-        entity.setIdDispositivo(cursor.getLong(offset + 7));
-        entity.setDtInclusao(new java.util.Date(cursor.getLong(offset + 8)));
-        entity.setDtAlteracao(new java.util.Date(cursor.getLong(offset + 9)));
-        entity.setVersaoSistema(cursor.getLong(offset + 10));
-        entity.setIdUsuarioReg(cursor.getLong(offset + 11));
+        entity.setDtRegistro(new java.util.Date(cursor.getLong(offset + 4)));
+        entity.setIdCliente(cursor.getLong(offset + 5));
+        entity.setLatitude(cursor.getDouble(offset + 6));
+        entity.setLongitude(cursor.getDouble(offset + 7));
+        entity.setIdDispositivo(cursor.getLong(offset + 8));
+        entity.setDtInclusao(new java.util.Date(cursor.getLong(offset + 9)));
+        entity.setDtAlteracao(new java.util.Date(cursor.getLong(offset + 10)));
+        entity.setVersaoSistema(cursor.getLong(offset + 11));
+        entity.setIdUsuarioReg(cursor.getLong(offset + 12));
      }
     
     @Override

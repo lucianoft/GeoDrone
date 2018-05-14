@@ -5,10 +5,10 @@ import android.content.Context;
 import org.greenrobot.greendao.AbstractDao;
 import org.greenrobot.greendao.query.QueryBuilder;
 
-import br.com.geodrone.model.Doenca;
-import br.com.geodrone.model.Praga;
+import java.util.Date;
+import java.util.List;
+
 import br.com.geodrone.model.RegistroChuva;
-import br.com.geodrone.model.daoGen.DoencaDao;
 import br.com.geodrone.model.daoGen.RegistroChuvaDao;
 
 /**
@@ -33,4 +33,10 @@ public class RegistroChuvaRepository extends CrudRepository<RegistroChuva, Long>
         return qrBuilder.unique();
     }
 
+    public List<RegistroChuva> findAllByClienteToSincronizar(Long IdClienteRef, Date dtSincronizacaoErp ) {
+        QueryBuilder<RegistroChuva> qb = getCrudDao().queryBuilder();
+        qb.where(RegistroChuvaDao.Properties.IdCliente.eq(IdClienteRef),
+                RegistroChuvaDao.Properties.DtAlteracao.gt(dtSincronizacaoErp));
+        return qb.list();
+    }
 }

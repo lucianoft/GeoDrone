@@ -11,20 +11,21 @@ import org.greenrobot.greendao.annotation.Generated;
 
 import br.com.geodrone.model.api.AuditModel;
 import br.com.geodrone.model.api.ClientModel;
+import br.com.geodrone.model.api.DateRegistryModel;
 import br.com.geodrone.model.api.DeviceModel;
 import br.com.geodrone.model.api.LocationModel;
 import br.com.geodrone.model.api.UserModel;
 
 
 @Entity(generateConstructors = false, nameInDb ="GEO_REGISTRO_PRAGA")
-public class RegistroPraga extends GenericModel implements AuditModel, ClientModel, DeviceModel, UserModel, LocationModel {
+public class RegistroPraga extends GenericModel implements AuditModel, ClientModel, DeviceModel, UserModel, LocationModel, DateRegistryModel {
 
 	@Id(autoincrement = true)
 	@Property(nameInDb = "ID_REGISTRO_PRAGA_DISP")
 	private Long id;
 
 	@Property(nameInDb = "QTDE")
-	private Integer qtde;
+	private Long qtde;
 
 	@Property(nameInDb = "OBSERVACAO")
 	private String observacao;
@@ -34,6 +35,10 @@ public class RegistroPraga extends GenericModel implements AuditModel, ClientMod
 
 	@Property(nameInDb = "ID_REGISTRO_PRAGA")
 	private Long idRegistroPraga;
+
+	@Property(nameInDb = "DT_REGISTRO")
+	@NotNull
+	private Date dtRegistro;
 
 	@Property(nameInDb = "ID_CLIENTE")
 	@NotNull
@@ -77,10 +82,10 @@ public class RegistroPraga extends GenericModel implements AuditModel, ClientMod
 		this.id = id;
 	}
 
-	public Integer getQtde() {
+	public Long getQtde() {
 		return this.qtde;
 	}
-	public void setQtde(Integer qtde) {
+	public void setQtde(Long qtde) {
 		this.qtde = qtde;
 	}
 
@@ -106,6 +111,18 @@ public class RegistroPraga extends GenericModel implements AuditModel, ClientMod
 		this.idRegistroPraga = idRegistroPraga;
 	}
 
+
+	/** ***** from DateRegistryModel ****** */
+	@Override
+	public Date getDtRegistro() {
+		return dtRegistro;
+	}
+
+	@Override
+	public void setDtRegistro(Date dtRegistro) {
+		this.dtRegistro = dtRegistro;
+	}
+	/** ***** from DateRegistryModel ****** */
 
 	/** ***** from DomainCliente ****** */
 	@Override

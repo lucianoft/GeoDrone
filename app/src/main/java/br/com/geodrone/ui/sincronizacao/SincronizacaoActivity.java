@@ -12,6 +12,7 @@ import br.com.geodrone.ui.aceiteusuario.AceiteUsuarioActivity;
 import br.com.geodrone.ui.base.BaseActivity;
 import br.com.geodrone.ui.helper.GenericProgress;
 import br.com.geodrone.ui.main.MainActivity;
+import br.com.geodrone.utils.Messenger;
 import butterknife.ButterKnife;
 
 public class SincronizacaoActivity extends BaseActivity implements SincronizacaoPresenter.View {
@@ -52,7 +53,15 @@ public class SincronizacaoActivity extends BaseActivity implements Sincronizacao
     }
 
     @Override
-    public void onAtualizacaoSucesso(String msg) {
+    public void onAtualizacaoToAndroidSucesso(String msg) {
+        hideLoading();
+        showMessage(msg);
+        showLoading();
+        sincronizacaoPresenter.sincronizacaoToWeb();;
+    }
+
+    @Override
+    public void onAtualizacaoToWebSucesso(String msg) {
         hideLoading();
         showMessage(msg);
         hideLoading();
@@ -74,4 +83,11 @@ public class SincronizacaoActivity extends BaseActivity implements Sincronizacao
         hideLoading();
         onError(msg);
     }
+
+    @Override
+    public void onAtualizacaoError(Messenger messenger) {
+        hideLoading();
+        showMessenger(messenger);
+    }
+
 }

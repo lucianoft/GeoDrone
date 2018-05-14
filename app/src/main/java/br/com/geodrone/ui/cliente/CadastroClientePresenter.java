@@ -1,39 +1,22 @@
 package br.com.geodrone.ui.cliente;
 
 import android.util.Log;
-import android.widget.EditText;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import org.json.JSONObject;
-
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Type;
 
 import br.com.geodrone.R;
-import br.com.geodrone.model.Cliente;
 import br.com.geodrone.model.Configuracao;
 import br.com.geodrone.oauth.APIClient;
 import br.com.geodrone.oauth.ServiceGenerator;
-import br.com.geodrone.oauth.dto.AccessToken;
 import br.com.geodrone.resource.ClienteResource;
-import br.com.geodrone.resource.SincronizacaoRetResource;
 import br.com.geodrone.service.ClienteService;
 import br.com.geodrone.service.ConfiguracaoService;
 import br.com.geodrone.ui.base.BaseActivity;
 import br.com.geodrone.ui.base.BasePresenter;
-import br.com.geodrone.ui.sincronizacao.SincronizacaoPresenter;
 import br.com.geodrone.utils.Constantes;
 import br.com.geodrone.utils.ErrorUtils;
 import br.com.geodrone.utils.Messenger;
 import br.com.geodrone.utils.NumberUtils;
-import br.com.geodrone.utils.PreferencesUtils;
-import butterknife.BindView;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Converter;
 import retrofit2.Response;
 
 /**

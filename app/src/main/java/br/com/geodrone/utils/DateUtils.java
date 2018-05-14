@@ -1,5 +1,6 @@
 package br.com.geodrone.utils;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -49,4 +50,29 @@ public class DateUtils {
 		return date.compareTo(anotherDate) == 0;
 	}
 
+
+	public Date createDate(int dia, int mes, int ano) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+
+		cal.set(Calendar.DAY_OF_MONTH, dia);
+		cal.set(Calendar.MONTH, mes+1);
+		cal.set(Calendar.YEAR, ano);
+
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MILLISECOND, 0);
+
+		return cal.getTime();
+	}
+
+	public String format(Date date) {
+		try {
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			return dateFormat.format(date);
+		}catch (Exception ex){
+			throw new RuntimeException(ex);
+		}
+	}
 }

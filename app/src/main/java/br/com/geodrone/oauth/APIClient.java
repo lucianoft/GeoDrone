@@ -3,7 +3,8 @@ package br.com.geodrone.oauth;
 import br.com.geodrone.oauth.dto.AccessToken;
 import br.com.geodrone.resource.ClienteResource;
 import br.com.geodrone.resource.InstallerResource;
-import br.com.geodrone.resource.SincronizacaoRetResource;
+import br.com.geodrone.resource.SincronizacaoAndroidResource;
+import br.com.geodrone.resource.SincronizacaoWebResource;
 import br.com.geodrone.utils.Constantes;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -37,12 +38,15 @@ public interface APIClient {
                                                                 @Path("descDispositivo") String descDispositivo);
 
     @GET(Constantes.API_URL_PREFIXO + "sincronizacao/{idUsuario}/{idCliente}/{idDispositivo}/{dtSincronizacao}")
-    public Call<SincronizacaoRetResource> getAtualizacoes(@Path("idUsuario")  Long idUsuario,
-                                                    @Path("idCliente")  Long idCliente,
-                                                    @Path("idDispositivo") Long idDispositivo,
-                                                    @Path("dtSincronizacao") String dtSincronizacao);
+    public Call<SincronizacaoAndroidResource> getAtualizacoes(@Path("idUsuario")  Long idUsuario,
+                                                              @Path("idCliente")  Long idCliente,
+                                                              @Path("idDispositivo") Long idDispositivo,
+                                                              @Path("dtSincronizacao") String dtSincronizacao);
 
 
     @POST(Constantes.API_URL_PREFIXO + "cliente/cadastro-inicial")
     public Call<ClienteResource> cadastrarCliente(@Body ClienteResource ClienteResource);
+
+    @POST(Constantes.API_URL_PREFIXO + "sincronizacao/web")
+    public Call<SincronizacaoWebResource> sincronizarWeb(@Body SincronizacaoWebResource sincronizacaoWebResource);
 }

@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class PontoColetaChuvaResource implements Serializable {
 
-    private Long idPontoColetaChuvaDispositivo;
+    private Long idPontoColetaChuvaDisp;
     private Long idPontoColetaChuva;
     private Long idDispositivo;
     private String descricao;
@@ -17,12 +17,12 @@ public class PontoColetaChuvaResource implements Serializable {
     private Date dtInclusao;
     private Date dtAlteracao;
 
-    public Long getIdPontoColetaChuvaDispositivo() {
-        return idPontoColetaChuvaDispositivo;
+    public Long getIdPontoColetaChuvaDisp() {
+        return idPontoColetaChuvaDisp;
     }
 
-    public void setIdPontoColetaChuvaDispositivo(Long idPontoColetaChuvaDispositivo) {
-        this.idPontoColetaChuvaDispositivo = idPontoColetaChuvaDispositivo;
+    public void setIdPontoColetaChuvaDisp(Long idPontoColetaChuvaDisp) {
+        this.idPontoColetaChuvaDisp = idPontoColetaChuvaDisp;
     }
 
     public Long getIdPontoColetaChuva() {

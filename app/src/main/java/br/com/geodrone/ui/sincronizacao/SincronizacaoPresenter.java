@@ -2,21 +2,27 @@ package br.com.geodrone.ui.sincronizacao;
 
 import android.util.Log;
 
+import java.util.Date;
+
 import br.com.geodrone.R;
-import br.com.geodrone.SessionGeooDrone;
 import br.com.geodrone.model.Configuracao;
 import br.com.geodrone.model.Dispositivo;
 import br.com.geodrone.oauth.APIClient;
 import br.com.geodrone.oauth.ServiceGenerator;
 import br.com.geodrone.oauth.dto.AccessToken;
-import br.com.geodrone.resource.InstallerResource;
-import br.com.geodrone.resource.SincronizacaoRetResource;
+import br.com.geodrone.resource.SincronizacaoAndroidResource;
+import br.com.geodrone.resource.SincronizacaoAndroidResource;
+import br.com.geodrone.resource.SincronizacaoFilter;
+import br.com.geodrone.resource.SincronizacaoWebResource;
 import br.com.geodrone.service.ConfiguracaoService;
 import br.com.geodrone.service.DispositivoService;
-import br.com.geodrone.service.SincronizacaoService;
+import br.com.geodrone.service.SincronizacaoToAndroidService;
+import br.com.geodrone.service.SincronizacaoToWebService;
 import br.com.geodrone.ui.base.BaseActivity;
 import br.com.geodrone.ui.base.BasePresenter;
-import br.com.geodrone.utils.AndroidInformation;
+import br.com.geodrone.utils.DateUtils;
+import br.com.geodrone.utils.ErrorUtils;
+import br.com.geodrone.utils.Messenger;
 import br.com.geodrone.utils.PreferencesUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,11 +36,14 @@ public class SincronizacaoPresenter extends BasePresenter<SincronizacaoPresenter
     private static String TAG = SincronizacaoPresenter.class.getName();
 
     interface View {
-        void onAtualizacaoSucesso(String msg);
+        void onAtualizacaoToAndroidSucesso(String msg);
+        void onAtualizacaoToWebSucesso(String msg);
         void onAtualizacaoError(String msg);
+        void onAtualizacaoError(Messenger messenger);
     }
 
-    SincronizacaoService sincronizacaoService = null;
+    SincronizacaoToAndroidService sincronizacaoService = null;
+    SincronizacaoToWebService sincronizacaoToWebService = null;
     ConfiguracaoService configuracaoService = null;
     DispositivoService dispositivoService = null;
 
@@ -42,9 +51,10 @@ public class SincronizacaoPresenter extends BasePresenter<SincronizacaoPresenter
 
     public SincronizacaoPresenter(BaseActivity activity){
         this.activity = activity;
-        this.sincronizacaoService = new SincronizacaoService(activity);
+        this.sincronizacaoService = new SincronizacaoToAndroidService(activity);
+        this.sincronizacaoToWebService = new SincronizacaoToWebService(activity);
         this.configuracaoService = new ConfiguracaoService(activity);
-        dispositivoService = new DispositivoService(activity);
+        this.dispositivoService = new DispositivoService(activity);
     }
 
     public void getAtualizacoes(){
@@ -52,26 +62,67 @@ public class SincronizacaoPresenter extends BasePresenter<SincronizacaoPresenter
             AccessToken accessToken = PreferencesUtils.getAccessToken(this.activity);
             Configuracao configuracao = configuracaoService.getOneConfiguracao();
             Dispositivo dispositivo = dispositivoService.findOneByCliente(accessToken.getIdCliente());
-            String URL_BASE = configuracao.getUrl();
+            final String URL_BASE = configuracao.getUrl();
             APIClient client = ServiceGenerator.getInstance(URL_BASE).createServiceWithAuth(APIClient.class, accessToken);
-            Call<SincronizacaoRetResource> call = client.getAtualizacoes(accessToken.getIdUsuario(),
+            DateUtils dateUtils = new DateUtils();
+            Date dtSinc = dispositivo.getDtSincronizacaoErp() != null ?
+                          dispositivo.getDtSincronizacaoErp() : dateUtils.createDate(01, 01, 1900);
+            Call<SincronizacaoAndroidResource> call = client.getAtualizacoes(accessToken.getIdUsuario(),
                                                                     accessToken.getIdCliente(),
                                                                     dispositivo.getId(),
-                                                                   "2000-01-01");
-            call.enqueue(new Callback<SincronizacaoRetResource>() {
+                                                                    dateUtils.format(dtSinc));
+            call.enqueue(new Callback<SincronizacaoAndroidResource>() {
                 @Override
-                public void onResponse(Call<SincronizacaoRetResource> call, Response<SincronizacaoRetResource> response) {
+                public void onResponse(Call<SincronizacaoAndroidResource> call, Response<SincronizacaoAndroidResource> response) {
                     int statusCode = response.code();
                     if(statusCode == 200) {
-                        SincronizacaoRetResource sincronizacaoResource = response.body();
+                        SincronizacaoAndroidResource sincronizacaoResource = response.body();
                         sincronizacaoService.sincronizar(sincronizacaoResource);
-                        view.onAtualizacaoSucesso(activity.getString(R.string.msg_operacao_sucesso));
+                        dispositivoService.atualizarDtSincAndroid();
+                        view.onAtualizacaoToAndroidSucesso(activity.getString(R.string.msg_operacao_sucesso));
                     } else {
-                        view.onAtualizacaoError("x");
+
+                        Messenger messenger = ErrorUtils.parseError(response, URL_BASE);
+                        view.onAtualizacaoError(messenger);
                     }
                 }
                 @Override
-                public void onFailure(Call<SincronizacaoRetResource> call, Throwable t) {
+                public void onFailure(Call<SincronizacaoAndroidResource> call, Throwable t) {
+                    view.onAtualizacaoError(t.getMessage());
+                    Log.e(TAG, t.toString(), t);
+                }
+            });
+
+        }catch (Exception ex){
+            view.onAtualizacaoError(ex.getMessage());
+            Log.e(TAG, ex.toString(), ex);
+        }
+    }
+
+    public void sincronizacaoToWeb(){
+        try {
+            AccessToken accessToken = PreferencesUtils.getAccessToken(this.activity);
+            Configuracao configuracao = configuracaoService.getOneConfiguracao();
+            Dispositivo dispositivo = dispositivoService.findOneByCliente(accessToken.getIdCliente());
+            final String URL_BASE = configuracao.getUrl();
+            SincronizacaoWebResource sincronizacaoWebResource = sincronizacaoToWebService.sincronizarWeb();
+            APIClient client = ServiceGenerator.getInstance(URL_BASE).createServiceWithAuth(APIClient.class, accessToken);
+            Call<SincronizacaoWebResource> call = client.sincronizarWeb(sincronizacaoWebResource);
+            call.enqueue(new Callback<SincronizacaoWebResource>() {
+                @Override
+                public void onResponse(Call<SincronizacaoWebResource> call, Response<SincronizacaoWebResource> response) {
+                    int statusCode = response.code();
+                    if(response.isSuccessful()) {
+                        SincronizacaoWebResource sincronizacaoResource = response.body();
+                        dispositivoService.atualizarDtSincWeb();
+                        view.onAtualizacaoToWebSucesso(activity.getString(R.string.msg_operacao_sucesso));
+                    } else {
+                        Messenger messenger = ErrorUtils.parseError(response, URL_BASE);
+                        view.onAtualizacaoError(messenger);
+                    }
+                }
+                @Override
+                public void onFailure(Call<SincronizacaoWebResource> call, Throwable t) {
                     view.onAtualizacaoError(t.getMessage());
                     Log.e(TAG, t.toString(), t);
                 }

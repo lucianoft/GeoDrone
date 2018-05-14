@@ -2,7 +2,12 @@ package br.com.geodrone.oauth;
 
 import android.text.TextUtils;
 
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.IOException;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import br.com.geodrone.oauth.dto.AccessToken;
@@ -17,6 +22,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServiceGenerator {
+
+    static Gson gson = new GsonBuilder()
+            .setDateFormat("yyyy-MM-dd'T'HH:mm:ssz")
+            .create();
 
     private static ServiceGenerator uniqueInstance;
 
@@ -33,7 +42,7 @@ public class ServiceGenerator {
 
         builder = new Retrofit.Builder()
                         .baseUrl(API_BASE_URL)
-                        .addConverterFactory(GsonConverterFactory.create());
+                        .addConverterFactory(GsonConverterFactory.create(gson));
         retrofit = builder.build();
         return uniqueInstance;
     }

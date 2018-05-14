@@ -47,13 +47,14 @@ public class AceiteUsuarioActivity extends BaseActivity implements AceiteUsuario
 
         aceiteUsuarioPresenter = new AceiteUsuarioPresenter(this);
         mProgress = new GenericProgress(this);
-
+        showLoading();
     }
 
     @Override
     public void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         aceiteUsuarioPresenter.takeView(this);
+        hideLoading();
     }
 
     @Override

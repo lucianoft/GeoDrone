@@ -11,13 +11,14 @@ import org.greenrobot.greendao.annotation.Generated;
 
 import br.com.geodrone.model.api.AuditModel;
 import br.com.geodrone.model.api.ClientModel;
+import br.com.geodrone.model.api.DateRegistryModel;
 import br.com.geodrone.model.api.DeviceModel;
 import br.com.geodrone.model.api.LocationModel;
 import br.com.geodrone.model.api.UserModel;
 
 
 @Entity(generateConstructors = false, nameInDb ="GEO_REGISTRO_DOENCA")
-public class RegistroDoenca extends GenericModel implements AuditModel, ClientModel, DeviceModel, UserModel, LocationModel {
+public class RegistroDoenca extends GenericModel implements AuditModel, ClientModel, DeviceModel, UserModel, LocationModel, DateRegistryModel {
 
 	@Id(autoincrement = true)
 	@Property(nameInDb = "ID_REGISTRO_DOENCA_DISP")
@@ -31,6 +32,10 @@ public class RegistroDoenca extends GenericModel implements AuditModel, ClientMo
 
 	@Property(nameInDb = "ID_REGISTRO_DOENCA")
 	private Long idRegistroDoenca;
+
+	@Property(nameInDb = "DT_REGISTRO")
+	@NotNull
+	private Date dtRegistro;
 
 	@Property(nameInDb = "ID_CLIENTE")
 	@NotNull
@@ -96,8 +101,20 @@ public class RegistroDoenca extends GenericModel implements AuditModel, ClientMo
 		this.idRegistroDoenca = idRegistroDoenca;
 	}
 
+    /** ***** from DateRegistryModel ****** */
+    @Override
+    public Date getDtRegistro() {
+        return dtRegistro;
+    }
 
-	/** ***** from DomainCliente ****** */
+    @Override
+    public void setDtRegistro(Date dtRegistro) {
+        this.dtRegistro = dtRegistro;
+    }
+    /** ***** from DateRegistryModel ****** */
+
+
+    /** ***** from DomainCliente ****** */
 	@Override
 	public Long getIdCliente() {
 		return this.idCliente;

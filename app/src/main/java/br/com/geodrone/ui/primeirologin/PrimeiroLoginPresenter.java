@@ -1,14 +1,8 @@
 package br.com.geodrone.ui.primeirologin;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
 
-import java.io.IOException;
-
-import br.com.geodrone.BuildConfig;
 import br.com.geodrone.R;
-import br.com.geodrone.SessionGeooDrone;
 import br.com.geodrone.oauth.APIClient;
 import br.com.geodrone.oauth.ServiceGenerator;
 import br.com.geodrone.oauth.dto.AccessToken;
@@ -16,7 +10,7 @@ import br.com.geodrone.resource.InstallerResource;
 import br.com.geodrone.service.ClienteService;
 import br.com.geodrone.service.ConfiguracaoService;
 import br.com.geodrone.service.DispositivoService;
-import br.com.geodrone.service.SincronizacaoService;
+import br.com.geodrone.service.SincronizacaoToAndroidService;
 import br.com.geodrone.service.UsuarioService;
 import br.com.geodrone.ui.base.BaseActivity;
 import br.com.geodrone.ui.base.BasePresenter;
@@ -55,7 +49,7 @@ public class PrimeiroLoginPresenter extends BasePresenter<PrimeiroLoginPresenter
     UsuarioService usuarioService = null;
     ClienteService clienteService = null;
     DispositivoService dispositivoService = null;
-    SincronizacaoService sincronizacaoService = null;
+    SincronizacaoToAndroidService sincronizacaoService = null;
     ConfiguracaoService configuracaoService = null;
 
     private BaseActivity activity;
@@ -65,7 +59,7 @@ public class PrimeiroLoginPresenter extends BasePresenter<PrimeiroLoginPresenter
         this.usuarioService = new UsuarioService(activity);
         this.clienteService = new ClienteService(activity);
         this.dispositivoService = new DispositivoService(activity);
-        this.sincronizacaoService = new SincronizacaoService(activity);
+        this.sincronizacaoService = new SincronizacaoToAndroidService(activity);
         configuracaoService = new ConfiguracaoService(activity);
     }
 

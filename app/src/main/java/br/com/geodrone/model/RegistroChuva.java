@@ -151,7 +151,7 @@ public class RegistroChuva extends GenericModel implements AuditModel, ClientMod
 	/** ***************************** */
 
 
-	/** ***** from UserDomain ****** */
+	/** ***** from DeviceDomain ****** */
 	@Override
 	public Long getIdDispositivo() {
 		return this.idDispositivo;

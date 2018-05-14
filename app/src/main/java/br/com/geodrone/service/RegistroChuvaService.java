@@ -2,9 +2,6 @@ package br.com.geodrone.service;
 
 import android.content.Context;
 
-import java.util.List;
-
-import br.com.geodrone.model.PontoColetaChuva;
 import br.com.geodrone.model.RegistroChuva;
 import br.com.geodrone.repository.CrudRepository;
 import br.com.geodrone.repository.RegistroChuvaRepository;

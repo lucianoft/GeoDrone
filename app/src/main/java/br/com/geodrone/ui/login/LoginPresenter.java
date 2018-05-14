@@ -16,7 +16,7 @@ import br.com.geodrone.resource.InstallerResource;
 import br.com.geodrone.service.ClienteService;
 import br.com.geodrone.service.ConfiguracaoService;
 import br.com.geodrone.service.DispositivoService;
-import br.com.geodrone.service.SincronizacaoService;
+import br.com.geodrone.service.SincronizacaoToAndroidService;
 import br.com.geodrone.service.UsuarioService;
 import br.com.geodrone.ui.base.BaseActivity;
 import br.com.geodrone.ui.base.BasePresenter;
@@ -55,7 +55,7 @@ public class LoginPresenter extends BasePresenter<LoginPresenter.View> {
     UsuarioService usuarioService = null;
     ClienteService clienteService = null;
     DispositivoService dispositivoService = null;
-    SincronizacaoService sincronizacaoService = null;
+    SincronizacaoToAndroidService sincronizacaoService = null;
     ConfiguracaoService configuracaoService = null;
 
     private BaseActivity activity;
@@ -65,7 +65,7 @@ public class LoginPresenter extends BasePresenter<LoginPresenter.View> {
         this.usuarioService = new UsuarioService(activity);
         this.clienteService = new ClienteService(activity);
         this.dispositivoService = new DispositivoService(activity);
-        this.sincronizacaoService = new SincronizacaoService(activity);
+        this.sincronizacaoService = new SincronizacaoToAndroidService(activity);
         configuracaoService = new ConfiguracaoService(activity);
         this.activity.hideLoading();
     }
