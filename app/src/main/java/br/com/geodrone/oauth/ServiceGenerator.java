@@ -1,31 +1,41 @@
 package br.com.geodrone.oauth;
 
 import android.text.TextUtils;
+import android.util.Base64;
 
-import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import br.com.geodrone.oauth.dto.AccessToken;
+import br.com.geodrone.ui.sincronizacao.ByteArrayToBase64TypeAdapter;
 import okhttp3.Credentials;
 import okhttp3.Interceptor;
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class ServiceGenerator {
 
+    // Using Android's base64 libraries. This can be replaced with any base64 library.
+
     static Gson gson = new GsonBuilder()
             .setDateFormat("yyyy-MM-dd'T'HH:mm:ssz")
+            .registerTypeAdapter(byte[].class, new ByteArrayToBase64TypeAdapter())
             .create();
+
 
     private static ServiceGenerator uniqueInstance;
 
@@ -42,6 +52,7 @@ public class ServiceGenerator {
 
         builder = new Retrofit.Builder()
                         .baseUrl(API_BASE_URL)
+                        .addConverterFactory(ScalarsConverterFactory.create())
                         .addConverterFactory(GsonConverterFactory.create(gson));
         retrofit = builder.build();
         return uniqueInstance;
