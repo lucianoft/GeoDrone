@@ -180,6 +180,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 || !hasPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {
             requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
                             Manifest.permission.ACCESS_FINE_LOCATION},
+                    -1);
+        }
+        if (!hasPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
+                || !hasPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {
+            requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
+                            Manifest.permission.ACCESS_FINE_LOCATION},
                     REQ_LOCATION_PERMISSION_PONTO_PLUVIOSIDADE);
         }else{
             Intent i = new Intent(this,RegistroPluviosidadeActivity.class);

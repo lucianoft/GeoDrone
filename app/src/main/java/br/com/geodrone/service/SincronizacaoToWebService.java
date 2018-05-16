@@ -2,6 +2,7 @@ package br.com.geodrone.service;
 
 import android.content.Context;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -34,6 +35,7 @@ import br.com.geodrone.resource.SincronizacaoWebResource;
 import br.com.geodrone.resource.UsuarioResource;
 import br.com.geodrone.service.util.GenericService;
 import br.com.geodrone.utils.DateUtils;
+import br.com.geodrone.utils.FileUtils;
 
 /**
  * Created by fernandes on 11/05/2018.
@@ -225,22 +227,29 @@ public class SincronizacaoToWebService extends GenericService {
         List<RegistroImagem> registroImagems = registroImagemRepository.findAllByClienteToSincronizar(cliente.getId(), dtSincronizacaoErp);
         for (RegistroImagem registroImagem: registroImagems) {
 
-            RegistroImagemResource registroImagemResource = new RegistroImagemResource();
+            try {
+                File file = new File(registroImagem.getPath());
+                byte[] imagem = FileUtils.convertFileToByteArray(file);
 
-            registroImagemResource.setIdRegistroImagem(registroImagem.getIdRegistroImagem());
-            registroImagemResource.setIdRegistroImagemDisp(registroImagem.getId());
-            registroImagemResource.setImagem(registroImagem.getImagem());
-            registroImagemResource.setObservacao(registroImagem.getObservacao());
-            registroImagemResource.setIdCliente(registroImagem.getIdCliente());
-            registroImagemResource.setLatitude(registroImagem.getLatitude());
-            registroImagemResource.setLongitude(registroImagem.getLongitude());
-            registroImagemResource.setDtRegistro(registroImagem.getDtRegistro());
-            registroImagemResource.setIdDispositivo(registroImagem.getIdDispositivo());
-            registroImagemResource.setDtInclusao(registroImagem.getDtInclusao());
-            registroImagemResource.setDtAlteracao(registroImagem.getDtAlteracao());
-            registroImagemResource.setIdUsuarioReg(registroImagem.getIdUsuarioReg());
+                RegistroImagemResource registroImagemResource = new RegistroImagemResource();
 
-            registroImagemResources.add(registroImagemResource);
+                registroImagemResource.setIdRegistroImagem(registroImagem.getIdRegistroImagem());
+                registroImagemResource.setIdRegistroImagemDisp(registroImagem.getId());
+                registroImagemResource.setImagem(imagem);
+                registroImagemResource.setObservacao(registroImagem.getObservacao());
+                registroImagemResource.setIdCliente(registroImagem.getIdCliente());
+                registroImagemResource.setLatitude(registroImagem.getLatitude());
+                registroImagemResource.setLongitude(registroImagem.getLongitude());
+                registroImagemResource.setDtRegistro(registroImagem.getDtRegistro());
+                registroImagemResource.setIdDispositivo(registroImagem.getIdDispositivo());
+                registroImagemResource.setDtInclusao(registroImagem.getDtInclusao());
+                registroImagemResource.setDtAlteracao(registroImagem.getDtAlteracao());
+                registroImagemResource.setIdUsuarioReg(registroImagem.getIdUsuarioReg());
+
+                registroImagemResources.add(registroImagemResource);
+            }catch (Exception ex){
+                ex.printStackTrace();
+            }
         }
         return registroImagemResources;
     }

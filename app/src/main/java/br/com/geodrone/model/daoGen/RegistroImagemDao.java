@@ -26,17 +26,18 @@ public class RegistroImagemDao extends AbstractDao<RegistroImagem, Long> {
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "ID_REGISTRO_IMAGEM_DISP");
         public final static Property Observacao = new Property(1, String.class, "observacao", false, "OBSERVACAO");
-        public final static Property Imagem = new Property(2, byte[].class, "imagem", false, "IMAGEM");
-        public final static Property IdRegistroImagem = new Property(3, Long.class, "idRegistroImagem", false, "ID_REGISTRO_IMAGEM");
-        public final static Property DtRegistro = new Property(4, java.util.Date.class, "dtRegistro", false, "DT_REGISTRO");
-        public final static Property IdCliente = new Property(5, Long.class, "idCliente", false, "ID_CLIENTE");
-        public final static Property Latitude = new Property(6, Double.class, "latitude", false, "LATITUDE");
-        public final static Property Longitude = new Property(7, Double.class, "longitude", false, "LONGITUDE");
-        public final static Property IdDispositivo = new Property(8, Long.class, "idDispositivo", false, "ID_DISPOSITIVO");
-        public final static Property DtInclusao = new Property(9, java.util.Date.class, "dtInclusao", false, "DT_INCLUSAO");
-        public final static Property DtAlteracao = new Property(10, java.util.Date.class, "dtAlteracao", false, "DT_ALTERACAO");
-        public final static Property VersaoSistema = new Property(11, Long.class, "versaoSistema", false, "VERSAO_SISTEMA");
-        public final static Property IdUsuarioReg = new Property(12, Long.class, "idUsuarioReg", false, "ID_USUARIO_REG");
+        public final static Property Path = new Property(2, String.class, "path", false, "PATH");
+        public final static Property FileName = new Property(3, String.class, "fileName", false, "FILE_NAME");
+        public final static Property IdRegistroImagem = new Property(4, Long.class, "idRegistroImagem", false, "ID_REGISTRO_IMAGEM");
+        public final static Property DtRegistro = new Property(5, java.util.Date.class, "dtRegistro", false, "DT_REGISTRO");
+        public final static Property IdCliente = new Property(6, Long.class, "idCliente", false, "ID_CLIENTE");
+        public final static Property Latitude = new Property(7, Double.class, "latitude", false, "LATITUDE");
+        public final static Property Longitude = new Property(8, Double.class, "longitude", false, "LONGITUDE");
+        public final static Property IdDispositivo = new Property(9, Long.class, "idDispositivo", false, "ID_DISPOSITIVO");
+        public final static Property DtInclusao = new Property(10, java.util.Date.class, "dtInclusao", false, "DT_INCLUSAO");
+        public final static Property DtAlteracao = new Property(11, java.util.Date.class, "dtAlteracao", false, "DT_ALTERACAO");
+        public final static Property VersaoSistema = new Property(12, Long.class, "versaoSistema", false, "VERSAO_SISTEMA");
+        public final static Property IdUsuarioReg = new Property(13, Long.class, "idUsuarioReg", false, "ID_USUARIO_REG");
     }
 
 
@@ -54,17 +55,18 @@ public class RegistroImagemDao extends AbstractDao<RegistroImagem, Long> {
         db.execSQL("CREATE TABLE " + constraint + "\"GEO_REGISTRO_IMAGEM\" (" + //
                 "\"ID_REGISTRO_IMAGEM_DISP\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"OBSERVACAO\" TEXT," + // 1: observacao
-                "\"IMAGEM\" BLOB NOT NULL ," + // 2: imagem
-                "\"ID_REGISTRO_IMAGEM\" INTEGER," + // 3: idRegistroImagem
-                "\"DT_REGISTRO\" INTEGER NOT NULL ," + // 4: dtRegistro
-                "\"ID_CLIENTE\" INTEGER NOT NULL ," + // 5: idCliente
-                "\"LATITUDE\" REAL NOT NULL ," + // 6: latitude
-                "\"LONGITUDE\" REAL NOT NULL ," + // 7: longitude
-                "\"ID_DISPOSITIVO\" INTEGER NOT NULL ," + // 8: idDispositivo
-                "\"DT_INCLUSAO\" INTEGER NOT NULL ," + // 9: dtInclusao
-                "\"DT_ALTERACAO\" INTEGER NOT NULL ," + // 10: dtAlteracao
-                "\"VERSAO_SISTEMA\" INTEGER NOT NULL ," + // 11: versaoSistema
-                "\"ID_USUARIO_REG\" INTEGER NOT NULL );"); // 12: idUsuarioReg
+                "\"PATH\" TEXT," + // 2: path
+                "\"FILE_NAME\" TEXT," + // 3: fileName
+                "\"ID_REGISTRO_IMAGEM\" INTEGER," + // 4: idRegistroImagem
+                "\"DT_REGISTRO\" INTEGER NOT NULL ," + // 5: dtRegistro
+                "\"ID_CLIENTE\" INTEGER NOT NULL ," + // 6: idCliente
+                "\"LATITUDE\" REAL NOT NULL ," + // 7: latitude
+                "\"LONGITUDE\" REAL NOT NULL ," + // 8: longitude
+                "\"ID_DISPOSITIVO\" INTEGER NOT NULL ," + // 9: idDispositivo
+                "\"DT_INCLUSAO\" INTEGER NOT NULL ," + // 10: dtInclusao
+                "\"DT_ALTERACAO\" INTEGER NOT NULL ," + // 11: dtAlteracao
+                "\"VERSAO_SISTEMA\" INTEGER NOT NULL ," + // 12: versaoSistema
+                "\"ID_USUARIO_REG\" INTEGER NOT NULL );"); // 13: idUsuarioReg
     }
 
     /** Drops the underlying database table. */
@@ -86,21 +88,30 @@ public class RegistroImagemDao extends AbstractDao<RegistroImagem, Long> {
         if (observacao != null) {
             stmt.bindString(2, observacao);
         }
-        stmt.bindBlob(3, entity.getImagem());
+ 
+        String path = entity.getPath();
+        if (path != null) {
+            stmt.bindString(3, path);
+        }
+ 
+        String fileName = entity.getFileName();
+        if (fileName != null) {
+            stmt.bindString(4, fileName);
+        }
  
         Long idRegistroImagem = entity.getIdRegistroImagem();
         if (idRegistroImagem != null) {
-            stmt.bindLong(4, idRegistroImagem);
+            stmt.bindLong(5, idRegistroImagem);
         }
-        stmt.bindLong(5, entity.getDtRegistro().getTime());
-        stmt.bindLong(6, entity.getIdCliente());
-        stmt.bindDouble(7, entity.getLatitude());
-        stmt.bindDouble(8, entity.getLongitude());
-        stmt.bindLong(9, entity.getIdDispositivo());
-        stmt.bindLong(10, entity.getDtInclusao().getTime());
-        stmt.bindLong(11, entity.getDtAlteracao().getTime());
-        stmt.bindLong(12, entity.getVersaoSistema());
-        stmt.bindLong(13, entity.getIdUsuarioReg());
+        stmt.bindLong(6, entity.getDtRegistro().getTime());
+        stmt.bindLong(7, entity.getIdCliente());
+        stmt.bindDouble(8, entity.getLatitude());
+        stmt.bindDouble(9, entity.getLongitude());
+        stmt.bindLong(10, entity.getIdDispositivo());
+        stmt.bindLong(11, entity.getDtInclusao().getTime());
+        stmt.bindLong(12, entity.getDtAlteracao().getTime());
+        stmt.bindLong(13, entity.getVersaoSistema());
+        stmt.bindLong(14, entity.getIdUsuarioReg());
     }
 
     @Override
@@ -116,21 +127,30 @@ public class RegistroImagemDao extends AbstractDao<RegistroImagem, Long> {
         if (observacao != null) {
             stmt.bindString(2, observacao);
         }
-        stmt.bindBlob(3, entity.getImagem());
+ 
+        String path = entity.getPath();
+        if (path != null) {
+            stmt.bindString(3, path);
+        }
+ 
+        String fileName = entity.getFileName();
+        if (fileName != null) {
+            stmt.bindString(4, fileName);
+        }
  
         Long idRegistroImagem = entity.getIdRegistroImagem();
         if (idRegistroImagem != null) {
-            stmt.bindLong(4, idRegistroImagem);
+            stmt.bindLong(5, idRegistroImagem);
         }
-        stmt.bindLong(5, entity.getDtRegistro().getTime());
-        stmt.bindLong(6, entity.getIdCliente());
-        stmt.bindDouble(7, entity.getLatitude());
-        stmt.bindDouble(8, entity.getLongitude());
-        stmt.bindLong(9, entity.getIdDispositivo());
-        stmt.bindLong(10, entity.getDtInclusao().getTime());
-        stmt.bindLong(11, entity.getDtAlteracao().getTime());
-        stmt.bindLong(12, entity.getVersaoSistema());
-        stmt.bindLong(13, entity.getIdUsuarioReg());
+        stmt.bindLong(6, entity.getDtRegistro().getTime());
+        stmt.bindLong(7, entity.getIdCliente());
+        stmt.bindDouble(8, entity.getLatitude());
+        stmt.bindDouble(9, entity.getLongitude());
+        stmt.bindLong(10, entity.getIdDispositivo());
+        stmt.bindLong(11, entity.getDtInclusao().getTime());
+        stmt.bindLong(12, entity.getDtAlteracao().getTime());
+        stmt.bindLong(13, entity.getVersaoSistema());
+        stmt.bindLong(14, entity.getIdUsuarioReg());
     }
 
     @Override
@@ -149,17 +169,18 @@ public class RegistroImagemDao extends AbstractDao<RegistroImagem, Long> {
     public void readEntity(Cursor cursor, RegistroImagem entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setObservacao(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setImagem(cursor.getBlob(offset + 2));
-        entity.setIdRegistroImagem(cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3));
-        entity.setDtRegistro(new java.util.Date(cursor.getLong(offset + 4)));
-        entity.setIdCliente(cursor.getLong(offset + 5));
-        entity.setLatitude(cursor.getDouble(offset + 6));
-        entity.setLongitude(cursor.getDouble(offset + 7));
-        entity.setIdDispositivo(cursor.getLong(offset + 8));
-        entity.setDtInclusao(new java.util.Date(cursor.getLong(offset + 9)));
-        entity.setDtAlteracao(new java.util.Date(cursor.getLong(offset + 10)));
-        entity.setVersaoSistema(cursor.getLong(offset + 11));
-        entity.setIdUsuarioReg(cursor.getLong(offset + 12));
+        entity.setPath(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setFileName(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setIdRegistroImagem(cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4));
+        entity.setDtRegistro(new java.util.Date(cursor.getLong(offset + 5)));
+        entity.setIdCliente(cursor.getLong(offset + 6));
+        entity.setLatitude(cursor.getDouble(offset + 7));
+        entity.setLongitude(cursor.getDouble(offset + 8));
+        entity.setIdDispositivo(cursor.getLong(offset + 9));
+        entity.setDtInclusao(new java.util.Date(cursor.getLong(offset + 10)));
+        entity.setDtAlteracao(new java.util.Date(cursor.getLong(offset + 11)));
+        entity.setVersaoSistema(cursor.getLong(offset + 12));
+        entity.setIdUsuarioReg(cursor.getLong(offset + 13));
      }
     
     @Override

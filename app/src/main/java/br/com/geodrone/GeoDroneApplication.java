@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import org.greenrobot.greendao.AbstractDaoMaster;
 import org.greenrobot.greendao.database.Database;
 
+import java.lang.reflect.Field;
 import java.util.Date;
 
 import br.com.geodrone.model.Cliente;
@@ -19,6 +20,7 @@ import br.com.geodrone.model.Usuario;
 import br.com.geodrone.model.constantes.FlagStatusCliente;
 import br.com.geodrone.model.daoGen.DaoMaster;
 import br.com.geodrone.model.daoGen.DaoSession;
+import br.com.geodrone.model.daoGen.RotaTrabalhoDao;
 import br.com.geodrone.utils.Constantes;
 import br.com.geodrone.utils.PreferencesUtils;
 
@@ -27,6 +29,17 @@ public class GeoDroneApplication extends Application {
     public DaoSession daoSession;
     public static final boolean ENCRYPTED = false;
 
+    private void setCursorWindowSize(int size) {
+            try {
+                final Class cls = Class.forName("android.database.CursorWindow");
+                final Field fld = cls.getDeclaredField("sCursorWindowSize");
+                fld.setAccessible(true);
+                int before = fld.getInt(null); // default=2048*1024
+                fld.setInt(null, size * 1024); // extend to
+                int after = fld.getInt(null);
+            } catch (Exception e) {
+            }
+    }
     @Override
     public void onCreate() {
         super.onCreate();
@@ -36,8 +49,14 @@ public class GeoDroneApplication extends Application {
         Database db = helper.getWritableDb();
         //DaoMaster.dropAllTables(db, true);
         daoSession = new DaoMaster(db).newSession();
+        try{
+            daoSession.getRotaTrabalhoDao().loadAll();
+        }catch (Exception ex){
+            RotaTrabalhoDao.dropTable(db, true);
+        }
         DaoMaster.createAllTables(db, true);
 
+        //setCursorWindowSize(10240);
         /*criarCliente();
         criarDispositivo();
         criarUsuario();

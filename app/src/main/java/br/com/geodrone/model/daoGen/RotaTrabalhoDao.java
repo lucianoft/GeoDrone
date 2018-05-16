@@ -27,13 +27,15 @@ public class RotaTrabalhoDao extends AbstractDao<RotaTrabalho, Long> {
         public final static Property Id = new Property(0, Long.class, "id", true, "ID_ROTA_TRABALHO_DISP");
         public final static Property IdRotaTrabalho = new Property(1, Long.class, "idRotaTrabalho", false, "ID_ROTA_TRABALHO");
         public final static Property IdCliente = new Property(2, Long.class, "idCliente", false, "ID_CLIENTE");
-        public final static Property Latitude = new Property(3, Double.class, "latitude", false, "LATITUDE");
-        public final static Property Longitude = new Property(4, Double.class, "longitude", false, "LONGITUDE");
-        public final static Property IdDispositivo = new Property(5, Long.class, "idDispositivo", false, "ID_DISPOSITIVO");
-        public final static Property DtInclusao = new Property(6, java.util.Date.class, "dtInclusao", false, "DT_INCLUSAO");
-        public final static Property DtAlteracao = new Property(7, java.util.Date.class, "dtAlteracao", false, "DT_ALTERACAO");
-        public final static Property VersaoSistema = new Property(8, Long.class, "versaoSistema", false, "VERSAO_SISTEMA");
-        public final static Property IdUsuarioReg = new Property(9, Long.class, "idUsuarioReg", false, "ID_USUARIO_REG");
+        public final static Property FlagTipo = new Property(3, String.class, "flagTipo", false, "FLAG_TIPO");
+        public final static Property FlagOperacaoRota = new Property(4, String.class, "flagOperacaoRota", false, "FLAG_OPERACAO_ROTA");
+        public final static Property Latitude = new Property(5, Double.class, "latitude", false, "LATITUDE");
+        public final static Property Longitude = new Property(6, Double.class, "longitude", false, "LONGITUDE");
+        public final static Property IdDispositivo = new Property(7, Long.class, "idDispositivo", false, "ID_DISPOSITIVO");
+        public final static Property DtInclusao = new Property(8, java.util.Date.class, "dtInclusao", false, "DT_INCLUSAO");
+        public final static Property DtAlteracao = new Property(9, java.util.Date.class, "dtAlteracao", false, "DT_ALTERACAO");
+        public final static Property VersaoSistema = new Property(10, Long.class, "versaoSistema", false, "VERSAO_SISTEMA");
+        public final static Property IdUsuarioReg = new Property(11, Long.class, "idUsuarioReg", false, "ID_USUARIO_REG");
     }
 
 
@@ -52,13 +54,15 @@ public class RotaTrabalhoDao extends AbstractDao<RotaTrabalho, Long> {
                 "\"ID_ROTA_TRABALHO_DISP\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"ID_ROTA_TRABALHO\" INTEGER," + // 1: idRotaTrabalho
                 "\"ID_CLIENTE\" INTEGER NOT NULL ," + // 2: idCliente
-                "\"LATITUDE\" REAL NOT NULL ," + // 3: latitude
-                "\"LONGITUDE\" REAL NOT NULL ," + // 4: longitude
-                "\"ID_DISPOSITIVO\" INTEGER NOT NULL ," + // 5: idDispositivo
-                "\"DT_INCLUSAO\" INTEGER NOT NULL ," + // 6: dtInclusao
-                "\"DT_ALTERACAO\" INTEGER NOT NULL ," + // 7: dtAlteracao
-                "\"VERSAO_SISTEMA\" INTEGER NOT NULL ," + // 8: versaoSistema
-                "\"ID_USUARIO_REG\" INTEGER NOT NULL );"); // 9: idUsuarioReg
+                "\"FLAG_TIPO\" TEXT," + // 3: flagTipo
+                "\"FLAG_OPERACAO_ROTA\" TEXT," + // 4: flagOperacaoRota
+                "\"LATITUDE\" REAL NOT NULL ," + // 5: latitude
+                "\"LONGITUDE\" REAL NOT NULL ," + // 6: longitude
+                "\"ID_DISPOSITIVO\" INTEGER NOT NULL ," + // 7: idDispositivo
+                "\"DT_INCLUSAO\" INTEGER NOT NULL ," + // 8: dtInclusao
+                "\"DT_ALTERACAO\" INTEGER NOT NULL ," + // 9: dtAlteracao
+                "\"VERSAO_SISTEMA\" INTEGER NOT NULL ," + // 10: versaoSistema
+                "\"ID_USUARIO_REG\" INTEGER NOT NULL );"); // 11: idUsuarioReg
     }
 
     /** Drops the underlying database table. */
@@ -81,13 +85,23 @@ public class RotaTrabalhoDao extends AbstractDao<RotaTrabalho, Long> {
             stmt.bindLong(2, idRotaTrabalho);
         }
         stmt.bindLong(3, entity.getIdCliente());
-        stmt.bindDouble(4, entity.getLatitude());
-        stmt.bindDouble(5, entity.getLongitude());
-        stmt.bindLong(6, entity.getIdDispositivo());
-        stmt.bindLong(7, entity.getDtInclusao().getTime());
-        stmt.bindLong(8, entity.getDtAlteracao().getTime());
-        stmt.bindLong(9, entity.getVersaoSistema());
-        stmt.bindLong(10, entity.getIdUsuarioReg());
+ 
+        String flagTipo = entity.getFlagTipo();
+        if (flagTipo != null) {
+            stmt.bindString(4, flagTipo);
+        }
+ 
+        String flagOperacaoRota = entity.getFlagOperacaoRota();
+        if (flagOperacaoRota != null) {
+            stmt.bindString(5, flagOperacaoRota);
+        }
+        stmt.bindDouble(6, entity.getLatitude());
+        stmt.bindDouble(7, entity.getLongitude());
+        stmt.bindLong(8, entity.getIdDispositivo());
+        stmt.bindLong(9, entity.getDtInclusao().getTime());
+        stmt.bindLong(10, entity.getDtAlteracao().getTime());
+        stmt.bindLong(11, entity.getVersaoSistema());
+        stmt.bindLong(12, entity.getIdUsuarioReg());
     }
 
     @Override
@@ -104,13 +118,23 @@ public class RotaTrabalhoDao extends AbstractDao<RotaTrabalho, Long> {
             stmt.bindLong(2, idRotaTrabalho);
         }
         stmt.bindLong(3, entity.getIdCliente());
-        stmt.bindDouble(4, entity.getLatitude());
-        stmt.bindDouble(5, entity.getLongitude());
-        stmt.bindLong(6, entity.getIdDispositivo());
-        stmt.bindLong(7, entity.getDtInclusao().getTime());
-        stmt.bindLong(8, entity.getDtAlteracao().getTime());
-        stmt.bindLong(9, entity.getVersaoSistema());
-        stmt.bindLong(10, entity.getIdUsuarioReg());
+ 
+        String flagTipo = entity.getFlagTipo();
+        if (flagTipo != null) {
+            stmt.bindString(4, flagTipo);
+        }
+ 
+        String flagOperacaoRota = entity.getFlagOperacaoRota();
+        if (flagOperacaoRota != null) {
+            stmt.bindString(5, flagOperacaoRota);
+        }
+        stmt.bindDouble(6, entity.getLatitude());
+        stmt.bindDouble(7, entity.getLongitude());
+        stmt.bindLong(8, entity.getIdDispositivo());
+        stmt.bindLong(9, entity.getDtInclusao().getTime());
+        stmt.bindLong(10, entity.getDtAlteracao().getTime());
+        stmt.bindLong(11, entity.getVersaoSistema());
+        stmt.bindLong(12, entity.getIdUsuarioReg());
     }
 
     @Override
@@ -130,13 +154,15 @@ public class RotaTrabalhoDao extends AbstractDao<RotaTrabalho, Long> {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setIdRotaTrabalho(cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1));
         entity.setIdCliente(cursor.getLong(offset + 2));
-        entity.setLatitude(cursor.getDouble(offset + 3));
-        entity.setLongitude(cursor.getDouble(offset + 4));
-        entity.setIdDispositivo(cursor.getLong(offset + 5));
-        entity.setDtInclusao(new java.util.Date(cursor.getLong(offset + 6)));
-        entity.setDtAlteracao(new java.util.Date(cursor.getLong(offset + 7)));
-        entity.setVersaoSistema(cursor.getLong(offset + 8));
-        entity.setIdUsuarioReg(cursor.getLong(offset + 9));
+        entity.setFlagTipo(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setFlagOperacaoRota(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setLatitude(cursor.getDouble(offset + 5));
+        entity.setLongitude(cursor.getDouble(offset + 6));
+        entity.setIdDispositivo(cursor.getLong(offset + 7));
+        entity.setDtInclusao(new java.util.Date(cursor.getLong(offset + 8)));
+        entity.setDtAlteracao(new java.util.Date(cursor.getLong(offset + 9)));
+        entity.setVersaoSistema(cursor.getLong(offset + 10));
+        entity.setIdUsuarioReg(cursor.getLong(offset + 11));
      }
     
     @Override

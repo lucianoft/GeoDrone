@@ -129,6 +129,7 @@ public class SincronizacaoPresenter extends BasePresenter<SincronizacaoPresenter
             });
 
         }catch (Exception ex){
+            ex.printStackTrace();
             view.onAtualizacaoError(ex.getMessage());
             Log.e(TAG, ex.toString(), ex);
         }

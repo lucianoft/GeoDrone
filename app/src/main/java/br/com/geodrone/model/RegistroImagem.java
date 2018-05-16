@@ -27,9 +27,15 @@ public class RegistroImagem extends GenericModel implements AuditModel, ClientMo
 	@Property(nameInDb = "OBSERVACAO")
 	private String observacao;
 
-	@Property(nameInDb = "IMAGEM")
-	@NotNull
-	private byte[] imagem;
+	@Property(nameInDb = "PATH")
+	private String path;
+
+	@Property(nameInDb = "FILE_NAME")
+	private String fileName;
+
+	//@Property(nameInDb = "IMAGEM")
+	//@NotNull
+	//private byte[] imagem;
 
 	@Property(nameInDb = "ID_REGISTRO_IMAGEM")
 	private Long idRegistroImagem;
@@ -87,11 +93,20 @@ public class RegistroImagem extends GenericModel implements AuditModel, ClientMo
 		this.observacao = observacao;
 	}
 
-	public byte[] getImagem() {
-		return this.imagem;
+	public String getPath() {
+		return path;
 	}
-	public void setImagem(byte[] imagem) {
-		this.imagem = imagem;
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
 	public Long getIdRegistroImagem() {

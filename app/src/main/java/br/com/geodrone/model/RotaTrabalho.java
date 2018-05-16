@@ -30,6 +30,12 @@ public class RotaTrabalho extends GenericModel implements AuditModel, ClientMode
 	@NotNull
 	private Long idCliente;
 
+	@Property(nameInDb = "FLAG_TIPO")
+	private String flagTipo;
+
+    @Property(nameInDb = "FLAG_OPERACAO_ROTA")
+    private String flagOperacaoRota;
+
 	@Property(nameInDb = "LATITUDE")
 	@NotNull
 	private Double latitude;
@@ -104,8 +110,23 @@ public class RotaTrabalho extends GenericModel implements AuditModel, ClientMode
 	}
 	/** ***************************** */
 
+    public String getFlagTipo() {
+        return flagTipo;
+    }
 
-	/** ***** from UserDomain ****** */
+    public void setFlagTipo(String flagTipo) {
+        this.flagTipo = flagTipo;
+    }
+
+    public String getFlagOperacaoRota() {
+        return flagOperacaoRota;
+    }
+
+    public void setFlagOperacaoRota(String flagOperacaoRota) {
+        this.flagOperacaoRota = flagOperacaoRota;
+    }
+
+    /** ***** from UserDomain ****** */
 	@Override
 	public Long getIdDispositivo() {
 		return this.idDispositivo;

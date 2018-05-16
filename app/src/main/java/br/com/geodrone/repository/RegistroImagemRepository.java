@@ -26,6 +26,8 @@ public class RegistroImagemRepository extends CrudRepository<RegistroImagem, Lon
 
 
     public List<RegistroImagem> findAllByClienteToSincronizar(Long IdClienteRef, Date dtSincronizacaoErp ) {
+        //QueryBuilder.LOG_SQL = true;
+        //QueryBuilder.LOG_VALUES = true;
         QueryBuilder<RegistroImagem> qb = getCrudDao().queryBuilder();
         qb.where(RegistroImagemDao.Properties.IdCliente.eq(IdClienteRef),
                 RegistroImagemDao.Properties.DtAlteracao.gt(dtSincronizacaoErp));
