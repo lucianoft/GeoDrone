@@ -15,20 +15,17 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import br.com.geodrone.R;
 import br.com.geodrone.activity.utils.Constantes;
-import br.com.geodrone.ui.aceiteusuario.AceiteUsuarioActivity;
 import br.com.geodrone.ui.base.BaseActivity;
 import br.com.geodrone.ui.logout.LogoutActivity;
 import br.com.geodrone.ui.pontocoletachuva.PontoColetaChuvaActivity;
 import br.com.geodrone.ui.registrocondicaotempo.RegistroCondicoesTempoActivity;
 import br.com.geodrone.ui.registroimagem.RegistroImagemActivity;
 import br.com.geodrone.ui.registrochuva.RegistroPluviosidadeActivity;
-import br.com.geodrone.activity.ForunActivity;
-import br.com.geodrone.ui.mensagem.MensagemActivity;
 import br.com.geodrone.ui.monitoramento.MonitoramentoActivity;
+import br.com.geodrone.ui.reqpragas.RequisitarArquivoPragasActivity;
 import br.com.geodrone.ui.sincronizacao.SincronizacaoActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -132,6 +129,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             getPermissionsGpsRegistroPluviosidade();
         }  else if (id == R.id.menu_item_monitoramento_campo) {
             getPermissionsGpsMonitoramento();
+        } else if (id == R.id.menu_item_requisitar_arquivos_pragas){
+            Intent intent = new Intent(this, RequisitarArquivoPragasActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_mensagem) {
 
         } else if (id == R.id.nav_forum) {
