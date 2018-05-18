@@ -1,5 +1,6 @@
 package br.com.geodrone.utils;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -68,11 +69,25 @@ public class DateUtils {
 	}
 
 	public String format(Date date) {
+		return format(date,"yyyy-MM-dd");
+	}
+
+	public String format(Date date, String format) {
 		try {
-			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			SimpleDateFormat dateFormat = new SimpleDateFormat(format);
 			return dateFormat.format(date);
 		}catch (Exception ex){
 			throw new RuntimeException(ex);
 		}
 	}
+
+	public Date parse(String strDate, String pattern) {
+		try{
+			DateFormat df = new SimpleDateFormat(pattern);
+			return df.parse(strDate);
+		}catch (Exception ex){
+			throw new RuntimeException(ex);
+		}
+	}
+
 }

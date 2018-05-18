@@ -128,7 +128,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.logout.LogoutActivity" />
         <activity android:name=".ui.aceiteusuario.AceiteUsuarioActivity" />
-        <activity android:name=".ui.reqpragas.RequisitarArquivoPragasActivity"></activity>
+        <activity android:name=".ui.reqpragas.RequisitarArquivoPragaActivity"></activity>
     </application>
 
 </manifest>

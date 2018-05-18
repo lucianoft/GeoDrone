@@ -25,7 +25,7 @@ import br.com.geodrone.ui.registrocondicaotempo.RegistroCondicoesTempoActivity;
 import br.com.geodrone.ui.registroimagem.RegistroImagemActivity;
 import br.com.geodrone.ui.registrochuva.RegistroPluviosidadeActivity;
 import br.com.geodrone.ui.monitoramento.MonitoramentoActivity;
-import br.com.geodrone.ui.reqpragas.RequisitarArquivoPragasActivity;
+import br.com.geodrone.ui.reqpragas.RequisitarArquivoPragaActivity;
 import br.com.geodrone.ui.sincronizacao.SincronizacaoActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -130,7 +130,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         }  else if (id == R.id.menu_item_monitoramento_campo) {
             getPermissionsGpsMonitoramento();
         } else if (id == R.id.menu_item_requisitar_arquivos_pragas){
-            Intent intent = new Intent(this, RequisitarArquivoPragasActivity.class);
+            Intent intent = new Intent(this, RequisitarArquivoPragaActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_mensagem) {
 
