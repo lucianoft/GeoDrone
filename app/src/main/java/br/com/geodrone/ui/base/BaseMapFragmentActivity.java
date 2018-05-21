@@ -96,7 +96,6 @@ public abstract class BaseMapFragmentActivity extends BaseFragmentActivity imple
         locationAlertDialog.show();
     }
 
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -126,4 +125,8 @@ public abstract class BaseMapFragmentActivity extends BaseFragmentActivity imple
     }
 
     public abstract void onChangeLocation(Location location);
+
+    public Location getMyLocation(){
+        return tracker.getLocation();
+    }
 }

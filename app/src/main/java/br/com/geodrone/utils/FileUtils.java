@@ -5,12 +5,14 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Created by fernandes on 02/04/2018.
@@ -54,5 +56,10 @@ public class FileUtils {
             e.printStackTrace();
         }
         return byteArray;
+    }
+
+    public static InputStream getInputStream(String s) {
+        InputStream stream = new ByteArrayInputStream(s.getBytes(StandardCharsets.UTF_8));
+        return stream;
     }
 }

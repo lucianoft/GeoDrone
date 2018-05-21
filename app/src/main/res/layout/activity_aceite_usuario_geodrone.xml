@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="br.com.geodrone.ui.aceiteusuario.AceiteUsuarioGeodroneActivity">
+
+    <WebView
+        android:id="@+id/webView_aceite_usuario"
+        android:layout_above="@+id/layout_aceite_usuario_chek"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </WebView>
+    <LinearLayout
+        android:id="@+id/layout_aceite_usuario_chek"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+        <CheckBox
+            android:id="@+id/checkbox_aceite_usuario"
+            android:layout_above="@+id/button_aceite_usuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/lb_check_aceite_usuario" />
+
+        <Button
+            android:id="@+id/button_aceite_usuario"
+            style="@style/CustomStyleButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lb_aceite_usuario" />
+    </LinearLayout>
+
+</RelativeLayout>

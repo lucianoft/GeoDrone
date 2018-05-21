@@ -29,10 +29,6 @@ public class Dispositivo extends GenericModel implements AuditModel {
 	@Property(nameInDb = "DT_SINCRONIZACAO_ERP")
 	private Date dtSincronizacaoErp;
 
-	@Property(nameInDb = "ID_CLIENTE")
-	@NotNull
-	private Long idCliente;
-
 	@Property(nameInDb = "DT_INCLUSAO")
 	@NotNull
 	private Date dtInclusao;
@@ -144,11 +140,5 @@ public class Dispositivo extends GenericModel implements AuditModel {
 		return (this.id == null ? "" : this.id.toString() );
 	}
 	/** ***************************** */
-	public Long getIdCliente() {
-		return this.idCliente;
-	}
-	public void setIdCliente(Long idCliente) {
-		this.idCliente = idCliente;
-	}
 
 }

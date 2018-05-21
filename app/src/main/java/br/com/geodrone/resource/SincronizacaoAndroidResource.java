@@ -11,8 +11,9 @@ public class SincronizacaoAndroidResource implements Serializable {
 	private Long idCliente;
 	private Long idDispositivo;
 
-	private ClienteResource clienteResource;
-	private UsuarioResource usuarioResource;
+    private UsuarioResource usuario;
+    private List<ClienteResource> clientes;
+	private List<ClienteUsuarioResource> clienteUsuarios;
 	private List<TipoCultivoResource> tipoCultivos;
 	private List<DoencaResource> doencas;
 	private List<PragaResource> pragas;
@@ -42,23 +43,32 @@ public class SincronizacaoAndroidResource implements Serializable {
 		this.idDispositivo = idDispositivo;
 	}
 
-	public ClienteResource getClienteResource() {
-		return clienteResource;
-	}
 
-	public void setClienteResource(ClienteResource clienteResource) {
-		this.clienteResource = clienteResource;
-	}
+    public UsuarioResource getUsuario() {
+        return usuario;
+    }
 
-	public UsuarioResource getUsuarioResource() {
-		return usuarioResource;
-	}
+    public void setUsuario(UsuarioResource usuario) {
+        this.usuario = usuario;
+    }
 
-	public void setUsuarioResource(UsuarioResource usuarioResource) {
-		this.usuarioResource = usuarioResource;
-	}
+    public List<ClienteResource> getClientes() {
+        return clientes;
+    }
 
-	public List<TipoCultivoResource> getTipoCultivos() {
+    public void setClientes(List<ClienteResource> clientes) {
+        this.clientes = clientes;
+    }
+
+    public List<ClienteUsuarioResource> getClienteUsuarios() {
+        return clienteUsuarios;
+    }
+
+    public void setClienteUsuarios(List<ClienteUsuarioResource> clienteUsuarios) {
+        this.clienteUsuarios = clienteUsuarios;
+    }
+
+    public List<TipoCultivoResource> getTipoCultivos() {
 		return tipoCultivos;
 	}
 

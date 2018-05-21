@@ -4,6 +4,7 @@ import android.content.Context;
 
 import br.com.geodrone.SessionGeooDrone;
 import br.com.geodrone.model.Cliente;
+import br.com.geodrone.model.ClienteUsuario;
 import br.com.geodrone.model.Configuracao;
 import br.com.geodrone.model.Dispositivo;
 import br.com.geodrone.model.Doenca;
@@ -14,7 +15,9 @@ import br.com.geodrone.model.Usuario;
 import br.com.geodrone.oauth.APIClient;
 import br.com.geodrone.oauth.ServiceGenerator;
 import br.com.geodrone.oauth.dto.AccessToken;
+import br.com.geodrone.repository.ClienteUsuarioRepository;
 import br.com.geodrone.resource.ClienteResource;
+import br.com.geodrone.resource.ClienteUsuarioResource;
 import br.com.geodrone.resource.DoencaResource;
 import br.com.geodrone.resource.InstallerResource;
 import br.com.geodrone.resource.PontoColetaChuvaResource;
@@ -41,6 +44,8 @@ public class SincronizacaoToAndroidService extends GenericService {
     UsuarioService usuarioService = null;
     ClienteService clienteService = null;
     PontoColetaChuvaService pontoColetaChuvaService = null;
+    ClienteUsuarioService clienteUsuarioService = null;
+    ClienteUsuarioRepository clienteUsuarioRepository = null;
 
     private Context ctx = null;
     public SincronizacaoToAndroidService(Context ctx){
@@ -53,6 +58,8 @@ public class SincronizacaoToAndroidService extends GenericService {
         usuarioService = new UsuarioService(ctx);
         clienteService = new ClienteService(ctx);
         pontoColetaChuvaService = new PontoColetaChuvaService(ctx);
+        clienteUsuarioService = new ClienteUsuarioService(ctx);
+        clienteUsuarioRepository = new ClienteUsuarioRepository(ctx);
     }
 
     public void instalarAplicativo (String url, InstallerResource installerResource)  {
@@ -65,7 +72,6 @@ public class SincronizacaoToAndroidService extends GenericService {
         Dispositivo dispositivo = new Dispositivo();
         dispositivo.setId(installerResource.getIdDispositivo());
         dispositivo.setDescricao(installerResource.getDescDispositivo());
-        dispositivo.setIdCliente(accessToken.getIdCliente());
         dispositivo = dispositivoService.insert(dispositivo);
 
         SessionGeooDrone.setAttribute(SessionGeooDrone.CHAVE_DISPOSITIVO, dispositivo);
@@ -81,12 +87,20 @@ public class SincronizacaoToAndroidService extends GenericService {
     }
 
     public void sincronizar(SincronizacaoAndroidResource sincronizacaoAndroidResource){
-        if (sincronizacaoAndroidResource.getClienteResource() != null){
-            salvarCliente(sincronizacaoAndroidResource.getClienteResource());
+        if (sincronizacaoAndroidResource.getClientes() != null){
+            for (ClienteResource clienteResource : sincronizacaoAndroidResource.getClientes()) {
+                salvarCliente(clienteResource);
+            }
         }
 
-        if (sincronizacaoAndroidResource.getUsuarioResource() != null){
-            salvarUsuario(sincronizacaoAndroidResource.getUsuarioResource());
+        if (sincronizacaoAndroidResource.getClienteUsuarios() != null){
+            for (ClienteUsuarioResource clienteUsuarioResource : sincronizacaoAndroidResource.getClienteUsuarios()) {
+                salvarClienteUsuario(clienteUsuarioResource);
+            }
+        }
+
+        if (sincronizacaoAndroidResource.getUsuario() != null){
+            salvarUsuario(sincronizacaoAndroidResource.getUsuario());
         }
 
         if (sincronizacaoAndroidResource.getTipoCultivos() != null && !sincronizacaoAndroidResource.getTipoCultivos().isEmpty()){
@@ -175,6 +189,29 @@ public class SincronizacaoToAndroidService extends GenericService {
         }
 
         SessionGeooDrone.setAttribute(SessionGeooDrone.CHAVE_CLIENTE, cliente);
+    }
+
+    private void salvarClienteUsuario(ClienteUsuarioResource clienteUsuarioResource) {
+        boolean bInsert = false;
+
+        ClienteUsuario clienteUsuario = clienteUsuarioService.findById(clienteUsuarioResource.getIdClienteUsuario());
+        if (clienteUsuario == null) {
+            bInsert = true;
+            clienteUsuario = new ClienteUsuario();
+        }
+
+        clienteUsuario.setId(clienteUsuarioResource.getIdClienteUsuario());
+        clienteUsuario.setIdCliente(clienteUsuarioResource.getIdCliente());
+        clienteUsuario.setIdUsuario(clienteUsuarioResource.getIdUsuario());
+        clienteUsuario.setIndAtivo(clienteUsuarioResource.getIndAtivo());
+        clienteUsuario.setIndPadrao(clienteUsuarioResource.getIndPadrao());
+        
+        if (bInsert){
+            clienteUsuario = clienteUsuarioService.insert(clienteUsuario);
+        }else{
+            clienteUsuario = clienteUsuarioService.update(clienteUsuario);
+        }
+
     }
 
     private void salvarUsuario(UsuarioResource usuarioResource) {

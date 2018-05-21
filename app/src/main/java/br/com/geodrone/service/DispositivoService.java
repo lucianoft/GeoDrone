@@ -23,16 +23,13 @@ public class DispositivoService extends CrudService<Dispositivo, Long> {
         return dispositivoRepository;
     }
 
-    public Dispositivo findOneByCliente(Long idCliente){
-        return dispositivoRepository.findOneByCliente(idCliente);
-    }
 
     public boolean isPrimeiroLogin(){
         return dispositivoRepository.isPrimeiroLogin();
     }
 
-    public boolean isClienteJaPossuiDispositivo(Long idCliente){
-        return findOneByCliente(idCliente) != null;
+    public Dispositivo findOneDispositivo(){
+        return dispositivoRepository.findOneByCliente();
     }
 
     public void atualizarDtSincAndroid(){

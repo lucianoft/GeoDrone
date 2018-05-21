@@ -11,13 +11,14 @@ import org.greenrobot.greendao.annotation.Generated;
 
 import br.com.geodrone.model.api.AuditModel;
 import br.com.geodrone.model.api.ClientModel;
+import br.com.geodrone.model.api.DateRegistryModel;
 import br.com.geodrone.model.api.DeviceModel;
 import br.com.geodrone.model.api.LocationModel;
 import br.com.geodrone.model.api.UserModel;
 
 
 @Entity(generateConstructors = false, nameInDb ="GEO_ROTA_TRABALHO")
-public class RotaTrabalho extends GenericModel implements AuditModel, ClientModel, DeviceModel, UserModel, LocationModel {
+public class RotaTrabalho extends GenericModel implements AuditModel, ClientModel, DeviceModel, UserModel, LocationModel, DateRegistryModel {
 
 	@Id(autoincrement = true)
 	@Property(nameInDb = "ID_ROTA_TRABALHO_DISP")
@@ -35,6 +36,10 @@ public class RotaTrabalho extends GenericModel implements AuditModel, ClientMode
 
     @Property(nameInDb = "FLAG_OPERACAO_ROTA")
     private String flagOperacaoRota;
+
+	@Property(nameInDb = "DT_REGISTRO")
+	@NotNull
+	private Date dtRegistro;
 
 	@Property(nameInDb = "LATITUDE")
 	@NotNull
@@ -125,6 +130,18 @@ public class RotaTrabalho extends GenericModel implements AuditModel, ClientMode
     public void setFlagOperacaoRota(String flagOperacaoRota) {
         this.flagOperacaoRota = flagOperacaoRota;
     }
+
+	/** ***** from DateRegistryModel ****** */
+	@Override
+	public Date getDtRegistro() {
+		return dtRegistro;
+	}
+
+	@Override
+	public void setDtRegistro(Date dtRegistro) {
+		this.dtRegistro = dtRegistro;
+	}
+	/** ***** from DateRegistryModel ****** */
 
     /** ***** from UserDomain ****** */
 	@Override

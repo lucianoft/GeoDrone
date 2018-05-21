@@ -15,9 +15,14 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import br.com.geodrone.R;
+import br.com.geodrone.SessionGeooDrone;
 import br.com.geodrone.activity.utils.Constantes;
+import br.com.geodrone.model.Cliente;
+import br.com.geodrone.model.Usuario;
 import br.com.geodrone.ui.base.BaseActivity;
 import br.com.geodrone.ui.logout.LogoutActivity;
 import br.com.geodrone.ui.pontocoletachuva.PontoColetaChuvaActivity;
@@ -26,6 +31,7 @@ import br.com.geodrone.ui.registroimagem.RegistroImagemActivity;
 import br.com.geodrone.ui.registrochuva.RegistroPluviosidadeActivity;
 import br.com.geodrone.ui.monitoramento.MonitoramentoActivity;
 import br.com.geodrone.ui.reqpragas.RequisitarArquivoPragaActivity;
+import br.com.geodrone.ui.rotatrabalhokml.RotaTrabalhoKmlActivity;
 import br.com.geodrone.ui.sincronizacao.SincronizacaoActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,6 +42,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public static final int REQ_LOCATION_PERMISSION_REGISTRO_PLUVIOSIDADE = 1002;
     public static final int REQ_LOCATION_PERMISSION_MONITORAMENTO         = 1003;
     public static final int REQ_LOCATION_PERMISSION_FOTOS                 = 1004;
+    public static final int REQ_LOCATION_PERMISSION_ROTA_KM               = 1005;
 
     @BindView(R.id.main_activity_coordinator_layout)
     CoordinatorLayout coordinatorLayout;
@@ -45,6 +52,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @BindView(R.id.drawer_layout) DrawerLayout drawer;
 
     private Integer nSair =0;
+    private Menu menu;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,6 +77,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     public void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
+        configurarUsuarioCliente();
 
       }
 
@@ -89,12 +98,24 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 finishAffinity();
             }
         }
-
     }
 
+    private void configurarUsuarioCliente(){
+        Usuario usuario = SessionGeooDrone.getAttribute(SessionGeooDrone.CHAVE_USUARIO);
+        Cliente cliente = SessionGeooDrone.getAttribute(SessionGeooDrone.CHAVE_CLIENTE);
+
+        View header = navigationView.getHeaderView(0);
+        TextView textViewEmailUsuario = (TextView) header.findViewById(R.id.text_view_email_usuario);
+        textViewEmailUsuario.setText(usuario.getEmail());
+
+        TextView textViewNomeCliente = (TextView) header.findViewById(R.id.text_view_nome_cliente);
+        textViewNomeCliente.setText(cliente.getNomeRazaoSocial());
+
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
+        this.menu = menu;
         return true;
     }
 
@@ -141,6 +162,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             b.putString(br.com.geodrone.activity.utils.Constantes.CHAVE_UI_ORIGEM, Constantes.ACTIVITY_MAIN); //Your id
             intent.putExtras(b); //Put your id to your next Intent
             startActivity(intent);
+        }else if (id == R.id.menu_item_rota_trabalho){
+            getPermissionsGpsRotaMonitoramentoKml();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -220,6 +243,27 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             startActivity(i);
         }
     }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void getPermissionsGpsRotaMonitoramentoKml() {
+
+        if (!hasPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
+                || !hasPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {
+            requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
+                            Manifest.permission.ACCESS_FINE_LOCATION},
+                    -1);
+        }
+        if (!hasPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
+                || !hasPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {
+            requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
+                            Manifest.permission.ACCESS_FINE_LOCATION},
+                    REQ_LOCATION_PERMISSION_ROTA_KM);
+        }else{
+            Intent i = new Intent(this,RotaTrabalhoKmlActivity.class);
+            startActivity(i);
+        }
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         if (requestCode == REQ_LOCATION_PERMISSION_PONTO_PLUVIOSIDADE) {
@@ -240,6 +284,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         }else if (requestCode == REQ_LOCATION_PERMISSION_FOTOS) {
             if (grantResults.length > 1 && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                 Intent i = new Intent(this,RegistroImagemActivity.class);
+                startActivity(i);
+            }
+        }else if (requestCode == REQ_LOCATION_PERMISSION_ROTA_KM) {
+            if (grantResults.length > 1 && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                Intent i = new Intent(this,RotaTrabalhoKmlActivity.class);
                 startActivity(i);
             }
         }

@@ -32,8 +32,8 @@ public class DispositivoRepository extends CrudRepository<Dispositivo, Long>{
         return dispositivo == null;
     }
 
-    public Dispositivo findOneByCliente(Long idCliente) {
-        QueryBuilder<Dispositivo> qrBuilder = getCrudDao().queryBuilder().where(DispositivoDao.Properties.IdCliente.eq(idCliente)).limit(1);
+    public Dispositivo findOneByCliente() {
+        QueryBuilder<Dispositivo> qrBuilder = getCrudDao().queryBuilder().limit(1);
         return qrBuilder.unique();
     }
 }

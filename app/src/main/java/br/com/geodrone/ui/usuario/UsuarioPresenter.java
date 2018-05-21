@@ -88,7 +88,14 @@ public class UsuarioPresenter extends BasePresenter<UsuarioPresenter.View> {
             if (isOk) {
                 Cliente cliente = SessionGeooDrone.getAttribute(SessionGeooDrone.CHAVE_CLIENTE);
                 Long idCliente = cliente != null ? cliente.getId() : null;
-                Usuario usuario = new Usuario(null, nome, sobrenome, email, telefone, senha, FlagPerfilUsuario.ADM.value(), 1);
+                Usuario usuario = new Usuario();
+                usuario.setNome(nome);
+                usuario.setSobrenome(sobrenome);
+                usuario.setEmail(email);
+                usuario.setEmail(email);
+                usuario.setTelefone(telefone);
+                usuario.setSenha(senha);
+                usuario.setFlagPerfil(FlagPerfilUsuario.ADM.value());
                 usuario = usuarioService.insert(usuario);
 
                 view.onCadastroSucesso(activity.getString(R.string.msg_operacao_sucesso));

@@ -50,11 +50,13 @@ public class GeoDroneApplication extends Application {
         //DaoMaster.dropAllTables(db, true);
         daoSession = new DaoMaster(db).newSession();
         try{
+            daoSession.getUsuarioDao().loadAll();
             daoSession.getRotaTrabalhoDao().loadAll();
         }catch (Exception ex){
-            RotaTrabalhoDao.dropTable(db, true);
+            DaoMaster.dropAllTables(db, true);
         }
         DaoMaster.createAllTables(db, true);
+
 
         //setCursorWindowSize(10240);
         /*criarCliente();
@@ -74,6 +76,14 @@ public class GeoDroneApplication extends Application {
 
     }
 
+    private boolean isEncontrou(String[] columns, String name){
+        for (String column : columns){
+            if (column.toUpperCase().equals(name.toLowerCase())){
+                return true;
+            }
+        }
+        return false;
+    }
     private void criarConfiguracao() {
         if (daoSession.getConfiguracaoDao().loadAll().size() == 0) {
 
@@ -158,7 +168,6 @@ public class GeoDroneApplication extends Application {
         if (daoSession.getDispositivoDao().loadAll().size() == 0) {
             Dispositivo dispositivo = new Dispositivo();
             dispositivo.setId(1L);
-            dispositivo.setIdCliente(1L);
             //dispositivo.setDtSincronizacao(new Date());
             dispositivo.setDtInclusao(new Date());
             dispositivo.setDtAlteracao(new Date());
@@ -273,7 +282,7 @@ public class GeoDroneApplication extends Application {
         return praga;
     }
 
-    
+
     private void criarDoencas() {
         if (daoSession.getDoencaDao().loadAll().size() == 0) {
             daoSession.getDoencaDao().insert(criarDoenca(1L, "Acaro Rajado",	"Tetranychus urticae", 1L));

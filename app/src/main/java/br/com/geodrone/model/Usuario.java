@@ -43,8 +43,11 @@ public class Usuario extends GenericModel implements AuditModel, ActiveModel, Cl
 	@NotNull
 	private Long idCliente;
 
-	@Property(nameInDb = "IND_ACEITE")
-	private Integer indAceite;
+	@Property(nameInDb = "IND_ACEITE_GEODRONE")
+	private Integer indAceiteGeodrone;
+
+	@Property(nameInDb = "IND_ACEITE_GEOCLIMA")
+	private Integer indAceiteGeoClima;
 
 	@Property(nameInDb = "IND_ATIVO")
 	@NotNull
@@ -63,17 +66,6 @@ public class Usuario extends GenericModel implements AuditModel, ActiveModel, Cl
 	private Long versaoSistema;
 
 	public Usuario() {
-	}
-
-	public Usuario(Long id, String nome, String sobrenome, String email, String telefone, String senha, String flagPerfil, Integer indAtivo) {
-		this.id = id;
-		this.nome = nome;
-		this.sobrenome = sobrenome;
-		this.email = email;
-		this.telefone = telefone;
-		this.senha = senha;
-		this.flagPerfil = flagPerfil;
-		this.indAtivo = indAtivo;
 	}
 
 	public Long getId() {
@@ -136,12 +128,20 @@ public class Usuario extends GenericModel implements AuditModel, ActiveModel, Cl
 	}
 
 
-    public Integer getIndAceite() {
-        return indAceite;
+    public Integer getIndAceiteGeodrone() {
+        return indAceiteGeodrone;
     }
 
-    public void setIndAceite(Integer indAceite) {
-        this.indAceite = indAceite;
+    public void setIndAceiteGeodrone(Integer indAceiteGeodrone) {
+        this.indAceiteGeodrone = indAceiteGeodrone;
+    }
+
+    public Integer getIndAceiteGeoClima() {
+        return indAceiteGeoClima;
+    }
+
+    public void setIndAceiteGeoClima(Integer indAceiteGeoClima) {
+        this.indAceiteGeoClima = indAceiteGeoClima;
     }
 
     /** ***** from ActiveDomain ***** */

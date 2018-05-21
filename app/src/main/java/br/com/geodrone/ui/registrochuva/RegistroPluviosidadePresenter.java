@@ -10,6 +10,8 @@ import java.util.List;
 
 import br.com.geodrone.R;
 import br.com.geodrone.SessionGeooDrone;
+import br.com.geodrone.model.constantes.FlagOperacaoRota;
+import br.com.geodrone.model.constantes.FlagTipoRota;
 import br.com.geodrone.utils.LocationUtils;
 import br.com.geodrone.dto.ColetaPluviosidadeDto;
 import br.com.geodrone.model.Cliente;
@@ -65,8 +67,17 @@ public class RegistroPluviosidadePresenter extends BasePresenter<RegistroPluvios
 
     public void onChangeLocation(Location location){
         try {
-            if (locationOld != null || distancia(location) > 10f) {
+            if (locationOld == null) {
                 RotaTrabalho rotaTrabalho = new RotaTrabalho();
+                rotaTrabalho.setFlagTipo(FlagTipoRota.REGISTRO_CHUVA.value());
+                rotaTrabalho.setFlagOperacaoRota(FlagOperacaoRota.INICIO_REGISTRO_CHUVA.value());
+                rotaTrabalho.setLatitude(location.getLatitude());
+                rotaTrabalho.setLongitude(location.getLongitude());
+                rotaTrabalhoService.insert(rotaTrabalho);
+            }else if (distancia(location) > 10f) {
+                RotaTrabalho rotaTrabalho = new RotaTrabalho();
+                rotaTrabalho.setFlagTipo(FlagTipoRota.REGISTRO_CHUVA.value());
+                rotaTrabalho.setFlagOperacaoRota(FlagOperacaoRota.MEIO_REGISTRO_CHUVA.value());
                 rotaTrabalho.setLatitude(location.getLatitude());
                 rotaTrabalho.setLongitude(location.getLongitude());
                 rotaTrabalhoService.insert(rotaTrabalho);
@@ -184,4 +195,17 @@ public class RegistroPluviosidadePresenter extends BasePresenter<RegistroPluvios
         return messenger;
     }
 
+    public void salvarTerminoRota(Location location){
+        try {
+            if (location != null) {
+                RotaTrabalho rotaTrabalho = new RotaTrabalho();
+                rotaTrabalho.setFlagTipo(FlagTipoRota.REGISTRO_CHUVA.value());
+                rotaTrabalho.setFlagOperacaoRota(FlagOperacaoRota.FIM_REGISTRO_CHUVA.value());
+                rotaTrabalhoService.insert(rotaTrabalho);
+            }
+            Log.i(TAG, "Rota de trabalho grava com sucesso");
+        }catch (Exception ex){
+            Log.e(TAG, "Erro ao gravar Rota de trabalho", ex);
+        }
+    }
 }

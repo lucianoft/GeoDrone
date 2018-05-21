@@ -61,7 +61,7 @@ public class SincronizacaoPresenter extends BasePresenter<SincronizacaoPresenter
         try {
             AccessToken accessToken = PreferencesUtils.getAccessToken(this.activity);
             Configuracao configuracao = configuracaoService.getOneConfiguracao();
-            Dispositivo dispositivo = dispositivoService.findOneByCliente(accessToken.getIdCliente());
+            Dispositivo dispositivo = this.dispositivoService.findOneDispositivo();
             final String URL_BASE = configuracao.getUrl();
             APIClient client = ServiceGenerator.getInstance(URL_BASE).createServiceWithAuth(APIClient.class, accessToken);
             DateUtils dateUtils = new DateUtils();
@@ -103,7 +103,7 @@ public class SincronizacaoPresenter extends BasePresenter<SincronizacaoPresenter
         try {
             AccessToken accessToken = PreferencesUtils.getAccessToken(this.activity);
             Configuracao configuracao = configuracaoService.getOneConfiguracao();
-            Dispositivo dispositivo = dispositivoService.findOneByCliente(accessToken.getIdCliente());
+            Dispositivo dispositivo = this.dispositivoService.findOneDispositivo();
             final String URL_BASE = configuracao.getUrl();
             SincronizacaoWebResource sincronizacaoWebResource = sincronizacaoToWebService.sincronizarWeb();
             APIClient client = ServiceGenerator.getInstance(URL_BASE).createServiceWithAuth(APIClient.class, accessToken);

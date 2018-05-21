@@ -96,7 +96,7 @@ public class SincronizacaoToWebService extends GenericService {
 
         SincronizacaoWebResource sincronizacaoWebResource = new SincronizacaoWebResource();
         sincronizacaoWebResource.setUsuarioResource(getUsuario());
-        sincronizacaoWebResource.setClienteResource(getClienteResource());
+        //sincronizacaoWebResource.setClienteResource(getClienteResource());
         sincronizacaoWebResource.setPontoColetaChuvas(pontoColetaChuvas());
         sincronizacaoWebResource.setRegistroChuvas(getRegistroChuvaResources());
         sincronizacaoWebResource.setRegistroImagems(getRegistroImagemResources());

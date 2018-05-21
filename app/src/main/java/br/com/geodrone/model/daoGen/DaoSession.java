@@ -9,6 +9,7 @@ import org.greenrobot.greendao.identityscope.IdentityScopeType;
 import org.greenrobot.greendao.internal.DaoConfig;
 
 import br.com.geodrone.model.Cliente;
+import br.com.geodrone.model.ClienteUsuario;
 import br.com.geodrone.model.Configuracao;
 import br.com.geodrone.model.Dispositivo;
 import br.com.geodrone.model.Doenca;
@@ -24,6 +25,7 @@ import br.com.geodrone.model.TipoCultivo;
 import br.com.geodrone.model.Usuario;
 
 import br.com.geodrone.model.daoGen.ClienteDao;
+import br.com.geodrone.model.daoGen.ClienteUsuarioDao;
 import br.com.geodrone.model.daoGen.ConfiguracaoDao;
 import br.com.geodrone.model.daoGen.DispositivoDao;
 import br.com.geodrone.model.daoGen.DoencaDao;
@@ -48,6 +50,7 @@ import br.com.geodrone.model.daoGen.UsuarioDao;
 public class DaoSession extends AbstractDaoSession {
 
     private final DaoConfig clienteDaoConfig;
+    private final DaoConfig clienteUsuarioDaoConfig;
     private final DaoConfig configuracaoDaoConfig;
     private final DaoConfig dispositivoDaoConfig;
     private final DaoConfig doencaDaoConfig;
@@ -63,6 +66,7 @@ public class DaoSession extends AbstractDaoSession {
     private final DaoConfig usuarioDaoConfig;
 
     private final ClienteDao clienteDao;
+    private final ClienteUsuarioDao clienteUsuarioDao;
     private final ConfiguracaoDao configuracaoDao;
     private final DispositivoDao dispositivoDao;
     private final DoencaDao doencaDao;
@@ -83,6 +87,9 @@ public class DaoSession extends AbstractDaoSession {
 
         clienteDaoConfig = daoConfigMap.get(ClienteDao.class).clone();
         clienteDaoConfig.initIdentityScope(type);
+
+        clienteUsuarioDaoConfig = daoConfigMap.get(ClienteUsuarioDao.class).clone();
+        clienteUsuarioDaoConfig.initIdentityScope(type);
 
         configuracaoDaoConfig = daoConfigMap.get(ConfiguracaoDao.class).clone();
         configuracaoDaoConfig.initIdentityScope(type);
@@ -124,6 +131,7 @@ public class DaoSession extends AbstractDaoSession {
         usuarioDaoConfig.initIdentityScope(type);
 
         clienteDao = new ClienteDao(clienteDaoConfig, this);
+        clienteUsuarioDao = new ClienteUsuarioDao(clienteUsuarioDaoConfig, this);
         configuracaoDao = new ConfiguracaoDao(configuracaoDaoConfig, this);
         dispositivoDao = new DispositivoDao(dispositivoDaoConfig, this);
         doencaDao = new DoencaDao(doencaDaoConfig, this);
@@ -139,6 +147,7 @@ public class DaoSession extends AbstractDaoSession {
         usuarioDao = new UsuarioDao(usuarioDaoConfig, this);
 
         registerDao(Cliente.class, clienteDao);
+        registerDao(ClienteUsuario.class, clienteUsuarioDao);
         registerDao(Configuracao.class, configuracaoDao);
         registerDao(Dispositivo.class, dispositivoDao);
         registerDao(Doenca.class, doencaDao);
@@ -156,6 +165,7 @@ public class DaoSession extends AbstractDaoSession {
     
     public void clear() {
         clienteDaoConfig.clearIdentityScope();
+        clienteUsuarioDaoConfig.clearIdentityScope();
         configuracaoDaoConfig.clearIdentityScope();
         dispositivoDaoConfig.clearIdentityScope();
         doencaDaoConfig.clearIdentityScope();
@@ -173,6 +183,10 @@ public class DaoSession extends AbstractDaoSession {
 
     public ClienteDao getClienteDao() {
         return clienteDao;
+    }
+
+    public ClienteUsuarioDao getClienteUsuarioDao() {
+        return clienteUsuarioDao;
     }
 
     public ConfiguracaoDao getConfiguracaoDao() {

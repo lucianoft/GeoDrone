@@ -4,6 +4,8 @@ import android.location.Location;
 import android.util.Log;
 
 import br.com.geodrone.model.RotaTrabalho;
+import br.com.geodrone.model.constantes.FlagOperacaoRota;
+import br.com.geodrone.model.constantes.FlagTipoRota;
 import br.com.geodrone.service.RotaTrabalhoService;
 import br.com.geodrone.ui.base.BaseFragmentActivity;
 import br.com.geodrone.ui.base.BasePresenter;
@@ -39,8 +41,16 @@ public class MonitoramentoPresenter extends BasePresenter<MonitoramentoPresenter
 
     public void onChangeLocation(Location location){
         try {
-            if (locationOld != null || distancia(location) > 10f) {
+            if (locationOld == null){
                 RotaTrabalho rotaTrabalho = new RotaTrabalho();
+                rotaTrabalho.setFlagTipo(FlagTipoRota.MONITORAMENTO.value());
+                rotaTrabalho.setFlagOperacaoRota(FlagOperacaoRota.INICIO_MONITORAMENTO.value());
+                rotaTrabalhoService.insert(rotaTrabalho);
+
+            }else if( distancia(location) > 10f) {
+                RotaTrabalho rotaTrabalho = new RotaTrabalho();
+                rotaTrabalho.setFlagTipo(FlagTipoRota.MONITORAMENTO.value());
+                rotaTrabalho.setFlagOperacaoRota(FlagOperacaoRota.MEIO_MONITORAMENTO.value());
                 rotaTrabalhoService.insert(rotaTrabalho);
             }
             Log.i(TAG, "Rota de trabalho grava com sucesso");
@@ -49,5 +59,19 @@ public class MonitoramentoPresenter extends BasePresenter<MonitoramentoPresenter
         }
         locationOld = location;
 
+    }
+
+    public void salvarTerminoRota(Location location){
+        try {
+            if (location != null) {
+                RotaTrabalho rotaTrabalho = new RotaTrabalho();
+                rotaTrabalho.setFlagTipo(FlagTipoRota.MONITORAMENTO.value());
+                rotaTrabalho.setFlagOperacaoRota(FlagOperacaoRota.FIM_MONITORAMENTO.value());
+                rotaTrabalhoService.insert(rotaTrabalho);
+            }
+            Log.i(TAG, "Rota de trabalho grava com sucesso");
+        }catch (Exception ex){
+            Log.e(TAG, "Erro ao gravar Rota de trabalho", ex);
+        }
     }
 }

@@ -28,10 +28,9 @@ public class DispositivoDao extends AbstractDao<Dispositivo, Long> {
         public final static Property Descricao = new Property(1, String.class, "descricao", false, "DESCRICAO");
         public final static Property DtSincronizacaoAndroid = new Property(2, java.util.Date.class, "dtSincronizacaoAndroid", false, "DT_SINCRONIZACAO_ANDROID");
         public final static Property DtSincronizacaoErp = new Property(3, java.util.Date.class, "dtSincronizacaoErp", false, "DT_SINCRONIZACAO_ERP");
-        public final static Property IdCliente = new Property(4, Long.class, "idCliente", false, "ID_CLIENTE");
-        public final static Property DtInclusao = new Property(5, java.util.Date.class, "dtInclusao", false, "DT_INCLUSAO");
-        public final static Property DtAlteracao = new Property(6, java.util.Date.class, "dtAlteracao", false, "DT_ALTERACAO");
-        public final static Property VersaoSistema = new Property(7, Long.class, "versaoSistema", false, "VERSAO_SISTEMA");
+        public final static Property DtInclusao = new Property(4, java.util.Date.class, "dtInclusao", false, "DT_INCLUSAO");
+        public final static Property DtAlteracao = new Property(5, java.util.Date.class, "dtAlteracao", false, "DT_ALTERACAO");
+        public final static Property VersaoSistema = new Property(6, Long.class, "versaoSistema", false, "VERSAO_SISTEMA");
     }
 
 
@@ -51,10 +50,9 @@ public class DispositivoDao extends AbstractDao<Dispositivo, Long> {
                 "\"DESCRICAO\" TEXT," + // 1: descricao
                 "\"DT_SINCRONIZACAO_ANDROID\" INTEGER," + // 2: dtSincronizacaoAndroid
                 "\"DT_SINCRONIZACAO_ERP\" INTEGER," + // 3: dtSincronizacaoErp
-                "\"ID_CLIENTE\" INTEGER NOT NULL ," + // 4: idCliente
-                "\"DT_INCLUSAO\" INTEGER NOT NULL ," + // 5: dtInclusao
-                "\"DT_ALTERACAO\" INTEGER NOT NULL ," + // 6: dtAlteracao
-                "\"VERSAO_SISTEMA\" INTEGER NOT NULL );"); // 7: versaoSistema
+                "\"DT_INCLUSAO\" INTEGER NOT NULL ," + // 4: dtInclusao
+                "\"DT_ALTERACAO\" INTEGER NOT NULL ," + // 5: dtAlteracao
+                "\"VERSAO_SISTEMA\" INTEGER NOT NULL );"); // 6: versaoSistema
     }
 
     /** Drops the underlying database table. */
@@ -86,10 +84,9 @@ public class DispositivoDao extends AbstractDao<Dispositivo, Long> {
         if (dtSincronizacaoErp != null) {
             stmt.bindLong(4, dtSincronizacaoErp.getTime());
         }
-        stmt.bindLong(5, entity.getIdCliente());
-        stmt.bindLong(6, entity.getDtInclusao().getTime());
-        stmt.bindLong(7, entity.getDtAlteracao().getTime());
-        stmt.bindLong(8, entity.getVersaoSistema());
+        stmt.bindLong(5, entity.getDtInclusao().getTime());
+        stmt.bindLong(6, entity.getDtAlteracao().getTime());
+        stmt.bindLong(7, entity.getVersaoSistema());
     }
 
     @Override
@@ -115,10 +112,9 @@ public class DispositivoDao extends AbstractDao<Dispositivo, Long> {
         if (dtSincronizacaoErp != null) {
             stmt.bindLong(4, dtSincronizacaoErp.getTime());
         }
-        stmt.bindLong(5, entity.getIdCliente());
-        stmt.bindLong(6, entity.getDtInclusao().getTime());
-        stmt.bindLong(7, entity.getDtAlteracao().getTime());
-        stmt.bindLong(8, entity.getVersaoSistema());
+        stmt.bindLong(5, entity.getDtInclusao().getTime());
+        stmt.bindLong(6, entity.getDtAlteracao().getTime());
+        stmt.bindLong(7, entity.getVersaoSistema());
     }
 
     @Override
@@ -139,10 +135,9 @@ public class DispositivoDao extends AbstractDao<Dispositivo, Long> {
         entity.setDescricao(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setDtSincronizacaoAndroid(cursor.isNull(offset + 2) ? null : new java.util.Date(cursor.getLong(offset + 2)));
         entity.setDtSincronizacaoErp(cursor.isNull(offset + 3) ? null : new java.util.Date(cursor.getLong(offset + 3)));
-        entity.setIdCliente(cursor.getLong(offset + 4));
-        entity.setDtInclusao(new java.util.Date(cursor.getLong(offset + 5)));
-        entity.setDtAlteracao(new java.util.Date(cursor.getLong(offset + 6)));
-        entity.setVersaoSistema(cursor.getLong(offset + 7));
+        entity.setDtInclusao(new java.util.Date(cursor.getLong(offset + 4)));
+        entity.setDtAlteracao(new java.util.Date(cursor.getLong(offset + 5)));
+        entity.setVersaoSistema(cursor.getLong(offset + 6));
      }
     
     @Override

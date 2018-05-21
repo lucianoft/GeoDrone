@@ -98,6 +98,6 @@
         android:layout_below="@+id/text_input_layout_obs_praga"
         android:layout_marginTop="15dp"
         style="@style/CustomStyleButton"
-        android:text="@string/lb_btn_salvar" />
+        android:text="@string/lb_btn_salvar_registro_praga" />
 
 </RelativeLayout>

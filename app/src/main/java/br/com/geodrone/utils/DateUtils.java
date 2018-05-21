@@ -44,6 +44,19 @@ public class DateUtils {
 		return date;
 	}
 
+	public Date lastMinute(Date date) {
+		if (date != null) {
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(date);
+			cal.set(Calendar.HOUR_OF_DAY, 23);
+			cal.set(Calendar.MINUTE, 59);
+			cal.set(Calendar.SECOND, 59);
+			cal.set(Calendar.MILLISECOND, 0);
+			date = cal.getTime();
+		}
+		return date;
+	}
+
 	public boolean equals(Date date, Date anotherDate){
 		if (date == null){
 			return anotherDate == null;

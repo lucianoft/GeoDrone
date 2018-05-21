@@ -167,4 +167,10 @@ public class RegistroPluviosidadeActivity extends BaseMapFragmentActivity implem
         }
         return null;
     }
+
+    @Override
+    protected void onDestroy() {
+        registroPluviosidadePresenter.salvarTerminoRota(getMyLocation());
+        super.onDestroy();
+    }
 }

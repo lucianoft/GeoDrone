@@ -3,12 +3,12 @@ package br.com.geodrone.resource;
 import java.io.Serializable;
 import java.util.List;
 
-public class SincronizacaoWebResource implements Serializable {
+public class SincronizacaoWebResource {
 
-    private static final long serialVersionUID = 1L;
-
-    private ClienteResource clienteResource;
     private UsuarioResource usuarioResource;
+
+    private List<ClienteResource> clientes;
+    private List<ClienteUsuarioResource> clienteUsuarios;
 
     private List<PontoColetaChuvaResource> pontoColetaChuvas;
     private List<RegistroChuvaResource> registroChuvas;
@@ -17,12 +17,20 @@ public class SincronizacaoWebResource implements Serializable {
     private List<RegistroDoencaResource> registroDoencas;
     private List<RegistroCondicaoTempoResource> registroCondicaoTempos;
 
-    public ClienteResource getClienteResource() {
-        return clienteResource;
+    public List<ClienteResource> getClientes() {
+        return clientes;
     }
 
-    public void setClienteResource(ClienteResource clienteResource) {
-        this.clienteResource = clienteResource;
+    public void setClientes(List<ClienteResource> clientes) {
+        this.clientes = clientes;
+    }
+
+    public List<ClienteUsuarioResource> getClienteUsuarios() {
+        return clienteUsuarios;
+    }
+
+    public void setClienteUsuarios(List<ClienteUsuarioResource> clienteUsuarios) {
+        this.clienteUsuarios = clienteUsuarios;
     }
 
     public UsuarioResource getUsuarioResource() {

@@ -139,7 +139,7 @@ public class LoginPresenter extends BasePresenter<LoginPresenter.View> {
 
                     AccessToken accessToken = response.body();
                     PreferencesUtils.putAccessToken(activity, accessToken);
-                    if (!dispositivoService.isClienteJaPossuiDispositivo(accessToken.getIdCliente())){
+                    if (dispositivoService.isPrimeiroLogin()){
                         instalarDispositivo(url, accessToken);
                     }else{
                         configurarCache(accessToken);
@@ -194,7 +194,7 @@ public class LoginPresenter extends BasePresenter<LoginPresenter.View> {
         PreferencesUtils.putString(this.activity.getApplicationContext(), PreferencesUtils.CHAVE_SENHA_USUARIO, senha);
         PreferencesUtils.putUsuario(this.activity.getApplicationContext(), usuario);
         Cliente cliente = this.clienteService.findById(usuario.getIdCliente());
-        Dispositivo dispositivo = this.dispositivoService.findOneByCliente(usuario.getIdCliente());
+        Dispositivo dispositivo = this.dispositivoService.findOneDispositivo();
         SessionGeooDrone.setAttribute(SessionGeooDrone.CHAVE_USUARIO, usuario);
         SessionGeooDrone.setAttribute(SessionGeooDrone.CHAVE_CLIENTE, cliente);
         SessionGeooDrone.setAttribute(SessionGeooDrone.CHAVE_DISPOSITIVO, dispositivo);
@@ -203,7 +203,7 @@ public class LoginPresenter extends BasePresenter<LoginPresenter.View> {
 
     private void configurarCache(AccessToken accessToken){
         Cliente cliente = this.clienteService.findById(accessToken.getIdCliente());
-        Dispositivo dispositivo = this.dispositivoService.findOneByCliente(accessToken.getIdCliente());
+        Dispositivo dispositivo = this.dispositivoService.findOneDispositivo();
         Usuario usuario = this.usuarioService.findById(accessToken.getIdUsuario());
         SessionGeooDrone.setAttribute(SessionGeooDrone.CHAVE_USUARIO, usuario);
         SessionGeooDrone.setAttribute(SessionGeooDrone.CHAVE_CLIENTE, cliente);

@@ -171,4 +171,10 @@ public class MonitoramentoActivity extends BaseMapFragmentActivity implements Bo
     public void onErrorSemRegistroRegitroDoenca(String message) {
         this.showMessage(message);
     }
+
+    @Override
+    protected void onDestroy() {
+        monitoramentoPresenter.salvarTerminoRota(getMyLocation());
+        super.onDestroy();
+    }
 }
