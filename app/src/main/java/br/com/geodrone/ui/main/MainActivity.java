@@ -23,8 +23,11 @@ import br.com.geodrone.SessionGeooDrone;
 import br.com.geodrone.activity.utils.Constantes;
 import br.com.geodrone.model.Cliente;
 import br.com.geodrone.model.Usuario;
+import br.com.geodrone.ui.aceiteusuariogeoclima.AceiteUsuarioGeoclimaActivity;
+import br.com.geodrone.ui.aceiteusuariogeomonitora.AceiteUsuarioGeomonitoraActivity;
 import br.com.geodrone.ui.base.BaseActivity;
 import br.com.geodrone.ui.logout.LogoutActivity;
+import br.com.geodrone.ui.mensagem.MensagemActivity;
 import br.com.geodrone.ui.pontocoletachuva.PontoColetaChuvaActivity;
 import br.com.geodrone.ui.registrocondicaotempo.RegistroCondicoesTempoActivity;
 import br.com.geodrone.ui.registroimagem.RegistroImagemActivity;
@@ -36,7 +39,8 @@ import br.com.geodrone.ui.sincronizacao.SincronizacaoActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener /*BottomNavigationView.OnNavigationItemSelectedListener*/ {
+public class MainActivity extends BaseActivity
+                          implements NavigationView.OnNavigationItemSelectedListener /*BottomNavigationView.OnNavigationItemSelectedListener*/ {
 
     public static final int REQ_LOCATION_PERMISSION_PONTO_PLUVIOSIDADE    = 1001;
     public static final int REQ_LOCATION_PERMISSION_REGISTRO_PLUVIOSIDADE = 1002;
@@ -139,31 +143,55 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
+        //geoclima
         if (id == R.id.nav_registro_foto) {
-            getPermissionsCamera();
+            if (isAceiteGeoClima()) {
+                getPermissionsCamera();
+            }
         } else if (id == R.id.nav_ponto_coleta_chuva){
-            getPermissionsGpsPontoPluviosidade();
+            if (isAceiteGeoClima()) {
+                getPermissionsGpsPontoPluviosidade();
+            }
         } else if (id == R.id.nav_registro_condicoes_tempo){
-            Intent i = new Intent(this,RegistroCondicoesTempoActivity.class);
-            startActivity(i);
+            if (isAceiteGeoClima()) {
+                Intent i = new Intent(this, RegistroCondicoesTempoActivity.class);
+                startActivity(i);
+            }
         } else if (id == R.id.nav_registo_chuva) {
-            getPermissionsGpsRegistroPluviosidade();
-        }  else if (id == R.id.menu_item_monitoramento_campo) {
-            getPermissionsGpsMonitoramento();
-        } else if (id == R.id.menu_item_requisitar_arquivos_pragas){
-            Intent intent = new Intent(this, RequisitarArquivoPragaActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_mensagem) {
-
+            if (isAceiteGeoClima()) {
+                getPermissionsGpsRegistroPluviosidade();
+            }
+        }else if (id == R.id.nav_mensagem) {
+            if (isAceiteGeoClima()) {
+                Intent intent = new Intent(this, MensagemActivity.class);
+                startActivity(intent);
+            }
         } else if (id == R.id.nav_forum) {
-         } else if (id == R.id.nav_sincronizacao){
+        }
+
+        //geomonitora
+        else if (id == R.id.menu_item_monitoramento_campo) {
+            if (isAceiteGeomonitora()) {
+                getPermissionsGpsMonitoramento();
+            }
+        } else if (id == R.id.menu_item_requisitar_arquivos_pragas){
+            if (isAceiteGeomonitora()) {
+                Intent intent = new Intent(this, RequisitarArquivoPragaActivity.class);
+                startActivity(intent);
+            }
+        }  else if (id == R.id.menu_item_rota_trabalho){
+            if (isAceiteGeomonitora()) {
+                getPermissionsGpsRotaMonitoramentoKml();
+            }
+        }
+
+        //sincronizacao
+        else if (id == R.id.nav_sincronizacao){
             Intent intent = new Intent(this, SincronizacaoActivity.class);
             Bundle b = new Bundle();
             b.putString(br.com.geodrone.activity.utils.Constantes.CHAVE_UI_ORIGEM, Constantes.ACTIVITY_MAIN); //Your id
             intent.putExtras(b); //Put your id to your next Intent
             startActivity(intent);
-        }else if (id == R.id.menu_item_rota_trabalho){
-            getPermissionsGpsRotaMonitoramentoKml();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -182,7 +210,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     private void getPermissionsCamera() {
-
         if (!hasPermission(Manifest.permission.CAMERA)
                 || !hasPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 || !hasPermission(Manifest.permission.READ_EXTERNAL_STORAGE)) {
@@ -292,6 +319,28 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 startActivity(i);
             }
         }
+    }
+
+    private boolean isAceiteGeomonitora(){
+        Usuario usuario = SessionGeooDrone.getAttribute(SessionGeooDrone.CHAVE_USUARIO);
+        if (usuario.getIndAceiteGeomonitora() != null && usuario.getIndAceiteGeomonitora().intValue() == 1){
+            return true;
+        }else{
+            Intent i = new Intent(this,AceiteUsuarioGeomonitoraActivity.class);
+            startActivity(i);
+        }
+        return false;
+    }
+
+    private boolean isAceiteGeoClima(){
+        Usuario usuario = SessionGeooDrone.getAttribute(SessionGeooDrone.CHAVE_USUARIO);
+        if (usuario.getIndAceiteGeoClima() != null && usuario.getIndAceiteGeoClima().intValue() == 1){
+            return true;
+        }else{
+            Intent i = new Intent(this, AceiteUsuarioGeoclimaActivity.class);
+            startActivity(i);
+        }
+        return false;
     }
 
 }

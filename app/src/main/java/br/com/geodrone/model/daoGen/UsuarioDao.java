@@ -32,7 +32,7 @@ public class UsuarioDao extends AbstractDao<Usuario, Long> {
         public final static Property Senha = new Property(5, String.class, "senha", false, "SENHA");
         public final static Property FlagPerfil = new Property(6, String.class, "flagPerfil", false, "FLAG_PERFIL");
         public final static Property IdCliente = new Property(7, Long.class, "idCliente", false, "ID_CLIENTE");
-        public final static Property IndAceiteGeodrone = new Property(8, Integer.class, "indAceiteGeodrone", false, "IND_ACEITE_GEODRONE");
+        public final static Property IndAceiteGeomonitora = new Property(8, Integer.class, "indAceiteGeomonitora", false, "IND_ACEITE_GEOMONITORA");
         public final static Property IndAceiteGeoClima = new Property(9, Integer.class, "indAceiteGeoClima", false, "IND_ACEITE_GEOCLIMA");
         public final static Property IndAtivo = new Property(10, Integer.class, "indAtivo", false, "IND_ATIVO");
         public final static Property DtInclusao = new Property(11, java.util.Date.class, "dtInclusao", false, "DT_INCLUSAO");
@@ -61,7 +61,7 @@ public class UsuarioDao extends AbstractDao<Usuario, Long> {
                 "\"SENHA\" TEXT," + // 5: senha
                 "\"FLAG_PERFIL\" TEXT," + // 6: flagPerfil
                 "\"ID_CLIENTE\" INTEGER NOT NULL ," + // 7: idCliente
-                "\"IND_ACEITE_GEODRONE\" INTEGER," + // 8: indAceiteGeodrone
+                "\"IND_ACEITE_GEOMONITORA\" INTEGER," + // 8: indAceiteGeomonitora
                 "\"IND_ACEITE_GEOCLIMA\" INTEGER," + // 9: indAceiteGeoClima
                 "\"IND_ATIVO\" INTEGER NOT NULL ," + // 10: indAtivo
                 "\"DT_INCLUSAO\" INTEGER NOT NULL ," + // 11: dtInclusao
@@ -115,9 +115,9 @@ public class UsuarioDao extends AbstractDao<Usuario, Long> {
         }
         stmt.bindLong(8, entity.getIdCliente());
  
-        Integer indAceiteGeodrone = entity.getIndAceiteGeodrone();
-        if (indAceiteGeodrone != null) {
-            stmt.bindLong(9, indAceiteGeodrone);
+        Integer indAceiteGeomonitora = entity.getIndAceiteGeomonitora();
+        if (indAceiteGeomonitora != null) {
+            stmt.bindLong(9, indAceiteGeomonitora);
         }
  
         Integer indAceiteGeoClima = entity.getIndAceiteGeoClima();
@@ -170,9 +170,9 @@ public class UsuarioDao extends AbstractDao<Usuario, Long> {
         }
         stmt.bindLong(8, entity.getIdCliente());
  
-        Integer indAceiteGeodrone = entity.getIndAceiteGeodrone();
-        if (indAceiteGeodrone != null) {
-            stmt.bindLong(9, indAceiteGeodrone);
+        Integer indAceiteGeomonitora = entity.getIndAceiteGeomonitora();
+        if (indAceiteGeomonitora != null) {
+            stmt.bindLong(9, indAceiteGeomonitora);
         }
  
         Integer indAceiteGeoClima = entity.getIndAceiteGeoClima();
@@ -207,7 +207,7 @@ public class UsuarioDao extends AbstractDao<Usuario, Long> {
         entity.setSenha(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
         entity.setFlagPerfil(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
         entity.setIdCliente(cursor.getLong(offset + 7));
-        entity.setIndAceiteGeodrone(cursor.isNull(offset + 8) ? null : cursor.getInt(offset + 8));
+        entity.setIndAceiteGeomonitora(cursor.isNull(offset + 8) ? null : cursor.getInt(offset + 8));
         entity.setIndAceiteGeoClima(cursor.isNull(offset + 9) ? null : cursor.getInt(offset + 9));
         entity.setIndAtivo(cursor.getInt(offset + 10));
         entity.setDtInclusao(new java.util.Date(cursor.getLong(offset + 11)));

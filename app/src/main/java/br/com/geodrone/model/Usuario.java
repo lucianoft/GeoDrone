@@ -43,8 +43,8 @@ public class Usuario extends GenericModel implements AuditModel, ActiveModel, Cl
 	@NotNull
 	private Long idCliente;
 
-	@Property(nameInDb = "IND_ACEITE_GEODRONE")
-	private Integer indAceiteGeodrone;
+	@Property(nameInDb = "IND_ACEITE_GEOMONITORA")
+	private Integer indAceiteGeomonitora;
 
 	@Property(nameInDb = "IND_ACEITE_GEOCLIMA")
 	private Integer indAceiteGeoClima;
@@ -127,16 +127,15 @@ public class Usuario extends GenericModel implements AuditModel, ActiveModel, Cl
 		this.idCliente = idCliente;
 	}
 
+	public Integer getIndAceiteGeomonitora() {
+		return indAceiteGeomonitora;
+	}
 
-    public Integer getIndAceiteGeodrone() {
-        return indAceiteGeodrone;
-    }
+	public void setIndAceiteGeomonitora(Integer indAceiteGeomonitora) {
+		this.indAceiteGeomonitora = indAceiteGeomonitora;
+	}
 
-    public void setIndAceiteGeodrone(Integer indAceiteGeodrone) {
-        this.indAceiteGeodrone = indAceiteGeodrone;
-    }
-
-    public Integer getIndAceiteGeoClima() {
+	public Integer getIndAceiteGeoClima() {
         return indAceiteGeoClima;
     }
 

@@ -19,40 +19,47 @@ public class KmlUtils {
         content.append(kmlstart);
         content.append("<Document>");
         if (locationRotaDto.getLocationPointMonitoramentos() != null && !locationRotaDto.getLocationPointMonitoramentos().isEmpty()) {
-            for (LocationPointDto locationPoint : locationRotaDto.getLocationPointMonitoramentos()) {
-                content.append("<Placemark>" +
-                        "<name>Local</name>" +
-                        "<description>Teste</description>");
-                //content.append("<styleUrl>#transGreenPoly</styleUrl>");
-                content.append("<Point>");
-                content.append("<coordinates>");
-                content.append(numberUtils.toString(locationPoint.getLongitude()));
-                content.append(",");
-                content.append(numberUtils.toString(locationPoint.getLatitude()));
-                content.append(",0");
-                content.append(System.getProperty("line.separator"));
-                content.append("</coordinates>");
-                content.append("</Point>");
-                content.append("</Placemark>");
+            for (int i = 0; i < locationRotaDto.getLocationPointMonitoramentos().size(); i++) {
+                if (i % 5 == 0 || i == locationRotaDto.getLocationPointMonitoramentos().size() - 1) {
+                    LocationPointDto locationPoint = locationRotaDto.getLocationPointMonitoramentos().get(i);
+                    content.append("<Placemark>" +
+                            "<name>Local</name>" +
+                            "<description>Teste</description>");
+                    //content.append("<styleUrl>#transGreenPoly</styleUrl>");
+                    content.append("<Point>");
+                    content.append("<coordinates>");
+                    content.append(numberUtils.toString(locationPoint.getLongitude()));
+                    content.append(",");
+                    content.append(numberUtils.toString(locationPoint.getLatitude()));
+                    content.append(",0");
+                    content.append(System.getProperty("line.separator"));
+                    content.append("</coordinates>");
+                    content.append("</Point>");
+                    content.append("</Placemark>");
+                }
             }
         }
 
         if (locationRotaDto.getLocationPointRegChuvas() != null && !locationRotaDto.getLocationPointRegChuvas().isEmpty()) {
-            for (LocationPointDto locationPoint : locationRotaDto.getLocationPointRegChuvas()) {
-                content.append("<Placemark>" +
-                        "<name>Local</name>" +
-                        "<description>Teste</description>");
-                //content.append("<styleUrl>#transGreenPoly</styleUrl>");
-                content.append("<Point>");
-                content.append("<coordinates>");
-                content.append(numberUtils.toString(locationPoint.getLongitude()));
-                content.append(",");
-                content.append(numberUtils.toString(locationPoint.getLatitude()));
-                content.append(",0");
-                content.append(System.getProperty("line.separator"));
-                content.append("</coordinates>");
-                content.append("</Point>");
-                content.append("</Placemark>");
+            for (int i = 0; i < locationRotaDto.getLocationPointRegChuvas().size(); i++) {
+                if (i % 5 == 0 || i == locationRotaDto.getLocationPointRegChuvas().size() - 1) {
+                    LocationPointDto locationPoint = locationRotaDto.getLocationPointRegChuvas().get(i);
+
+                    content.append("<Placemark>" +
+                            "<name>Local</name>" +
+                            "<description>Teste</description>");
+                    //content.append("<styleUrl>#transGreenPoly</styleUrl>");
+                    content.append("<Point>");
+                    content.append("<coordinates>");
+                    content.append(numberUtils.toString(locationPoint.getLongitude()));
+                    content.append(",");
+                    content.append(numberUtils.toString(locationPoint.getLatitude()));
+                    content.append(",0");
+                    content.append(System.getProperty("line.separator"));
+                    content.append("</coordinates>");
+                    content.append("</Point>");
+                    content.append("</Placemark>");
+                }
             }
         }
 
@@ -62,7 +69,9 @@ public class KmlUtils {
                    /* "<styleUrl>#street</styleUrl>"+*/
             content.append("<LineString>");
             //content.append("<extrude>1</extrude>");
-            content.append("<tessellate>0</tessellate>");
+            content.append("<tessellate>1</tessellate>");
+            content.append("<altitudeMode>absolute</altitudeMode>");
+
             content.append("<coordinates>");
             for (LocationPointDto locationPoint : locationRotaDto.getLocationPointMonitoramentos()) {
                 content.append(numberUtils.toString(locationPoint.getLongitude()));
