@@ -37,7 +37,7 @@ public class KmlUtils {
             }
         }
 
-        if (locationRotaDto.getLocationPointMonitoramentos() != null && !locationRotaDto.getLocationPointRegChuvas().isEmpty()) {
+        if (locationRotaDto.getLocationPointRegChuvas() != null && !locationRotaDto.getLocationPointRegChuvas().isEmpty()) {
             for (LocationPointDto locationPoint : locationRotaDto.getLocationPointRegChuvas()) {
                 content.append("<Placemark>" +
                         "<name>Local</name>" +
@@ -102,65 +102,4 @@ public class KmlUtils {
         return content.toString();
     }
 
-    public static String writeFileKML(List<LocationPointDto> locationPoints) {
-        NumberUtils numberUtils = new NumberUtils();
-
-        StringBuilder content = new StringBuilder();
-        String kmlstart = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-                "<kml xmlns=\"http://www.opengis.net/kml/2.2\">";
-        content.append(kmlstart);
-        content.append("<Document>");
-        //content.append("<name>KmlFile</name>");
-
-
-        /*content.append("<Folder>");*/
-
-        for (LocationPointDto locationPoint: locationPoints) {
-            content.append("<Placemark>" +
-                    "<name>Local</name>" +
-                    "<description>Teste</description>");
-            //content.append("<styleUrl>#transGreenPoly</styleUrl>");
-            content.append("<Point>");
-            content.append("<coordinates>");
-            content.append(numberUtils.toString(locationPoint.getLongitude()));
-            content.append(",");
-            content.append(numberUtils.toString(locationPoint.getLatitude()));
-            content.append(",0");
-            content.append(System.getProperty("line.separator"));
-            content.append("</coordinates>");
-            content.append("</Point>");
-            content.append("<TimeSpan>");
-            content.append("<begin>1876-08-01</begin>");
-            content.append("</TimeSpan>");
-            content.append("</Placemark>");
-        }
-
-        //incluir linha
-
-        //<Snippet maxLines="0"></Snippet>
-        content.append("<Placemark>");
-        content.append("<Style><LineStyle><color>7f0000ff</color><width>8</width></LineStyle></Style>");
-               /* "<styleUrl>#street</styleUrl>"+*/
-        content.append("<LineString>");
-        //content.append("<extrude>1</extrude>");
-        content.append("<tessellate>0</tessellate>");
-        content.append("<coordinates>");
-        for (LocationPointDto locationPoint: locationPoints) {
-            content.append(numberUtils.toString(locationPoint.getLongitude()));
-            content.append(",");
-            content.append(numberUtils.toString(locationPoint.getLatitude()));
-            content.append(",0");
-            content.append(System.getProperty("line.separator"));
-        }
-        content.append("</coordinates>");
-        content.append("</LineString>");
-        content.append("</Placemark>");
-
-        //content.append("</Folder>");
-        content.append("</Document>");
-
-        String kmlend = "</kml>";
-        content.append(kmlend);
-        return content.toString();
-    }
 }
