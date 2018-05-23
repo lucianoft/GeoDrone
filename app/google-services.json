@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "601950052636",
+    "firebase_url": "https://endless-bank-196919.firebaseio.com",
+    "project_id": "endless-bank-196919",
+    "storage_bucket": "endless-bank-196919.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:601950052636:android:2b83186013c876b5",
+        "android_client_info": {
+          "package_name": "br.com.geodrone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "601950052636-4ulgkuhlu1n7p7f345hoifce6bm3851t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAx0yLdJe-mFcovB0sInhBe8xnEJtYqNfA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

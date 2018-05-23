@@ -130,7 +130,8 @@
         <activity android:name=".ui.aceiteusuariogeoclima.AceiteUsuarioGeoclimaActivity" />
         <activity android:name=".ui.reqpragas.RequisitarArquivoPragaActivity" />
         <activity android:name=".ui.rotatrabalhokml.RotaTrabalhoKmlActivity" />
-        <activity android:name=".ui.aceiteusuariogeomonitora.AceiteUsuarioGeomonitoraActivity"></activity>
+        <activity android:name=".ui.aceiteusuariogeomonitora.AceiteUsuarioGeomonitoraActivity" />
+        <activity android:name=".ui.forum.ForumActivity"></activity>
     </application>
 
 </manifest>

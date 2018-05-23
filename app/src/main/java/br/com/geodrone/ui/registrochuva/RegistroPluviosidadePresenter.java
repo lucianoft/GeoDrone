@@ -59,7 +59,7 @@ public class RegistroPluviosidadePresenter extends BasePresenter<RegistroPluvios
 
     private float distancia(Location location){
         float distancia = 0;
-        if (locationOld != null){
+        if (locationOld != null && location.hasAccuracy()){
             distancia = location.distanceTo(locationOld);
         }
         return distancia;
@@ -74,18 +74,18 @@ public class RegistroPluviosidadePresenter extends BasePresenter<RegistroPluvios
                 rotaTrabalho.setLatitude(location.getLatitude());
                 rotaTrabalho.setLongitude(location.getLongitude());
                 rotaTrabalhoService.insert(rotaTrabalho);
-            }else if (distancia(location) > 10f) {
+                Log.i(TAG, "Rota de trabalho grava com sucesso");
+            }else if (distancia(location) > 50f) {
                 RotaTrabalho rotaTrabalho = new RotaTrabalho();
                 rotaTrabalho.setFlagTipo(FlagTipoRota.REGISTRO_CHUVA.value());
                 rotaTrabalho.setFlagOperacaoRota(FlagOperacaoRota.MEIO_REGISTRO_CHUVA.value());
                 rotaTrabalho.setLatitude(location.getLatitude());
                 rotaTrabalho.setLongitude(location.getLongitude());
                 rotaTrabalhoService.insert(rotaTrabalho);
+                Log.i(TAG, "Rota de trabalho grava com sucesso");
             }
-            Log.i(TAG, "Rota de trabalho grava com sucesso");
         }catch (Exception ex){
-            Log.i(TAG, "Erro ao gravar Rota de trabalho");
-            Log.e(TAG, ex.toString(), ex);
+            Log.e(TAG, "Erro ao gravar Rota de trabalho", ex);
         }
         onShowPontoColeta(location);
         locationOld = location;
@@ -98,7 +98,6 @@ public class RegistroPluviosidadePresenter extends BasePresenter<RegistroPluvios
             double lng = location.getLongitude();
             LatLng locAtual = new LatLng(lat, lng);
         }
-
         ColetaPluviosidadeDto coletaPluviosidadeDto = LocationUtils.localLessDistance(location, this.coletaPluviosidadeDtos);
         if ( coletaPluviosidadeDto != null) {
             Location locationMenor = LocationUtils.createNewLocation(coletaPluviosidadeDto.getLatitude(), coletaPluviosidadeDto.getLongitude());

@@ -33,7 +33,7 @@ public class MonitoramentoPresenter extends BasePresenter<MonitoramentoPresenter
 
     private float distancia(Location location){
         float distancia = 0;
-        if (locationOld != null){
+        if (locationOld != null && location.hasAccuracy()){
             distancia = location.distanceTo(locationOld);
         }
         return distancia;
@@ -46,14 +46,14 @@ public class MonitoramentoPresenter extends BasePresenter<MonitoramentoPresenter
                 rotaTrabalho.setFlagTipo(FlagTipoRota.MONITORAMENTO.value());
                 rotaTrabalho.setFlagOperacaoRota(FlagOperacaoRota.INICIO_MONITORAMENTO.value());
                 rotaTrabalhoService.insert(rotaTrabalho);
-
-            }else if( distancia(location) > 10f) {
+                Log.i(TAG, "Rota de trabalho grava com sucesso");
+            }else if( distancia(location) > 50f) {
                 RotaTrabalho rotaTrabalho = new RotaTrabalho();
                 rotaTrabalho.setFlagTipo(FlagTipoRota.MONITORAMENTO.value());
                 rotaTrabalho.setFlagOperacaoRota(FlagOperacaoRota.MEIO_MONITORAMENTO.value());
                 rotaTrabalhoService.insert(rotaTrabalho);
+                Log.i(TAG, "Rota de trabalho grava com sucesso");
             }
-            Log.i(TAG, "Rota de trabalho grava com sucesso");
         }catch (Exception ex){
             Log.e(TAG, "Erro ao gravar Rota de trabalho", ex);
         }
