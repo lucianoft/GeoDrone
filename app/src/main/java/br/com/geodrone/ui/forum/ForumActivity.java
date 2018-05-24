@@ -29,6 +29,7 @@ import br.com.geodrone.R;
 
 public class ForumActivity extends AppCompatActivity {
 
+    public static final String MESSAGES_CHILD = "messages";
 
     private static final int SIGN_IN_REQUEST_CODE = 111;
     private FirebaseListAdapter<ChatMessage> adapter;
@@ -63,6 +64,7 @@ public class ForumActivity extends AppCompatActivity {
                 } else {
                     FirebaseDatabase.getInstance()
                             .getReference()
+                            .child(MESSAGES_CHILD)
                             .push()
                             .setValue(new ChatMessage(input.getText().toString(),
                                     FirebaseAuth.getInstance().getCurrentUser().getDisplayName(),
@@ -120,7 +122,7 @@ public class ForumActivity extends AppCompatActivity {
                 FirebaseDatabase.getInstance().getReference());*/
 
         //Suppose you want to retrieve "chats" in your Firebase DB:
-        Query query = FirebaseDatabase.getInstance().getReference();
+        Query query = FirebaseDatabase.getInstance().getReference().child(MESSAGES_CHILD);
 //The error said the constructor expected FirebaseListOptions - here you create them:
         FirebaseListOptions<ChatMessage> options = new FirebaseListOptions.Builder<ChatMessage>()
                 .setQuery(query, ChatMessage.class)
