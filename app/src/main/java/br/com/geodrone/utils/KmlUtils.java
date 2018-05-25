@@ -21,7 +21,7 @@ public class KmlUtils {
         content.append("<Document>");
         if (locationRotaDto.getLocationPointMonitoramentos() != null && !locationRotaDto.getLocationPointMonitoramentos().isEmpty()) {
             for (int i = 0; i < locationRotaDto.getLocationPointMonitoramentos().size(); i++) {
-                if (i % 5 == 0 || i == locationRotaDto.getLocationPointMonitoramentos().size() - 1) {
+                if (i % 2 == 0 || i == locationRotaDto.getLocationPointMonitoramentos().size() - 1) {
                     LocationPointDto locationPoint = locationRotaDto.getLocationPointMonitoramentos().get(i);
                     content.append("<Placemark>");
                     content.append(System.getProperty("line.separator"));
@@ -51,7 +51,7 @@ public class KmlUtils {
 
         if (locationRotaDto.getLocationPointRegChuvas() != null && !locationRotaDto.getLocationPointRegChuvas().isEmpty()) {
             for (int i = 0; i < locationRotaDto.getLocationPointRegChuvas().size(); i++) {
-                if (i % 5 == 0 || i == locationRotaDto.getLocationPointRegChuvas().size() - 1) {
+                if (i % 2 == 0 || i == locationRotaDto.getLocationPointRegChuvas().size() - 1) {
                     LocationPointDto locationPoint = locationRotaDto.getLocationPointRegChuvas().get(i);
 
                     content.append("<Placemark>");
@@ -80,22 +80,23 @@ public class KmlUtils {
             }
         }
 
-       /* if (locationRotaDto.getLocationPointMonitoramentos() != null && !locationRotaDto.getLocationPointMonitoramentos().isEmpty()) {
+        if (locationRotaDto.getLocationPointMonitoramentos() != null && !locationRotaDto.getLocationPointMonitoramentos().isEmpty()) {
             content.append("<Placemark>");
-            //content.append("<Style><LineStyle><color>#004080</color><width>8</width></LineStyle></Style>");
-                   *//* "<styleUrl>#street</styleUrl>"+*//*
-            content.append("<LineString>");
+              content.append("<LineString>");
             //content.append("<extrude>1</extrude>");
             content.append("<tessellate>1</tessellate>");
             content.append("<altitudeMode>absolute</altitudeMode>");
 
             content.append("<coordinates>");
-            for (LocationPointDto locationPoint : locationRotaDto.getLocationPointMonitoramentos()) {
-                content.append(numberUtils.toString(locationPoint.getLongitude()));
-                content.append(",");
-                content.append(numberUtils.toString(locationPoint.getLatitude()));
-                content.append(",0");
-                content.append(System.getProperty("line.separator"));
+            for (int i = 0; i < locationRotaDto.getLocationPointMonitoramentos().size(); i++) {
+                if (i % 2 == 0 || i == locationRotaDto.getLocationPointMonitoramentos().size() - 1) {
+                    LocationPointDto locationPoint = locationRotaDto.getLocationPointMonitoramentos().get(i);
+                    content.append(numberUtils.toString(locationPoint.getLongitude()));
+                    content.append(",");
+                    content.append(numberUtils.toString(locationPoint.getLatitude()));
+                    content.append(",0");
+                    content.append(System.getProperty("line.separator"));
+                }
             }
             content.append("</coordinates>");
             content.append("</LineString>");
@@ -104,23 +105,24 @@ public class KmlUtils {
 
         if (locationRotaDto.getLocationPointRegChuvas() != null && !locationRotaDto.getLocationPointRegChuvas().isEmpty()) {
             content.append("<Placemark>");
-            //content.append("<Style><LineStyle><color>#009933</color><width>8</width></LineStyle></Style>");
-                   *//* "<styleUrl>#street</styleUrl>"+*//*
             content.append("<LineString>");
             //content.append("<extrude>1</extrude>");
             content.append("<tessellate>0</tessellate>");
             content.append("<coordinates>");
-            for (LocationPointDto locationPoint : locationRotaDto.getLocationPointRegChuvas()) {
-                content.append(numberUtils.toString(locationPoint.getLongitude()));
-                content.append(",");
-                content.append(numberUtils.toString(locationPoint.getLatitude()));
-                content.append(",0");
-                content.append(System.getProperty("line.separator"));
+            for (int i = 0; i < locationRotaDto.getLocationPointRegChuvas().size(); i++) {
+                if (i % 2 == 0 || i == locationRotaDto.getLocationPointRegChuvas().size() - 1) {
+                    LocationPointDto locationPoint = locationRotaDto.getLocationPointRegChuvas().get(i);
+                    content.append(numberUtils.toString(locationPoint.getLongitude()));
+                    content.append(",");
+                    content.append(numberUtils.toString(locationPoint.getLatitude()));
+                    content.append(",0");
+                    content.append(System.getProperty("line.separator"));
+                }
             }
             content.append("</coordinates>");
             content.append("</LineString>");
             content.append("</Placemark>");
-        }*/
+        }
         //content.append("</Folder>");
         content.append("</Document>");
 
