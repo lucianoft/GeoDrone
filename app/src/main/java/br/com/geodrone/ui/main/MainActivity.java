@@ -26,6 +26,7 @@ import br.com.geodrone.model.Usuario;
 import br.com.geodrone.ui.aceiteusuariogeoclima.AceiteUsuarioGeoclimaActivity;
 import br.com.geodrone.ui.aceiteusuariogeomonitora.AceiteUsuarioGeomonitoraActivity;
 import br.com.geodrone.ui.base.BaseActivity;
+import br.com.geodrone.ui.forum.ForumGeodroneActivity;
 import br.com.geodrone.ui.forum.ForumActivity;
 import br.com.geodrone.ui.logout.LogoutActivity;
 import br.com.geodrone.ui.mensagem.MensagemActivity;
@@ -169,7 +170,7 @@ public class MainActivity extends BaseActivity
             }
         } else if (id == R.id.nav_forum) {
             if (isAceiteGeoClima()) {
-                Intent intent = new Intent(this, ForumActivity.class);
+                Intent intent = new Intent(this, ForumGeodroneActivity.class);
                 startActivity(intent);
             }
         }

@@ -22,7 +22,7 @@
 
     <!-- Open Chat -->
     <color name="openChatText">#47505d</color>
-    <color name="openChatNicknameOther">#3a414d</color>
+    <color name="openChatNicknameOther">#dab187</color>
     <color name="openChatNicknameMe">#00BCD4</color>
 
 
@@ -33,4 +33,6 @@
 
     <!-- The color of the divider and error text when enabled. -->
     <color name="widget_labelled_spinner_error">#FFDD2C00</color>
+
+    <color name="background">#e9e3dd</color>
 </resources>

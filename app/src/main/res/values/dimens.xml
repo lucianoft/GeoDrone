@@ -11,4 +11,9 @@
     <dimen name="nav_image">13sp</dimen>
 
     <dimen name="design_fab_image_size" tools:override="true">24dp</dimen>
+
+    <dimen name="size_avatar_toolbar">40dp</dimen>
+    <dimen name="spacing_double">16dp</dimen>
+    <dimen name="elevation_header">4dp</dimen>
+
 </resources>

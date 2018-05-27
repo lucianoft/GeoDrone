@@ -81,7 +81,7 @@ public class AceiteUsuarioGeomonitoraActivity extends BaseActivity implements Ac
     @Override
     public void onAceiteSucesso(String message) {
         hideLoading();
-        //Intent intent = new Intent(this, MainActivity.class);
+        //Intent intent = new Intent(this, Forum2Activity.class);
         //startActivity(intent);
         finish();
         super.onBackPressed();

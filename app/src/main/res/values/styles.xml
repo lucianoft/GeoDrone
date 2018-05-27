@@ -65,6 +65,15 @@
         <item name="windowFixedWidthMajor">90%</item>
         <item name="windowFixedWidthMinor">30%</item>
     </style>
+
+    <style name="FullScreen.TextAppearance.Title" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="FullScreen.TextAppearance.Title.Inverse" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
 </resources>
 
 <!--

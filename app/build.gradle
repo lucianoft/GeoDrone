@@ -75,5 +75,17 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    //IMAGE LOAD
+    //implementation 'com.github.bumptech.glide:glide:4.6.1'
+    //annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+
+
+    //CHAT UI
+    //compile 'com.github.hani-momanii:SuperNova-Emoji:1.1'
+    compile 'hani.momanii.supernova_emoji_library:supernova-emoji-library:0.0.2'
+    compile 'me.himanshusoni.chatmessageview:chat-message-view:1.0.3'
+
 }
 apply plugin: 'com.google.gms.google-services'

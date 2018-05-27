@@ -18,5 +18,8 @@ public interface Constantes {
     public static final String API_OAUTH_CLIENTSECRET = "geomobile";//"geomobile";
     public static final String API_OAUTH_GRANT_TYPE = "password";
 
+    public static final String CHAT_REFERENCE = "chatmodel";
+    public static final String CHAT_USER      = "users";
+
 
 }

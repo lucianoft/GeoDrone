@@ -24,17 +24,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import br.com.geodrone.R;
+import br.com.geodrone.ui.base.BaseActivity;
+import br.com.geodrone.ui.forum.adapter.ForumAdapter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ForumActivity extends AppCompatActivity {
+public class ForumActivity extends BaseActivity {
 
     private static final String TAG = ForumActivity.class.getName();
     public static final String MESSAGES_CHILD = "messages";
 
     private static final int SIGN_IN_REQUEST_CODE = 111;
-    private FirebaseListAdapter<ChatMessage> adapter;
-    private ListView listView;
     private String loggedInUserName = "";
 
     @BindView(R.id.recyclerView_forum) RecyclerView recyclerView;
@@ -66,6 +66,7 @@ public class ForumActivity extends AppCompatActivity {
         final EditText input = (EditText) findViewById(R.id.input);
 
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+
             // Start sign in/sign up activity
             startActivityForResult(AuthUI.getInstance()
                     .createSignInIntentBuilder()
@@ -174,5 +175,15 @@ public class ForumActivity extends AppCompatActivity {
 
         forumAdapter.notifyDataSetChanged();
         recyclerView.scrollToPosition(i);
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
     }
 }
