@@ -50,15 +50,14 @@
             android:layout_toRightOf="@+id/buttonEmoji"
             android:layout_toEndOf="@+id/buttonEmoji"
             emojicon:emojiconSize="28sp"/>
+
         <ImageView
             android:id="@+id/buttonMessage"
-            android:src="@android:drawable/ic_menu_send"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="4dp"
             android:layout_alignBottom="@+id/editTextMessage"
-            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            />
+            android:padding="4dp"
+            android:src="@android:drawable/ic_menu_send" />
     </RelativeLayout>
 </LinearLayout>

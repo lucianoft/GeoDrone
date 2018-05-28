@@ -1,6 +1,5 @@
 package br.com.geodrone.ui.forum.adapter;
 
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
@@ -10,17 +9,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.geodrone.R;
-import br.com.geodrone.ui.forum.ChatMessage;
 import br.com.geodrone.ui.forum.ForumGeodroneActivity;
-import br.com.geodrone.ui.forum.ForumActivity;
 import br.com.geodrone.ui.forum.model.ChatModel;
 import br.com.geodrone.utils.Util;
 import hani.momanii.supernova_emoji_library.Helper.EmojiconTextView;
@@ -118,16 +112,16 @@ public class ChatFirebaseAdapter extends RecyclerView.Adapter<ChatFirebaseAdapte
     public MyChatViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;
         if (viewType == RIGHT_MSG){
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message_right,parent,false);
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message_forum_right,parent,false);
             return new MyChatViewHolder(view);
         }else if (viewType == LEFT_MSG){
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message_left,parent,false);
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message_forum_left,parent,false);
             return new MyChatViewHolder(view);
         }else if (viewType == RIGHT_MSG_IMG){
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message_right_img,parent,false);
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message_forum_right_img,parent,false);
             return new MyChatViewHolder(view);
         }else{
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message_left_img,parent,false);
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message_forum_left_img,parent,false);
             return new MyChatViewHolder(view);
         }
     }

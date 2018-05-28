@@ -1,10 +1,12 @@
 package br.com.geodrone.oauth;
 
 import java.io.File;
+import java.util.List;
 
 import br.com.geodrone.oauth.dto.AccessToken;
 import br.com.geodrone.resource.ClienteResource;
 import br.com.geodrone.resource.InstallerResource;
+import br.com.geodrone.resource.MensagemResource;
 import br.com.geodrone.resource.SincronizacaoAndroidResource;
 import br.com.geodrone.resource.SincronizacaoWebResource;
 import br.com.geodrone.utils.Constantes;
@@ -52,7 +54,7 @@ public interface APIClient {
 
 
     @POST(Constantes.API_URL_PREFIXO + "cliente/cadastro-inicial")
-    public Call<ClienteResource> cadastrarCliente(@Body ClienteResource ClienteResource);
+    public Call<ClienteResource> cadastrarCliente(@Body ClienteResource clienteResource);
 
     @POST(Constantes.API_URL_PREFIXO + "sincronizacao/web")
     @Streaming
@@ -63,5 +65,12 @@ public interface APIClient {
     public Call<ResponseBody> findRelatorioRegistroPraga(@Path("idCliente") Long idCliente,
                                                          @Query("dtInicio") String dtInicio,
                                                          @Query("dtFim")    String dtFim);
+
+    @POST(Constantes.API_URL_PREFIXO + "mensagems/cadastro")
+    public Call<MensagemResource> insert(@Body MensagemResource mensagemResource);
+
+    @GET(Constantes.API_URL_PREFIXO + "mensagems/usuario-resource/{idUsuario}")
+    public Call<List<MensagemResource>> findAllMensagemsByUsuario(@Path("idUsuario") Long idUsuario);
+
 
 }

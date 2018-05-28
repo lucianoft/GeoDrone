@@ -74,7 +74,7 @@ public class CadastroClienteActivity extends BaseActivity implements CadastroCli
     @Override
     public void onCadastroSucesso(String message) {
         showMessage(message);
-        mProgress.hide();
+        hideLoading();
         finish();
         super.onBackPressed();
     }
@@ -82,7 +82,7 @@ public class CadastroClienteActivity extends BaseActivity implements CadastroCli
     @Override
     public void onCadastroError(String message) {
         showMessage(message);
-        mProgress.hide();
+        hideLoading();
     }
 
     @Override

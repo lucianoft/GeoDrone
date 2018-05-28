@@ -55,9 +55,9 @@ public class ForumAdapter extends RecyclerView.Adapter<ForumAdapter.ChatViewHold
     public ForumAdapter.ChatViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View root;
         if (viewType == USUARIO_LOGADO)
-            root = activity.getLayoutInflater().inflate(R.layout.item_out_message, viewGroup, false);
+            root = activity.getLayoutInflater().inflate(R.layout.item_message_out, viewGroup, false);
         else
-            root = activity.getLayoutInflater().inflate(R.layout.item_in_message, viewGroup, false);
+            root = activity.getLayoutInflater().inflate(R.layout.item_message_in, viewGroup, false);
 
         return new ChatViewHolder(root);
     }
