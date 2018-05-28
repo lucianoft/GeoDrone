@@ -34,14 +34,12 @@ public class MensagemAdapter extends RecyclerView.Adapter<MensagemAdapter.Mensag
     static final class MensagemViewHolder extends RecyclerView.ViewHolder {
 
         TextView messageText;
-        TextView messageUser;
         TextView messageTime;
 
         MensagemViewHolder(View view) {
             super(view);
 
             messageText = (TextView) view.findViewById(R.id.message_text);
-            messageUser = (TextView) view.findViewById(R.id.message_user);
             messageTime = (TextView) view.findViewById(R.id.message_time);
 
         }
@@ -73,7 +71,6 @@ public class MensagemAdapter extends RecyclerView.Adapter<MensagemAdapter.Mensag
         MensagemResource chatMessage = mContent.get(position);
         if (chatMessage != null) {
             holder.messageText.setText(chatMessage.getMensagem());
-            holder.messageUser.setText(null);
 
             holder.messageTime.setText(converteTimestamp(chatMessage.getDtRegistro().getTime()));
         }

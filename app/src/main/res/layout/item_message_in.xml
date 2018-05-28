@@ -23,14 +23,6 @@
         app:cmv_showArrow="true">
 
         <TextView
-            android:id="@+id/message_user"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:text="aaaaa"
-            android:textStyle="normal|bold" />
-
-        <TextView
             android:id="@+id/message_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -38,7 +30,7 @@
             android:layout_marginTop="5dp"
             android:text="dsfsdfds"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:textSize="18sp" />
 
     </me.himanshusoni.chatmessageview.ChatMessageView>
