@@ -33,14 +33,17 @@
         android:layout_height="wrap_content"
         android:padding="2dp">
                />
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/editTextMessage"
-            android:layout_toStartOf="@+id/buttonMessage"
-            android:layout_toRightOf="@+id/buttonEmoji"
-            android:layout_toEndOf="@+id/buttonEmoji"/>
+            android:layout_toStartOf="@+id/buttonMessage"/>
 
+
+        <!--
+                    android:layout_toRightOf="@+id/buttonEmoji"
+                    android:layout_toEndOf="@+id/buttonEmoji"-->
         <ImageView
             android:id="@+id/buttonMessage"
             android:layout_width="40dp"

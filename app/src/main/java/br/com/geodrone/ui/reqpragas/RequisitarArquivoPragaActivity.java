@@ -1,6 +1,15 @@
 package br.com.geodrone.ui.reqpragas;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.DatePicker;
@@ -14,12 +23,16 @@ import br.com.geodrone.R;
 import br.com.geodrone.ui.base.BaseActivity;
 import br.com.geodrone.ui.helper.GenericProgress;
 import br.com.geodrone.utils.DateUtils;
+import br.com.geodrone.utils.Download;
 import br.com.geodrone.utils.Messenger;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class RequisitarArquivoPragaActivity extends BaseActivity implements DatePickerDialog.OnDateSetListener, RequisitarArquivoPragaPresenter.View{
+
+    public static final String MESSAGE_PROGRESS = "message_progress";
+    private static final int PERMISSION_REQUEST_CODE = 1;
 
     public static final int FLAG_START_DATE = 0;
     public static final int FLAG_END_DATE = 1;
@@ -35,6 +48,8 @@ public class RequisitarArquivoPragaActivity extends BaseActivity implements Date
     private GenericProgress mProgress;
     private RequisitarArquivoPragaPresenter requisitarArquivoPragaPresenter;
 
+    private int REQ_STORAGE_PERMISSION = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +58,9 @@ public class RequisitarArquivoPragaActivity extends BaseActivity implements Date
 
         mProgress = new GenericProgress(this);
         requisitarArquivoPragaPresenter = new RequisitarArquivoPragaPresenter(this);
+        if (!hasPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            requestPermissionsSafely(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQ_STORAGE_PERMISSION);
+        }
     }
 
     @Override
@@ -101,16 +119,18 @@ public class RequisitarArquivoPragaActivity extends BaseActivity implements Date
 
     @Override
     public void onRelatorioSucesso(String message, File file) {
-
+        showMessage(message);
     }
 
     @Override
     public void onRelatorioError(String message) {
+        showMessage(message);
 
     }
 
     @Override
     public void onRelatorioError(Messenger messenger) {
+        showMessenger(messenger);
 
     }
 
@@ -123,4 +143,7 @@ public class RequisitarArquivoPragaActivity extends BaseActivity implements Date
     public void hideLoading() {
         mProgress.hide();
     }
+
+
 }
+

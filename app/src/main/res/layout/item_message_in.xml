@@ -33,6 +33,7 @@
             android:textColor="@android:color/black"
             android:textSize="18sp" />
 
+
     </me.himanshusoni.chatmessageview.ChatMessageView>
 
     <TextView

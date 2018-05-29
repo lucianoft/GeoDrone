@@ -1,13 +1,10 @@
 package br.com.geodrone.ui.mensagem;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.EditText;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
 
 import java.util.List;
 
@@ -17,8 +14,6 @@ import br.com.geodrone.activity.utils.Constantes;
 import br.com.geodrone.model.Usuario;
 import br.com.geodrone.resource.MensagemResource;
 import br.com.geodrone.ui.base.BaseActivity;
-import br.com.geodrone.ui.forum.adapter.ChatFirebaseAdapter;
-import br.com.geodrone.ui.forum.model.ChatModel;
 import br.com.geodrone.ui.helper.GenericProgress;
 import br.com.geodrone.utils.Messenger;
 import br.com.geodrone.utils.Util;
@@ -28,9 +23,19 @@ import butterknife.OnClick;
 
 public class MensagemActivity extends BaseActivity implements  MensagemPresenter.View {
 
-    @BindView(R.id.messagesRecyclerView)  RecyclerView mRecyclerView;
-    @BindView(R.id.editTextMessage)  EditText mMessageEditText;
 
+
+    @BindView(R.id.messagesRecyclerView)  RecyclerView mRecyclerView;
+    @BindView(R.id.editTextMessage)
+    EditText mMessageEditText;
+
+    @BindView(R.id.contentRoot)
+    View contentRoot;
+
+    /*@BindView(R.id.buttonEmoji)
+    ImageView btEmoji;
+    EmojIconActions emojIcon;
+*/
     private GenericProgress mProgress;
     private MensagemPresenter mensagemPresenter;
     private MensagemAdapter mensagemAdapter;
@@ -58,6 +63,9 @@ public class MensagemActivity extends BaseActivity implements  MensagemPresenter
             idUsuario = usuario.getId();
         }
         mensagemPresenter = new MensagemPresenter(this, idUsuario);
+
+        /*emojIcon = new EmojIconActions(this,contentRoot,mMessageEditText,btEmoji);
+        emojIcon.ShowEmojIcon();*/
 
     }
 

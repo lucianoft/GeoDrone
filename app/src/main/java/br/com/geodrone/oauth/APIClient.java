@@ -73,4 +73,5 @@ public interface APIClient {
     public Call<List<MensagemResource>> findAllMensagemsByUsuario(@Path("idUsuario") Long idUsuario);
 
 
+
 }

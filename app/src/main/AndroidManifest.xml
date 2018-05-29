@@ -131,7 +131,6 @@
         <activity android:name=".ui.forum.ForumActivity" />
         <activity android:name=".ui.forum.ForumGeodroneActivity" android:theme="@style/AppTheme"></activity>
         <activity android:name=".ui.forum.FullScreenImageActivity" android:theme="@style/AppTheme.NoActionBar"></activity>
-
     </application>
 
 </manifest>
