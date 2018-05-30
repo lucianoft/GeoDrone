@@ -41,13 +41,11 @@
                 android:id="@+id/menu_item_monitoramento_campo"
                 android:title="@string/menu_monitoramento" />
             <item
-                android:id="@+id/menu_item_requisitar_arquivos_pragas"
-                android:title="@string/menu_requisitar_arquivos_pragas" />
-
-            <item
                 android:id="@+id/menu_item_rota_trabalho"
                 android:title="@string/menu_rota_trabalho" />
-
+            <item
+                android:id="@+id/menu_item_requisitar_arquivos_pragas"
+                android:title="@string/menu_requisitar_arquivos_pragas" />
         </menu>
     </item>
 

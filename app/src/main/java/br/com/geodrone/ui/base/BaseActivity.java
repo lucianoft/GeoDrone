@@ -37,9 +37,15 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseErro
     public abstract void hideLoading();
 
     @Override
-    public void onError(String message){
-        hideLoading();
-        MessageUI.showMessage(this, message);
+    public void onError(final String message){
+        final BaseActivity this_ = this;
+        runOnUiThread(new Runnable() {
+            public void run() {
+                hideLoading();
+                MessageUI.showMessage(this_, message);
+            }
+        });
+
     }
 
     @Override
@@ -49,15 +55,26 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseErro
     }
 
     @Override
-    public void showMessage(String message){
-        MessageUI.showMessage(this, message);
+    public void showMessage(final String message){
+        final BaseActivity this_ = this;
+        runOnUiThread(new Runnable() {
+            public void run() {
+                MessageUI.showMessage(this_, message);
+            }
+        });
     }
 
     @Override
-    public void showMessenger(Messenger messenger){
+    public void showMessenger(final Messenger messenger){
+        final BaseActivity this_ = this;
+        runOnUiThread(new Runnable() {
+            public void run() {
+
         if (messenger != null && messenger.getMessages() != null)
             for (Message message : messenger.getMessages()) {
-                MessageUI.showMessage(this, message.getMsg());
+                MessageUI.showMessage(this_, message.getMsg());
             }
+            }
+        });
     }
 }

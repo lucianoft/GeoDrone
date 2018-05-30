@@ -144,9 +144,12 @@
     <string name="menu_sem_registro_de_praga">Sem Pragas</string>
     <string name="menu_registro_de_doenca">Registro Doenca</string>
     <string name="menu_sem_registro_de_doenca">Doenca</string>
+    <string name="menu_talhao">Talhão</string>
 
     <string name="action_settings">Settings</string>
     <string name="action_logout">Logout</string>
+    <string name="action_alterar_cliente">Alterar Cliente</string>
+    <string name="action_alterar_senha">Alterar Senha</string>
 
     <string name="sendPhoto">Photo Camera</string>
     <string name="sign_out">Sign Out</string>

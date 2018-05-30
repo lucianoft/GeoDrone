@@ -2,6 +2,7 @@ package br.com.geodrone.ui.reqpragas;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
+import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -119,7 +120,10 @@ public class RequisitarArquivoPragaActivity extends BaseActivity implements Date
 
     @Override
     public void onRelatorioSucesso(String message, File file) {
+
         showMessage(message);
+        this.startActivity(new Intent(DownloadManager.ACTION_VIEW_DOWNLOADS));
+        finish();
     }
 
     @Override

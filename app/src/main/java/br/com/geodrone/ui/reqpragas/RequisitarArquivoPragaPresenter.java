@@ -1,14 +1,16 @@
 package br.com.geodrone.ui.reqpragas;
 
-import android.content.Intent;
+import android.app.NotificationManager;
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Environment;
-import android.support.v4.content.LocalBroadcastManager;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationCompat.Builder;
 import android.util.Log;
 
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -26,7 +28,6 @@ import br.com.geodrone.utils.Constantes;
 import br.com.geodrone.utils.DateUtils;
 import br.com.geodrone.utils.Download;
 import br.com.geodrone.utils.ErrorUtils;
-import br.com.geodrone.utils.FileUtils;
 import br.com.geodrone.utils.Messenger;
 import br.com.geodrone.utils.PreferencesUtils;
 import okhttp3.ResponseBody;
@@ -52,6 +53,12 @@ public class RequisitarArquivoPragaPresenter extends BasePresenter<RequisitarArq
 
     }
 
+    private NotificationManager mNotifyManager;
+    private Builder mBuilder;
+    int id = 1;
+
+
+    private Downloader downloader;
     private int totalFileSize;
     private BaseActivity activity;
     private ConfiguracaoService configuracaoService;
@@ -84,9 +91,14 @@ public class RequisitarArquivoPragaPresenter extends BasePresenter<RequisitarArq
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (response.isSuccessful()) {
                         ResponseBody responseBody = response.body();
-                        downloadFile(responseBody, "imagem.jpg");
-                        //FileUtils.writeResponseBodyToDisk(responseBody, activity.getExternalFilesDir(null) + File.separator + "Future Studio Icon.png");
-                        view.onRelatorioSucesso(activity.getString(R.string.msg_operacao_sucesso), null);
+                        mNotifyManager = (NotificationManager) activity.getSystemService(Context.NOTIFICATION_SERVICE);
+                        mBuilder = new NotificationCompat.Builder(activity, "download_id");
+                        mBuilder.setContentTitle("Download")
+                                .setContentText("Download in progress")
+                                .setSmallIcon(R.drawable.ic_notifications_black_24dp);
+
+                        downloader = new Downloader();
+                        downloader.execute(responseBody);
                     } else {
                         Messenger messenger = ErrorUtils.parseError(response, finalURL_BASE);
                         view.onRelatorioError(messenger);
@@ -113,7 +125,14 @@ public class RequisitarArquivoPragaPresenter extends BasePresenter<RequisitarArq
             byte data[] = new byte[1024 * 4];
             long fileSize = body.contentLength();
             InputStream bis = new BufferedInputStream(body.byteStream(), 1024 * 8);
-            File outputFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), fileName);
+
+            File outputFile = null;
+            if (Environment.getExternalStorageState() == null) {
+                //create new file directory object
+                outputFile = new File(Environment.getDataDirectory(), fileName);
+            } else {
+                outputFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), fileName);
+            }
             OutputStream output = new FileOutputStream(outputFile);
             long total = 0;
             long startTime = System.currentTimeMillis();
@@ -141,10 +160,11 @@ public class RequisitarArquivoPragaPresenter extends BasePresenter<RequisitarArq
 
                 output.write(data, 0, count);
             }
-            onDownloadComplete();
             output.flush();
             output.close();
             bis.close();
+            view.onRelatorioSucesso(activity.getString(R.string.msg_operacao_sucesso), outputFile);
+
         }catch (Exception ex){
             view.onRelatorioError(ex.toString());
         }
@@ -152,7 +172,12 @@ public class RequisitarArquivoPragaPresenter extends BasePresenter<RequisitarArq
 
     private void sendNotification(Download download){
 
-     }
+        sendIntent(download);
+        mBuilder.setProgress(download.getTotalFileSize(),download.getProgress(),false);
+        mBuilder.setContentText("Downloading file "+ download.getCurrentFileSize() +"/"+totalFileSize +" MB");
+        mNotifyManager.notify(0, mBuilder.build());
+        downloader.onProgressUpdate(download.getProgress());
+    }
 
     private void sendIntent(Download download){
 
@@ -161,12 +186,40 @@ public class RequisitarArquivoPragaPresenter extends BasePresenter<RequisitarArq
         LocalBroadcastManager.getInstance(RequisitarArquivoService.this).sendBroadcast(intent);*/
     }
 
-    private void onDownloadComplete(){
+    private class Downloader extends AsyncTask<ResponseBody, Integer, Integer> {
 
-        Download download = new Download();
-        download.setProgress(100);
-        sendIntent(download);
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            // Displays the progress bar for the first time.
+            mBuilder.setProgress(100, 0, false);
+            mNotifyManager.notify(id, mBuilder.build());
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            mBuilder.setProgress(100, values[0], false);
+            mNotifyManager.notify(id, mBuilder.build());
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected Integer doInBackground(ResponseBody... params) {
+            downloadFile(params[0],  "Future Studio Icon.png");
+            return null;
+        }
 
 
+
+        @Override
+        protected void onPostExecute(Integer result) {
+            super.onPostExecute(result);
+            mBuilder.setContentText("Download completo");
+            // Removes the progress bar
+            mBuilder.setProgress(0, 0, false);
+            mNotifyManager.notify(id, mBuilder.build());
+
+        }
     }
 }

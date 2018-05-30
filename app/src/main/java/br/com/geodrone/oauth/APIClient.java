@@ -9,6 +9,7 @@ import br.com.geodrone.resource.InstallerResource;
 import br.com.geodrone.resource.MensagemResource;
 import br.com.geodrone.resource.SincronizacaoAndroidResource;
 import br.com.geodrone.resource.SincronizacaoWebResource;
+import br.com.geodrone.resource.UsuarioMensagemResource;
 import br.com.geodrone.utils.Constantes;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -71,6 +72,10 @@ public interface APIClient {
 
     @GET(Constantes.API_URL_PREFIXO + "mensagems/usuario-resource/{idUsuario}")
     public Call<List<MensagemResource>> findAllMensagemsByUsuario(@Path("idUsuario") Long idUsuario);
+
+
+    @GET(Constantes.API_URL_PREFIXO + "usuarios/all-mensagem-resource")
+    public Call<List<UsuarioMensagemResource>> findAllUsuariosMensagem();
 
 
 

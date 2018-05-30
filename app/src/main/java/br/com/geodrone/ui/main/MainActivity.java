@@ -30,6 +30,7 @@ import br.com.geodrone.ui.forum.ForumGeodroneActivity;
 import br.com.geodrone.ui.forum.ForumActivity;
 import br.com.geodrone.ui.logout.LogoutActivity;
 import br.com.geodrone.ui.mensagem.MensagemActivity;
+import br.com.geodrone.ui.mensagem.usuarios.MensagemUsuariosActivity;
 import br.com.geodrone.ui.pontocoletachuva.PontoColetaChuvaActivity;
 import br.com.geodrone.ui.registrocondicaotempo.RegistroCondicoesTempoActivity;
 import br.com.geodrone.ui.registroimagem.RegistroImagemActivity;
@@ -165,7 +166,7 @@ public class MainActivity extends BaseActivity
             }
         }else if (id == R.id.nav_mensagem) {
             if (isAceiteGeoClima()) {
-                Intent intent = new Intent(this, MensagemActivity.class);
+                Intent intent = new Intent(this, MensagemUsuariosActivity.class);
                 startActivity(intent);
             }
         } else if (id == R.id.nav_forum) {
