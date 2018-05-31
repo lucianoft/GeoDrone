@@ -23,6 +23,7 @@ import java.util.Date;
 import br.com.geodrone.R;
 import br.com.geodrone.ui.base.BaseActivity;
 import br.com.geodrone.ui.helper.GenericProgress;
+import br.com.geodrone.utils.ActivityUtils;
 import br.com.geodrone.utils.DateUtils;
 import br.com.geodrone.utils.Download;
 import br.com.geodrone.utils.Messenger;
@@ -122,7 +123,7 @@ public class RequisitarArquivoPragaActivity extends BaseActivity implements Date
     public void onRelatorioSucesso(String message, File file) {
 
         showMessage(message);
-        this.startActivity(new Intent(DownloadManager.ACTION_VIEW_DOWNLOADS));
+        ActivityUtils.openDownloads(this);
         finish();
     }
 

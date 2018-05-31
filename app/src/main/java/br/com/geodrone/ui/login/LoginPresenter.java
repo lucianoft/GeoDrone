@@ -5,6 +5,8 @@ import android.util.Log;
 
 import br.com.geodrone.R;
 import br.com.geodrone.SessionGeooDrone;
+import br.com.geodrone.crypt.Cryptography;
+import br.com.geodrone.crypt.KeyUtils;
 import br.com.geodrone.model.Cliente;
 import br.com.geodrone.model.Configuracao;
 import br.com.geodrone.model.Dispositivo;
@@ -90,6 +92,8 @@ public class LoginPresenter extends BasePresenter<LoginPresenter.View> {
             if (NetworkUtils.isNetworkConnected(activity)){
                 Configuracao configuracao = configuracaoService.getOneConfiguracao();
                 loginWeb(configuracao.getUrl(), login, senha);
+                Cryptography cryptography = Cryptography.getInstance(Cryptography.CRYPTO_CIPHER, KeyUtils.SECRET_KEY);
+                System.out.println(cryptography.encrypt(senha));
             }else{
                 loginAndroid(login, senha);
             }
