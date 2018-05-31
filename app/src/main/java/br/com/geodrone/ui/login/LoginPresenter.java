@@ -92,8 +92,6 @@ public class LoginPresenter extends BasePresenter<LoginPresenter.View> {
             if (NetworkUtils.isNetworkConnected(activity)){
                 Configuracao configuracao = configuracaoService.getOneConfiguracao();
                 loginWeb(configuracao.getUrl(), login, senha);
-                Cryptography cryptography = Cryptography.getInstance(Cryptography.CRYPTO_CIPHER, KeyUtils.SECRET_KEY);
-                System.out.println(cryptography.encrypt(senha));
             }else{
                 loginAndroid(login, senha);
             }
@@ -111,8 +109,14 @@ public class LoginPresenter extends BasePresenter<LoginPresenter.View> {
                 Usuario usuario = usuarioService.findByEmail(login);
                 if (usuario != null) {
 
-                    configurarCache(usuario, login, senha);
-                    view.onSuccessoLogin(activity.getString(R.string.msg_obr_login_sucesso));
+                    Cryptography cryptography = Cryptography.getInstance(Cryptography.CRYPTO_CIPHER, KeyUtils.SECRET_KEY);
+                    String senhaCrypto = cryptography.encrypt(senha);
+                    if (!usuario.getSenha().equals(senhaCrypto)){
+                        activity.onError(activity.getString(R.string.msg_inv_login));
+                    }else{
+                        configurarCache(usuario, login, senha);
+                        view.onSuccessoLogin(activity.getString(R.string.msg_obr_login_sucesso));
+                    }
                 } else {
                     activity.onError(activity.getString(R.string.msg_inv_login));
                 }

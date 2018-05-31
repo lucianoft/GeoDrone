@@ -28,6 +28,7 @@ import br.com.geodrone.ui.aceiteusuariogeomonitora.AceiteUsuarioGeomonitoraActiv
 import br.com.geodrone.ui.base.BaseActivity;
 import br.com.geodrone.ui.forum.ForumGeodroneActivity;
 import br.com.geodrone.ui.forum.ForumActivity;
+import br.com.geodrone.ui.helper.ActivityHelper;
 import br.com.geodrone.ui.logout.LogoutActivity;
 import br.com.geodrone.ui.mensagem.MensagemActivity;
 import br.com.geodrone.ui.mensagem.usuarios.MensagemUsuariosActivity;
@@ -135,6 +136,9 @@ public class MainActivity extends BaseActivity
         }else if (id == R.id.action_logout){
             Intent i = new Intent(this,LogoutActivity.class);
             startActivity(i);
+        }else  if (id == R.id.action_alterar_senha){
+            ActivityHelper activityHelper = new ActivityHelper();
+            activityHelper.alterarSenha(this);
         }
 
         return super.onOptionsItemSelected(item);

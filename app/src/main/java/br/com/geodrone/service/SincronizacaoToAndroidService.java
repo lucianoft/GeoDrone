@@ -222,14 +222,14 @@ public class SincronizacaoToAndroidService extends GenericService {
             usuario = new Usuario();
         }
 
-        String senha = PreferencesUtils.getString(ctx, PreferencesUtils.CHAVE_SENHA_USUARIO);
+        //String senha = PreferencesUtils.getString(ctx, PreferencesUtils.CHAVE_SENHA_USUARIO);
 
         usuario.setId(usuarioResource.getId());
         usuario.setNome(usuarioResource.getNome());
         usuario.setSobrenome(usuarioResource.getSobrenome());
         usuario.setEmail(usuarioResource.getEmail());
         usuario.setTelefone(usuarioResource.getTelefone());
-        usuarioResource.setSenha(senha);
+        usuarioResource.setSenha(usuarioResource.getSenha());
         usuario.setFlagPerfil(usuarioResource.getFlagPerfil());
         usuario.setIdCliente(usuarioResource.getIdCliente());
         usuario.setIndAtivo(usuarioResource.getIndAtivo());

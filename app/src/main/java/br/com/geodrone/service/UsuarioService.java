@@ -6,6 +6,7 @@ import android.content.Context;
 
 import java.util.List;
 
+import br.com.geodrone.SessionGeooDrone;
 import br.com.geodrone.model.Usuario;
 import br.com.geodrone.repository.CrudRepository;
 import br.com.geodrone.repository.UsuarioRepository;
@@ -25,5 +26,11 @@ public class UsuarioService extends CrudService<Usuario, Long> {
 
     public Usuario findByEmail(String email) {
         return usuarioRepository.findByEmail(email);
+    }
+
+    public void alterarSenha(Usuario usuario, String senha){
+        usuario.setSenha(senha);
+        usuario = usuarioRepository.update(usuario);
+        SessionGeooDrone.setAttribute(SessionGeooDrone.CHAVE_USUARIO, usuario);
     }
 }

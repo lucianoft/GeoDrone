@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 
 import br.com.geodrone.oauth.dto.AccessToken;
+import br.com.geodrone.resource.AlterarSenhaUsuarioResourse;
 import br.com.geodrone.resource.ClienteResource;
 import br.com.geodrone.resource.InstallerResource;
 import br.com.geodrone.resource.MensagemResource;
@@ -20,6 +21,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.Streaming;
@@ -76,6 +78,10 @@ public interface APIClient {
 
     @GET(Constantes.API_URL_PREFIXO + "usuarios/all-mensagem-resource")
     public Call<List<UsuarioMensagemResource>> findAllUsuariosMensagem();
+
+    @PUT(Constantes.API_URL_PREFIXO + "usuarios/{id}/alterar-senha")
+    public Call<Void> alterarSenhaUsuario(@Path("id") Long idUsuario,@Body AlterarSenhaUsuarioResourse alterarSenhaUsuarioResourse);
+
 
 
 

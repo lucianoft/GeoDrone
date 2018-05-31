@@ -140,10 +140,15 @@ public class ForumGeodroneActivity extends BaseActivity  implements View.OnClick
                 }*/
             //}
         }else if (requestCode == SIGN_IN_REQUEST_CODE){
-            String fotoUrl = mFirebaseUser.getPhotoUrl() != null ? mFirebaseUser.getPhotoUrl().toString() : null;
-            userModel = new UserModel(mFirebaseUser.getDisplayName(), fotoUrl, mFirebaseUser.getUid() );
-            cadastrarUsuario();
-            lerMessagensFirebase();
+            if (mFirebaseUser != null) {
+                String fotoUrl = mFirebaseUser.getPhotoUrl() != null ? mFirebaseUser.getPhotoUrl().toString() : null;
+                userModel = new UserModel(mFirebaseUser.getDisplayName(), fotoUrl, mFirebaseUser.getUid());
+                cadastrarUsuario();
+                lerMessagensFirebase();
+            }else{
+                finish();
+                super.onBackPressed();
+            }
         }
 
     }

@@ -74,6 +74,8 @@
     <string name="lbl_pressionarparasair">Pressione novamente para sair</string>
     <string name="lb_dt_inicio">Data Inicio</string>
     <string name="lb_dt_fim">Data Fim</string>
+    <string name="lb_alterar_senha">alterar_senha</string>
+
 
     <string name="lb_btn_salvar">Salvar</string>
     <string name="lb_btn_salvar_registro_praga">Salvar Registro Praga</string>

@@ -58,7 +58,8 @@ public abstract class Cryptography {
 	
 	public static void main(String[] args) {
 		try {
-            System.out.print(BCrypt.hashpw("@ngul@r0", BCrypt.gensalt()));
+			System.out.println(new BCryptPasswordEncoder().encode("@ngul@r0"));
+            System.out.println(BCrypt.hashpw("@ngul@r0", BCrypt.gensalt()));
 			Cryptography cryptography = Cryptography.getInstance(Cryptography.CRYPTO_CIPHER, KeyUtils.SECRET_KEY);
 			System.out.println(cryptography.encrypt("@ngul@r0"));
 		} catch (Exception e) {
