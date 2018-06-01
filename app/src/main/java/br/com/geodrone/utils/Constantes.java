@@ -11,8 +11,8 @@ public interface Constantes {
 
 
     // TODO Replace this with your own data
-    public static final String API_LOGIN_URL = "http://192.168.0.179:8080/geoodrone/";
-    //public static final String API_LOGIN_URL = "https://geoodrone-back.herokuapp.com";
+    //public static final String API_LOGIN_URL = "http://192.168.1.108:8080/geoodrone/";
+    public static final String API_LOGIN_URL = "https://geoodrone-back.herokuapp.com";
     public static final String API_URL_PREFIXO = "";
     public static final String API_OAUTH_CLIENTID = "mobileGeodrone";
     public static final String API_OAUTH_CLIENTSECRET = "geomobile";//"geomobile";

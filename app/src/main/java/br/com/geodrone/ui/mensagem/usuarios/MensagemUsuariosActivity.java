@@ -3,6 +3,7 @@ package br.com.geodrone.ui.mensagem.usuarios;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.EditText;
@@ -50,6 +51,8 @@ public class MensagemUsuariosActivity extends BaseActivity implements MensagemUs
         usuariosMensagemAdapter = new UsuariosMensagemAdapter();
         usuariosMensagemAdapter.setActivity(this);
         recyclerViewUsuarios.setAdapter(usuariosMensagemAdapter);
+        // Configurando um dividr entre linhas, para uma melhor visualização.
+        recyclerViewUsuarios.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
     }
 

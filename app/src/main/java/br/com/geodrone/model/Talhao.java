@@ -54,8 +54,10 @@ public class Talhao extends GenericModel implements AuditModel, ActiveModel, Dev
 	@NotNull
 	private Long idUsuarioReg;
 
+
 	public Talhao() {
 	}
+
 
 	public Long getId() {
 		return this.id;
@@ -192,7 +194,7 @@ public class Talhao extends GenericModel implements AuditModel, ActiveModel, Dev
 
 	@Override
 	public String toString() {
-		return (this.id == null ? "" : this.id.toString() );
+		return (this.descricao == null ? "" : this.descricao.toString() );
 	}
 	/** ***************************** */
 

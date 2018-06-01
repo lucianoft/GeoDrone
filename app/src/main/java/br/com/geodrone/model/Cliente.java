@@ -299,7 +299,7 @@ public class Cliente extends GenericModel implements AuditModel {
 
 	@Override
 	public String toString() {
-		return (this.id == null ? "" : this.id.toString() );
+		return (this.nomeRazaoSocial == null ? "" : this.nomeRazaoSocial.toString() );
 	}
 	/** ***************************** */
 

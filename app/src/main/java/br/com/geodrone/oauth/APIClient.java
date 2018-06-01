@@ -82,6 +82,8 @@ public interface APIClient {
     @PUT(Constantes.API_URL_PREFIXO + "usuarios/{id}/alterar-senha")
     public Call<Void> alterarSenhaUsuario(@Path("id") Long idUsuario,@Body AlterarSenhaUsuarioResourse alterarSenhaUsuarioResourse);
 
+    @POST(Constantes.API_URL_PREFIXO + "recuperar-senha")
+    public Call<Void> recuperarSenha(@Query("email") String email);
 
 
 

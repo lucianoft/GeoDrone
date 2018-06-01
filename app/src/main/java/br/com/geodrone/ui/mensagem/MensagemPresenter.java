@@ -83,7 +83,7 @@ public class MensagemPresenter extends BasePresenter<MensagemPresenter.View> {
         mensagem.setMensagem(msg);
         mensagem.setIdUsuario(idUsuario);
         mensagem.setFlagDestino(FlagDestinoMensagem.ADMINISTRADOR.value());
-        mensagem.setDtRegistro(new DateUtils().now());
+        mensagem.setDtRegistro(null);
         mensagem.setIdDispositivo(dispositivo.getId());
 
         return mensagem;

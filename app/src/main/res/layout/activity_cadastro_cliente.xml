@@ -39,7 +39,7 @@
                     style="@style/TextLabel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
+                    android:inputType="number"
                     android:hint="@string/lb_cpf_cnpj" />
             </android.support.design.widget.TextInputLayout>
 
@@ -82,7 +82,7 @@
                     style="@style/TextLabel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPhonetic"
+                    android:inputType="phone"
                     android:hint="@string/lb_telefone" />
             </android.support.design.widget.TextInputLayout>
 
@@ -95,7 +95,7 @@
                     style="@style/TextLabel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPhonetic"
+                    android:inputType="phone"
                     android:hint="@string/lb_celular" />
             </android.support.design.widget.TextInputLayout>
 

@@ -15,6 +15,7 @@ import android.widget.Toast;
 import br.com.geodrone.R;
 import br.com.geodrone.ui.base.BaseActivity;
 import br.com.geodrone.ui.cliente.CadastroClienteActivity;
+import br.com.geodrone.ui.helper.ActivityHelper;
 import br.com.geodrone.ui.helper.GenericProgress;
 import br.com.geodrone.ui.sincronizacao.SincronizacaoActivity;
 import br.com.geodrone.ui.usuario.CadatroUsuarioActivity;
@@ -145,4 +146,15 @@ public class LoginActivity extends BaseActivity implements LoginPresenter.View{
     public void hideLoading() {
         mProgress.hide();
     }
+
+    @OnClick(R.id.text_view_esqueci_minha_senha)
+    public void onClickEsqueciMinhaSenha() {
+        try{
+            ActivityHelper activityHelper = new ActivityHelper();
+            activityHelper.esqueciMinhaSenha(this);
+        }catch (Exception ex){
+            showMessage(ex.toString());
+        }
+    }
+
 }

@@ -134,13 +134,17 @@ public class MainActivity extends BaseActivity
         if (id == R.id.action_settings) {
             return true;
         }else if (id == R.id.action_logout){
+            finish();
             Intent i = new Intent(this,LogoutActivity.class);
             startActivity(i);
-        }else  if (id == R.id.action_alterar_senha){
+        }else if (id == R.id.action_alterar_senha){
             ActivityHelper activityHelper = new ActivityHelper();
             activityHelper.alterarSenha(this);
+        }else if (id == R.id.action_alterar_cliente){
+            ActivityHelper activityHelper = new ActivityHelper();
+            activityHelper.alterarCliente(this);
+            configurarUsuarioCliente();
         }
-
         return super.onOptionsItemSelected(item);
     }
 

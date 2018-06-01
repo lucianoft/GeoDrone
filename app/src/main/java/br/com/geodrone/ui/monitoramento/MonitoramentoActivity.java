@@ -14,6 +14,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 
 import br.com.geodrone.R;
+import br.com.geodrone.model.Talhao;
 import br.com.geodrone.ui.base.BaseMapFragmentActivity;
 import br.com.geodrone.ui.registrodoenca.RegistroDoencaActivity;
 import br.com.geodrone.ui.registrodoenca.RegistroSemDoenca;
@@ -77,6 +78,9 @@ public class MonitoramentoActivity extends BaseMapFragmentActivity implements Bo
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
+            case  R.id.menu_item_talhao:
+                monitoramentoPresenter.selecionarTalhao();
+                break;
             case R.id.menu_item_registrar_praga:
                 dialogConfirmPraga();
                 break;

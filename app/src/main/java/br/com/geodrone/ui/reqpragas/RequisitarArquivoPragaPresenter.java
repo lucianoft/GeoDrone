@@ -99,7 +99,10 @@ public class RequisitarArquivoPragaPresenter extends BasePresenter<RequisitarArq
 
                         downloader = new Downloader();
                         downloader.execute(responseBody);
-                    } else {
+                    }else if (response.code() == 500) {
+                        view.onRelatorioError(activity.getString(R.string.msg_erro_500));
+
+                    } else{
                         Messenger messenger = ErrorUtils.parseError(response, finalURL_BASE);
                         view.onRelatorioError(messenger);
                     }

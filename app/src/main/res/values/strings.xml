@@ -74,7 +74,10 @@
     <string name="lbl_pressionarparasair">Pressione novamente para sair</string>
     <string name="lb_dt_inicio">Data Inicio</string>
     <string name="lb_dt_fim">Data Fim</string>
-    <string name="lb_alterar_senha">alterar_senha</string>
+    <string name="lb_alterar_senha">Alterar Senha Usuario</string>
+    <string name="lb_alterar_cliente">Alterar Cliente</string>
+    <string name="lb_recuperar_senha">Recuperar Senha</string>
+    <string name="lb_talhao">Talhao</string>
 
 
     <string name="lb_btn_salvar">Salvar</string>
@@ -109,7 +112,9 @@
 
     <string name="msg_inv_login">Login Invalido</string>
     <string name="msg_operacao_sucesso">Operacao realizada com sucesso</string>
+    <string name="msg_nova_senha_enviada">Sua nova senha foi enviada para seu email</string>
     <string name="msg_erro_cadastrar_registro_doenca">Erro ao cadastrar registro de doenca</string>
+    <string name="msg_erro_500">Erro interno do servidor</string>
 
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
@@ -121,6 +126,7 @@
 
     <string name="lb_criar_usuario">Criar Usuario</string>
     <string name="lb_cadastrar_cliente">Cadastrar Cliente</string>
+    <string name="lb_esqueci_minha_senha">Esqueci minha senha</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
