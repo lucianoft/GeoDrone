@@ -129,14 +129,15 @@ public class RequisitarArquivoPragaPresenter extends BasePresenter<RequisitarArq
             long fileSize = body.contentLength();
             InputStream bis = new BufferedInputStream(body.byteStream(), 1024 * 8);
 
+            OutputStream output = null;
             File outputFile = null;
-            if (Environment.getExternalStorageState() == null) {
+           if (Environment.getExternalStorageState() == null) {
                 //create new file directory object
-                outputFile = new File(Environment.getDataDirectory(), fileName);
-            } else {
-                outputFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), fileName);
+                output = activity.openFileOutput(fileName, Context.MODE_PRIVATE);
+           } else {
+               outputFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), fileName);
+              output = new FileOutputStream(outputFile);
             }
-            OutputStream output = new FileOutputStream(outputFile);
             long total = 0;
             long startTime = System.currentTimeMillis();
             int timeCount = 1;
@@ -209,7 +210,7 @@ public class RequisitarArquivoPragaPresenter extends BasePresenter<RequisitarArq
 
         @Override
         protected Integer doInBackground(ResponseBody... params) {
-            downloadFile(params[0],  "Future Studio Icon.png");
+            downloadFile(params[0],  "relatorioPraga.pdf");
             return null;
         }
 

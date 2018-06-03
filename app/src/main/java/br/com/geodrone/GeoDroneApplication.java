@@ -58,6 +58,8 @@ public class GeoDroneApplication extends Application {
         }
 
         DaoMaster.createAllTables(db, true);
+        criarConfiguracao();
+
     }
 
     public void clearDatabase(String databaseName) {
@@ -65,7 +67,20 @@ public class GeoDroneApplication extends Application {
         Database db = helper.getWritableDb();
         daoSession = new DaoMaster(db).newSession();
         DaoMaster.createAllTables(db, true);
+    }
 
+    private void criarConfiguracao() {
+        if (daoSession.getConfiguracaoDao().loadAll().size() == 0) {
+
+            Configuracao configuracao = new Configuracao();
+            configuracao.setUrl(Constantes.API_LOGIN_URL);
+            configuracao.setDtInclusao(new Date());
+            configuracao.setDtAlteracao(new Date());
+            configuracao.setVersaoSistema(1L);
+
+            getDaoSession().getConfiguracaoDao().insert(configuracao);
+            SessionGeooDrone.setAttribute(SessionGeooDrone.CHAVE_URL_BASE, Constantes.API_LOGIN_URL);
+        }
     }
 
     public DaoSession getDaoSession() {

@@ -64,7 +64,7 @@ public interface APIClient {
     public Call<SincronizacaoWebResource> sincronizarWeb(@Body SincronizacaoWebResource sincronizacaoWebResource);
 
     @Streaming
-    @GET(Constantes.API_URL_PREFIXO + "registroPragas/cliente/{idCliente}/relatorio")
+    @GET(Constantes.API_URL_PREFIXO + "registro-pragas/cliente/{idCliente}/relatorio")
     public Call<ResponseBody> findRelatorioRegistroPraga(@Path("idCliente") Long idCliente,
                                                          @Query("dtInicio") String dtInicio,
                                                          @Query("dtFim")    String dtFim);

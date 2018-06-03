@@ -84,23 +84,12 @@ public class ServiceGenerator {
                 return chain.proceed(request);
             }
         };
-        //OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.addInterceptor(interceptor);
-        OkHttpClient client = httpClient.build();
-
         builder.client(httpClient.build());
         retrofit = builder.build();
 
         return retrofit.create(serviceClass);
-        /*if (!TextUtils.isEmpty(username)
-                && !TextUtils.isEmpty(password)) {
-            String authToken = Credentials.basic(username, password);
-
-            return createService(serviceClass, authToken);
-        }
-
-        return createService(serviceClass, null);*/
-    }
+      }
 
     public <S> S createService(
             Class<S> serviceClass, final String authToken) {
@@ -130,9 +119,7 @@ public class ServiceGenerator {
                 return chain.proceed(request);
             }
         };
-        //OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.addInterceptor(interceptor);
-        OkHttpClient client = httpClient.build();
         builder.client(httpClient.build());
         retrofit = builder.build();
 
