@@ -19,7 +19,10 @@ public class ErrorUtils {
         Messenger error;
 
         try {
-            if (response.code() == 404){
+            if (response.code() == 500){
+                error = new Messenger();
+                error.addError("Erro de conexão com serviço");
+            }else if (response.code() == 404){
                 error = new Messenger();
                 error.addError("Erro de conexão com serviço");
             }else {

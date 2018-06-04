@@ -85,6 +85,11 @@ public interface APIClient {
     @POST(Constantes.API_URL_PREFIXO + "recuperar-senha")
     public Call<Void> recuperarSenha(@Query("email") String email);
 
+    @Streaming
+    @GET(Constantes.API_URL_PREFIXO + "registroChuvas/cliente/{idCliente}/relatorio")
+    public Call<ResponseBody> findRelatorioRegistroChuva(@Path("idCliente") Long idCliente,
+                                                         @Query("dtInicio") String dtInicio,
+                                                         @Query("dtFim")    String dtFim);
 
 
 }

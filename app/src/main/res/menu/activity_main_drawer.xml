@@ -46,7 +46,10 @@
             <item
                 android:id="@+id/menu_item_requisitar_arquivos_pragas"
                 android:title="@string/menu_requisitar_arquivos_pragas" />
-        </menu>
+            <item
+                android:id="@+id/menu_item_relatorio_registro_chuva"
+                android:title="@string/menu_relatorio_registro_chuva" />
+            </menu>
     </item>
 
     <item android:title="@string/menu_configuracao">

@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.os.StrictMode;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
@@ -116,27 +117,34 @@ public class RequisitarArquivoPragaActivity extends BaseActivity implements Date
     @OnClick(R.id.btn_req_relatorio_praga)
     @Override
     public void onClickRelatorio() {
+        showLoading();
         requisitarArquivoPragaPresenter.gerarRelatorio(editTextDtInicio.getText().toString(), editTextDtFim.getText().toString());
     }
 
     @Override
     public void onRelatorioSucesso(String message, File file) {
 
+        hideLoading();
         showMessage(message);
-        ActivityUtils.openDownloads(this);
-        finish();
+        try {
+            ActivityUtils.openFile(this, file);
+        }catch (Exception ex){
+            onError(ex);
+        }
+        //ActivityUtils.openDownloads(this);
+        //finish();
     }
 
     @Override
     public void onRelatorioError(String message) {
         showMessage(message);
-
+        hideLoading();
     }
 
     @Override
     public void onRelatorioError(Messenger messenger) {
         showMessenger(messenger);
-
+        hideLoading();
     }
 
     @Override

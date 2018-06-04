@@ -16,6 +16,7 @@ import java.io.OutputStream;
 
 import br.com.geodrone.R;
 import br.com.geodrone.SessionGeooDrone;
+import br.com.geodrone.dto.DownloadFile;
 import br.com.geodrone.model.Cliente;
 import br.com.geodrone.model.Configuracao;
 import br.com.geodrone.oauth.APIClient;
@@ -53,11 +54,6 @@ public class RequisitarArquivoPragaPresenter extends BasePresenter<RequisitarArq
 
     }
 
-    private NotificationManager mNotifyManager;
-    private Builder mBuilder;
-    int id = 1;
-
-
     private Downloader downloader;
     private int totalFileSize;
     private BaseActivity activity;
@@ -74,6 +70,7 @@ public class RequisitarArquivoPragaPresenter extends BasePresenter<RequisitarArq
 
             dtInicio = dateUtils.format(dateUtils.parse(dtInicio, "dd/MM/yyyy"));
             dtFim    = dateUtils.format(dateUtils.parse(dtFim, "dd/MM/yyyy"));
+            final String fileName = "relatorioPraga" + System.currentTimeMillis() + ".pdf";
 
             Configuracao configuracao = configuracaoService.getOneConfiguracao();
             String URL_BASE = configuracao.getUrl();
@@ -91,14 +88,13 @@ public class RequisitarArquivoPragaPresenter extends BasePresenter<RequisitarArq
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (response.isSuccessful()) {
                         ResponseBody responseBody = response.body();
-                        mNotifyManager = (NotificationManager) activity.getSystemService(Context.NOTIFICATION_SERVICE);
-                        mBuilder = new NotificationCompat.Builder(activity, "download_id");
-                        mBuilder.setContentTitle("Download")
-                                .setContentText("Download in progress")
-                                .setSmallIcon(R.drawable.ic_notifications_black_24dp);
+
+                        DownloadFile downloadFile = new DownloadFile();
+                        downloadFile.setResponseBody(responseBody);
+                        downloadFile.setFileName(fileName);
 
                         downloader = new Downloader();
-                        downloader.execute(responseBody);
+                        downloader.execute(downloadFile);
                     }else if (response.code() == 500) {
                         view.onRelatorioError(activity.getString(R.string.msg_erro_500));
 
@@ -121,21 +117,20 @@ public class RequisitarArquivoPragaPresenter extends BasePresenter<RequisitarArq
     }
 
 
-    private void downloadFile(ResponseBody body, String fileName)  {
+    private void downloadFile(DownloadFile downloadFile)  {
 
         try {
             int count;
             byte data[] = new byte[1024 * 4];
-            long fileSize = body.contentLength();
-            InputStream bis = new BufferedInputStream(body.byteStream(), 1024 * 8);
+            long fileSize = downloadFile.getResponseBody().contentLength();
+            InputStream bis = new BufferedInputStream(downloadFile.getResponseBody().byteStream(), 1024 * 8);
 
             OutputStream output = null;
             File outputFile = null;
            if (Environment.getExternalStorageState() == null) {
-                //create new file directory object
-                output = activity.openFileOutput(fileName, Context.MODE_PRIVATE);
+                output = activity.openFileOutput(downloadFile.getFileName(), Context.MODE_PRIVATE);
            } else {
-               outputFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), fileName);
+               outputFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "/arquivos" + downloadFile.getFileName());
               output = new FileOutputStream(outputFile);
             }
             long total = 0;
@@ -155,10 +150,8 @@ public class RequisitarArquivoPragaPresenter extends BasePresenter<RequisitarArq
                 download.setTotalFileSize(totalFileSize);
 
                 if (currentTime > 1000 * timeCount) {
-
                     download.setCurrentFileSize((int) current);
                     download.setProgress(progress);
-                    sendNotification(download);
                     timeCount++;
                 }
 
@@ -174,55 +167,27 @@ public class RequisitarArquivoPragaPresenter extends BasePresenter<RequisitarArq
         }
     }
 
-    private void sendNotification(Download download){
 
-        sendIntent(download);
-        mBuilder.setProgress(download.getTotalFileSize(),download.getProgress(),false);
-        mBuilder.setContentText("Downloading file "+ download.getCurrentFileSize() +"/"+totalFileSize +" MB");
-        mNotifyManager.notify(0, mBuilder.build());
-        downloader.onProgressUpdate(download.getProgress());
-    }
-
-    private void sendIntent(Download download){
-
-      /*  Intent intent = new Intent(RequisitarArquivoPragaActivity.MESSAGE_PROGRESS);
-        intent.putExtra("download",download);
-        LocalBroadcastManager.getInstance(RequisitarArquivoService.this).sendBroadcast(intent);*/
-    }
-
-    private class Downloader extends AsyncTask<ResponseBody, Integer, Integer> {
+    private class Downloader extends AsyncTask<DownloadFile, Integer, Integer> {
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
-            // Displays the progress bar for the first time.
-            mBuilder.setProgress(100, 0, false);
-            mNotifyManager.notify(id, mBuilder.build());
         }
 
         @Override
         protected void onProgressUpdate(Integer... values) {
-            mBuilder.setProgress(100, values[0], false);
-            mNotifyManager.notify(id, mBuilder.build());
             super.onProgressUpdate(values);
         }
 
         @Override
-        protected Integer doInBackground(ResponseBody... params) {
-            downloadFile(params[0],  "relatorioPraga.pdf");
+        protected Integer doInBackground(DownloadFile... params) {
+            downloadFile(params[0]);
             return null;
         }
-
-
-
         @Override
         protected void onPostExecute(Integer result) {
             super.onPostExecute(result);
-            mBuilder.setContentText("Download completo");
-            // Removes the progress bar
-            mBuilder.setProgress(0, 0, false);
-            mNotifyManager.notify(id, mBuilder.build());
 
         }
     }

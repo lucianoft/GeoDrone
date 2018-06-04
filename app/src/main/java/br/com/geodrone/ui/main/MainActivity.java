@@ -23,6 +23,7 @@ import br.com.geodrone.SessionGeooDrone;
 import br.com.geodrone.activity.utils.Constantes;
 import br.com.geodrone.model.Cliente;
 import br.com.geodrone.model.Usuario;
+import br.com.geodrone.ui.RelatorioUiUtils;
 import br.com.geodrone.ui.aceiteusuariogeoclima.AceiteUsuarioGeoclimaActivity;
 import br.com.geodrone.ui.aceiteusuariogeomonitora.AceiteUsuarioGeomonitoraActivity;
 import br.com.geodrone.ui.base.BaseActivity;
@@ -189,14 +190,18 @@ public class MainActivity extends BaseActivity
             if (isAceiteGeomonitora()) {
                 getPermissionsGpsMonitoramento();
             }
-        } else if (id == R.id.menu_item_requisitar_arquivos_pragas){
+        }  else if (id == R.id.menu_item_rota_trabalho){
+            if (isAceiteGeomonitora()) {
+                getPermissionsGpsRotaMonitoramentoKml();
+            }
+        }else if (id == R.id.menu_item_requisitar_arquivos_pragas){
             if (isAceiteGeomonitora()) {
                 Intent intent = new Intent(this, RequisitarArquivoPragaActivity.class);
                 startActivity(intent);
             }
-        }  else if (id == R.id.menu_item_rota_trabalho){
+        }else if (id == R.id.menu_item_relatorio_registro_chuva){
             if (isAceiteGeomonitora()) {
-                getPermissionsGpsRotaMonitoramentoKml();
+                new RelatorioUiUtils(this).relatorioPluviosidade();
             }
         }
 
@@ -207,6 +212,7 @@ public class MainActivity extends BaseActivity
             b.putString(br.com.geodrone.activity.utils.Constantes.CHAVE_UI_ORIGEM, Constantes.ACTIVITY_MAIN); //Your id
             intent.putExtras(b); //Put your id to your next Intent
             startActivity(intent);
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
