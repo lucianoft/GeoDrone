@@ -72,10 +72,34 @@
             android:hint="@string/lb_qtd_doencas" />
     </android.support.design.widget.TextInputLayout>
 
+
+    <!--NEW LINE!-->
+    <LinearLayout
+        android:id="@+id/linear_layout_estagio_infestacao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_input_layout_qtde_doenca"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/lb_estagio_infestacao"
+            android:visibility="visible" />
+
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteEstagioInfestacao"
+            android:hint="@string/lb_pesquisar"
+            android:completionThreshold="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
     <!--  Observacao -->
     <android.support.design.widget.TextInputLayout
         android:id="@+id/text_input_layout_obs_doenca"
-        android:layout_below="@+id/text_input_layout_qtde_doenca"
+        android:layout_below="@+id/linear_layout_estagio_infestacao"
         style="@style/TextLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

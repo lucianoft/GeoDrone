@@ -3,9 +3,7 @@ package br.com.geodrone.resource;
 import java.io.Serializable;
 import java.util.List;
 
-public class SincronizacaoAndroidResource implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+public class SincronizacaoAndroidResource {
 
 	private Long idUsuario;
 	private Long idCliente;
@@ -18,6 +16,8 @@ public class SincronizacaoAndroidResource implements Serializable {
 	private List<DoencaResource> doencas;
 	private List<PragaResource> pragas;
 	private List<PontoColetaChuvaResource> pontoColetaChuvas;
+	private List<TipoDefensivoResource> tipoDefensivos;
+	private List<EstagioInfestacaoResource> estagioInfestacaos;
 
 	public Long getIdUsuario() {
 		return idUsuario;
@@ -99,4 +99,20 @@ public class SincronizacaoAndroidResource implements Serializable {
     public void setPontoColetaChuvas(List<PontoColetaChuvaResource> pontoColetaChuvas) {
         this.pontoColetaChuvas = pontoColetaChuvas;
     }
+
+	public List<TipoDefensivoResource> getTipoDefensivos() {
+		return tipoDefensivos;
+	}
+
+	public void setTipoDefensivos(List<TipoDefensivoResource> tipoDefensivos) {
+		this.tipoDefensivos = tipoDefensivos;
+	}
+
+	public List<EstagioInfestacaoResource> getEstagioInfestacaos() {
+		return estagioInfestacaos;
+	}
+
+	public void setEstagioInfestacaos(List<EstagioInfestacaoResource> estagioInfestacaos) {
+		this.estagioInfestacaos = estagioInfestacaos;
+	}
 }

@@ -8,9 +8,11 @@ import br.com.geodrone.model.ClienteUsuario;
 import br.com.geodrone.model.Configuracao;
 import br.com.geodrone.model.Dispositivo;
 import br.com.geodrone.model.Doenca;
+import br.com.geodrone.model.EstagioInfestacao;
 import br.com.geodrone.model.PontoColetaChuva;
 import br.com.geodrone.model.Praga;
 import br.com.geodrone.model.TipoCultivo;
+import br.com.geodrone.model.TipoDefensivo;
 import br.com.geodrone.model.Usuario;
 import br.com.geodrone.oauth.APIClient;
 import br.com.geodrone.oauth.ServiceGenerator;
@@ -19,11 +21,13 @@ import br.com.geodrone.repository.ClienteUsuarioRepository;
 import br.com.geodrone.resource.ClienteResource;
 import br.com.geodrone.resource.ClienteUsuarioResource;
 import br.com.geodrone.resource.DoencaResource;
+import br.com.geodrone.resource.EstagioInfestacaoResource;
 import br.com.geodrone.resource.InstallerResource;
 import br.com.geodrone.resource.PontoColetaChuvaResource;
 import br.com.geodrone.resource.PragaResource;
 import br.com.geodrone.resource.SincronizacaoAndroidResource;
 import br.com.geodrone.resource.TipoCultivoResource;
+import br.com.geodrone.resource.TipoDefensivoResource;
 import br.com.geodrone.resource.UsuarioResource;
 import br.com.geodrone.service.util.GenericService;
 import br.com.geodrone.utils.DateUtils;
@@ -46,6 +50,8 @@ public class SincronizacaoToAndroidService extends GenericService {
     PontoColetaChuvaService pontoColetaChuvaService = null;
     ClienteUsuarioService clienteUsuarioService = null;
     ClienteUsuarioRepository clienteUsuarioRepository = null;
+    TipoDefensivoService tipoDefensivoService = null;
+    EstagioInfestacaoService estagioInfestacaoService = null;
 
     private Context ctx = null;
     public SincronizacaoToAndroidService(Context ctx){
@@ -60,6 +66,8 @@ public class SincronizacaoToAndroidService extends GenericService {
         pontoColetaChuvaService = new PontoColetaChuvaService(ctx);
         clienteUsuarioService = new ClienteUsuarioService(ctx);
         clienteUsuarioRepository = new ClienteUsuarioRepository(ctx);
+        tipoDefensivoService = new TipoDefensivoService(ctx);
+        estagioInfestacaoService = new EstagioInfestacaoService(ctx);
     }
 
     public void instalarAplicativo (String url, InstallerResource installerResource)  {
@@ -109,6 +117,12 @@ public class SincronizacaoToAndroidService extends GenericService {
             }
         }
 
+        if (sincronizacaoAndroidResource.getTipoDefensivos() != null && !sincronizacaoAndroidResource.getTipoDefensivos().isEmpty()){
+            for (TipoDefensivoResource tipoDefensivoResource : sincronizacaoAndroidResource.getTipoDefensivos()) {
+                salvarTipoDefensivo(tipoDefensivoResource);
+            }
+        }
+        
         if (sincronizacaoAndroidResource.getPragas() != null && !sincronizacaoAndroidResource.getPragas().isEmpty()){
             for (PragaResource pragaResource : sincronizacaoAndroidResource.getPragas()) {
                 salvarPraga(pragaResource);
@@ -133,6 +147,12 @@ public class SincronizacaoToAndroidService extends GenericService {
             }
         }
 
+        if (sincronizacaoAndroidResource.getEstagioInfestacaos() != null && !sincronizacaoAndroidResource.getEstagioInfestacaos().isEmpty()){
+            for (EstagioInfestacaoResource estagioInfestacaoResource : sincronizacaoAndroidResource.getEstagioInfestacaos()) {
+                salvarEstagioInfestacao(estagioInfestacaoResource);
+            }
+        }
+
     }
 
     private void salvarTipoCultivo(TipoCultivoResource tipoCultivoResource) {
@@ -149,6 +169,43 @@ public class SincronizacaoToAndroidService extends GenericService {
             tipoCultivoService.insert(tipoCultivo);
         }else{
             tipoCultivoService.update(tipoCultivo);
+        }
+
+    }
+
+    private void salvarTipoDefensivo(TipoDefensivoResource tipoDefensivoResource) {
+        boolean bInsert = false;
+        TipoDefensivo tipoDefensivo = tipoDefensivoService.findById(tipoDefensivoResource.getId());
+        if (tipoDefensivo == null) {
+            bInsert = true;
+            tipoDefensivo = new TipoDefensivo();
+        }
+        tipoDefensivo.setId(tipoDefensivoResource.getId());
+        tipoDefensivo.setDescricao(tipoDefensivoResource.getDescricao());
+        tipoDefensivo.setIndAtivo(tipoDefensivoResource.getIndAtivo());
+        if (bInsert){
+            tipoDefensivoService.insert(tipoDefensivo);
+        }else{
+            tipoDefensivoService.update(tipoDefensivo);
+        }
+
+    }
+
+    private void salvarEstagioInfestacao(EstagioInfestacaoResource estagioInfestacaoResource) {
+        boolean bInsert = false;
+        EstagioInfestacao estagioInfestacao = estagioInfestacaoService.findById(estagioInfestacaoResource.getId());
+        if (estagioInfestacao == null) {
+            bInsert = true;
+            estagioInfestacao = new EstagioInfestacao();
+        }
+        estagioInfestacao.setId(estagioInfestacaoResource.getId());
+        estagioInfestacao.setCodigo(estagioInfestacaoResource.getCodigo());
+        estagioInfestacao.setDescricao(estagioInfestacaoResource.getDescricao());
+        estagioInfestacao.setIndAtivo(estagioInfestacaoResource.getIndAtivo());
+        if (bInsert){
+            estagioInfestacaoService.insert(estagioInfestacao);
+        }else{
+            estagioInfestacaoService.update(estagioInfestacao);
         }
 
     }

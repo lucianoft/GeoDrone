@@ -37,6 +37,9 @@ public class DaoMaster extends AbstractDaoMaster {
         TipoCultivoDao.createTable(db, ifNotExists);
         UsuarioDao.createTable(db, ifNotExists);
         TalhaoDao.createTable(db, ifNotExists);
+        EstagioInfestacaoDao.createTable(db, ifNotExists);
+        RegistroDefensivoDao.createTable(db, ifNotExists);
+        TipoDefensivoDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
@@ -57,6 +60,9 @@ public class DaoMaster extends AbstractDaoMaster {
         TipoCultivoDao.dropTable(db, ifExists);
         UsuarioDao.dropTable(db, ifExists);
         TalhaoDao.dropTable(db, ifExists);
+        EstagioInfestacaoDao.dropTable(db, ifExists);
+        RegistroDefensivoDao.dropTable(db, ifExists);
+        TipoDefensivoDao.dropTable(db, ifExists);
     }
 
     /**
@@ -91,6 +97,9 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(TipoCultivoDao.class);
         registerDaoClass(UsuarioDao.class);
         registerDaoClass(TalhaoDao.class);
+        registerDaoClass(EstagioInfestacaoDao.class);
+        registerDaoClass(RegistroDefensivoDao.class);
+        registerDaoClass(TipoDefensivoDao.class);
     }
 
     public DaoSession newSession() {

@@ -78,6 +78,9 @@
     <string name="lb_alterar_cliente">Alterar Cliente</string>
     <string name="lb_recuperar_senha">Recuperar Senha</string>
     <string name="lb_talhao">Talhao</string>
+    <string name="lb_estagio_infestacao">Estagio Infestacao</string>
+
+
 
 
     <string name="lb_btn_salvar">Salvar</string>

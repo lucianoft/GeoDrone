@@ -17,7 +17,7 @@ import br.com.geodrone.model.api.LocationModel;
 import br.com.geodrone.model.api.UserModel;
 
 
-@Entity(generateConstructors = false, nameInDb ="GEO_PONTO_COLETA_CHUVA")
+@Entity(generateConstructors = false, nameInDb = "GEO_PONTO_COLETA_CHUVA")
 public class PontoColetaChuva extends GenericModel implements AuditModel, ActiveModel, ClientModel, DeviceModel, UserModel, LocationModel {
 
 	@Id(autoincrement = true)

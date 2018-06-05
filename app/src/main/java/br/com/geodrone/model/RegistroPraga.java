@@ -33,6 +33,9 @@ public class RegistroPraga extends GenericModel implements AuditModel, ClientMod
 	@Property(nameInDb = "ID_PRAGA")
 	private Long idPraga;
 
+	@Property(nameInDb="ID_ESTAGIO_INFESTACAO")
+	private Long idEstagioInfestacao;
+
 	@Property(nameInDb = "ID_REGISTRO_PRAGA")
 	private Long idRegistroPraga;
 
@@ -104,7 +107,10 @@ public class RegistroPraga extends GenericModel implements AuditModel, ClientMod
 	}
 
 
-	public Long getIdRegistroPraga() {
+    public Long getIdEstagioInfestacao() {return idEstagioInfestacao;}
+    public void setIdEstagioInfestacao(Long idEstagioInfestacao) { this.idEstagioInfestacao = idEstagioInfestacao;}
+
+    public Long getIdRegistroPraga() {
 		return this.idRegistroPraga;
 	}
 	public void setIdRegistroPraga(Long idRegistroPraga) {

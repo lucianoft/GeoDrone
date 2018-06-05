@@ -28,16 +28,17 @@ public class RegistroPragaDao extends AbstractDao<RegistroPraga, Long> {
         public final static Property Qtde = new Property(1, Long.class, "qtde", false, "QTDE");
         public final static Property Observacao = new Property(2, String.class, "observacao", false, "OBSERVACAO");
         public final static Property IdPraga = new Property(3, Long.class, "idPraga", false, "ID_PRAGA");
-        public final static Property IdRegistroPraga = new Property(4, Long.class, "idRegistroPraga", false, "ID_REGISTRO_PRAGA");
-        public final static Property DtRegistro = new Property(5, java.util.Date.class, "dtRegistro", false, "DT_REGISTRO");
-        public final static Property IdCliente = new Property(6, Long.class, "idCliente", false, "ID_CLIENTE");
-        public final static Property Latitude = new Property(7, Double.class, "latitude", false, "LATITUDE");
-        public final static Property Longitude = new Property(8, Double.class, "longitude", false, "LONGITUDE");
-        public final static Property IdDispositivo = new Property(9, Long.class, "idDispositivo", false, "ID_DISPOSITIVO");
-        public final static Property DtInclusao = new Property(10, java.util.Date.class, "dtInclusao", false, "DT_INCLUSAO");
-        public final static Property DtAlteracao = new Property(11, java.util.Date.class, "dtAlteracao", false, "DT_ALTERACAO");
-        public final static Property VersaoSistema = new Property(12, Long.class, "versaoSistema", false, "VERSAO_SISTEMA");
-        public final static Property IdUsuarioReg = new Property(13, Long.class, "idUsuarioReg", false, "ID_USUARIO_REG");
+        public final static Property IdEstagioInfestacao = new Property(4, Long.class, "idEstagioInfestacao", false, "ID_ESTAGIO_INFESTACAO");
+        public final static Property IdRegistroPraga = new Property(5, Long.class, "idRegistroPraga", false, "ID_REGISTRO_PRAGA");
+        public final static Property DtRegistro = new Property(6, java.util.Date.class, "dtRegistro", false, "DT_REGISTRO");
+        public final static Property IdCliente = new Property(7, Long.class, "idCliente", false, "ID_CLIENTE");
+        public final static Property Latitude = new Property(8, Double.class, "latitude", false, "LATITUDE");
+        public final static Property Longitude = new Property(9, Double.class, "longitude", false, "LONGITUDE");
+        public final static Property IdDispositivo = new Property(10, Long.class, "idDispositivo", false, "ID_DISPOSITIVO");
+        public final static Property DtInclusao = new Property(11, java.util.Date.class, "dtInclusao", false, "DT_INCLUSAO");
+        public final static Property DtAlteracao = new Property(12, java.util.Date.class, "dtAlteracao", false, "DT_ALTERACAO");
+        public final static Property VersaoSistema = new Property(13, Long.class, "versaoSistema", false, "VERSAO_SISTEMA");
+        public final static Property IdUsuarioReg = new Property(14, Long.class, "idUsuarioReg", false, "ID_USUARIO_REG");
     }
 
 
@@ -57,16 +58,17 @@ public class RegistroPragaDao extends AbstractDao<RegistroPraga, Long> {
                 "\"QTDE\" INTEGER," + // 1: qtde
                 "\"OBSERVACAO\" TEXT," + // 2: observacao
                 "\"ID_PRAGA\" INTEGER," + // 3: idPraga
-                "\"ID_REGISTRO_PRAGA\" INTEGER," + // 4: idRegistroPraga
-                "\"DT_REGISTRO\" INTEGER NOT NULL ," + // 5: dtRegistro
-                "\"ID_CLIENTE\" INTEGER NOT NULL ," + // 6: idCliente
-                "\"LATITUDE\" REAL NOT NULL ," + // 7: latitude
-                "\"LONGITUDE\" REAL NOT NULL ," + // 8: longitude
-                "\"ID_DISPOSITIVO\" INTEGER NOT NULL ," + // 9: idDispositivo
-                "\"DT_INCLUSAO\" INTEGER NOT NULL ," + // 10: dtInclusao
-                "\"DT_ALTERACAO\" INTEGER NOT NULL ," + // 11: dtAlteracao
-                "\"VERSAO_SISTEMA\" INTEGER NOT NULL ," + // 12: versaoSistema
-                "\"ID_USUARIO_REG\" INTEGER NOT NULL );"); // 13: idUsuarioReg
+                "\"ID_ESTAGIO_INFESTACAO\" INTEGER," + // 4: idEstagioInfestacao
+                "\"ID_REGISTRO_PRAGA\" INTEGER," + // 5: idRegistroPraga
+                "\"DT_REGISTRO\" INTEGER NOT NULL ," + // 6: dtRegistro
+                "\"ID_CLIENTE\" INTEGER NOT NULL ," + // 7: idCliente
+                "\"LATITUDE\" REAL NOT NULL ," + // 8: latitude
+                "\"LONGITUDE\" REAL NOT NULL ," + // 9: longitude
+                "\"ID_DISPOSITIVO\" INTEGER NOT NULL ," + // 10: idDispositivo
+                "\"DT_INCLUSAO\" INTEGER NOT NULL ," + // 11: dtInclusao
+                "\"DT_ALTERACAO\" INTEGER NOT NULL ," + // 12: dtAlteracao
+                "\"VERSAO_SISTEMA\" INTEGER NOT NULL ," + // 13: versaoSistema
+                "\"ID_USUARIO_REG\" INTEGER NOT NULL );"); // 14: idUsuarioReg
     }
 
     /** Drops the underlying database table. */
@@ -99,19 +101,24 @@ public class RegistroPragaDao extends AbstractDao<RegistroPraga, Long> {
             stmt.bindLong(4, idPraga);
         }
  
+        Long idEstagioInfestacao = entity.getIdEstagioInfestacao();
+        if (idEstagioInfestacao != null) {
+            stmt.bindLong(5, idEstagioInfestacao);
+        }
+ 
         Long idRegistroPraga = entity.getIdRegistroPraga();
         if (idRegistroPraga != null) {
-            stmt.bindLong(5, idRegistroPraga);
+            stmt.bindLong(6, idRegistroPraga);
         }
-        stmt.bindLong(6, entity.getDtRegistro().getTime());
-        stmt.bindLong(7, entity.getIdCliente());
-        stmt.bindDouble(8, entity.getLatitude());
-        stmt.bindDouble(9, entity.getLongitude());
-        stmt.bindLong(10, entity.getIdDispositivo());
-        stmt.bindLong(11, entity.getDtInclusao().getTime());
-        stmt.bindLong(12, entity.getDtAlteracao().getTime());
-        stmt.bindLong(13, entity.getVersaoSistema());
-        stmt.bindLong(14, entity.getIdUsuarioReg());
+        stmt.bindLong(7, entity.getDtRegistro().getTime());
+        stmt.bindLong(8, entity.getIdCliente());
+        stmt.bindDouble(9, entity.getLatitude());
+        stmt.bindDouble(10, entity.getLongitude());
+        stmt.bindLong(11, entity.getIdDispositivo());
+        stmt.bindLong(12, entity.getDtInclusao().getTime());
+        stmt.bindLong(13, entity.getDtAlteracao().getTime());
+        stmt.bindLong(14, entity.getVersaoSistema());
+        stmt.bindLong(15, entity.getIdUsuarioReg());
     }
 
     @Override
@@ -138,19 +145,24 @@ public class RegistroPragaDao extends AbstractDao<RegistroPraga, Long> {
             stmt.bindLong(4, idPraga);
         }
  
+        Long idEstagioInfestacao = entity.getIdEstagioInfestacao();
+        if (idEstagioInfestacao != null) {
+            stmt.bindLong(5, idEstagioInfestacao);
+        }
+ 
         Long idRegistroPraga = entity.getIdRegistroPraga();
         if (idRegistroPraga != null) {
-            stmt.bindLong(5, idRegistroPraga);
+            stmt.bindLong(6, idRegistroPraga);
         }
-        stmt.bindLong(6, entity.getDtRegistro().getTime());
-        stmt.bindLong(7, entity.getIdCliente());
-        stmt.bindDouble(8, entity.getLatitude());
-        stmt.bindDouble(9, entity.getLongitude());
-        stmt.bindLong(10, entity.getIdDispositivo());
-        stmt.bindLong(11, entity.getDtInclusao().getTime());
-        stmt.bindLong(12, entity.getDtAlteracao().getTime());
-        stmt.bindLong(13, entity.getVersaoSistema());
-        stmt.bindLong(14, entity.getIdUsuarioReg());
+        stmt.bindLong(7, entity.getDtRegistro().getTime());
+        stmt.bindLong(8, entity.getIdCliente());
+        stmt.bindDouble(9, entity.getLatitude());
+        stmt.bindDouble(10, entity.getLongitude());
+        stmt.bindLong(11, entity.getIdDispositivo());
+        stmt.bindLong(12, entity.getDtInclusao().getTime());
+        stmt.bindLong(13, entity.getDtAlteracao().getTime());
+        stmt.bindLong(14, entity.getVersaoSistema());
+        stmt.bindLong(15, entity.getIdUsuarioReg());
     }
 
     @Override
@@ -171,16 +183,17 @@ public class RegistroPragaDao extends AbstractDao<RegistroPraga, Long> {
         entity.setQtde(cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1));
         entity.setObservacao(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setIdPraga(cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3));
-        entity.setIdRegistroPraga(cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4));
-        entity.setDtRegistro(new java.util.Date(cursor.getLong(offset + 5)));
-        entity.setIdCliente(cursor.getLong(offset + 6));
-        entity.setLatitude(cursor.getDouble(offset + 7));
-        entity.setLongitude(cursor.getDouble(offset + 8));
-        entity.setIdDispositivo(cursor.getLong(offset + 9));
-        entity.setDtInclusao(new java.util.Date(cursor.getLong(offset + 10)));
-        entity.setDtAlteracao(new java.util.Date(cursor.getLong(offset + 11)));
-        entity.setVersaoSistema(cursor.getLong(offset + 12));
-        entity.setIdUsuarioReg(cursor.getLong(offset + 13));
+        entity.setIdEstagioInfestacao(cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4));
+        entity.setIdRegistroPraga(cursor.isNull(offset + 5) ? null : cursor.getLong(offset + 5));
+        entity.setDtRegistro(new java.util.Date(cursor.getLong(offset + 6)));
+        entity.setIdCliente(cursor.getLong(offset + 7));
+        entity.setLatitude(cursor.getDouble(offset + 8));
+        entity.setLongitude(cursor.getDouble(offset + 9));
+        entity.setIdDispositivo(cursor.getLong(offset + 10));
+        entity.setDtInclusao(new java.util.Date(cursor.getLong(offset + 11)));
+        entity.setDtAlteracao(new java.util.Date(cursor.getLong(offset + 12)));
+        entity.setVersaoSistema(cursor.getLong(offset + 13));
+        entity.setIdUsuarioReg(cursor.getLong(offset + 14));
      }
     
     @Override

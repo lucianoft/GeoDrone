@@ -30,6 +30,9 @@ public class RegistroDoenca extends GenericModel implements AuditModel, ClientMo
 	@Property(nameInDb = "ID_DOENCA")
 	private Long idDoenca;
 
+	@Property(nameInDb="ID_ESTAGIO_INFESTACAO")
+	private Long idEstagioInfestacao;
+
 	@Property(nameInDb = "ID_REGISTRO_DOENCA")
 	private Long idRegistroDoenca;
 
@@ -93,6 +96,8 @@ public class RegistroDoenca extends GenericModel implements AuditModel, ClientMo
 		this.idDoenca = idDoenca;
 	}
 
+    public Long getIdEstagioInfestacao() {return idEstagioInfestacao;}
+    public void setIdEstagioInfestacao(Long idEstagioInfestacao) { this.idEstagioInfestacao = idEstagioInfestacao;}
 
 	public Long getIdRegistroDoenca() {
 		return this.idRegistroDoenca;

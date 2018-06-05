@@ -53,6 +53,8 @@ public class GeoDroneApplication extends Application {
         try{
             daoSession.getUsuarioDao().loadAll();
             daoSession.getRotaTrabalhoDao().loadAll();
+            daoSession.getRegistroDoencaDao().loadAll();
+            daoSession.getRegistroDoencaDao().loadAll();
         }catch (Exception ex){
             DaoMaster.dropAllTables(db, true);
         }
