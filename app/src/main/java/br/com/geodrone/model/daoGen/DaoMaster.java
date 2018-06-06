@@ -26,20 +26,20 @@ public class DaoMaster extends AbstractDaoMaster {
         ConfiguracaoDao.createTable(db, ifNotExists);
         DispositivoDao.createTable(db, ifNotExists);
         DoencaDao.createTable(db, ifNotExists);
+        EstagioInfestacaoDao.createTable(db, ifNotExists);
         PontoColetaChuvaDao.createTable(db, ifNotExists);
         PragaDao.createTable(db, ifNotExists);
         RegistroChuvaDao.createTable(db, ifNotExists);
         RegistroCondicaoTempoDao.createTable(db, ifNotExists);
+        RegistroDefensivoDao.createTable(db, ifNotExists);
         RegistroDoencaDao.createTable(db, ifNotExists);
         RegistroImagemDao.createTable(db, ifNotExists);
         RegistroPragaDao.createTable(db, ifNotExists);
         RotaTrabalhoDao.createTable(db, ifNotExists);
-        TipoCultivoDao.createTable(db, ifNotExists);
-        UsuarioDao.createTable(db, ifNotExists);
         TalhaoDao.createTable(db, ifNotExists);
-        EstagioInfestacaoDao.createTable(db, ifNotExists);
-        RegistroDefensivoDao.createTable(db, ifNotExists);
+        TipoCultivoDao.createTable(db, ifNotExists);
         TipoDefensivoDao.createTable(db, ifNotExists);
+        UsuarioDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
@@ -49,20 +49,20 @@ public class DaoMaster extends AbstractDaoMaster {
         ConfiguracaoDao.dropTable(db, ifExists);
         DispositivoDao.dropTable(db, ifExists);
         DoencaDao.dropTable(db, ifExists);
+        EstagioInfestacaoDao.dropTable(db, ifExists);
         PontoColetaChuvaDao.dropTable(db, ifExists);
         PragaDao.dropTable(db, ifExists);
         RegistroChuvaDao.dropTable(db, ifExists);
         RegistroCondicaoTempoDao.dropTable(db, ifExists);
+        RegistroDefensivoDao.dropTable(db, ifExists);
         RegistroDoencaDao.dropTable(db, ifExists);
         RegistroImagemDao.dropTable(db, ifExists);
         RegistroPragaDao.dropTable(db, ifExists);
         RotaTrabalhoDao.dropTable(db, ifExists);
-        TipoCultivoDao.dropTable(db, ifExists);
-        UsuarioDao.dropTable(db, ifExists);
         TalhaoDao.dropTable(db, ifExists);
-        EstagioInfestacaoDao.dropTable(db, ifExists);
-        RegistroDefensivoDao.dropTable(db, ifExists);
+        TipoCultivoDao.dropTable(db, ifExists);
         TipoDefensivoDao.dropTable(db, ifExists);
+        UsuarioDao.dropTable(db, ifExists);
     }
 
     /**
@@ -86,20 +86,20 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(ConfiguracaoDao.class);
         registerDaoClass(DispositivoDao.class);
         registerDaoClass(DoencaDao.class);
+        registerDaoClass(EstagioInfestacaoDao.class);
         registerDaoClass(PontoColetaChuvaDao.class);
         registerDaoClass(PragaDao.class);
         registerDaoClass(RegistroChuvaDao.class);
         registerDaoClass(RegistroCondicaoTempoDao.class);
+        registerDaoClass(RegistroDefensivoDao.class);
         registerDaoClass(RegistroDoencaDao.class);
         registerDaoClass(RegistroImagemDao.class);
         registerDaoClass(RegistroPragaDao.class);
         registerDaoClass(RotaTrabalhoDao.class);
-        registerDaoClass(TipoCultivoDao.class);
-        registerDaoClass(UsuarioDao.class);
         registerDaoClass(TalhaoDao.class);
-        registerDaoClass(EstagioInfestacaoDao.class);
-        registerDaoClass(RegistroDefensivoDao.class);
+        registerDaoClass(TipoCultivoDao.class);
         registerDaoClass(TipoDefensivoDao.class);
+        registerDaoClass(UsuarioDao.class);
     }
 
     public DaoSession newSession() {

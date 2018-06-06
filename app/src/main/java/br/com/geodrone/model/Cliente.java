@@ -71,6 +71,10 @@ public class Cliente extends GenericModel implements AuditModel {
 	@Property(nameInDb =  "FLAG_STATUS")
 	private String flagStatus;
 
+	@Property(nameInDb = "ID_MICRO_REGIAO")
+	private Long idMicroRegiao;
+
+
 	@Property(nameInDb = "DT_INCLUSAO")
 	@NotNull
 	private Date dtInclusao;
@@ -237,7 +241,15 @@ public class Cliente extends GenericModel implements AuditModel {
 		this.flagStatus = flagStatus;
 	}
 
-	/** ***** from AuditDomain ****** */
+    public Long getIdMicroRegiao() {
+        return idMicroRegiao;
+    }
+
+    public void setIdMicroRegiao(Long idMicroRegiao) {
+        this.idMicroRegiao = idMicroRegiao;
+    }
+
+    /** ***** from AuditDomain ****** */
 	@Override
 	public Date getDtInclusao() {
 		return this.dtInclusao;

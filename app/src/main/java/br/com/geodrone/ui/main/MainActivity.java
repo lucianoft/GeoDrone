@@ -23,22 +23,21 @@ import br.com.geodrone.SessionGeooDrone;
 import br.com.geodrone.activity.utils.Constantes;
 import br.com.geodrone.model.Cliente;
 import br.com.geodrone.model.Usuario;
-import br.com.geodrone.ui.RelatorioUiUtils;
 import br.com.geodrone.ui.aceiteusuariogeoclima.AceiteUsuarioGeoclimaActivity;
 import br.com.geodrone.ui.aceiteusuariogeomonitora.AceiteUsuarioGeomonitoraActivity;
 import br.com.geodrone.ui.base.BaseActivity;
 import br.com.geodrone.ui.forum.ForumGeodroneActivity;
-import br.com.geodrone.ui.forum.ForumActivity;
 import br.com.geodrone.ui.helper.ActivityHelper;
 import br.com.geodrone.ui.logout.LogoutActivity;
-import br.com.geodrone.ui.mensagem.MensagemActivity;
 import br.com.geodrone.ui.mensagem.usuarios.MensagemUsuariosActivity;
 import br.com.geodrone.ui.pontocoletachuva.PontoColetaChuvaActivity;
 import br.com.geodrone.ui.registrocondicaotempo.RegistroCondicoesTempoActivity;
 import br.com.geodrone.ui.registroimagem.RegistroImagemActivity;
 import br.com.geodrone.ui.registrochuva.RegistroPluviosidadeActivity;
 import br.com.geodrone.ui.monitoramento.MonitoramentoActivity;
-import br.com.geodrone.ui.reqpragas.RequisitarArquivoPragaActivity;
+import br.com.geodrone.ui.relatorioregistrochuva.RelatorioRegistroChuvaActivity;
+import br.com.geodrone.ui.relatorioregistrodoenca.RelatorioRegistroDoencaActivity;
+import br.com.geodrone.ui.relatorioregistropraga.RelatorioRegistroPragaActivity;
 import br.com.geodrone.ui.rotatrabalhokml.RotaTrabalhoKmlActivity;
 import br.com.geodrone.ui.sincronizacao.SincronizacaoActivity;
 import butterknife.BindView;
@@ -196,12 +195,18 @@ public class MainActivity extends BaseActivity
             }
         }else if (id == R.id.menu_item_requisitar_arquivos_pragas){
             if (isAceiteGeomonitora()) {
-                Intent intent = new Intent(this, RequisitarArquivoPragaActivity.class);
+                Intent intent = new Intent(this, RelatorioRegistroPragaActivity.class);
+                startActivity(intent);
+            }
+        }else if (id == R.id.menu_item_requisitar_arquivos_doencas){
+            if (isAceiteGeomonitora()) {
+                Intent intent = new Intent(this, RelatorioRegistroDoencaActivity.class);
                 startActivity(intent);
             }
         }else if (id == R.id.menu_item_relatorio_registro_chuva){
             if (isAceiteGeomonitora()) {
-                new RelatorioUiUtils(this).relatorioPluviosidade();
+                Intent intent = new Intent(this, RelatorioRegistroChuvaActivity.class);
+                startActivity(intent);
             }
         }
 

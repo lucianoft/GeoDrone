@@ -43,9 +43,10 @@ public class ClienteDao extends AbstractDao<Cliente, Long> {
         public final static Property Cep = new Property(16, Long.class, "cep", false, "CEP");
         public final static Property QtdeEstacoes = new Property(17, Long.class, "qtdeEstacoes", false, "QTDE_ESTACOES");
         public final static Property FlagStatus = new Property(18, String.class, "flagStatus", false, "FLAG_STATUS");
-        public final static Property DtInclusao = new Property(19, java.util.Date.class, "dtInclusao", false, "DT_INCLUSAO");
-        public final static Property DtAlteracao = new Property(20, java.util.Date.class, "dtAlteracao", false, "DT_ALTERACAO");
-        public final static Property VersaoSistema = new Property(21, Long.class, "versaoSistema", false, "VERSAO_SISTEMA");
+        public final static Property IdMicroRegiao = new Property(19, Long.class, "idMicroRegiao", false, "ID_MICRO_REGIAO");
+        public final static Property DtInclusao = new Property(20, java.util.Date.class, "dtInclusao", false, "DT_INCLUSAO");
+        public final static Property DtAlteracao = new Property(21, java.util.Date.class, "dtAlteracao", false, "DT_ALTERACAO");
+        public final static Property VersaoSistema = new Property(22, Long.class, "versaoSistema", false, "VERSAO_SISTEMA");
     }
 
 
@@ -80,9 +81,10 @@ public class ClienteDao extends AbstractDao<Cliente, Long> {
                 "\"CEP\" INTEGER," + // 16: cep
                 "\"QTDE_ESTACOES\" INTEGER," + // 17: qtdeEstacoes
                 "\"FLAG_STATUS\" TEXT," + // 18: flagStatus
-                "\"DT_INCLUSAO\" INTEGER NOT NULL ," + // 19: dtInclusao
-                "\"DT_ALTERACAO\" INTEGER NOT NULL ," + // 20: dtAlteracao
-                "\"VERSAO_SISTEMA\" INTEGER NOT NULL );"); // 21: versaoSistema
+                "\"ID_MICRO_REGIAO\" INTEGER," + // 19: idMicroRegiao
+                "\"DT_INCLUSAO\" INTEGER NOT NULL ," + // 20: dtInclusao
+                "\"DT_ALTERACAO\" INTEGER NOT NULL ," + // 21: dtAlteracao
+                "\"VERSAO_SISTEMA\" INTEGER NOT NULL );"); // 22: versaoSistema
     }
 
     /** Drops the underlying database table. */
@@ -189,9 +191,14 @@ public class ClienteDao extends AbstractDao<Cliente, Long> {
         if (flagStatus != null) {
             stmt.bindString(19, flagStatus);
         }
-        stmt.bindLong(20, entity.getDtInclusao().getTime());
-        stmt.bindLong(21, entity.getDtAlteracao().getTime());
-        stmt.bindLong(22, entity.getVersaoSistema());
+ 
+        Long idMicroRegiao = entity.getIdMicroRegiao();
+        if (idMicroRegiao != null) {
+            stmt.bindLong(20, idMicroRegiao);
+        }
+        stmt.bindLong(21, entity.getDtInclusao().getTime());
+        stmt.bindLong(22, entity.getDtAlteracao().getTime());
+        stmt.bindLong(23, entity.getVersaoSistema());
     }
 
     @Override
@@ -292,9 +299,14 @@ public class ClienteDao extends AbstractDao<Cliente, Long> {
         if (flagStatus != null) {
             stmt.bindString(19, flagStatus);
         }
-        stmt.bindLong(20, entity.getDtInclusao().getTime());
-        stmt.bindLong(21, entity.getDtAlteracao().getTime());
-        stmt.bindLong(22, entity.getVersaoSistema());
+ 
+        Long idMicroRegiao = entity.getIdMicroRegiao();
+        if (idMicroRegiao != null) {
+            stmt.bindLong(20, idMicroRegiao);
+        }
+        stmt.bindLong(21, entity.getDtInclusao().getTime());
+        stmt.bindLong(22, entity.getDtAlteracao().getTime());
+        stmt.bindLong(23, entity.getVersaoSistema());
     }
 
     @Override
@@ -330,9 +342,10 @@ public class ClienteDao extends AbstractDao<Cliente, Long> {
         entity.setCep(cursor.isNull(offset + 16) ? null : cursor.getLong(offset + 16));
         entity.setQtdeEstacoes(cursor.isNull(offset + 17) ? null : cursor.getLong(offset + 17));
         entity.setFlagStatus(cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18));
-        entity.setDtInclusao(new java.util.Date(cursor.getLong(offset + 19)));
-        entity.setDtAlteracao(new java.util.Date(cursor.getLong(offset + 20)));
-        entity.setVersaoSistema(cursor.getLong(offset + 21));
+        entity.setIdMicroRegiao(cursor.isNull(offset + 19) ? null : cursor.getLong(offset + 19));
+        entity.setDtInclusao(new java.util.Date(cursor.getLong(offset + 20)));
+        entity.setDtAlteracao(new java.util.Date(cursor.getLong(offset + 21)));
+        entity.setVersaoSistema(cursor.getLong(offset + 22));
      }
     
     @Override

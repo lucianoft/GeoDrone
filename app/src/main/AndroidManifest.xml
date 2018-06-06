@@ -127,7 +127,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.logout.LogoutActivity" />
         <activity android:name=".ui.aceiteusuariogeoclima.AceiteUsuarioGeoclimaActivity" />
-        <activity android:name=".ui.reqpragas.RequisitarArquivoPragaActivity" />
         <activity android:name=".ui.rotatrabalhokml.RotaTrabalhoKmlActivity" />
         <activity android:name=".ui.aceiteusuariogeomonitora.AceiteUsuarioGeomonitoraActivity" />
         <activity android:name=".ui.forum.ForumActivity" />
@@ -137,7 +136,17 @@
         <activity
             android:name=".ui.forum.FullScreenImageActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ui.mensagem.usuarios.MensagemUsuariosActivity"></activity>
+        <activity android:name=".ui.mensagem.usuarios.MensagemUsuariosActivity" />
+        <activity
+            android:name=".ui.relatorioregistropraga.RelatorioRegistroPragaActivity"
+            android:label="@string/title_activity_relatorio_registro_pragas"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ui.relatorioregistrodoenca.RelatorioRegistroDoencaActivity"
+            android:label="@string/title_activity_relatorio_registro_doencas"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".ui.relatorioregistrochuva.RelatorioRegistroChuvaActivity"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

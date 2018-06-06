@@ -63,11 +63,6 @@ public interface APIClient {
     @Streaming
     public Call<SincronizacaoWebResource> sincronizarWeb(@Body SincronizacaoWebResource sincronizacaoWebResource);
 
-    @Streaming
-    @GET(Constantes.API_URL_PREFIXO + "registro-pragas/cliente/{idCliente}/relatorio")
-    public Call<ResponseBody> findRelatorioRegistroPraga(@Path("idCliente") Long idCliente,
-                                                         @Query("dtInicio") String dtInicio,
-                                                         @Query("dtFim")    String dtFim);
 
     @POST(Constantes.API_URL_PREFIXO + "mensagems/cadastro")
     public Call<MensagemResource> insert(@Body MensagemResource mensagemResource);
@@ -86,7 +81,19 @@ public interface APIClient {
     public Call<Void> recuperarSenha(@Query("email") String email);
 
     @Streaming
-    @GET(Constantes.API_URL_PREFIXO + "registroChuvas/cliente/{idCliente}/relatorio")
+    @GET(Constantes.API_URL_PREFIXO + "registro-pragas/cliente/{idCliente}/relatorio")
+    public Call<ResponseBody> findRelatorioRegistroPraga(@Path("idCliente") Long idCliente,
+                                                         @Query("dtInicio") String dtInicio,
+                                                         @Query("dtFim")    String dtFim);
+
+    @Streaming
+    @GET(Constantes.API_URL_PREFIXO + "registro-doencas/cliente/{idCliente}/relatorio")
+    public Call<ResponseBody> findRelatorioRegistroDoenca(@Path("idCliente") Long idCliente,
+                                                         @Query("dtInicio") String dtInicio,
+                                                         @Query("dtFim")    String dtFim);
+
+    @Streaming
+    @GET(Constantes.API_URL_PREFIXO + "registro-chuvas/cliente/{idCliente}/relatorio")
     public Call<ResponseBody> findRelatorioRegistroChuva(@Path("idCliente") Long idCliente,
                                                          @Query("dtInicio") String dtInicio,
                                                          @Query("dtFim")    String dtFim);

@@ -38,14 +38,23 @@
     <item android:title="@string/menu_geoomonitora">
         <menu>
             <item
+                android:id="@+id/menu_item_registro_talhao"
+                android:title="@string/menu_registro_talhao" />
+            <item
                 android:id="@+id/menu_item_monitoramento_campo"
                 android:title="@string/menu_monitoramento" />
+            <item
+                android:id="@+id/menu_item_defensivos_doses"
+                android:title="@string/menu_defensivo_doses" />
             <item
                 android:id="@+id/menu_item_rota_trabalho"
                 android:title="@string/menu_rota_trabalho" />
             <item
                 android:id="@+id/menu_item_requisitar_arquivos_pragas"
                 android:title="@string/menu_requisitar_arquivos_pragas" />
+            <item
+                android:id="@+id/menu_item_requisitar_arquivos_doencas"
+                android:title="@string/menu_requisitar_arquivos_doencas" />
             <item
                 android:id="@+id/menu_item_relatorio_registro_chuva"
                 android:title="@string/menu_relatorio_registro_chuva" />

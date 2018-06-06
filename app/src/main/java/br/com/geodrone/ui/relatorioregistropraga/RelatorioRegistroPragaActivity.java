@@ -1,38 +1,25 @@
-package br.com.geodrone.ui.reqpragas;
+package br.com.geodrone.ui.relatorioregistropraga;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
-import android.app.DownloadManager;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.pm.PackageManager;
-import android.os.StrictMode;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
-import java.io.File;
 import java.util.Calendar;
 import java.util.Date;
 
 import br.com.geodrone.R;
-import br.com.geodrone.ui.base.BaseActivity;
+import br.com.geodrone.ui.base.BaseRelatorioActivity;
 import br.com.geodrone.ui.helper.GenericProgress;
-import br.com.geodrone.utils.ActivityUtils;
 import br.com.geodrone.utils.DateUtils;
-import br.com.geodrone.utils.Download;
 import br.com.geodrone.utils.Messenger;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class RequisitarArquivoPragaActivity extends BaseActivity implements DatePickerDialog.OnDateSetListener, RequisitarArquivoPragaPresenter.View{
+public class RelatorioRegistroPragaActivity extends BaseRelatorioActivity implements DatePickerDialog.OnDateSetListener,
+                                                                                     RelatorioRegistroPragaPresenter.View{
 
     public static final String MESSAGE_PROGRESS = "message_progress";
     private static final int PERMISSION_REQUEST_CODE = 1;
@@ -40,27 +27,27 @@ public class RequisitarArquivoPragaActivity extends BaseActivity implements Date
     public static final int FLAG_START_DATE = 0;
     public static final int FLAG_END_DATE = 1;
 
-    @BindView(R.id.edit_text_dt_inicio_req_praga)
+    @BindView(R.id.edit_text_dt_inicio)
     EditText editTextDtInicio;
 
-    @BindView(R.id.edit_text_dt_fim_req_praga)
+    @BindView(R.id.edit_text_dt_fim)
     EditText editTextDtFim;
 
     private int flag = 0;
 
     private GenericProgress mProgress;
-    private RequisitarArquivoPragaPresenter requisitarArquivoPragaPresenter;
+    private RelatorioRegistroPragaPresenter requisitarArquivoPragaPresenter;
 
     private int REQ_STORAGE_PERMISSION = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_requisitar_arquivo_praga);
+        setContentView(R.layout.activity_relatorio_registro_praga);
         ButterKnife.bind(this);
 
         mProgress = new GenericProgress(this);
-        requisitarArquivoPragaPresenter = new RequisitarArquivoPragaPresenter(this);
+        requisitarArquivoPragaPresenter = new RelatorioRegistroPragaPresenter(this);
         if (!hasPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
             requestPermissionsSafely(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQ_STORAGE_PERMISSION);
         }
@@ -76,7 +63,7 @@ public class RequisitarArquivoPragaActivity extends BaseActivity implements Date
         flag = i;
     }
 
-   @OnClick({R.id.text_input_layout_dt_inicio_req_praga, R.id.edit_text_dt_inicio_req_praga})
+   @OnClick({R.id.text_input_layout_dt_inicio, R.id.edit_text_dt_inicio})
    public void createDatePickerDialogInicio() {
         setFlag(FLAG_START_DATE);
        createDatePicker();
@@ -91,7 +78,7 @@ public class RequisitarArquivoPragaActivity extends BaseActivity implements Date
         datePickerDialog.show();
     }
 
-    @OnClick({R.id.text_input_layout_dt_fim_req_praga, R.id.edit_text_dt_fim_req_praga})
+    @OnClick({R.id.text_input_layout_dt_fim, R.id.edit_text_dt_fim})
     public void createDatePickerDialogFim() {
         setFlag(FLAG_END_DATE);
         createDatePicker();
@@ -122,29 +109,21 @@ public class RequisitarArquivoPragaActivity extends BaseActivity implements Date
     }
 
     @Override
-    public void onRelatorioSucesso(String message, File file) {
-
+    public void onErrorDtInicio(String message) {
         hideLoading();
-        showMessage(message);
-        try {
-            ActivityUtils.openFile(this, file);
-        }catch (Exception ex){
-            onError(ex);
-        }
-        //ActivityUtils.openDownloads(this);
-        //finish();
+        editTextDtInicio.setError(message);
     }
 
     @Override
-    public void onRelatorioError(String message) {
-        showMessage(message);
+    public void onErrorDtFim(String message) {
         hideLoading();
+        editTextDtFim.setError(message);
     }
 
     @Override
-    public void onRelatorioError(Messenger messenger) {
+    public void onError(Messenger messenger) {
+        hideLoading();
         showMessenger(messenger);
-        hideLoading();
     }
 
     @Override

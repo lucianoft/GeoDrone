@@ -19,6 +19,8 @@
     <string name="title_activity_registro_condicao_tempo">Registro de Condicao do tempo</string>
     <string name="title_dialog_confirmar_doenca">Registro de doença</string>
     <string name="title_dialog_confirmar_praga">Registro de praga</string>
+    <string name="title_activity_relatorio_registro_pragas">Relatorio de Pagras</string>
+    <string name="title_activity_relatorio_registro_doencas">Relatorio de Pragas</string>
 
     <string name="title_activity_monitoramento">Monitoramento</string>
     <string name="title_activity_mon">Teste</string>
@@ -81,11 +83,10 @@
     <string name="lb_estagio_infestacao">Estagio Infestacao</string>
 
 
-
-
     <string name="lb_btn_salvar">Salvar</string>
     <string name="lb_btn_salvar_registro_praga">Salvar Registro Praga</string>
     <string name="lb_btn_salvar_registro_doenca">Salvar Registro Doença</string>
+    <string name="lb_btn_gerar_relatorio">Gerar Relatorio</string>
     <string name="lb_possui_registro_doenca">Possui registro de doença?</string>
     <string name="lb_possui_registro_praga">Possui registro de praga?</string>
     <string name="lb_sim">Sim</string>
@@ -109,6 +110,10 @@
     <string name="msg_obr_volume">É obrigatorio informar o campo volume</string>
     <string name="msg_obr_ponto_coleta_chuva">É obrigatorio informar o Ponto de Coleta de Chuva</string>
     <string name="msg_obr_aceite_usuario">É obrigatorio selecionar o campo de aceite</string>
+    <string name="msg_obr_dt_inicio">É obrigatorio informar o campo Data Inicio</string>
+    <string name="msg_obr_dt_fim">É obrigatorio informar o campo Data Fim</string>
+    <string name="msg_inv_dt_inicio">Conteudo do campo Data Inicio é invalido</string>
+    <string name="msg_inv_dt_fim">Conteudo do campo Data Inicio é invalido</string>
 
     <string name="msg_inv_senha_dif_confirmar_senha">Campo confirmar senha diferente do campo senha</string>
 
@@ -148,14 +153,17 @@
     <string name="menu_geo_clima">GeoClima</string>
     <string name="menu_geooDrone">GeooDrone</string>
     <string name="menu_geoomonitora">GeooMonitora</string>
+    <string name="menu_registro_talhao">Registro Talhao</string>
     <string name="menu_monitoramento">Monitoramento</string>
     <string name="menu_requisitar_arquivos_pragas">Requisitar Arquivos Pragas</string>
+    <string name="menu_requisitar_arquivos_doencas">Requisitar Arquivos Deoncas</string>
     <string name="menu_rota_trabalho">Rota Trabalho</string>
     <string name="menu_registro_de_praga">Praga</string>
     <string name="menu_sem_registro_de_praga">Sem Pragas</string>
     <string name="menu_registro_de_doenca">Registro Doenca</string>
     <string name="menu_sem_registro_de_doenca">Doenca</string>
     <string name="menu_talhao">Talhão</string>
+    <string name="menu_defensivo_doses">Defensivos e Doses</string>
     <string name="menu_relatorio_registro_chuva">Relatorio Registro Chuva</string>
 
     <string name="action_settings">Settings</string>
