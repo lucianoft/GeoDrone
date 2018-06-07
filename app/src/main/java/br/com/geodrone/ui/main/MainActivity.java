@@ -40,6 +40,7 @@ import br.com.geodrone.ui.relatorioregistrodoenca.RelatorioRegistroDoencaActivit
 import br.com.geodrone.ui.relatorioregistropraga.RelatorioRegistroPragaActivity;
 import br.com.geodrone.ui.rotatrabalhokml.RotaTrabalhoKmlActivity;
 import br.com.geodrone.ui.sincronizacao.SincronizacaoActivity;
+import br.com.geodrone.ui.talhao.ConsultaTalhaoActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -182,9 +183,20 @@ public class MainActivity extends BaseActivity
                 Intent intent = new Intent(this, ForumGeodroneActivity.class);
                 startActivity(intent);
             }
+        }else if (id == R.id.menu_item_relatorio_registro_chuva){
+            if (isAceiteGeoClima()) {
+                Intent intent = new Intent(this, RelatorioRegistroChuvaActivity.class);
+                startActivity(intent);
+            }
         }
 
         //geomonitora
+        else if (id == R.id.menu_item_registro_talhao){
+            if (isAceiteGeomonitora()) {
+                Intent intent = new Intent(this, ConsultaTalhaoActivity.class);
+                startActivity(intent);
+            }
+        }
         else if (id == R.id.menu_item_monitoramento_campo) {
             if (isAceiteGeomonitora()) {
                 getPermissionsGpsMonitoramento();
@@ -201,11 +213,6 @@ public class MainActivity extends BaseActivity
         }else if (id == R.id.menu_item_requisitar_arquivos_doencas){
             if (isAceiteGeomonitora()) {
                 Intent intent = new Intent(this, RelatorioRegistroDoencaActivity.class);
-                startActivity(intent);
-            }
-        }else if (id == R.id.menu_item_relatorio_registro_chuva){
-            if (isAceiteGeomonitora()) {
-                Intent intent = new Intent(this, RelatorioRegistroChuvaActivity.class);
                 startActivity(intent);
             }
         }

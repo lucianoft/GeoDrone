@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="15dp"
+    >
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_codigo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp">
+        <EditText android:id="@+id/editText_codigo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="@string/lb_codigo"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_descricao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/input_layout_codigo"
+        >
+        <EditText android:id="@+id/editText_descricao"
+            style="@style/TextLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="@string/lb_descricao"/>
+
+
+    </android.support.design.widget.TextInputLayout>
+    <TextView
+        android:id="@+id/input_layout_ativo"
+        android:layout_below="@+id/input_layout_descricao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text= "@string/lb_ativo"
+        />
+
+    <Spinner
+        style="@style/Widget.AppCompat.Spinner.Underlined"
+        android:id="@+id/spinner_ativo"
+        android:layout_below="@+id/input_layout_ativo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"/>
+
+
+
+
+</RelativeLayout>

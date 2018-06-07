@@ -20,6 +20,9 @@
             <item
                 android:id="@+id/nav_registro_condicoes_tempo"
                 android:title="@string/menu_registro_condicoes_tempo" />
+            <item
+                android:id="@+id/menu_item_relatorio_registro_chuva"
+                android:title="@string/menu_relatorio_registro_chuva" />
 
             <item android:title="@string/menu_comunicacao"
                 android:enabled="false"
@@ -55,9 +58,7 @@
             <item
                 android:id="@+id/menu_item_requisitar_arquivos_doencas"
                 android:title="@string/menu_requisitar_arquivos_doencas" />
-            <item
-                android:id="@+id/menu_item_relatorio_registro_chuva"
-                android:title="@string/menu_relatorio_registro_chuva" />
+
             </menu>
     </item>
 

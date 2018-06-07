@@ -29,6 +29,7 @@
     <string name="title_notifications">Notifications</string>
 
     <!-- Strings related to login -->
+    <string name="lb_codigo">Codigo</string>
     <string name="lb_cpf">cpf</string>
     <string name="lb_cnpj">cnpj</string>
     <string name="lb_cpf_cnpj">Cpf/Cnpj</string>

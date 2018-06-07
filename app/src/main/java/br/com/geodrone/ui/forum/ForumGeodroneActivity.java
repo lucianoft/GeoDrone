@@ -35,6 +35,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -50,6 +51,7 @@ import br.com.geodrone.utils.Constantes;
 import br.com.geodrone.utils.Util;
 import hani.momanii.supernova_emoji_library.Actions.EmojIconActions;
 import hani.momanii.supernova_emoji_library.Helper.EmojiconEditText;
+import id.zelory.compressor.Compressor;
 
 public class ForumGeodroneActivity extends BaseActivity  implements View.OnClickListener, ClickListenerChatFirebase {
 
@@ -121,6 +123,11 @@ public class ForumGeodroneActivity extends BaseActivity  implements View.OnClick
         }else if (requestCode == IMAGE_CAMERA_REQUEST){
             if (resultCode == RESULT_OK){
                 if (filePathImageCamera != null && filePathImageCamera.exists()){
+                    try {
+                        filePathImageCamera = new Compressor(this).compressToFile(filePathImageCamera);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     StorageReference imageCameraRef = storageRef.child(filePathImageCamera.getName()+"_camera");
                     sendFileFirebase(imageCameraRef,filePathImageCamera);
                 }else{

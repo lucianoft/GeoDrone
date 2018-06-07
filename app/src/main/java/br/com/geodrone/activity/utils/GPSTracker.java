@@ -84,31 +84,36 @@ public class GPSTracker implements LocationListener {
             Log.v("isNetworkEnabled", "=" + isNetworkEnabled);
 
             if (isGPSEnabled || isNetworkEnabled) {
+
+                Criteria crta = new Criteria();
+                crta.setAccuracy(Criteria.ACCURACY_FINE);
+                crta.setAltitudeRequired(false);
+                crta.setBearingRequired(false);
+                crta.setCostAllowed(true);
+                crta.setPowerRequirement(Criteria.POWER_MEDIUM);
+                String provider = locationManager.getBestProvider(crta, true);
+
                 this.canGetLocation = true;
                 location = null;
                 if (isNetworkEnabled) {
-                    Criteria crta = new Criteria();
-                    crta.setAccuracy(Criteria.ACCURACY_FINE);
-                    crta.setAltitudeRequired(false);
-                    crta.setBearingRequired(false);
-                    crta.setCostAllowed(true);
-                    crta.setPowerRequirement(Criteria.POWER_LOW);
-                    String provider = locationManager.getBestProvider(crta, true);
 
-                    locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+                    locationManager.requestLocationUpdates(provider/*LocationManager.NETWORK_PROVIDER*/, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
                     Log.d("Network", "Network");
                     if (locationManager != null) {
-                        location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                        location = locationManager.getLastKnownLocation(provider/*LocationManager.NETWORK_PROVIDER*/);
                         onLocationChanged(location);
                     }
                 }
                 // if GPS Enabled get lat/long using GPS Services
                 if (isGPSEnabled) {
                     if (location == null) {
-                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+
+
+
+                        locationManager.requestLocationUpdates(provider, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
                         Log.d("GPS Enabled", "GPS Enabled");
                         if (locationManager != null) {
-                            location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                            location = locationManager.getLastKnownLocation(provider);
                             onLocationChanged(location);
                         }
                     }

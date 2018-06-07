@@ -145,8 +145,10 @@
             android:name=".ui.relatorioregistrodoenca.RelatorioRegistroDoencaActivity"
             android:label="@string/title_activity_relatorio_registro_doencas"
             android:theme="@style/AppTheme" />
-        <activity android:name=".ui.relatorioregistrochuva.RelatorioRegistroChuvaActivity"
+        <activity
+            android:name=".ui.relatorioregistrochuva.RelatorioRegistroChuvaActivity"
             android:theme="@style/AppTheme" />
+        <activity android:name=".ui.talhao.ConsultaTalhaoActivity"></activity>
     </application>
 
 </manifest>
