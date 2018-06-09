@@ -8,7 +8,8 @@ public class CryptoUtils {
 
 	public String encrypt(String plaintext) throws Exception {
 		Cryptography cryptography = getCryptography();
-		return cryptography.encrypt(plaintext);
+
+		return cryptography.encrypt(plaintext).replaceAll("\\n", "");
 	}
 
 	public String decrypt(String hashed) throws Exception {

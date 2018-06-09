@@ -15,24 +15,22 @@ import br.com.geodrone.model.api.UserModel;
 import org.greenrobot.greendao.annotation.Generated;
 
 @Entity(generateConstructors = false, nameInDb ="GEO_TALHAO")
-public class Talhao extends GenericModel implements AuditModel, ActiveModel, DeviceModel, ClientModel, UserModel {
+public class Talhao extends GenericModel implements AuditModel, ActiveModel, ClientModel, UserModel {
 
 	@Id(autoincrement = true)
-	@Property(nameInDb = "ID_TALHAO_DISP")
+	@Property(nameInDb = "ID_TALHAO")
 	private Long id;
 
-	@Property(nameInDb = "ID_TALHAO")
-	private Long idTalhao;
+	@Property(nameInDb = "CODIGO")
+	private String codigo;
 
 	@Property(nameInDb = "DESCRICAO")
-	private String descricao;
+    @NotNull
+    private String descricao;
 
 	@Property(nameInDb = "ID_CLIENTE")
 	@NotNull
 	private Long idCliente;
-
-	@Property(nameInDb = "ID_DISPOSITIVO")
-	private Long idDispositivo;
 
 	@Property(nameInDb = "IND_ATIVO")
 	@NotNull
@@ -54,10 +52,8 @@ public class Talhao extends GenericModel implements AuditModel, ActiveModel, Dev
 	@NotNull
 	private Long idUsuarioReg;
 
-
 	public Talhao() {
 	}
-
 
 	public Long getId() {
 		return this.id;
@@ -66,12 +62,11 @@ public class Talhao extends GenericModel implements AuditModel, ActiveModel, Dev
 		this.id = id;
 	}
 
-    public Long getIdTalhao() {
-        return idTalhao;
+    public String getCodigo() {
+        return this.codigo;
     }
-
-    public void setIdTalhao(Long idTalhao) {
-        this.idTalhao = idTalhao;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     public String getDescricao() {
@@ -90,18 +85,6 @@ public class Talhao extends GenericModel implements AuditModel, ActiveModel, Dev
 	public void setIdCliente(Long idCliente) {
 		this.idCliente = idCliente;
 	}
-
-	/** ***** from UserDomain ****** */
-	@Override
-	public Long getIdDispositivo() {
-		return this.idDispositivo;
-	}
-	@Override
-	public void setIdDispositivo(Long idDispositivo) {
-		this.idDispositivo = idDispositivo;
-	}
-	/** ***************************** */
-
 
 	/** ***** from ActiveDomain ***** */
 	@Override

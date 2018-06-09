@@ -17,6 +17,7 @@ import br.com.geodrone.model.RegistroCondicaoTempo;
 import br.com.geodrone.model.RegistroDoenca;
 import br.com.geodrone.model.RegistroImagem;
 import br.com.geodrone.model.RegistroPraga;
+import br.com.geodrone.model.Talhao;
 import br.com.geodrone.model.Usuario;
 import br.com.geodrone.repository.PontoColetaChuvaRepository;
 import br.com.geodrone.repository.RegistroChuvaRepository;
@@ -24,6 +25,7 @@ import br.com.geodrone.repository.RegistroCondicaoTempoRepository;
 import br.com.geodrone.repository.RegistroDoencaRepository;
 import br.com.geodrone.repository.RegistroImagemRepository;
 import br.com.geodrone.repository.RegistroPragaRepository;
+import br.com.geodrone.repository.TalhaoRepository;
 import br.com.geodrone.resource.ClienteResource;
 import br.com.geodrone.resource.PontoColetaChuvaResource;
 import br.com.geodrone.resource.RegistroChuvaResource;
@@ -32,6 +34,7 @@ import br.com.geodrone.resource.RegistroDoencaResource;
 import br.com.geodrone.resource.RegistroImagemResource;
 import br.com.geodrone.resource.RegistroPragaResource;
 import br.com.geodrone.resource.SincronizacaoWebResource;
+import br.com.geodrone.resource.TalhaoResource;
 import br.com.geodrone.resource.UsuarioResource;
 import br.com.geodrone.service.util.GenericService;
 import br.com.geodrone.utils.DateUtils;
@@ -61,6 +64,8 @@ public class SincronizacaoToWebService extends GenericService {
     RegistroDoencaRepository registroDoencaRepository = null;
     RegistroCondicaoTempoService registroCondicaoTempoService = null;
     RegistroCondicaoTempoRepository registroCondicaoTempoRepository = null;
+    TalhaoService talhaoService = null;
+    TalhaoRepository talhaoRepository = null;
 
     private Context ctx = null;
 
@@ -103,6 +108,7 @@ public class SincronizacaoToWebService extends GenericService {
         sincronizacaoWebResource.setRegistroPragas(getRegistroPragaResources());
         sincronizacaoWebResource.setRegistroDoencas(getRegistroDoencaResources());
         sincronizacaoWebResource.setRegistroCondicaoTempos(getRegistroCondicaoTempoResources());
+        //sincronizacaoWebResource.setTalhaos(getTalhaoResources());
 
         return sincronizacaoWebResource;
 
@@ -353,4 +359,5 @@ public class SincronizacaoToWebService extends GenericService {
         }
         return registroCondicaoTempoResources;
     }
+    
 }

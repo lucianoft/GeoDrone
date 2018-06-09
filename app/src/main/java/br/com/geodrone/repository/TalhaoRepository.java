@@ -5,6 +5,7 @@ import android.content.Context;
 import org.greenrobot.greendao.AbstractDao;
 import org.greenrobot.greendao.query.QueryBuilder;
 
+import java.util.Date;
 import java.util.List;
 
 import br.com.geodrone.model.Talhao;

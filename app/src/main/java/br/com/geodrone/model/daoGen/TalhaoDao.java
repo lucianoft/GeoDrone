@@ -24,16 +24,15 @@ public class TalhaoDao extends AbstractDao<Talhao, Long> {
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property Id = new Property(0, Long.class, "id", true, "ID_TALHAO_DISP");
-        public final static Property IdTalhao = new Property(1, Long.class, "idTalhao", false, "ID_TALHAO");
+        public final static Property Id = new Property(0, Long.class, "id", true, "ID_TALHAO");
+        public final static Property Codigo = new Property(1, String.class, "codigo", false, "CODIGO");
         public final static Property Descricao = new Property(2, String.class, "descricao", false, "DESCRICAO");
         public final static Property IdCliente = new Property(3, Long.class, "idCliente", false, "ID_CLIENTE");
-        public final static Property IdDispositivo = new Property(4, Long.class, "idDispositivo", false, "ID_DISPOSITIVO");
-        public final static Property IndAtivo = new Property(5, Integer.class, "indAtivo", false, "IND_ATIVO");
-        public final static Property DtInclusao = new Property(6, java.util.Date.class, "dtInclusao", false, "DT_INCLUSAO");
-        public final static Property DtAlteracao = new Property(7, java.util.Date.class, "dtAlteracao", false, "DT_ALTERACAO");
-        public final static Property VersaoSistema = new Property(8, Long.class, "versaoSistema", false, "VERSAO_SISTEMA");
-        public final static Property IdUsuarioReg = new Property(9, Long.class, "idUsuarioReg", false, "ID_USUARIO_REG");
+        public final static Property IndAtivo = new Property(4, Integer.class, "indAtivo", false, "IND_ATIVO");
+        public final static Property DtInclusao = new Property(5, java.util.Date.class, "dtInclusao", false, "DT_INCLUSAO");
+        public final static Property DtAlteracao = new Property(6, java.util.Date.class, "dtAlteracao", false, "DT_ALTERACAO");
+        public final static Property VersaoSistema = new Property(7, Long.class, "versaoSistema", false, "VERSAO_SISTEMA");
+        public final static Property IdUsuarioReg = new Property(8, Long.class, "idUsuarioReg", false, "ID_USUARIO_REG");
     }
 
 
@@ -49,16 +48,15 @@ public class TalhaoDao extends AbstractDao<Talhao, Long> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"GEO_TALHAO\" (" + //
-                "\"ID_TALHAO_DISP\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
-                "\"ID_TALHAO\" INTEGER," + // 1: idTalhao
-                "\"DESCRICAO\" TEXT," + // 2: descricao
+                "\"ID_TALHAO\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
+                "\"CODIGO\" TEXT," + // 1: codigo
+                "\"DESCRICAO\" TEXT NOT NULL ," + // 2: descricao
                 "\"ID_CLIENTE\" INTEGER NOT NULL ," + // 3: idCliente
-                "\"ID_DISPOSITIVO\" INTEGER," + // 4: idDispositivo
-                "\"IND_ATIVO\" INTEGER NOT NULL ," + // 5: indAtivo
-                "\"DT_INCLUSAO\" INTEGER NOT NULL ," + // 6: dtInclusao
-                "\"DT_ALTERACAO\" INTEGER NOT NULL ," + // 7: dtAlteracao
-                "\"VERSAO_SISTEMA\" INTEGER NOT NULL ," + // 8: versaoSistema
-                "\"ID_USUARIO_REG\" INTEGER NOT NULL );"); // 9: idUsuarioReg
+                "\"IND_ATIVO\" INTEGER NOT NULL ," + // 4: indAtivo
+                "\"DT_INCLUSAO\" INTEGER NOT NULL ," + // 5: dtInclusao
+                "\"DT_ALTERACAO\" INTEGER NOT NULL ," + // 6: dtAlteracao
+                "\"VERSAO_SISTEMA\" INTEGER NOT NULL ," + // 7: versaoSistema
+                "\"ID_USUARIO_REG\" INTEGER NOT NULL );"); // 8: idUsuarioReg
     }
 
     /** Drops the underlying database table. */
@@ -76,26 +74,17 @@ public class TalhaoDao extends AbstractDao<Talhao, Long> {
             stmt.bindLong(1, id);
         }
  
-        Long idTalhao = entity.getIdTalhao();
-        if (idTalhao != null) {
-            stmt.bindLong(2, idTalhao);
+        String codigo = entity.getCodigo();
+        if (codigo != null) {
+            stmt.bindString(2, codigo);
         }
- 
-        String descricao = entity.getDescricao();
-        if (descricao != null) {
-            stmt.bindString(3, descricao);
-        }
+        stmt.bindString(3, entity.getDescricao());
         stmt.bindLong(4, entity.getIdCliente());
- 
-        Long idDispositivo = entity.getIdDispositivo();
-        if (idDispositivo != null) {
-            stmt.bindLong(5, idDispositivo);
-        }
-        stmt.bindLong(6, entity.getIndAtivo());
-        stmt.bindLong(7, entity.getDtInclusao().getTime());
-        stmt.bindLong(8, entity.getDtAlteracao().getTime());
-        stmt.bindLong(9, entity.getVersaoSistema());
-        stmt.bindLong(10, entity.getIdUsuarioReg());
+        stmt.bindLong(5, entity.getIndAtivo());
+        stmt.bindLong(6, entity.getDtInclusao().getTime());
+        stmt.bindLong(7, entity.getDtAlteracao().getTime());
+        stmt.bindLong(8, entity.getVersaoSistema());
+        stmt.bindLong(9, entity.getIdUsuarioReg());
     }
 
     @Override
@@ -107,26 +96,17 @@ public class TalhaoDao extends AbstractDao<Talhao, Long> {
             stmt.bindLong(1, id);
         }
  
-        Long idTalhao = entity.getIdTalhao();
-        if (idTalhao != null) {
-            stmt.bindLong(2, idTalhao);
+        String codigo = entity.getCodigo();
+        if (codigo != null) {
+            stmt.bindString(2, codigo);
         }
- 
-        String descricao = entity.getDescricao();
-        if (descricao != null) {
-            stmt.bindString(3, descricao);
-        }
+        stmt.bindString(3, entity.getDescricao());
         stmt.bindLong(4, entity.getIdCliente());
- 
-        Long idDispositivo = entity.getIdDispositivo();
-        if (idDispositivo != null) {
-            stmt.bindLong(5, idDispositivo);
-        }
-        stmt.bindLong(6, entity.getIndAtivo());
-        stmt.bindLong(7, entity.getDtInclusao().getTime());
-        stmt.bindLong(8, entity.getDtAlteracao().getTime());
-        stmt.bindLong(9, entity.getVersaoSistema());
-        stmt.bindLong(10, entity.getIdUsuarioReg());
+        stmt.bindLong(5, entity.getIndAtivo());
+        stmt.bindLong(6, entity.getDtInclusao().getTime());
+        stmt.bindLong(7, entity.getDtAlteracao().getTime());
+        stmt.bindLong(8, entity.getVersaoSistema());
+        stmt.bindLong(9, entity.getIdUsuarioReg());
     }
 
     @Override
@@ -144,15 +124,14 @@ public class TalhaoDao extends AbstractDao<Talhao, Long> {
     @Override
     public void readEntity(Cursor cursor, Talhao entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setIdTalhao(cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1));
-        entity.setDescricao(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setCodigo(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setDescricao(cursor.getString(offset + 2));
         entity.setIdCliente(cursor.getLong(offset + 3));
-        entity.setIdDispositivo(cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4));
-        entity.setIndAtivo(cursor.getInt(offset + 5));
-        entity.setDtInclusao(new java.util.Date(cursor.getLong(offset + 6)));
-        entity.setDtAlteracao(new java.util.Date(cursor.getLong(offset + 7)));
-        entity.setVersaoSistema(cursor.getLong(offset + 8));
-        entity.setIdUsuarioReg(cursor.getLong(offset + 9));
+        entity.setIndAtivo(cursor.getInt(offset + 4));
+        entity.setDtInclusao(new java.util.Date(cursor.getLong(offset + 5)));
+        entity.setDtAlteracao(new java.util.Date(cursor.getLong(offset + 6)));
+        entity.setVersaoSistema(cursor.getLong(offset + 7));
+        entity.setIdUsuarioReg(cursor.getLong(offset + 8));
      }
     
     @Override

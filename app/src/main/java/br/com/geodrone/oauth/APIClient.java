@@ -10,6 +10,7 @@ import br.com.geodrone.resource.InstallerResource;
 import br.com.geodrone.resource.MensagemResource;
 import br.com.geodrone.resource.SincronizacaoAndroidResource;
 import br.com.geodrone.resource.SincronizacaoWebResource;
+import br.com.geodrone.resource.TalhaoResource;
 import br.com.geodrone.resource.UsuarioMensagemResource;
 import br.com.geodrone.utils.Constantes;
 import okhttp3.ResponseBody;
@@ -89,8 +90,8 @@ public interface APIClient {
     @Streaming
     @GET(Constantes.API_URL_PREFIXO + "registro-doencas/cliente/{idCliente}/relatorio")
     public Call<ResponseBody> findRelatorioRegistroDoenca(@Path("idCliente") Long idCliente,
-                                                         @Query("dtInicio") String dtInicio,
-                                                         @Query("dtFim")    String dtFim);
+                                                          @Query("dtInicio") String dtInicio,
+                                                          @Query("dtFim")    String dtFim);
 
     @Streaming
     @GET(Constantes.API_URL_PREFIXO + "registro-chuvas/cliente/{idCliente}/relatorio")
@@ -98,5 +99,9 @@ public interface APIClient {
                                                          @Query("dtInicio") String dtInicio,
                                                          @Query("dtFim")    String dtFim);
 
+
+    @POST(Constantes.API_URL_PREFIXO + "talhaos/cliente/{idCliente}/resource")
+    public Call<TalhaoResource> insertTalhao(@Path("idCliente") Long idCliente,
+                                       @Body TalhaoResource talhaoResource);
 
 }

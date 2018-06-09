@@ -5,6 +5,7 @@ import android.util.Log;
 
 import br.com.geodrone.R;
 import br.com.geodrone.SessionGeooDrone;
+import br.com.geodrone.crypt.CryptoUtils;
 import br.com.geodrone.crypt.Cryptography;
 import br.com.geodrone.crypt.KeyUtils;
 import br.com.geodrone.model.Cliente;
@@ -109,8 +110,8 @@ public class LoginPresenter extends BasePresenter<LoginPresenter.View> {
                 Usuario usuario = usuarioService.findByEmail(login);
                 if (usuario != null) {
 
-                    Cryptography cryptography = Cryptography.getInstance(Cryptography.CRYPTO_CIPHER, KeyUtils.SECRET_KEY);
-                    String senhaCrypto = cryptography.encrypt(senha);
+                    CryptoUtils cryptoUtils = new CryptoUtils();
+                    String senhaCrypto = cryptoUtils.encrypt(senha);
                     if (!usuario.getSenha().equals(senhaCrypto)){
                         activity.onError(activity.getString(R.string.msg_inv_login));
                     }else{

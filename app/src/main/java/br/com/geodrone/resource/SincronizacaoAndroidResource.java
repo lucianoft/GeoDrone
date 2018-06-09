@@ -18,6 +18,7 @@ public class SincronizacaoAndroidResource {
 	private List<PontoColetaChuvaResource> pontoColetaChuvas;
 	private List<TipoDefensivoResource> tipoDefensivos;
 	private List<EstagioInfestacaoResource> estagioInfestacaos;
+	private List<TalhaoResource> talhaos;
 
 	public Long getIdUsuario() {
 		return idUsuario;
@@ -114,5 +115,13 @@ public class SincronizacaoAndroidResource {
 
 	public void setEstagioInfestacaos(List<EstagioInfestacaoResource> estagioInfestacaos) {
 		this.estagioInfestacaos = estagioInfestacaos;
+	}
+
+	public List<TalhaoResource> getTalhaos() {
+		return talhaos;
+	}
+
+	public void setTalhaos(List<TalhaoResource> talhaos) {
+		this.talhaos = talhaos;
 	}
 }

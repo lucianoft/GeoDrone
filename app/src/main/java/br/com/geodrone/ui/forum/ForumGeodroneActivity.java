@@ -1,5 +1,6 @@
 package br.com.geodrone.ui.forum;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -123,11 +124,6 @@ public class ForumGeodroneActivity extends BaseActivity  implements View.OnClick
         }else if (requestCode == IMAGE_CAMERA_REQUEST){
             if (resultCode == RESULT_OK){
                 if (filePathImageCamera != null && filePathImageCamera.exists()){
-                    try {
-                        filePathImageCamera = new Compressor(this).compressToFile(filePathImageCamera);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
                     StorageReference imageCameraRef = storageRef.child(filePathImageCamera.getName()+"_camera");
                     sendFileFirebase(imageCameraRef,filePathImageCamera);
                 }else{
@@ -246,8 +242,17 @@ public class ForumGeodroneActivity extends BaseActivity  implements View.OnClick
     /**
      * Envia o arvquivo para o firebase
      */
-    private void sendFileFirebase(StorageReference storageReference, final File file){
+    private void sendFileFirebase(StorageReference storageReference, File file){
         if (storageReference != null){
+
+            try {
+                file = new Compressor(this).compressToFile(file);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            final String fileName = file.getName();
+            final long fileLenth = file.length();
+
             Uri photoURI = FileProvider.getUriForFile(ForumGeodroneActivity.this,
                     BuildConfig.APPLICATION_ID + ".provider",
                     file);
@@ -262,7 +267,7 @@ public class ForumGeodroneActivity extends BaseActivity  implements View.OnClick
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Log.i(TAG,"onSuccess sendFileFirebase");
                     Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                    FileModel fileModel = new FileModel("img",downloadUrl.toString(),file.getName(),file.length()+"");
+                    FileModel fileModel = new FileModel("img",downloadUrl.toString(),fileName,fileLenth+"");
                     ChatModel chatModel = new ChatModel(userModel,"", Calendar.getInstance().getTime().getTime()+"",fileModel);
                     mFirebaseDatabaseReference.child(Constantes.CHAT_REFERENCE).push().setValue(chatModel);
                 }
@@ -449,15 +454,13 @@ public class ForumGeodroneActivity extends BaseActivity  implements View.OnClick
      */
     public void verifyStoragePermissions() {
         // Check if we have write permission
-        int permission = ActivityCompat.checkSelfPermission(ForumGeodroneActivity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
-
-        if (permission != PackageManager.PERMISSION_GRANTED) {
-            // We don't have permission so prompt the user
-            ActivityCompat.requestPermissions(
-                    ForumGeodroneActivity.this,
-                    PERMISSIONS_STORAGE,
-                    REQUEST_EXTERNAL_STORAGE
-            );
+        if (!hasPermission(Manifest.permission.CAMERA)
+                || !hasPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                || !hasPermission(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            requestPermissionsSafely(new String[]{Manifest.permission.CAMERA,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.READ_EXTERNAL_STORAGE},
+                    REQUEST_EXTERNAL_STORAGE);
         }else{
             // we already have permission, lets go ahead and call camera intent
             photoCameraIntent();

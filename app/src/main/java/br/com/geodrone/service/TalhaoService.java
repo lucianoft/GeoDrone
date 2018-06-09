@@ -30,4 +30,5 @@ public class TalhaoService  extends CrudService<Talhao, Long> {
     public List<Talhao> findAllByCliente(Long idCliente){
         return talhaoRepository.findAllByCliente(idCliente);
     }
+
 }

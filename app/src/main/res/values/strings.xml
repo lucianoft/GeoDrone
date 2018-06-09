@@ -20,13 +20,15 @@
     <string name="title_dialog_confirmar_doenca">Registro de doença</string>
     <string name="title_dialog_confirmar_praga">Registro de praga</string>
     <string name="title_activity_relatorio_registro_pragas">Relatorio de Pagras</string>
-    <string name="title_activity_relatorio_registro_doencas">Relatorio de Pragas</string>
+    <string name="title_activity_relatorio_registro_doencas">Relatorio de Doencas</string>
 
     <string name="title_activity_monitoramento">Monitoramento</string>
     <string name="title_activity_mon">Teste</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="tile_dialog_cadastrar_talhao">Cadastrar Talhao</string>
+    <string name="tile_dialog_alterar_talhao">Alterar Talhao</string>
 
     <!-- Strings related to login -->
     <string name="lb_codigo">Codigo</string>
@@ -98,6 +100,9 @@
     <string name="lb_check_aceite_usuario">Li e concordo com termos do contrato</string>
 
 
+    <string name="msg_obr_codigo">É obrigatorio informar o campo codigo</string>
+    <string name="msg_obr_descricao">É obrigatorio informar o campo descricao</string>
+    <string name="msg_obr_ativo">É obrigatorio informar o campo ativo</string>
     <string name="msg_obr_nome">É obrigatorio informar o campo nome</string>
     <string name="msg_obr_sobrenome">É obrigatorio informar o campo sobrenome</string>
     <string name="msg_obr_telefone">É obrigatorio informar o campo telefone</string>
@@ -157,7 +162,7 @@
     <string name="menu_registro_talhao">Registro Talhao</string>
     <string name="menu_monitoramento">Monitoramento</string>
     <string name="menu_requisitar_arquivos_pragas">Requisitar Arquivos Pragas</string>
-    <string name="menu_requisitar_arquivos_doencas">Requisitar Arquivos Deoncas</string>
+    <string name="menu_requisitar_arquivos_doencas">Requisitar Arquivos Doencas</string>
     <string name="menu_rota_trabalho">Rota Trabalho</string>
     <string name="menu_registro_de_praga">Praga</string>
     <string name="menu_sem_registro_de_praga">Sem Pragas</string>

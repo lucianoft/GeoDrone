@@ -52,6 +52,7 @@ public class MainActivity extends BaseActivity
     public static final int REQ_LOCATION_PERMISSION_MONITORAMENTO         = 1003;
     public static final int REQ_LOCATION_PERMISSION_FOTOS                 = 1004;
     public static final int REQ_LOCATION_PERMISSION_ROTA_KM               = 1005;
+    public static final int REQ_PERMISSION_FORUM                          = 1006;
 
     @BindView(R.id.main_activity_coordinator_layout)
     CoordinatorLayout coordinatorLayout;
@@ -180,8 +181,7 @@ public class MainActivity extends BaseActivity
             }
         } else if (id == R.id.nav_forum) {
             if (isAceiteGeoClima()) {
-                Intent intent = new Intent(this, ForumGeodroneActivity.class);
-                startActivity(intent);
+                getPermissionsForum();
             }
         }else if (id == R.id.menu_item_relatorio_registro_chuva){
             if (isAceiteGeoClima()) {
@@ -252,6 +252,19 @@ public class MainActivity extends BaseActivity
                     REQ_LOCATION_PERMISSION_FOTOS);
         }else {
             Intent i = new Intent(this,RegistroImagemActivity.class);
+            startActivity(i);
+        }
+    }
+
+    private void getPermissionsForum() {
+        if (!hasPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                || !hasPermission(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            requestPermissionsSafely(new String[]{Manifest.permission.CAMERA,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.READ_EXTERNAL_STORAGE},
+                    REQ_PERMISSION_FORUM);
+        }else {
+            Intent i = new Intent(this,ForumGeodroneActivity.class);
             startActivity(i);
         }
     }
@@ -349,6 +362,11 @@ public class MainActivity extends BaseActivity
         }else if (requestCode == REQ_LOCATION_PERMISSION_ROTA_KM) {
             if (grantResults.length > 1 && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                 Intent i = new Intent(this,RotaTrabalhoKmlActivity.class);
+                startActivity(i);
+            }
+        }else if (requestCode == REQ_PERMISSION_FORUM){
+            if (grantResults.length > 1 && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                Intent i = new Intent(this, ForumGeodroneActivity.class);
                 startActivity(i);
             }
         }

@@ -11,6 +11,7 @@ import br.com.geodrone.model.Doenca;
 import br.com.geodrone.model.EstagioInfestacao;
 import br.com.geodrone.model.PontoColetaChuva;
 import br.com.geodrone.model.Praga;
+import br.com.geodrone.model.Talhao;
 import br.com.geodrone.model.TipoCultivo;
 import br.com.geodrone.model.TipoDefensivo;
 import br.com.geodrone.model.Usuario;
@@ -26,6 +27,7 @@ import br.com.geodrone.resource.InstallerResource;
 import br.com.geodrone.resource.PontoColetaChuvaResource;
 import br.com.geodrone.resource.PragaResource;
 import br.com.geodrone.resource.SincronizacaoAndroidResource;
+import br.com.geodrone.resource.TalhaoResource;
 import br.com.geodrone.resource.TipoCultivoResource;
 import br.com.geodrone.resource.TipoDefensivoResource;
 import br.com.geodrone.resource.UsuarioResource;
@@ -52,6 +54,7 @@ public class SincronizacaoToAndroidService extends GenericService {
     ClienteUsuarioRepository clienteUsuarioRepository = null;
     TipoDefensivoService tipoDefensivoService = null;
     EstagioInfestacaoService estagioInfestacaoService = null;
+    TalhaoService talhaoService = null;
 
     private Context ctx = null;
     public SincronizacaoToAndroidService(Context ctx){
@@ -68,6 +71,7 @@ public class SincronizacaoToAndroidService extends GenericService {
         clienteUsuarioRepository = new ClienteUsuarioRepository(ctx);
         tipoDefensivoService = new TipoDefensivoService(ctx);
         estagioInfestacaoService = new EstagioInfestacaoService(ctx);
+        talhaoService = new TalhaoService(ctx);
     }
 
     public void instalarAplicativo (String url, InstallerResource installerResource)  {
@@ -150,6 +154,11 @@ public class SincronizacaoToAndroidService extends GenericService {
         if (sincronizacaoAndroidResource.getEstagioInfestacaos() != null && !sincronizacaoAndroidResource.getEstagioInfestacaos().isEmpty()){
             for (EstagioInfestacaoResource estagioInfestacaoResource : sincronizacaoAndroidResource.getEstagioInfestacaos()) {
                 salvarEstagioInfestacao(estagioInfestacaoResource);
+            }
+        }
+        if (sincronizacaoAndroidResource.getTalhaos() != null && !sincronizacaoAndroidResource.getTalhaos().isEmpty()){
+            for (TalhaoResource talhaoResource : sincronizacaoAndroidResource.getTalhaos()) {
+                salvarTalhao(talhaoResource);
             }
         }
 
@@ -279,12 +288,11 @@ public class SincronizacaoToAndroidService extends GenericService {
             usuario = new Usuario();
         }
 
-        //String senha = PreferencesUtils.getString(ctx, PreferencesUtils.CHAVE_SENHA_USUARIO);
-
         usuario.setId(usuarioResource.getId());
         usuario.setNome(usuarioResource.getNome());
         usuario.setSobrenome(usuarioResource.getSobrenome());
         usuario.setEmail(usuarioResource.getEmail());
+        usuario.setSenha(usuarioResource.getSenha());
         usuario.setTelefone(usuarioResource.getTelefone());
         usuarioResource.setSenha(usuarioResource.getSenha());
         usuario.setFlagPerfil(usuarioResource.getFlagPerfil());
@@ -371,6 +379,26 @@ public class SincronizacaoToAndroidService extends GenericService {
             pontoColetaChuvaService.insert(pontoColetaChuva);
         }else{
             pontoColetaChuvaService.update(pontoColetaChuva);
+        }
+    }
+
+
+    private void salvarTalhao(TalhaoResource talhaoResource) {
+        boolean bInsert = false;
+        Talhao talhao = talhaoService.findById(talhaoResource.getIdTalhao());
+        if (talhao == null) {
+            bInsert = true;
+            talhao = new Talhao();
+        }
+        talhao.setId(talhaoResource.getIdTalhao());
+        talhao.setIdCliente(talhaoResource.getIdCliente());
+        talhao.setDescricao(talhaoResource.getDescricao());
+        talhao.setCodigo(talhaoResource.getCodigo());
+        talhao.setIndAtivo(talhaoResource.getIndAtivo());
+        if (bInsert){
+            talhaoService.insert(talhao);
+        }else{
+            talhaoService.update(talhao);
         }
     }
 }
