@@ -62,14 +62,14 @@ public class MonitoramentoPresenter extends BasePresenter<MonitoramentoPresenter
                 RotaTrabalho rotaTrabalho = new RotaTrabalho();
                 rotaTrabalho.setFlagTipo(FlagTipoRota.MONITORAMENTO.value());
                 rotaTrabalho.setFlagOperacaoRota(FlagOperacaoRota.INICIO_MONITORAMENTO.value());
-                rotaTrabalho.setIdTalhaoDisp(talhao != null ? talhao.getId() : null);
+                rotaTrabalho.setIdTalhao(talhao != null ? talhao.getId() : null);
                 rotaTrabalhoService.insert(rotaTrabalho);
                 Log.i(TAG, "Rota de trabalho grava com sucesso");
             }else if( distancia(location) > 50f) {
                 RotaTrabalho rotaTrabalho = new RotaTrabalho();
                 rotaTrabalho.setFlagTipo(FlagTipoRota.MONITORAMENTO.value());
                 rotaTrabalho.setFlagOperacaoRota(FlagOperacaoRota.MEIO_MONITORAMENTO.value());
-                rotaTrabalho.setIdTalhaoDisp(talhao != null ? talhao.getId() : null);
+                rotaTrabalho.setIdTalhao(talhao != null ? talhao.getId() : null);
                 rotaTrabalhoService.insert(rotaTrabalho);
                 Log.i(TAG, "Rota de trabalho grava com sucesso");
             }
@@ -86,7 +86,7 @@ public class MonitoramentoPresenter extends BasePresenter<MonitoramentoPresenter
                 RotaTrabalho rotaTrabalho = new RotaTrabalho();
                 rotaTrabalho.setFlagTipo(FlagTipoRota.MONITORAMENTO.value());
                 rotaTrabalho.setFlagOperacaoRota(FlagOperacaoRota.FIM_MONITORAMENTO.value());
-                rotaTrabalho.setIdTalhaoDisp(talhao != null ? talhao.getId() : null);
+                rotaTrabalho.setIdTalhao(talhao != null ? talhao.getId() : null);
                 rotaTrabalhoService.insert(rotaTrabalho);
             }
             Log.i(TAG, "Rota de trabalho grava com sucesso");

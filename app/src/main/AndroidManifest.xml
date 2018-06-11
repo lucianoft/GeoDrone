@@ -148,7 +148,8 @@
         <activity
             android:name=".ui.relatorioregistrochuva.RelatorioRegistroChuvaActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".ui.talhao.ConsultaTalhaoActivity"></activity>
+        <activity android:name=".ui.talhao.ConsultaTalhaoActivity" />
+        <activity android:name=".ui.relatorioindicepraga.RelatorioIndicePragaActivity"></activity>
     </application>
 
 </manifest>

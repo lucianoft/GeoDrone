@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="start"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:layout_marginTop="15dp"
+    android:layout_marginBottom="15dp"
+    tools:context=".ui.registrodefensivo.RegistroDefensivoActivity">
+
+    <LinearLayout
+        android:id="@+id/linear_layout_tipo_defensivo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text= "@string/lb_tipo_defensivo"
+            />
+
+        <Spinner
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:id="@+id/spinner_tipo_defensivo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/text_input_layout_dt_registro"
+        android:layout_below="@+id/linear_layout_tipo_defensivo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText android:id="@+id/edit_text_dt_registro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:focusable="false"
+            android:hint="@string/lb_dt_inicio" />
+    </android.support.design.widget.TextInputLayout>
+
+    <!--  Observacao -->
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/text_input_layout_dose_defensivo"
+        android:layout_below="@+id/text_input_layout_dt_registro"
+        style="@style/TextLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp">
+        <EditText android:id="@+id/edit_text_dose_defensivo"
+            style="@style/TextLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="@string/lb_dose" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <!--NEW LINE!-->
+    <Button
+        android:id="@+id/btn_salvar_defensivo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_input_layout_dose_defensivo"
+        android:layout_marginTop="15dp"
+        style="@style/CustomStyleButton"
+        android:text="@string/lb_btn_salvar_dose_defensivo" />
+
+</RelativeLayout>

@@ -26,7 +26,7 @@ public class RotaTrabalhoDao extends AbstractDao<RotaTrabalho, Long> {
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "ID_ROTA_TRABALHO_DISP");
         public final static Property IdRotaTrabalho = new Property(1, Long.class, "idRotaTrabalho", false, "ID_ROTA_TRABALHO");
-        public final static Property IdTalhaoDisp = new Property(2, Long.class, "idTalhaoDisp", false, "ID_TALHAO_DISP");
+        public final static Property IdTalhao = new Property(2, Long.class, "idTalhao", false, "ID_TALHAO");
         public final static Property IdCliente = new Property(3, Long.class, "idCliente", false, "ID_CLIENTE");
         public final static Property FlagTipo = new Property(4, String.class, "flagTipo", false, "FLAG_TIPO");
         public final static Property FlagOperacaoRota = new Property(5, String.class, "flagOperacaoRota", false, "FLAG_OPERACAO_ROTA");
@@ -55,7 +55,7 @@ public class RotaTrabalhoDao extends AbstractDao<RotaTrabalho, Long> {
         db.execSQL("CREATE TABLE " + constraint + "\"GEO_ROTA_TRABALHO\" (" + //
                 "\"ID_ROTA_TRABALHO_DISP\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"ID_ROTA_TRABALHO\" INTEGER," + // 1: idRotaTrabalho
-                "\"ID_TALHAO_DISP\" INTEGER," + // 2: idTalhaoDisp
+                "\"ID_TALHAO\" INTEGER," + // 2: idTalhao
                 "\"ID_CLIENTE\" INTEGER NOT NULL ," + // 3: idCliente
                 "\"FLAG_TIPO\" TEXT," + // 4: flagTipo
                 "\"FLAG_OPERACAO_ROTA\" TEXT," + // 5: flagOperacaoRota
@@ -89,9 +89,9 @@ public class RotaTrabalhoDao extends AbstractDao<RotaTrabalho, Long> {
             stmt.bindLong(2, idRotaTrabalho);
         }
  
-        Long idTalhaoDisp = entity.getIdTalhaoDisp();
-        if (idTalhaoDisp != null) {
-            stmt.bindLong(3, idTalhaoDisp);
+        Long idTalhao = entity.getIdTalhao();
+        if (idTalhao != null) {
+            stmt.bindLong(3, idTalhao);
         }
         stmt.bindLong(4, entity.getIdCliente());
  
@@ -128,9 +128,9 @@ public class RotaTrabalhoDao extends AbstractDao<RotaTrabalho, Long> {
             stmt.bindLong(2, idRotaTrabalho);
         }
  
-        Long idTalhaoDisp = entity.getIdTalhaoDisp();
-        if (idTalhaoDisp != null) {
-            stmt.bindLong(3, idTalhaoDisp);
+        Long idTalhao = entity.getIdTalhao();
+        if (idTalhao != null) {
+            stmt.bindLong(3, idTalhao);
         }
         stmt.bindLong(4, entity.getIdCliente());
  
@@ -169,7 +169,7 @@ public class RotaTrabalhoDao extends AbstractDao<RotaTrabalho, Long> {
     public void readEntity(Cursor cursor, RotaTrabalho entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setIdRotaTrabalho(cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1));
-        entity.setIdTalhaoDisp(cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2));
+        entity.setIdTalhao(cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2));
         entity.setIdCliente(cursor.getLong(offset + 3));
         entity.setFlagTipo(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setFlagOperacaoRota(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));

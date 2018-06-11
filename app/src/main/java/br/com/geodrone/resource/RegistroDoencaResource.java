@@ -10,6 +10,7 @@ public class RegistroDoencaResource {
     private String observacao;
     private Long idDoenca;
     private Long idCliente;
+    private Long idTalhao;
     private Double latitude;
     private Double longitude;
     private Date dtRegistro;
@@ -62,6 +63,14 @@ public class RegistroDoencaResource {
 
     public void setIdCliente(Long idCliente) {
         this.idCliente = idCliente;
+    }
+
+    public Long getIdTalhao() {
+        return idTalhao;
+    }
+
+    public void setIdTalhao(Long idTalhao) {
+        this.idTalhao = idTalhao;
     }
 
     public Double getLatitude() {

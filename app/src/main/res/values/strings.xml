@@ -51,9 +51,11 @@
     <string name="lb_mensagem">Mensagem</string>
     <string name="lb_profile">Profile</string>
     <string name="lb_observacao">Observação</string>
+    <string name="lb_dose">Dose</string>
     <string name="lb_tipo_praga_doenca">Tipo de Praga/Doença</string>
     <string name="lb_tipo_praga">Tipo de Praga</string>
     <string name="lb_tipo_cultivo">Tipo de Cultivo</string>
+    <string name="lb_tipo_defensivo">Tipo de Defensivo</string>
     <string name="lb_direcao">Direçao</string>
     <string name="lb_pesquisar">pesquisar</string>
     <string name="lb_praga">Praga</string>
@@ -92,6 +94,7 @@
     <string name="lb_btn_gerar_relatorio">Gerar Relatorio</string>
     <string name="lb_possui_registro_doenca">Possui registro de doença?</string>
     <string name="lb_possui_registro_praga">Possui registro de praga?</string>
+    <string name="lb_btn_salvar_dose_defensivo">Salvar Dose Defensivo</string>
     <string name="lb_sim">Sim</string>
     <string name="lb_nao">Não</string>
     <string name="lb_registro_condicao_tempo">Condição do Tempo</string>
@@ -120,6 +123,9 @@
     <string name="msg_obr_dt_fim">É obrigatorio informar o campo Data Fim</string>
     <string name="msg_inv_dt_inicio">Conteudo do campo Data Inicio é invalido</string>
     <string name="msg_inv_dt_fim">Conteudo do campo Data Inicio é invalido</string>
+    <string name="msg_obr_tipo_defensivo">É obrigatorio informar o campo Tipo Defensivo</string>
+    <string name="msg_obr_dt_registro">É obrigatorio informar o campo Dt Registro</string>
+    <string name="msg_obr_dose">É obrigatorio informar o campo dose</string>
 
     <string name="msg_inv_senha_dif_confirmar_senha">Campo confirmar senha diferente do campo senha</string>
 
@@ -146,44 +152,66 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
 
-    <string name="menu_ponto_coleta_chuva">Ponto Coleta Chuva</string>
-    <string name="menu_registro_chuva">Registro Chuva</string>
-    <string name="menu_registro_foto">Registro Fotos</string>
-    <string name="menu_registro_condicoes_tempo">Registro Condiçoes Tempo</string>
-    <string name="menu_comunicacao">Comunicação</string>
-    <string name="menu_mensagem">Mensagem</string>
-    <string name="menu_forum">Forum</string>
-    <string name="menu_sincronizacao">Sincronizaçao</string>
-    <string name="menu_configuracao">Configuração</string>
-
     <string name="menu_geo_clima">GeoClima</string>
+    <string name="menu_ponto_previsao">\tPrevisao</string>
+    <string name="menu_ponto_coleta_chuva">\tPonto Coleta Chuva</string>
+    <string name="menu_registro_chuva">\tRegistro Chuva</string>
+    <string name="menu_registro_foto">\tRegistro Fotos</string>
+    <string name="menu_registro_condicoes_tempo">\tRegistro Condiçoes Tempo</string>
+    <string name="menu_relatorio_registro_chuva">\tRelatorio Registro Chuva</string>
+
+
+    <string name="menu_comunicacao">\tComunicação</string>
+    <string name="menu_mensagem">\t\tMensagem</string>
+    <string name="menu_forum">\t\tForum</string>
+
     <string name="menu_geooDrone">GeooDrone</string>
     <string name="menu_geoomonitora">GeooMonitora</string>
-    <string name="menu_registro_talhao">Registro Talhao</string>
-    <string name="menu_monitoramento">Monitoramento</string>
-    <string name="menu_requisitar_arquivos_pragas">Requisitar Arquivos Pragas</string>
-    <string name="menu_requisitar_arquivos_doencas">Requisitar Arquivos Doencas</string>
-    <string name="menu_rota_trabalho">Rota Trabalho</string>
+
+    <string name="menu_registro_talhao">\tRegistro Talhao</string>
+    <string name="menu_monitoramento">\tMonitoramento</string>
+    <string name="menu_defensivo_doses">\tDefensivos e Doses</string>
+    <string name="menu_rota_trabalho">\tRota Trabalho</string>
+    <string name="menu_requisitar_arquivos_pragas">\tRequisitar Arquivos Pragas</string>
+    <string name="menu_requisitar_arquivos_doencas">\tRequisitar Arquivos Doencas</string>
+    <string name="menu_relatorio_indice_pragas">\tRelatorio indice Pragas</string>
+
+    <string name="menu_configuracao">Configuração</string>
+    <string name="menu_sincronizacao">\tSincronizaçao</string>
+
     <string name="menu_registro_de_praga">Praga</string>
     <string name="menu_sem_registro_de_praga">Sem Pragas</string>
     <string name="menu_registro_de_doenca">Registro Doenca</string>
     <string name="menu_sem_registro_de_doenca">Doenca</string>
     <string name="menu_talhao">Talhão</string>
-    <string name="menu_defensivo_doses">Defensivos e Doses</string>
-    <string name="menu_relatorio_registro_chuva">Relatorio Registro Chuva</string>
 
-    <string name="action_settings">Settings</string>
+    <string name="menu_administracao">Administracao</string>
+    <string name="menu_clientes">\tClientes</string>
+
+    <string name="action_configuracao">Configuracao</string>
     <string name="action_logout">Logout</string>
     <string name="action_alterar_cliente">Alterar Cliente</string>
     <string name="action_alterar_senha">Alterar Senha</string>
+    <string name="action_administracao">Administração</string>
 
-    <string name="sendPhoto">Photo Camera</string>
-    <string name="sign_out">Sign Out</string>
-    <string name="select_picture_title">Get Photo From</string>
-    <string name="sendPhotoGallery">Photo Gallery</string>
+    <string name="sendPhoto">Camera</string>
+    <string name="sign_out">Logout</string>
+    <string name="select_picture_title">Selecionar Foto</string>
+    <string name="sendPhotoGallery">Foto Galeria</string>
     <string name="api_key_google_places">AIzaSyBisbsq9wIW8Q2Isj033c3wXqtTBRyaRBA</string>
-    <string name="sendLocation">Send Location</string>
+    <string name="sendLocation">Localizacao</string>
     <string name="locationTo">Localização Enviada</string>
+    <string name="title_activity_main_administrador">MainAdministradorActivity</string>
+
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+
+    <string name="action_example">Example action</string>
+    <string name="title_activity_main_adm">Geodrone</string>
+    <string name="title_activity_main_admin">Administraçao</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 
 
 </resources>

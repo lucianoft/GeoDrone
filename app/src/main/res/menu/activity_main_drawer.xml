@@ -6,71 +6,90 @@
 
     GeooDrone
 
-    <item android:title="@string/menu_geo_clima">
-        <menu>
-            <item
-                android:id="@+id/nav_ponto_coleta_chuva"
-                android:title="@string/menu_ponto_coleta_chuva" />
-            <item
-                android:id="@+id/nav_registo_chuva"
-                android:title="@string/menu_registro_chuva" />
-            <item
-                android:id="@+id/nav_registro_foto"
-                android:title="@string/menu_registro_foto" />
-            <item
-                android:id="@+id/nav_registro_condicoes_tempo"
-                android:title="@string/menu_registro_condicoes_tempo" />
-            <item
-                android:id="@+id/menu_item_relatorio_registro_chuva"
-                android:title="@string/menu_relatorio_registro_chuva" />
+    <group android:checkableBehavior="single">
 
-            <item android:title="@string/menu_comunicacao"
-                android:enabled="false"
-                app:showAsAction="always" />
-            <item
-                android:id="@+id/nav_mensagem"
-                android:title="@string/menu_mensagem"
-                android:menuCategory="secondary"/>
-            <item
-                android:id="@+id/nav_forum"
-                android:title="@string/menu_forum"
-                android:menuCategory="secondary"/>
-          </menu>
-    </item>
+        <item android:title="@string/menu_geo_clima">
+            <menu>
+                <item
+                    android:id="@+id/nav_ponto_previsao"
+                    android:title="@string/menu_ponto_previsao" />
+                <item
+                    android:id="@+id/nav_ponto_coleta_chuva"
+                    android:title="@string/menu_ponto_coleta_chuva" />
+                <item
+                    android:id="@+id/nav_registo_chuva"
+                    android:title="@string/menu_registro_chuva" />
+                <item
+                    android:id="@+id/nav_registro_foto"
+                    android:title="@string/menu_registro_foto" />
+                <item
+                    android:id="@+id/nav_registro_condicoes_tempo"
+                    android:title="@string/menu_registro_condicoes_tempo" />
+                <item
+                    android:id="@+id/menu_item_relatorio_registro_chuva"
+                    android:title="@string/menu_relatorio_registro_chuva" />
 
-    <item android:title="@string/menu_geoomonitora">
-        <menu>
-            <item
-                android:id="@+id/menu_item_registro_talhao"
-                android:title="@string/menu_registro_talhao" />
-            <item
-                android:id="@+id/menu_item_monitoramento_campo"
-                android:title="@string/menu_monitoramento" />
-            <item
-                android:id="@+id/menu_item_defensivos_doses"
-                android:title="@string/menu_defensivo_doses" />
-            <item
-                android:id="@+id/menu_item_rota_trabalho"
-                android:title="@string/menu_rota_trabalho" />
-            <item
-                android:id="@+id/menu_item_requisitar_arquivos_pragas"
-                android:title="@string/menu_requisitar_arquivos_pragas" />
-            <item
-                android:id="@+id/menu_item_requisitar_arquivos_doencas"
-                android:title="@string/menu_requisitar_arquivos_doencas" />
+                <item android:title="@string/menu_comunicacao"
+                    android:enabled="false"
+                    app:showAsAction="always" />
+                <item
+                    android:id="@+id/nav_mensagem"
+                    android:title="@string/menu_mensagem"
+                    android:menuCategory="secondary"/>
+                <item
+                    android:id="@+id/nav_forum"
+                    android:title="@string/menu_forum"
+                    android:menuCategory="secondary"/>
+              </menu>
+        </item>
+
+        <item android:title="@string/menu_geoomonitora">
+            <menu>
+                <item
+                    android:id="@+id/menu_item_registro_talhao"
+                    android:title="@string/menu_registro_talhao" />
+                <item
+                    android:id="@+id/menu_item_monitoramento_campo"
+                    android:title="@string/menu_monitoramento" />
+                <item
+                    android:id="@+id/menu_item_defensivos_doses"
+                    android:title="@string/menu_defensivo_doses" />
+                <item
+                    android:id="@+id/menu_item_rota_trabalho"
+                    android:title="@string/menu_rota_trabalho" />
+                <item
+                    android:id="@+id/menu_item_requisitar_arquivos_pragas"
+                    android:title="@string/menu_requisitar_arquivos_pragas" />
+                <item
+                    android:id="@+id/menu_item_relatorio_indice_pragas"
+                    android:title="@string/menu_relatorio_indice_pragas" />
+
+                <item
+                    android:id="@+id/menu_item_requisitar_arquivos_doencas"
+                    android:title="@string/menu_requisitar_arquivos_doencas" />
+
+                </menu>
+        </item>
+
+        <item android:title="@string/menu_configuracao">
+            <menu>
+                <item
+                    android:id="@+id/nav_sincronizacao"
+                    android:title="@string/menu_sincronizacao" />
 
             </menu>
-    </item>
+        </item>
 
-    <item android:title="@string/menu_configuracao">
-        <menu>
-            <item
-                android:id="@+id/nav_sincronizacao"
-                android:title="@string/menu_sincronizacao" />
+        <item
+            android:id="@+id/menu_administracao"
+            android:title="@string/menu_administracao">
+            <menu>
+                <item
+                    android:id="@+id/menu_item_adm_cliente"
+                    android:title="@string/menu_clientes" />
+            </menu>
+        </item>
 
-        </menu>
-    </item>
-
-
+    </group>
 
 </menu>

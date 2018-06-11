@@ -21,9 +21,6 @@ import butterknife.OnClick;
 public class RelatorioRegistroPragaActivity extends BaseRelatorioActivity implements DatePickerDialog.OnDateSetListener,
                                                                                      RelatorioRegistroPragaPresenter.View{
 
-    public static final String MESSAGE_PROGRESS = "message_progress";
-    private static final int PERMISSION_REQUEST_CODE = 1;
-
     public static final int FLAG_START_DATE = 0;
     public static final int FLAG_END_DATE = 1;
 

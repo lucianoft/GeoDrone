@@ -1,14 +1,11 @@
 package br.com.geodrone.ui.login;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.text.InputType;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,7 +15,6 @@ import br.com.geodrone.ui.cliente.CadastroClienteActivity;
 import br.com.geodrone.ui.helper.ActivityHelper;
 import br.com.geodrone.ui.helper.GenericProgress;
 import br.com.geodrone.ui.sincronizacao.SincronizacaoActivity;
-import br.com.geodrone.ui.usuario.CadatroUsuarioActivity;
 import br.com.geodrone.ui.main.MainActivity;
 import br.com.geodrone.utils.KeyboardUtils;
 import br.com.geodrone.utils.Messenger;

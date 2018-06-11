@@ -88,6 +88,12 @@ public interface APIClient {
                                                          @Query("dtFim")    String dtFim);
 
     @Streaming
+    @GET(Constantes.API_URL_PREFIXO + "registro-pragas/cliente/{idCliente}/relatorio-indice")
+    public Call<ResponseBody> findRelatorioIndicePraga(@Path("idCliente") Long idCliente,
+                                                         @Query("dtInicio") String dtInicio,
+                                                         @Query("dtFim")    String dtFim);
+
+    @Streaming
     @GET(Constantes.API_URL_PREFIXO + "registro-doencas/cliente/{idCliente}/relatorio")
     public Call<ResponseBody> findRelatorioRegistroDoenca(@Path("idCliente") Long idCliente,
                                                           @Query("dtInicio") String dtInicio,
@@ -103,5 +109,9 @@ public interface APIClient {
     @POST(Constantes.API_URL_PREFIXO + "talhaos/cliente/{idCliente}/resource")
     public Call<TalhaoResource> insertTalhao(@Path("idCliente") Long idCliente,
                                        @Body TalhaoResource talhaoResource);
+
+    @PUT(Constantes.API_URL_PREFIXO + "talhaos/{id}/resource")
+    public Call<TalhaoResource> updateTalhao(@Path("id") Long id,
+                                             @Body TalhaoResource talhaoResource);
 
 }

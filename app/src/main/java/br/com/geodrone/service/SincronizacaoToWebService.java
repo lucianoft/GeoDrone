@@ -278,6 +278,7 @@ public class SincronizacaoToWebService extends GenericService {
                 registroPragaResource.setIdRegistroPraga(registroPraga.getIdRegistroPraga());
                 registroPragaResource.setIdRegistroPragaDisp(registroPraga.getId());
                 registroPragaResource.setIdPraga(registroPraga.getIdPraga());
+                registroPragaResource.setIdTalhao(registroPraga.getIdTalhao());
                 registroPragaResource.setObservacao(registroPraga.getObservacao());
                 registroPragaResource.setQtde(registroPraga.getQtde());
                 registroPragaResource.setIdCliente(registroPraga.getIdCliente());
@@ -310,9 +311,10 @@ public class SincronizacaoToWebService extends GenericService {
 
                 registroDoencaResource.setIdRegistroDoenca(registroDoenca.getIdRegistroDoenca());
                 registroDoencaResource.setIdRegistroDoencaDisp(registroDoenca.getId());
+                registroDoencaResource.setIdTalhao(registroDoenca.getIdTalhao());
                 registroDoencaResource.setIdDoenca(registroDoenca.getIdDoenca());
                 registroDoencaResource.setObservacao(registroDoenca.getObservacao());
-                //registroDoencaResource.setQtde(registroDoenca.getQtde());
+                registroDoencaResource.setQtde(registroDoenca.getQtde());
                 registroDoencaResource.setIdCliente(registroDoenca.getIdCliente());
                 registroDoencaResource.setLatitude(registroDoenca.getLatitude());
                 registroDoencaResource.setLongitude(registroDoenca.getLongitude());

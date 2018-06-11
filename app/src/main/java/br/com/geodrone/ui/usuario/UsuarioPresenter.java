@@ -95,7 +95,7 @@ public class UsuarioPresenter extends BasePresenter<UsuarioPresenter.View> {
                 usuario.setEmail(email);
                 usuario.setTelefone(telefone);
                 usuario.setSenha(senha);
-                usuario.setFlagPerfil(FlagPerfilUsuario.ADM.value());
+                usuario.setFlagPerfil(FlagPerfilUsuario.ADMINISTRADOR.value());
                 usuario = usuarioService.insert(usuario);
 
                 view.onCadastroSucesso(activity.getString(R.string.msg_operacao_sucesso));

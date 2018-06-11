@@ -152,7 +152,7 @@ public class TipoDefensivo extends GenericModel implements AuditModel, ActiveMod
 
 	@Override
 	public String toString() {
-		return (this.id == null ? "" : this.id.toString() );
+		return (this.descricao == null ? "" : this.descricao.toString() );
 	}
 	/** ***************************** */
 

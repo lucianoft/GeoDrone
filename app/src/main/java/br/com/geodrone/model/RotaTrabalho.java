@@ -27,8 +27,8 @@ public class RotaTrabalho extends GenericModel implements AuditModel, ClientMode
 	@Property(nameInDb = "ID_ROTA_TRABALHO")
 	private Long idRotaTrabalho;
 
-	@Property(nameInDb = "ID_TALHAO_DISP")
-	private Long idTalhaoDisp;
+	@Property(nameInDb = "ID_TALHAO")
+	private Long idTalhao;
 
 	@Property(nameInDb = "ID_CLIENTE")
 	@NotNull
@@ -89,12 +89,12 @@ public class RotaTrabalho extends GenericModel implements AuditModel, ClientMode
 		this.idRotaTrabalho = idRotaTrabalho;
 	}
 
-    public Long getIdTalhaoDisp() {
-        return idTalhaoDisp;
+    public Long getIdTalhao() {
+        return idTalhao;
     }
 
-    public void setIdTalhaoDisp(Long idTalhaoDisp) {
-        this.idTalhaoDisp = idTalhaoDisp;
+    public void setIdTalhao(Long idTalhao) {
+        this.idTalhao = idTalhao;
     }
 
     /** ***** from DomainCliente ****** */

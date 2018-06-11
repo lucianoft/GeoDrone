@@ -10,9 +10,12 @@ public class RegistroPragaResource {
     private String observacao;
     private Long idPraga;
     private Long idCliente;
+    private Long idTalhao;
     private Double latitude;
     private Double longitude;
+
     private Date dtRegistro;
+
     private Long idDispositivo;
     private Long idUsuarioReg;
 
@@ -62,6 +65,14 @@ public class RegistroPragaResource {
 
     public void setIdCliente(Long idCliente) {
         this.idCliente = idCliente;
+    }
+
+    public Long getIdTalhao() {
+        return idTalhao;
+    }
+
+    public void setIdTalhao(Long idTalhao) {
+        this.idTalhao = idTalhao;
     }
 
     public Double getLatitude() {

@@ -27,7 +27,10 @@ public class RegistroDoenca extends GenericModel implements AuditModel, ClientMo
 	@Property(nameInDb = "OBSERVACAO")
 	private String observacao;
 
-	@Property(nameInDb = "ID_DOENCA")
+    @Property(nameInDb = "QTDE")
+    private Long qtde;
+
+    @Property(nameInDb = "ID_DOENCA")
 	private Long idDoenca;
 
 	@Property(nameInDb="ID_ESTAGIO_INFESTACAO")
@@ -43,6 +46,10 @@ public class RegistroDoenca extends GenericModel implements AuditModel, ClientMo
 	@Property(nameInDb = "ID_CLIENTE")
 	@NotNull
 	private Long idCliente;
+
+	@Property(nameInDb = "ID_TALHAO")
+	@NotNull
+	private Long idTalhao;
 
 	@Property(nameInDb = "LATITUDE")
 	@NotNull
@@ -82,7 +89,15 @@ public class RegistroDoenca extends GenericModel implements AuditModel, ClientMo
 		this.id = id;
 	}
 
-	public String getObservacao() {
+    public Long getQtde() {
+        return this.qtde;
+    }
+    public void setQtde(Long qtde) {
+        this.qtde = qtde;
+    }
+
+
+    public String getObservacao() {
 		return this.observacao;
 	}
 	public void setObservacao(String observacao) {
@@ -106,6 +121,13 @@ public class RegistroDoenca extends GenericModel implements AuditModel, ClientMo
 		this.idRegistroDoenca = idRegistroDoenca;
 	}
 
+    public Long getIdTalhao() {
+        return idTalhao;
+    }
+
+    public void setIdTalhao(Long idTalhao) {
+        this.idTalhao = idTalhao;
+    }
     /** ***** from DateRegistryModel ****** */
     @Override
     public Date getDtRegistro() {

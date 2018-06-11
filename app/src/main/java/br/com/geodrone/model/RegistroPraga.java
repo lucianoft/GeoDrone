@@ -47,6 +47,10 @@ public class RegistroPraga extends GenericModel implements AuditModel, ClientMod
 	@NotNull
 	private Long idCliente;
 
+	@Property(nameInDb = "ID_TALHAO")
+	@NotNull
+	private Long idTalhao;
+
 	@Property(nameInDb = "LATITUDE")
 	@NotNull
 	private Double latitude;
@@ -117,7 +121,13 @@ public class RegistroPraga extends GenericModel implements AuditModel, ClientMod
 		this.idRegistroPraga = idRegistroPraga;
 	}
 
+    public Long getIdTalhao() {
+        return idTalhao;
+    }
 
+    public void setIdTalhao(Long idTalhao) {
+        this.idTalhao = idTalhao;
+    }
 	/** ***** from DateRegistryModel ****** */
 	@Override
 	public Date getDtRegistro() {

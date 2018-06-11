@@ -7,7 +7,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -30,11 +29,13 @@ import br.com.geodrone.ui.forum.ForumGeodroneActivity;
 import br.com.geodrone.ui.helper.ActivityHelper;
 import br.com.geodrone.ui.logout.LogoutActivity;
 import br.com.geodrone.ui.mensagem.usuarios.MensagemUsuariosActivity;
-import br.com.geodrone.ui.pontocoletachuva.PontoColetaChuvaActivity;
-import br.com.geodrone.ui.registrocondicaotempo.RegistroCondicoesTempoActivity;
-import br.com.geodrone.ui.registroimagem.RegistroImagemActivity;
-import br.com.geodrone.ui.registrochuva.RegistroPluviosidadeActivity;
 import br.com.geodrone.ui.monitoramento.MonitoramentoActivity;
+import br.com.geodrone.ui.pontocoletachuva.PontoColetaChuvaActivity;
+import br.com.geodrone.ui.registrochuva.RegistroPluviosidadeActivity;
+import br.com.geodrone.ui.registrocondicaotempo.RegistroCondicoesTempoActivity;
+import br.com.geodrone.ui.registrodefensivo.RegistroDefensivoActivity;
+import br.com.geodrone.ui.registroimagem.RegistroImagemActivity;
+import br.com.geodrone.ui.relatorioindicepraga.RelatorioIndicePragaActivity;
 import br.com.geodrone.ui.relatorioregistrochuva.RelatorioRegistroChuvaActivity;
 import br.com.geodrone.ui.relatorioregistrodoenca.RelatorioRegistroDoencaActivity;
 import br.com.geodrone.ui.relatorioregistropraga.RelatorioRegistroPragaActivity;
@@ -45,7 +46,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity
-                          implements NavigationView.OnNavigationItemSelectedListener /*BottomNavigationView.OnNavigationItemSelectedListener*/ {
+                          implements NavigationView.OnNavigationItemSelectedListener,
+                                     MainPresenter.View
+                          /*BottomNavigationView.OnNavigationItemSelectedListener*/ {
 
     public static final int REQ_LOCATION_PERMISSION_PONTO_PLUVIOSIDADE    = 1001;
     public static final int REQ_LOCATION_PERMISSION_REGISTRO_PLUVIOSIDADE = 1002;
@@ -54,8 +57,7 @@ public class MainActivity extends BaseActivity
     public static final int REQ_LOCATION_PERMISSION_ROTA_KM               = 1005;
     public static final int REQ_PERMISSION_FORUM                          = 1006;
 
-    @BindView(R.id.main_activity_coordinator_layout)
-    CoordinatorLayout coordinatorLayout;
+    private MainPresenter mainPresenter;
 
     @BindView(R.id.nav_view_main)NavigationView navigationView;
     @BindView(R.id.toolbar) Toolbar toolbar;
@@ -74,26 +76,25 @@ public class MainActivity extends BaseActivity
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
 
+        mainPresenter = new MainPresenter(this);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
         navigationView.setNavigationItemSelectedListener(this);
-
     }
-
 
     @Override
     public void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
+        mainPresenter.takeView(this);
         configurarUsuarioCliente();
-
-      }
+        configurarPermissoes();
+    }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         nSair++;
         if(nSair<2) {
             if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -122,6 +123,28 @@ public class MainActivity extends BaseActivity
         textViewNomeCliente.setText(cliente.getNomeRazaoSocial());
 
     }
+
+    private void configurarPermissoes(){
+        Usuario usuario = SessionGeooDrone.getAttribute(SessionGeooDrone.CHAVE_USUARIO);
+        Cliente cliente = SessionGeooDrone.getAttribute(SessionGeooDrone.CHAVE_CLIENTE);
+
+        Menu menuNav = navigationView.getMenu();
+
+        if (mainPresenter.isPerfilColetor(usuario)) {
+            MenuItem menuItemMensagem = menuNav.findItem(R.id.nav_mensagem);
+            menuItemMensagem.setEnabled(false);
+        }
+        if (mainPresenter.isPerfilColetor(usuario)) {
+            MenuItem menuItemForum = menuNav.findItem(R.id.nav_forum);
+            menuItemForum.setEnabled(false);
+        }
+        if (mainPresenter.isPerfilColetor(usuario)) {
+            MenuItem menuItemTalhao= menuNav.findItem(R.id.menu_item_registro_talhao);
+            menuItemTalhao.setEnabled(false);
+        }
+
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
@@ -133,7 +156,7 @@ public class MainActivity extends BaseActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_configuracao) {
             return true;
         }else if (id == R.id.action_logout){
             finish();
@@ -146,6 +169,7 @@ public class MainActivity extends BaseActivity
             ActivityHelper activityHelper = new ActivityHelper();
             activityHelper.alterarCliente(this);
             configurarUsuarioCliente();
+            configurarPermissoes();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -196,12 +220,16 @@ public class MainActivity extends BaseActivity
                 Intent intent = new Intent(this, ConsultaTalhaoActivity.class);
                 startActivity(intent);
             }
-        }
-        else if (id == R.id.menu_item_monitoramento_campo) {
+        }else if (id == R.id.menu_item_monitoramento_campo) {
             if (isAceiteGeomonitora()) {
                 getPermissionsGpsMonitoramento();
             }
-        }  else if (id == R.id.menu_item_rota_trabalho){
+        }else if (id == R.id.menu_item_defensivos_doses){
+            if (isAceiteGeomonitora()){
+                Intent intent = new Intent(this, RegistroDefensivoActivity.class);
+                startActivity(intent);
+            }
+        }else if (id == R.id.menu_item_rota_trabalho){
             if (isAceiteGeomonitora()) {
                 getPermissionsGpsRotaMonitoramentoKml();
             }
@@ -213,6 +241,11 @@ public class MainActivity extends BaseActivity
         }else if (id == R.id.menu_item_requisitar_arquivos_doencas){
             if (isAceiteGeomonitora()) {
                 Intent intent = new Intent(this, RelatorioRegistroDoencaActivity.class);
+                startActivity(intent);
+            }
+        }else if (id == R.id.menu_item_relatorio_indice_pragas){
+            if (isAceiteGeomonitora()) {
+                Intent intent = new Intent(this, RelatorioIndicePragaActivity.class);
                 startActivity(intent);
             }
         }

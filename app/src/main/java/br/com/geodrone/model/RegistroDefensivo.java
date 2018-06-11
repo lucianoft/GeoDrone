@@ -23,7 +23,7 @@ public class RegistroDefensivo extends GenericModel implements AuditModel, UserM
 	private Long id;
 
 	@Property(nameInDb = "ID_TIPO_DEFENSIVO")
-	private Long idRipoDefensivo;
+	private Long idTipoDefensivo;
 
 	@Property(nameInDb = "DT_REGISTRO")
 	@NotNull
@@ -71,12 +71,12 @@ public class RegistroDefensivo extends GenericModel implements AuditModel, UserM
 		this.id = id;
 	}
 
-	public Long getIdRipoDefensivo() {
-		return idRipoDefensivo;
+	public Long getidTipoDefensivo() {
+		return idTipoDefensivo;
 	}
 
-	public void setIdRipoDefensivo(Long idRipoDefensivo) {
-		this.idRipoDefensivo = idRipoDefensivo;
+	public void setidTipoDefensivo(Long idTipoDefensivo) {
+		this.idTipoDefensivo = idTipoDefensivo;
 	}
 
 	public Long getIdRegistroDefensivo() {
@@ -203,5 +203,13 @@ public class RegistroDefensivo extends GenericModel implements AuditModel, UserM
 		return (this.id == null ? "" : this.id.toString() );
 	}
 	/** ***************************** */
+
+	public Long getIdTipoDefensivo() {
+		return this.idTipoDefensivo;
+	}
+
+	public void setIdTipoDefensivo(Long idTipoDefensivo) {
+		this.idTipoDefensivo = idTipoDefensivo;
+	}
 
 }

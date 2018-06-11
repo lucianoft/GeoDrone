@@ -126,14 +126,16 @@ public class ConsultaTalhaoPresenter extends BasePresenter<ConsultaTalhaoPresent
                 AccessToken accessToken =  PreferencesUtils.getAccessToken(activity);
 
                 APIClient client = ServiceGenerator.getInstance(URL_BASE).createServiceWithAuth(APIClient.class, accessToken);
-                Call<TalhaoResource> call = client.insertTalhao(cliente.getId(), talhaoResource);
+                Call<TalhaoResource> call = talhaoResource.getIdTalhao() != null ?
+                                               client.updateTalhao(talhaoResource.getIdTalhao(), talhaoResource) :
+                                               client.insertTalhao(cliente.getId(), talhaoResource);
                 final String finalURL_BASE = URL_BASE;
                 call.enqueue(new Callback<TalhaoResource>() {
                     @Override
                     public void onResponse(Call<TalhaoResource> call, Response<TalhaoResource> response) {
                         if (response.isSuccessful()) {
                             TalhaoResource talhaoResource1 = response.body();
-                            salvarTalhao(talhaoResource);
+                            salvarTalhao(talhaoResource1);
                         } else {
                             Messenger messenger = ErrorUtils.parseError(response, finalURL_BASE);
                             view.onErroSalvar(messenger);

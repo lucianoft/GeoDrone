@@ -5,7 +5,11 @@ package br.com.geodrone.model.constantes;
  */
 
 public enum FlagPerfilUsuario {
-    ADM("ADM");
+    MASTER("GEO"),
+    ADMINISTRADOR("ADM"),
+    CLIENTE("CLI"),
+    COLETOR("COL");
+
 
     private final String value;
 

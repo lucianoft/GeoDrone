@@ -25,7 +25,7 @@ public class RegistroDefensivoDao extends AbstractDao<RegistroDefensivo, Long> {
      */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "ID_REGISTRO_DEFENSIVO_DISP");
-        public final static Property IdRipoDefensivo = new Property(1, Long.class, "idRipoDefensivo", false, "ID_TIPO_DEFENSIVO");
+        public final static Property IdTipoDefensivo = new Property(1, Long.class, "idTipoDefensivo", false, "ID_TIPO_DEFENSIVO");
         public final static Property DtRegistro = new Property(2, java.util.Date.class, "dtRegistro", false, "DT_REGISTRO");
         public final static Property Dose = new Property(3, Double.class, "dose", false, "DOSE");
         public final static Property IdRegistroDefensivo = new Property(4, Long.class, "idRegistroDefensivo", false, "ID_REGISTRO_DEFENSIVO");
@@ -51,7 +51,7 @@ public class RegistroDefensivoDao extends AbstractDao<RegistroDefensivo, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"GEO_REGISTRO_DEFENSIVO\" (" + //
                 "\"ID_REGISTRO_DEFENSIVO_DISP\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
-                "\"ID_TIPO_DEFENSIVO\" INTEGER," + // 1: idRipoDefensivo
+                "\"ID_TIPO_DEFENSIVO\" INTEGER," + // 1: idTipoDefensivo
                 "\"DT_REGISTRO\" INTEGER NOT NULL ," + // 2: dtRegistro
                 "\"DOSE\" REAL NOT NULL ," + // 3: dose
                 "\"ID_REGISTRO_DEFENSIVO\" INTEGER," + // 4: idRegistroDefensivo
@@ -78,9 +78,9 @@ public class RegistroDefensivoDao extends AbstractDao<RegistroDefensivo, Long> {
             stmt.bindLong(1, id);
         }
  
-        Long idRipoDefensivo = entity.getIdRipoDefensivo();
-        if (idRipoDefensivo != null) {
-            stmt.bindLong(2, idRipoDefensivo);
+        Long idTipoDefensivo = entity.getIdTipoDefensivo();
+        if (idTipoDefensivo != null) {
+            stmt.bindLong(2, idTipoDefensivo);
         }
         stmt.bindLong(3, entity.getDtRegistro().getTime());
         stmt.bindDouble(4, entity.getDose());
@@ -106,9 +106,9 @@ public class RegistroDefensivoDao extends AbstractDao<RegistroDefensivo, Long> {
             stmt.bindLong(1, id);
         }
  
-        Long idRipoDefensivo = entity.getIdRipoDefensivo();
-        if (idRipoDefensivo != null) {
-            stmt.bindLong(2, idRipoDefensivo);
+        Long idTipoDefensivo = entity.getIdTipoDefensivo();
+        if (idTipoDefensivo != null) {
+            stmt.bindLong(2, idTipoDefensivo);
         }
         stmt.bindLong(3, entity.getDtRegistro().getTime());
         stmt.bindDouble(4, entity.getDose());
@@ -140,7 +140,7 @@ public class RegistroDefensivoDao extends AbstractDao<RegistroDefensivo, Long> {
     @Override
     public void readEntity(Cursor cursor, RegistroDefensivo entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setIdRipoDefensivo(cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1));
+        entity.setIdTipoDefensivo(cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1));
         entity.setDtRegistro(new java.util.Date(cursor.getLong(offset + 2)));
         entity.setDose(cursor.getDouble(offset + 3));
         entity.setIdRegistroDefensivo(cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4));
