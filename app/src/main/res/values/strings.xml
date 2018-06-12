@@ -21,6 +21,7 @@
     <string name="title_dialog_confirmar_praga">Registro de praga</string>
     <string name="title_activity_relatorio_registro_pragas">Relatorio de Pagras</string>
     <string name="title_activity_relatorio_registro_doencas">Relatorio de Doencas</string>
+    <string name="title_activity_consultar_cliente">Consultar Clientes</string>
 
     <string name="title_activity_monitoramento">Monitoramento</string>
     <string name="title_activity_mon">Teste</string>
@@ -72,7 +73,7 @@
     <string name="lb_segmento">Segmento</string>
     <string name="lb_logradouro">Logradouro</string>
     <string name="lb_bairro">Bairro</string>
-    <string name="lb_localidade">Localidade</string>
+    <string name="lb_localidade">Municipio</string>
     <string name="lb_numero">Numero</string>
     <string name="lb_complemento">Complemento</string>
     <string name="lb_cep">Cep</string>
@@ -201,7 +202,6 @@
     <string name="api_key_google_places">AIzaSyBisbsq9wIW8Q2Isj033c3wXqtTBRyaRBA</string>
     <string name="sendLocation">Localizacao</string>
     <string name="locationTo">Localização Enviada</string>
-    <string name="title_activity_main_administrador">MainAdministradorActivity</string>
 
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>

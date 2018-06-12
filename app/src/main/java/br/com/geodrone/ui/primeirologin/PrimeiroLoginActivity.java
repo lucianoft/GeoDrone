@@ -8,11 +8,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import br.com.geodrone.R;
-import br.com.geodrone.SessionGeooDrone;
 import br.com.geodrone.ui.base.BaseActivity;
-import br.com.geodrone.ui.cliente.CadastroClienteActivity;
+import br.com.geodrone.ui.cliente.cadastrar.CadastroClienteActivity;
 import br.com.geodrone.ui.helper.GenericProgress;
-import br.com.geodrone.ui.login.LoginActivity;
 import br.com.geodrone.ui.sincronizacao.SincronizacaoActivity;
 import br.com.geodrone.utils.Constantes;
 import br.com.geodrone.utils.Messenger;

@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import br.com.geodrone.R;
 import br.com.geodrone.ui.base.BaseActivity;
-import br.com.geodrone.ui.cliente.CadastroClienteActivity;
+import br.com.geodrone.ui.cliente.cadastrar.CadastroClienteActivity;
 import br.com.geodrone.ui.helper.ActivityHelper;
 import br.com.geodrone.ui.helper.GenericProgress;
 import br.com.geodrone.ui.sincronizacao.SincronizacaoActivity;

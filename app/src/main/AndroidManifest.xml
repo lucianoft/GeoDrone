@@ -81,10 +81,7 @@
             android:label="@string/title_activity_reg_chuvas"
             android:parentActivityName=".ui.main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".ui.usuario.CadatroUsuarioActivity"
-            android:label="@string/title_activity_cadatro_usuario"
-            android:parentActivityName=".ui.login.LoginActivity" />
+
         <activity
             android:name=".ui.registroimagem.RegistroImagemActivity"
             android:label="@string/title_activity_cadastro_imagem" />
@@ -121,7 +118,7 @@
             android:parentActivityName=".ui.main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.cliente.CadastroClienteActivity"
+            android:name=".ui.cliente.cadastrar.CadastroClienteActivity"
             android:label="@string/title_activity_cadatro_cliente"
             android:parentActivityName=".ui.main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -149,7 +146,11 @@
             android:name=".ui.relatorioregistrochuva.RelatorioRegistroChuvaActivity"
             android:theme="@style/AppTheme" />
         <activity android:name=".ui.talhao.ConsultaTalhaoActivity" />
-        <activity android:name=".ui.relatorioindicepraga.RelatorioIndicePragaActivity"></activity>
+        <activity android:name=".ui.relatorioindicepraga.RelatorioIndicePragaActivity" />
+        <activity android:name=".ui.cliente.consultar.ConsultarClienteActivity"
+            android:label="@string/title_activity_consultar_cliente"
+            android:parentActivityName=".ui.main.MainActivity"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

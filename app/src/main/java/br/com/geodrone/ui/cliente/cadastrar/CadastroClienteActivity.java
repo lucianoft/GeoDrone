@@ -1,14 +1,12 @@
-package br.com.geodrone.ui.cliente;
+package br.com.geodrone.ui.cliente.cadastrar;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 
 import br.com.geodrone.R;
 import br.com.geodrone.activity.utils.Mask;
 import br.com.geodrone.ui.base.BaseActivity;
 import br.com.geodrone.ui.helper.GenericProgress;
-import br.com.geodrone.ui.usuario.UsuarioPresenter;
 import br.com.geodrone.utils.Messenger;
 import butterknife.BindView;
 import butterknife.ButterKnife;

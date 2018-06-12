@@ -114,4 +114,7 @@ public interface APIClient {
     public Call<TalhaoResource> updateTalhao(@Path("id") Long id,
                                              @Body TalhaoResource talhaoResource);
 
+    @GET(Constantes.API_URL_PREFIXO + "clientes/resource")
+    public Call<List<ClienteResource>> findAllCliente();
+
 }

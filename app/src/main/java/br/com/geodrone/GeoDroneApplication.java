@@ -29,17 +29,7 @@ public class GeoDroneApplication extends Application {
     public DaoSession daoSession;
     public static final boolean ENCRYPTED = false;
 
-    private void setCursorWindowSize(int size) {
-            try {
-                final Class cls = Class.forName("android.database.CursorWindow");
-                final Field fld = cls.getDeclaredField("sCursorWindowSize");
-                fld.setAccessible(true);
-                int before = fld.getInt(null); // default=2048*1024
-                fld.setInt(null, size * 1024); // extend to
-                int after = fld.getInt(null);
-            } catch (Exception e) {
-            }
-    }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -48,7 +38,7 @@ public class GeoDroneApplication extends Application {
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, Constantes.BD_NOME); //The users-db here is the name of our database.
         Database db = helper.getWritableDb();
         daoSession = new DaoMaster(db).newSession();
-        DaoMaster.dropAllTables(db, true);
+        //DaoMaster.dropAllTables(db, true);
 
         try{
             daoSession.getTalhaoDao().loadAll();

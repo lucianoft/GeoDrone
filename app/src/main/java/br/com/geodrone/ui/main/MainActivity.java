@@ -25,6 +25,7 @@ import br.com.geodrone.model.Usuario;
 import br.com.geodrone.ui.aceiteusuariogeoclima.AceiteUsuarioGeoclimaActivity;
 import br.com.geodrone.ui.aceiteusuariogeomonitora.AceiteUsuarioGeomonitoraActivity;
 import br.com.geodrone.ui.base.BaseActivity;
+import br.com.geodrone.ui.cliente.consultar.ConsultarClienteActivity;
 import br.com.geodrone.ui.forum.ForumGeodroneActivity;
 import br.com.geodrone.ui.helper.ActivityHelper;
 import br.com.geodrone.ui.logout.LogoutActivity;
@@ -258,6 +259,11 @@ public class MainActivity extends BaseActivity
             intent.putExtras(b); //Put your id to your next Intent
             startActivity(intent);
             finish();
+        }
+
+        else if (id == R.id.menu_item_adm_cliente) {
+            Intent intent = new Intent(this, ConsultarClienteActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

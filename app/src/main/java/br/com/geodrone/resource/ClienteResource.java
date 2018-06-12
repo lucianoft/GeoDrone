@@ -1,8 +1,6 @@
 package br.com.geodrone.resource;
 
-import java.io.Serializable;
-
-public class ClienteResource implements Serializable{
+public class ClienteResource {
 
     private Long id;
     private String nomeRazaoSocial;
@@ -23,6 +21,8 @@ public class ClienteResource implements Serializable{
     private Long cep;
     private Long qtdeEstacoes;
     private String flagStatus;
+    private Long idMicroRegiao;
+    private String descMicroRegiao;
 
     public Long getId() {
         return id;
@@ -174,5 +174,21 @@ public class ClienteResource implements Serializable{
 
     public void setFlagStatus(String flagStatus) {
         this.flagStatus = flagStatus;
+    }
+
+    public Long getIdMicroRegiao() {
+        return idMicroRegiao;
+    }
+
+    public void setIdMicroRegiao(Long idMicroRegiao) {
+        this.idMicroRegiao = idMicroRegiao;
+    }
+
+    public String getDescMicroRegiao() {
+        return descMicroRegiao;
+    }
+
+    public void setDescMicroRegiao(String descMicroRegiao) {
+        this.descMicroRegiao = descMicroRegiao;
     }
 }

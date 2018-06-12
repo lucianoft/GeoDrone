@@ -1,4 +1,4 @@
-package br.com.geodrone.ui.cliente;
+package br.com.geodrone.ui.cliente.cadastrar;
 
 import android.util.Log;
 
