@@ -6,25 +6,71 @@
     android:padding="15dp"
     >
 
-<LinearLayout
-        android:id="@+id/linear_layout_alterar_cliente"
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_nome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-        <TextView
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp">
+        <EditText android:id="@+id/editText_nome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text= "@string/lb_nome"
-            />
+            android:inputType="text"
+            android:hint="@string/lb_nome"/>
+    </android.support.design.widget.TextInputLayout>
 
-        <Spinner
-            style="@style/Widget.AppCompat.Spinner.Underlined"
-            android:id="@+id/spinner_cliente_alt_cliente"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/input_layout_nome"
+        >
+        <EditText android:id="@+id/editText_email"
+            style="@style/TextLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"/>
-    </LinearLayout>
+            android:inputType="text"
+            android:hint="@string/lb_email"/>
+
+
+    </android.support.design.widget.TextInputLayout>
+
+    <TextView
+        android:id="@+id/input_layout_microregiao"
+        android:layout_below="@+id/input_layout_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text= "@string/lb_microregiao"
+        />
+
+    <Spinner
+        style="@style/Widget.AppCompat.Spinner.Underlined"
+        android:id="@+id/spinner_microregiao_cliente"
+        android:layout_below="@+id/input_layout_microregiao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/input_layout_status"
+        android:layout_below="@+id/spinner_microregiao_cliente"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text= "@string/lb_status"
+        />
+
+    <Spinner
+        style="@style/Widget.AppCompat.Spinner.Underlined"
+        android:id="@+id/spinner_status_cliente"
+        android:layout_below="@+id/input_layout_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"/>
+
+
+
 
 </RelativeLayout>

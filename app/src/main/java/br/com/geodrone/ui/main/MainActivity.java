@@ -135,13 +135,27 @@ public class MainActivity extends BaseActivity
             MenuItem menuItemMensagem = menuNav.findItem(R.id.nav_mensagem);
             menuItemMensagem.setEnabled(false);
         }
+
         if (mainPresenter.isPerfilColetor(usuario)) {
             MenuItem menuItemForum = menuNav.findItem(R.id.nav_forum);
             menuItemForum.setEnabled(false);
         }
+
         if (mainPresenter.isPerfilColetor(usuario)) {
-            MenuItem menuItemTalhao= menuNav.findItem(R.id.menu_item_registro_talhao);
+            MenuItem menuItemTalhao = menuNav.findItem(R.id.menu_item_registro_talhao);
             menuItemTalhao.setEnabled(false);
+        }
+
+        if (!mainPresenter.isPerfilAdministrador(usuario)) {
+            MenuItem menuItemAdmCliente = menuNav.findItem(R.id.menu_item_adm_cliente);
+            menuItemAdmCliente.setEnabled(false);
+
+            MenuItem menuItemAdmPrevisaoCliente = menuNav.findItem(R.id.menu_item_adm_previsao_cliente);
+            menuItemAdmPrevisaoCliente.setEnabled(false);
+
+            MenuItem menuItemAdmPrevisaoMicroRegiao = menuNav.findItem(R.id.menu_item_adm_previsao_cliente_microregiao);
+            menuItemAdmPrevisaoMicroRegiao.setEnabled(false);
+
         }
 
     }
@@ -168,7 +182,7 @@ public class MainActivity extends BaseActivity
             activityHelper.alterarSenha(this);
         }else if (id == R.id.action_alterar_cliente){
             ActivityHelper activityHelper = new ActivityHelper();
-            activityHelper.alterarCliente(this);
+            activityHelper.alterarClienteSessao(this);
             configurarUsuarioCliente();
             configurarPermissoes();
         }

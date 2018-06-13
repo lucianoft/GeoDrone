@@ -12,7 +12,7 @@
             <menu>
                 <item
                     android:id="@+id/nav_ponto_previsao"
-                    android:title="@string/menu_ponto_previsao" />
+                    android:title="@string/menu_previsao" />
                 <item
                     android:id="@+id/nav_ponto_coleta_chuva"
                     android:title="@string/menu_ponto_coleta_chuva" />
@@ -86,7 +86,16 @@
             <menu>
                 <item
                     android:id="@+id/menu_item_adm_cliente"
-                    android:title="@string/menu_clientes" />
+                    android:title="@string/menu_adm_clientes" />
+
+                <item
+                    android:id="@+id/menu_item_adm_previsao_cliente"
+                    android:title="@string/menu_adm_previsao_cliente" />
+
+                <item
+                    android:id="@+id/menu_item_adm_previsao_cliente_microregiao"
+                    android:title="@string/menu_adm_previsao_microregiao" />
+
             </menu>
         </item>
 

@@ -44,7 +44,7 @@ public class ConsultarClienteAdapter extends RecyclerView.Adapter<ConsultarClien
         @OnClick
         void onClick(View view) {
             ClienteResource clienteResource = mContent.get(getAdapterPosition());
-            activity.onClickAlterarStatusCliente(clienteResource);
+            activity.onClickCliente(clienteResource);
         }
      }
 

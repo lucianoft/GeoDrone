@@ -37,4 +37,9 @@ public class MicroRegiaoResource {
     public void setIndAtivo(Integer indAtivo) {
         this.indAtivo = indAtivo;
     }
+
+    @Override
+    public String toString() {
+        return descricao;
+    }
 }

@@ -81,7 +81,6 @@
             android:label="@string/title_activity_reg_chuvas"
             android:parentActivityName=".ui.main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".ui.registroimagem.RegistroImagemActivity"
             android:label="@string/title_activity_cadastro_imagem" />
@@ -147,10 +146,12 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".ui.talhao.ConsultaTalhaoActivity" />
         <activity android:name=".ui.relatorioindicepraga.RelatorioIndicePragaActivity" />
-        <activity android:name=".ui.cliente.consultar.ConsultarClienteActivity"
+        <activity
+            android:name=".ui.cliente.consultar.ConsultarClienteActivity"
             android:label="@string/title_activity_consultar_cliente"
             android:parentActivityName=".ui.main.MainActivity"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".ui.previsaotempoadmcliente.PrevisaoTempoAdmClienteActivity"></activity>
     </application>
 
 </manifest>

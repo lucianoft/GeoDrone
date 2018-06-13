@@ -8,6 +8,7 @@ import br.com.geodrone.resource.AlterarSenhaUsuarioResourse;
 import br.com.geodrone.resource.ClienteResource;
 import br.com.geodrone.resource.InstallerResource;
 import br.com.geodrone.resource.MensagemResource;
+import br.com.geodrone.resource.MicroRegiaoResource;
 import br.com.geodrone.resource.SincronizacaoAndroidResource;
 import br.com.geodrone.resource.SincronizacaoWebResource;
 import br.com.geodrone.resource.TalhaoResource;
@@ -116,5 +117,11 @@ public interface APIClient {
 
     @GET(Constantes.API_URL_PREFIXO + "clientes/resource")
     public Call<List<ClienteResource>> findAllCliente();
+
+    @GET(Constantes.API_URL_PREFIXO + "micro-regiao/resource")
+    public Call<List<MicroRegiaoResource>> findAllMicroRegiao();
+
+    @PUT(Constantes.API_URL_PREFIXO + "clientes/{id}/resource")
+    public Call<ClienteResource> alterarCliente(@Path("id") Long idCliente,@Body ClienteResource clienteResource);
 
 }

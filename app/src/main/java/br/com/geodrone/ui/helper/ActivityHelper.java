@@ -1,8 +1,6 @@
 package br.com.geodrone.ui.helper;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,24 +9,17 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import java.util.Date;
 import java.util.List;
 
 import br.com.geodrone.R;
 import br.com.geodrone.SessionGeooDrone;
-import br.com.geodrone.crypt.Cryptography;
-import br.com.geodrone.crypt.KeyUtils;
-import br.com.geodrone.dto.ColetaPluviosidadeDto;
 import br.com.geodrone.model.Cliente;
 import br.com.geodrone.model.Configuracao;
-import br.com.geodrone.model.Dispositivo;
-import br.com.geodrone.model.TipoCultivo;
 import br.com.geodrone.model.Usuario;
 import br.com.geodrone.oauth.APIClient;
 import br.com.geodrone.oauth.ServiceGenerator;
 import br.com.geodrone.oauth.dto.AccessToken;
 import br.com.geodrone.resource.AlterarSenhaUsuarioResourse;
-import br.com.geodrone.resource.SincronizacaoAndroidResource;
 import br.com.geodrone.service.ClienteService;
 import br.com.geodrone.service.ConfiguracaoService;
 import br.com.geodrone.service.UsuarioService;
@@ -128,12 +119,12 @@ public class ActivityHelper {
 
 
 
-    public void alterarCliente(final BaseActivity activity) {
+    public void alterarClienteSessao(final BaseActivity activity) {
 
         ClienteService clienteService = new ClienteService(activity);
         List<Cliente> clientes = clienteService.findAllByUsuario();
         LayoutInflater li = activity.getLayoutInflater();
-        View view = li.inflate(R.layout.dialog_alterar_cliente, null);
+        View view = li.inflate(R.layout.dialog_alterar_cliente_sessao, null);
         final Spinner spClientes = view.findViewById(R.id.spinner_cliente_alt_cliente);
         ArrayAdapter<Cliente> myAdapter = new ArrayAdapter<Cliente>(activity, android.R.layout.simple_spinner_item, clientes);
         spClientes.setAdapter(myAdapter);
@@ -154,7 +145,7 @@ public class ActivityHelper {
         alert.setPositiveButton(R.string.lb_confirmar, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                alterarCliente(spClientes);
+                alterarClienteSessao(spClientes);
                 dialog.dismiss();
             }
         });
@@ -163,7 +154,7 @@ public class ActivityHelper {
 
     }
 
-    private void alterarCliente(Spinner spClientes){
+    private void alterarClienteSessao(Spinner spClientes){
         Cliente cliente = (Cliente) spClientes.getSelectedItem();
         if (cliente != null){
             SessionGeooDrone.setAttribute(SessionGeooDrone.CHAVE_CLIENTE, cliente);

@@ -41,6 +41,7 @@
     <string name="lb_celular">Celular</string>
     <string name="lb_telefone">Telefone</string>
     <string name="lb_email">Email</string>
+    <string name="lb_status">Status</string>
     <string name="lb_senha">Senha</string>
     <string name="lb_confirmar">Confirmar</string>
     <string name="lb_inserir">Inserir</string>
@@ -50,6 +51,7 @@
     <string name="lb_login">Login</string>
     <string name="lb_registrar">Registrar</string>
     <string name="lb_mensagem">Mensagem</string>
+    <string name="lb_microregiao">Micro Regiao</string>
     <string name="lb_profile">Profile</string>
     <string name="lb_observacao">Observação</string>
     <string name="lb_dose">Dose</string>
@@ -154,7 +156,7 @@
 
 
     <string name="menu_geo_clima">GeoClima</string>
-    <string name="menu_ponto_previsao">\tPrevisao</string>
+    <string name="menu_previsao">\tPrevisao</string>
     <string name="menu_ponto_coleta_chuva">\tPonto Coleta Chuva</string>
     <string name="menu_registro_chuva">\tRegistro Chuva</string>
     <string name="menu_registro_foto">\tRegistro Fotos</string>
@@ -187,7 +189,9 @@
     <string name="menu_talhao">Talhão</string>
 
     <string name="menu_administracao">Administracao</string>
-    <string name="menu_clientes">\tClientes</string>
+    <string name="menu_adm_clientes">\tClientes</string>
+    <string name="menu_adm_previsao_cliente">\tPrevisao Cliente</string>
+    <string name="menu_adm_previsao_microregiao">\tPrevisao Micro Regiao</string>
 
     <string name="action_configuracao">Configuracao</string>
     <string name="action_logout">Logout</string>
