@@ -191,4 +191,9 @@ public class ClienteResource {
     public void setDescMicroRegiao(String descMicroRegiao) {
         this.descMicroRegiao = descMicroRegiao;
     }
+
+    @Override
+    public String toString() {
+        return nomeRazaoSocial;
+    }
 }

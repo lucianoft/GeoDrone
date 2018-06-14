@@ -14,6 +14,8 @@ import br.com.geodrone.resource.SincronizacaoWebResource;
 import br.com.geodrone.resource.TalhaoResource;
 import br.com.geodrone.resource.UsuarioMensagemResource;
 import br.com.geodrone.utils.Constantes;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -24,6 +26,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.Streaming;
@@ -124,4 +127,10 @@ public interface APIClient {
     @PUT(Constantes.API_URL_PREFIXO + "clientes/{id}/resource")
     public Call<ClienteResource> alterarCliente(@Path("id") Long idCliente,@Body ClienteResource clienteResource);
 
+    @Multipart
+    @POST(Constantes.API_URL_PREFIXO + "previsao-tempo-arqs/importacao-upload")
+    public Call<Void> uploadPrevisaoTempo(@Part MultipartBody.Part file,
+                                          @Part("nomeArquivo") RequestBody nomeArquivo,
+                                          @Part("idCliente") RequestBody idCliente,
+                                          @Part("dtRegistro") RequestBody dtRegistro);
 }

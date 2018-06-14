@@ -22,6 +22,7 @@
     <string name="title_activity_relatorio_registro_pragas">Relatorio de Pagras</string>
     <string name="title_activity_relatorio_registro_doencas">Relatorio de Doencas</string>
     <string name="title_activity_consultar_cliente">Consultar Clientes</string>
+    <string name="title_activity_arquivo_previsao_tempo_cliente">Previsão do Tempo Cliente</string>
 
     <string name="title_activity_monitoramento">Monitoramento</string>
     <string name="title_activity_mon">Teste</string>
@@ -32,6 +33,9 @@
     <string name="tile_dialog_alterar_talhao">Alterar Talhao</string>
 
     <!-- Strings related to login -->
+    <string name="lb_selecione_arquivo">Selecione arquivo a ser enviado</string>
+    <string name="lb_arquivo">Arquivo</string>
+    <string name="lb_cliente">Cliente</string>
     <string name="lb_codigo">Codigo</string>
     <string name="lb_cpf">cpf</string>
     <string name="lb_cnpj">cnpj</string>
@@ -89,8 +93,9 @@
     <string name="lb_recuperar_senha">Recuperar Senha</string>
     <string name="lb_talhao">Talhao</string>
     <string name="lb_estagio_infestacao">Estagio Infestacao</string>
+    <string name="lb_dt_previsao">Data Previsao</string>
 
-
+    <string name="lb_btn_enviar_arquivo">Enviar Arquivo</string>
     <string name="lb_btn_salvar">Salvar</string>
     <string name="lb_btn_salvar_registro_praga">Salvar Registro Praga</string>
     <string name="lb_btn_salvar_registro_doenca">Salvar Registro Doença</string>

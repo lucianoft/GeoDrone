@@ -5,32 +5,80 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
     tools:context="br.com.geodrone.ui.previsaotempoadmcliente.PrevisaoTempoAdmClienteActivity">
 
     <TextView
-        android:id="@+id/tvHeading"
-        android:layout_width="wrap_content"
+        android:id="@+id/text_view_SelecioneArquivo"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Touch the icon below to upload file to server"
+        android:text="@string/lb_selecione_arquivo"
         android:textSize="18sp"
         android:textStyle="bold" />
-    <Button
-        android:id="@+id/ivAttachment"
-        android:layout_alignTop="@+id/tvHeading"
-        android:layout_toRightOf="@+id/tvHeading"
-        android:layout_alignParentTop="@+id/tvHeading"
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_fileName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/text_view_SelecioneArquivo">
+        <EditText android:id="@+id/edit_text_fileName"
+            style="@style/TextLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:focusable="false"
+            android:hint="@string/lb_arquivo"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/image_view_arquivo_cliente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableStart="@android:drawable/ic_menu_upload"/>
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/text_view_SelecioneArquivo"
+        android:background="@android:drawable/ic_menu_search"
+        android:textSize="24sp" />
 
     <TextView
-        android:id="@+id/tv_file_name"
-        android:layout_width="wrap_content"
+        android:id="@+id/textViewCliente"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#fff"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:layout_below="@+id/ivAttachment"
-        android:layout_centerHorizontal="true"/>
+        android:layout_below="@+id/input_layout_fileName"
+        android:text= "@string/lb_cliente"
+     />
 
+    <Spinner
+        style="@style/Widget.AppCompat.Spinner.Underlined"
+        android:id="@+id/spinner_cliente_prev_tempo"
+        android:layout_below="@+id/textViewCliente"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"/>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/text_input_layout_dt_registro"
+        android:layout_below="@+id/spinner_cliente_prev_tempo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText android:id="@+id/edit_text_dt_previsao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:focusable="false"
+            android:hint="@string/lb_dt_previsao" />
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/button_enviar_file_cliente"
+        android:layout_below="@+id/text_input_layout_dt_registro"
+        style="@style/CustomStyleButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:text="@string/lb_btn_enviar_arquivo"
+        />
 </RelativeLayout>
