@@ -3,7 +3,6 @@ package br.com.geodrone.ui.registrodoenca;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -11,7 +10,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +48,7 @@ public class RegistroDoencaActivity extends BaseActivity implements RegistroDoen
     private Doenca doenca = null;
 
     private GenericProgress mProgress;
+    Long idTalhao = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +63,11 @@ public class RegistroDoencaActivity extends BaseActivity implements RegistroDoen
 
         Intent it = getIntent();
         location = it.getParcelableExtra("localizacao");
+        idTalhao = it.getLongExtra("idTalhao", -1);
+        if (idTalhao == -1){
+            idTalhao = null;
+        }
+
         registroDoencaPresenter = new RegistroDoencaPresenter(this);
 
         initComponentes();
@@ -108,7 +112,7 @@ public class RegistroDoencaActivity extends BaseActivity implements RegistroDoen
     @OnClick(R.id.btn_salvar_doenca)
     public void salvar() {
         showLoading();
-        registroDoencaPresenter.salvar(doenca, editTextObservacao.getText().toString(), location.getLatitude(), location.getLongitude(), editTextQtdeDoencas.getText().toString());
+        registroDoencaPresenter.salvar(doenca, idTalhao, editTextObservacao.getText().toString(), location.getLatitude(), location.getLongitude(), editTextQtdeDoencas.getText().toString());
     }
 
     @Override

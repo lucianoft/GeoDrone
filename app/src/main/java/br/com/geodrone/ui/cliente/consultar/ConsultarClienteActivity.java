@@ -27,6 +27,7 @@ import br.com.geodrone.ui.helper.GenericProgress;
 import br.com.geodrone.ui.mensagem.usuarios.UsuariosMensagemAdapter;
 import br.com.geodrone.utils.Messenger;
 import br.com.geodrone.utils.NumberUtils;
+import br.com.geodrone.utils.Util;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -46,18 +47,24 @@ public class ConsultarClienteActivity extends BaseActivity implements ConsultarC
         setContentView(R.layout.activity_consultar_cliente);
         ButterKnife.bind(this);
 
-        mProgress = new GenericProgress(this);
-        consultarClientePresenter = new ConsultarClientePresenter(this);
-        showLoading();
+        if (!Util.verificaConexao(this)) {
+            Util.initToast(this, getString(R.string.msg_sem_conexao_internet));
+            finish();
+        } else {
 
-        recyclerViewClientes.setLayoutManager(new LinearLayoutManager(this));
+            mProgress = new GenericProgress(this);
+            consultarClientePresenter = new ConsultarClientePresenter(this);
+            showLoading();
 
-        consultarClienteAdapter = new ConsultarClienteAdapter();
-        consultarClienteAdapter.setActivity(this);
-        recyclerViewClientes.setAdapter(consultarClienteAdapter);
-        // Configurando um dividr entre linhas, para uma melhor visualização.
-        recyclerViewClientes.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-     }
+            recyclerViewClientes.setLayoutManager(new LinearLayoutManager(this));
+
+            consultarClienteAdapter = new ConsultarClienteAdapter();
+            consultarClienteAdapter.setActivity(this);
+            recyclerViewClientes.setAdapter(consultarClienteAdapter);
+            // Configurando um dividr entre linhas, para uma melhor visualização.
+            recyclerViewClientes.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        }
+    }
 
     @Override
     public void onPostCreate(Bundle savedInstanceState) {

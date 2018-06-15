@@ -1,23 +1,19 @@
-package br.com.geodrone.ui.previsaotempoadmcliente;
+package br.com.geodrone.ui.previsaotempoadmmicroregiao;
 
-import android.location.Location;
 import android.util.Log;
 
 import java.io.File;
 import java.util.List;
 
 import br.com.geodrone.R;
-import br.com.geodrone.dto.ColetaPluviosidadeDto;
 import br.com.geodrone.model.Configuracao;
 import br.com.geodrone.oauth.APIClient;
 import br.com.geodrone.oauth.ServiceGenerator;
 import br.com.geodrone.oauth.dto.AccessToken;
-import br.com.geodrone.resource.ClienteResource;
-import br.com.geodrone.service.ClienteService;
+import br.com.geodrone.resource.MicroRegiaoResource;
 import br.com.geodrone.service.ConfiguracaoService;
 import br.com.geodrone.ui.base.BaseActivity;
 import br.com.geodrone.ui.base.BasePresenter;
-import br.com.geodrone.ui.pontocoletachuva.PontoColetaChuvaPresenter;
 import br.com.geodrone.utils.Constantes;
 import br.com.geodrone.utils.DateUtils;
 import br.com.geodrone.utils.ErrorUtils;
@@ -31,38 +27,36 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * Created by fernandes on 13/06/2018.
+ * Created by fernandes on 14/06/2018.
  */
 
-public class PrevisaoTempoAdmClientePresenter extends BasePresenter<PrevisaoTempoAdmClientePresenter.View> {
+public class PrevisaoTempoAdmMicroRegiaoPresenter extends BasePresenter<PrevisaoTempoAdmMicroRegiaoPresenter.View> {
 
-    private static  String TAG = PrevisaoTempoAdmClientePresenter.class.getName();
+    private static  String TAG = PrevisaoTempoAdmMicroRegiaoPresenter.class.getName();
 
     interface View {
-        void onListCliente(List<ClienteResource> clienteResources);
+        void onListMicroRegiao(List<MicroRegiaoResource> microRegiaoResources);
         void onEnvioArquivoSucesso(String message);
         void onError(String message);
         void onError(Messenger messenger);
 
         void onErrorFile(String string);
-        void onErrorCliente(String string);
+        void onErrorMicroRegiao(String string);
         void onErrorDtPrevisao(String string);
     }
 
     private BaseActivity activity;
 
-    ClienteService clienteService = null;
     ConfiguracaoService configuracaoService = null;
     Configuracao configuracao = null;
 
-    public PrevisaoTempoAdmClientePresenter(BaseActivity activity) {
+    public PrevisaoTempoAdmMicroRegiaoPresenter(BaseActivity activity) {
         this.activity = activity;
-        this.clienteService = new ClienteService(activity);
         this.configuracaoService = new ConfiguracaoService(activity);
         configuracao = configuracaoService.getOneConfiguracao();
     }
 
-    public void findAllCliente() {
+    public void findAllMicroRegiao() {
         try{
             String URL_BASE = configuracao != null ? configuracao.getUrl() : null;
             if (URL_BASE == null) {
@@ -71,14 +65,14 @@ public class PrevisaoTempoAdmClientePresenter extends BasePresenter<PrevisaoTemp
             AccessToken accessToken =  PreferencesUtils.getAccessToken(activity);
 
             APIClient client = ServiceGenerator.getInstance(URL_BASE).createServiceWithAuth(APIClient.class, accessToken);
-            Call<List<ClienteResource>> call = client.findAllCliente();
+            Call<List<MicroRegiaoResource>> call = client.findAllMicroRegiao();
             final String finalURL_BASE = URL_BASE;
-            call.enqueue(new Callback<List<ClienteResource>>() {
+            call.enqueue(new Callback<List<MicroRegiaoResource>>() {
                 @Override
-                public void onResponse(Call<List<ClienteResource>> call, Response<List<ClienteResource>> response) {
+                public void onResponse(Call<List<MicroRegiaoResource>> call, Response<List<MicroRegiaoResource>> response) {
                     if (response.isSuccessful()) {
-                        List<ClienteResource> clienteResources = response.body();
-                        view.onListCliente(clienteResources);
+                        List<MicroRegiaoResource> microRegiaoResources = response.body();
+                        view.onListMicroRegiao(microRegiaoResources);
                     } else {
                         Messenger messenger = ErrorUtils.parseError(response, finalURL_BASE);
                         view.onError(messenger);
@@ -86,7 +80,7 @@ public class PrevisaoTempoAdmClientePresenter extends BasePresenter<PrevisaoTemp
                 }
 
                 @Override
-                public void onFailure(Call<List<ClienteResource>> call, Throwable t) {
+                public void onFailure(Call<List<MicroRegiaoResource>> call, Throwable t) {
                     view.onError(t.getMessage());
                     Log.e(TAG, t.toString(), t);
                 }
@@ -98,7 +92,7 @@ public class PrevisaoTempoAdmClientePresenter extends BasePresenter<PrevisaoTemp
     }
 
 
-    private boolean validarEnvioArquivo(File file, ClienteResource clienteResource, String dtPrevisao) {
+    private boolean validarEnvioArquivo(File file, MicroRegiaoResource microRegiaoResource, String dtPrevisao) {
         boolean isOk = true;
         if (hasView()) {
             DateUtils dateUtils = new DateUtils();
@@ -106,9 +100,9 @@ public class PrevisaoTempoAdmClientePresenter extends BasePresenter<PrevisaoTemp
                 isOk = false;
                 view.onErrorFile(activity.getString(R.string.msg_obr_dt_inicio));
             }
-            if (clienteResource == null){
+            if (microRegiaoResource == null){
                 isOk = false;
-                view.onErrorCliente(activity.getString(R.string.msg_obr_dt_fim));
+                view.onErrorMicroRegiao(activity.getString(R.string.msg_obr_dt_fim));
             }
             try {
                 dtPrevisao = dateUtils.format(dateUtils.parse(dtPrevisao, "dd/MM/yyyy"));
@@ -120,9 +114,9 @@ public class PrevisaoTempoAdmClientePresenter extends BasePresenter<PrevisaoTemp
         }
         return isOk;
     }
-    public void enviarArquivo(File file, ClienteResource clienteResource, String dtPrevisao) {
+    public void enviarArquivo(File file, MicroRegiaoResource microRegiaoResource, String dtPrevisao) {
         try{
-            if (validarEnvioArquivo(file, clienteResource, dtPrevisao)) {
+            if (validarEnvioArquivo(file, microRegiaoResource, dtPrevisao)) {
                 String URL_BASE = configuracao != null ? configuracao.getUrl() : null;
                 if (URL_BASE == null) {
                     URL_BASE = Constantes.API_LOGIN_URL;
@@ -138,10 +132,10 @@ public class PrevisaoTempoAdmClientePresenter extends BasePresenter<PrevisaoTemp
                 RequestBody mFile = RequestBody.create(MediaType.parse("application/pdf"), file);
                 MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("file", file.getName(), mFile);
                 RequestBody nomeArquivo = RequestBody.create(MediaType.parse("text/plain"), file.getName());
-                RequestBody idCliente = RequestBody.create(MediaType.parse("text/plain"), clienteResource.getId().toString());
+                RequestBody idMicroRegiao = RequestBody.create(MediaType.parse("text/plain"), microRegiaoResource.getId().toString());
                 RequestBody dtPrevisao_ = RequestBody.create(MediaType.parse("text/plain"), dtPrevisao);
 
-                Call<Void> fileUpload = client.uploadPrevisaoTempoCliente(fileToUpload, nomeArquivo, idCliente, dtPrevisao_);
+                Call<Void> fileUpload = client.uploadPrevisaoTempoMicroRegiao(fileToUpload, nomeArquivo, idMicroRegiao, dtPrevisao_);
                 fileUpload.enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {

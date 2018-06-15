@@ -12,6 +12,7 @@ import br.com.geodrone.ui.base.BasePresenter;
 import br.com.geodrone.service.DoencaService;
 import br.com.geodrone.service.RegistroDoencaService;
 import br.com.geodrone.service.TipoCultivoService;
+import br.com.geodrone.utils.NumberUtils;
 import br.com.geodrone.utils.StringUtils;
 
 /**
@@ -53,7 +54,7 @@ public class RegistroDoencaPresenter extends BasePresenter<RegistroDoencaPresent
     }
 
 
-    private boolean validar(Doenca doenca, String observacao, Double latitude, Double longitude, String qtde){
+    private boolean validar(Doenca doenca, Long idTalhao, String observacao, Double latitude, Double longitude, String qtde){
         boolean isOk = true;
         if (hasView()) {
             if (doenca == null){
@@ -64,17 +65,23 @@ public class RegistroDoencaPresenter extends BasePresenter<RegistroDoencaPresent
                 view.onErrorQtde(activity.getString(R.string.msg_obr_qtde));
                 isOk = false;
             }
+            if (idTalhao == null){
+                view.onErrorRegitroDoenca(activity.getString(R.string.msg_obr_talhao));
+            }
         }
         return isOk;
     }
 
-    public void salvar(Doenca doenca, String observacao, Double latitude, Double longitude, String qtde) {
+    public void salvar(Doenca doenca, Long idTalhao, String observacao, Double latitude, Double longitude, String qtde) {
         try{
-            boolean isOk = validar(doenca, observacao, latitude, longitude, qtde);
+            boolean isOk = validar(doenca, idTalhao, observacao, latitude, longitude, qtde);
 
             if (isOk) {
                 RegistroDoenca registroDoenca = new RegistroDoenca();
                 registroDoenca.setIdDoenca(doenca != null ? doenca.getId() : null);
+                registroDoenca.setObservacao(observacao);
+                registroDoenca.setIdTalhao(idTalhao);
+                registroDoenca.setQtde(new NumberUtils().parseLong(qtde));
                 registroDoenca.setLatitude(latitude);
                 registroDoenca.setLongitude(longitude);
                 this.registroDoencaService.insert(registroDoenca);

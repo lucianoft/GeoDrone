@@ -151,10 +151,12 @@
             android:label="@string/title_activity_consultar_cliente"
             android:parentActivityName=".ui.main.MainActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".ui.previsaotempoadmcliente.PrevisaoTempoAdmClienteActivity"
+        <activity
+            android:name=".ui.previsaotempoadmcliente.PrevisaoTempoAdmClienteActivity"
             android:label="@string/title_activity_arquivo_previsao_tempo_cliente"
             android:parentActivityName=".ui.main.MainActivity"
             android:theme="@style/AppTheme" />
+        <activity android:name=".ui.previsaotempoadmmicroregiao.PrevisaoTempoAdmMicroRegiaoActivity"></activity>
     </application>
 
 </manifest>

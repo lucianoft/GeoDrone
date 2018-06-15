@@ -1,8 +1,7 @@
-package br.com.geodrone.ui.previsaotempoadmcliente;
+package br.com.geodrone.ui.previsaotempoadmmicroregiao;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
@@ -16,13 +15,9 @@ import java.util.Date;
 import java.util.List;
 
 import br.com.geodrone.R;
-import br.com.geodrone.resource.ClienteResource;
 import br.com.geodrone.resource.MicroRegiaoResource;
 import br.com.geodrone.ui.base.BaseActivity;
-import br.com.geodrone.ui.cliente.cadastrar.CadastroClienteActivity;
-import br.com.geodrone.ui.cliente.consultar.ConsultarClientePresenter;
 import br.com.geodrone.ui.helper.GenericProgress;
-import br.com.geodrone.ui.login.LoginActivity;
 import br.com.geodrone.utils.DateUtils;
 import br.com.geodrone.utils.Messenger;
 import br.com.geodrone.utils.Util;
@@ -30,29 +25,29 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class PrevisaoTempoAdmClienteActivity extends BaseActivity implements DatePickerDialog.OnDateSetListener,
-                                                                             PrevisaoTempoAdmClientePresenter.View {
+public class PrevisaoTempoAdmMicroRegiaoActivity extends BaseActivity implements DatePickerDialog.OnDateSetListener,
+        PrevisaoTempoAdmMicroRegiaoPresenter.View {
 
     private GenericProgress mProgress;
-    private PrevisaoTempoAdmClientePresenter previsaoTempoAdmClientePresenter;
+    private PrevisaoTempoAdmMicroRegiaoPresenter previsaoTempoAdmMicroRegiaoPresenter;
     private File file = null;
 
     @BindView(R.id.edit_text_fileName)
     EditText editTextFileName;
 
-    @BindView(R.id.spinner_cliente_prev_tempo)
-    Spinner spCliente;
+    @BindView(R.id.spinner_microregiao_prev_tempo)
+    Spinner spMicroRegiao;
 
     @BindView(R.id.edit_text_dt_previsao)
     EditText editTextDtPrevisao;
 
 
-    List<ClienteResource> clienteResources = new ArrayList<>();
+    List<MicroRegiaoResource> microRegiaoResources = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_previsao_tempo_adm_cliente);
+        setContentView(R.layout.activity_previsao_tempo_adm_micro_regiao);
         ButterKnife.bind(this);
 
         if (!Util.verificaConexao(this)) {
@@ -61,25 +56,25 @@ public class PrevisaoTempoAdmClienteActivity extends BaseActivity implements Dat
         } else {
 
             mProgress = new GenericProgress(this);
-            previsaoTempoAdmClientePresenter = new PrevisaoTempoAdmClientePresenter(this);
+            previsaoTempoAdmMicroRegiaoPresenter = new PrevisaoTempoAdmMicroRegiaoPresenter(this);
         }
     }
 
     @Override
     public void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        previsaoTempoAdmClientePresenter.takeView(this);
-        previsaoTempoAdmClientePresenter.findAllCliente();
+        previsaoTempoAdmMicroRegiaoPresenter.takeView(this);
+        previsaoTempoAdmMicroRegiaoPresenter.findAllMicroRegiao();
     }
 
     private void initCompontes(){
-        ArrayAdapter<ClienteResource> adapterMicroregiao = new ArrayAdapter<ClienteResource>(this, android.R.layout.simple_spinner_item, clienteResources);
-        spCliente.setAdapter(adapterMicroregiao);
+        ArrayAdapter<MicroRegiaoResource> adapterMicroregiao = new ArrayAdapter<MicroRegiaoResource>(this, android.R.layout.simple_spinner_item, microRegiaoResources);
+        spMicroRegiao.setAdapter(adapterMicroregiao);
         adapterMicroregiao.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
     }
 
-    @OnClick(R.id.image_view_arquivo_cliente)
+    @OnClick(R.id.image_view_arquivo_microregiao)
     public void onClickSelecionarArqquivo() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("file/*.pdf");
@@ -137,8 +132,8 @@ public class PrevisaoTempoAdmClienteActivity extends BaseActivity implements Dat
     }
 
     @Override
-    public void onListCliente(List<ClienteResource> clienteResources) {
-        this.clienteResources = clienteResources;
+    public void onListMicroRegiao(List<MicroRegiaoResource> microregiaoResources) {
+        this.microRegiaoResources = microregiaoResources;
         initCompontes();
         hideLoading();
     }
@@ -163,7 +158,7 @@ public class PrevisaoTempoAdmClienteActivity extends BaseActivity implements Dat
     }
 
     @Override
-    public void onErrorCliente(String message) {
+    public void onErrorMicroRegiao(String message) {
         hideLoading();
         showMessage(message);
 
@@ -175,11 +170,11 @@ public class PrevisaoTempoAdmClienteActivity extends BaseActivity implements Dat
         editTextDtPrevisao.setError(message);
     }
 
-    @OnClick(R.id.button_enviar_file_cliente)
+    @OnClick(R.id.button_enviar_file_microregiao)
     public void onClickEnviarArqquivo() {
         showLoading();
-        ClienteResource cliente = (ClienteResource) spCliente.getSelectedItem();
-        previsaoTempoAdmClientePresenter.enviarArquivo(file, cliente, editTextDtPrevisao.getText().toString());
+        MicroRegiaoResource microregiao = (MicroRegiaoResource) spMicroRegiao.getSelectedItem();
+        previsaoTempoAdmMicroRegiaoPresenter.enviarArquivo(file, microregiao, editTextDtPrevisao.getText().toString());
     }
 
     public void clear(){

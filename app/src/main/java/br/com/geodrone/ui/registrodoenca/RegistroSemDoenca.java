@@ -5,6 +5,7 @@ import android.util.Log;
 
 import br.com.geodrone.R;
 import br.com.geodrone.model.RegistroDoenca;
+import br.com.geodrone.model.Talhao;
 import br.com.geodrone.service.RegistroDoencaService;
 import br.com.geodrone.ui.base.BaseFragmentActivity;
 import br.com.geodrone.ui.base.BasePresenter;
@@ -30,12 +31,13 @@ public class RegistroSemDoenca extends BasePresenter<RegistroSemDoenca.View> {
         this.registroDoencaService = new RegistroDoencaService(activity);
     }
 
-    public void salvar(Location location) {
+    public void salvar(Location location, Talhao talhao) {
         try {
-            boolean isOk = validar(location);
+            boolean isOk = validar(location, talhao);
             if (isOk) {
                 RegistroDoenca registroDoenca = new RegistroDoenca();
                 registroDoenca.setIdDoenca(null);
+                registroDoenca.setIdTalhao(talhao != null ? talhao.getId() : null);
                 registroDoenca.setLatitude(location != null ? location.getLatitude() : null);
                 registroDoenca.setLongitude(location != null ? location.getLongitude() : null);
                 this.registroDoencaService.insert(registroDoenca);
@@ -48,7 +50,11 @@ public class RegistroSemDoenca extends BasePresenter<RegistroSemDoenca.View> {
         }
     }
 
-    private boolean validar(Location location) {
+    private boolean validar(Location location, Talhao talhao) {
+        if (talhao == null){
+            view.onErrorSemRegistroRegitroDoenca(activity.getString(R.string.msg_obr_talhao));
+            return false;
+        }
         return true;
     }
 }

@@ -33,6 +33,7 @@ import br.com.geodrone.ui.mensagem.usuarios.MensagemUsuariosActivity;
 import br.com.geodrone.ui.monitoramento.MonitoramentoActivity;
 import br.com.geodrone.ui.pontocoletachuva.PontoColetaChuvaActivity;
 import br.com.geodrone.ui.previsaotempoadmcliente.PrevisaoTempoAdmClienteActivity;
+import br.com.geodrone.ui.previsaotempoadmmicroregiao.PrevisaoTempoAdmMicroRegiaoActivity;
 import br.com.geodrone.ui.registrochuva.RegistroPluviosidadeActivity;
 import br.com.geodrone.ui.registrocondicaotempo.RegistroCondicoesTempoActivity;
 import br.com.geodrone.ui.registrodefensivo.RegistroDefensivoActivity;
@@ -281,6 +282,9 @@ public class MainActivity extends BaseActivity
             startActivity(intent);
         }else if (id == R.id.menu_item_adm_previsao_cliente) {
             Intent intent = new Intent(this, PrevisaoTempoAdmClienteActivity.class);
+            startActivity(intent);
+        }else if (id == R.id.menu_item_adm_previsao_cliente_microregiao) {
+            Intent intent = new Intent(this, PrevisaoTempoAdmMicroRegiaoActivity.class);
             startActivity(intent);
         }
 

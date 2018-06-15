@@ -79,13 +79,21 @@ public class MonitoramentoActivity extends BaseMapFragmentActivity implements Bo
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case  R.id.menu_item_talhao:
-                monitoramentoPresenter.selecionarTalhao();
+                monitoramentoPresenter.selecionarTalhao(getMyLocation());
                 break;
             case R.id.menu_item_registrar_praga:
-                dialogConfirmPraga();
+                if (monitoramentoPresenter.getTalhao() == null){
+                    showMessage(getString(R.string.msg_obr_talhao));
+                }else{
+                    dialogConfirmPraga();
+                }
                 break;
             case R.id.menu_item_registrar_doenca:
-                dialogConfirmDoenca();
+                if (monitoramentoPresenter.getTalhao() == null){
+                    showMessage(getString(R.string.msg_obr_talhao));
+                }else {
+                    dialogConfirmDoenca();
+                }
                 break;
             default:
                 break;
@@ -103,8 +111,11 @@ public class MonitoramentoActivity extends BaseMapFragmentActivity implements Bo
         //define um botão como positivo
         builder.setPositiveButton(R.string.lb_sim, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface arg0, int arg1) {
+                Long idTalhao = monitoramentoPresenter.getTalhao() != null ? monitoramentoPresenter.getTalhao().getId() : null;
                 Intent i = new Intent(MonitoramentoActivity.this, RegistroDoencaActivity.class);
                 i.putExtra("localizacao", tracker.getLocation());
+                i.putExtra("idTalhao", idTalhao);
+
                 startActivity(i);
                 alertDialog.dismiss();
             }
@@ -112,7 +123,7 @@ public class MonitoramentoActivity extends BaseMapFragmentActivity implements Bo
         //define um botão como negativo.
         builder.setNegativeButton(R.string.lb_nao, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface arg0, int arg1) {
-                registroSemDoenca.salvar(tracker.getLocation());
+                registroSemDoenca.salvar(tracker.getLocation(), monitoramentoPresenter.getTalhao());
                 alertDialog.dismiss();
             }
         });
@@ -133,15 +144,17 @@ public class MonitoramentoActivity extends BaseMapFragmentActivity implements Bo
         //define um botão como positivo
         builder.setPositiveButton(R.string.lb_sim, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface arg0, int arg1) {
+                Long idTalhao = monitoramentoPresenter.getTalhao() != null ? monitoramentoPresenter.getTalhao().getId() : null;
                 Intent i = new Intent(MonitoramentoActivity.this, RegistroPragaActivity.class);
                 i.putExtra("localizacao", tracker.getLocation());
+                i.putExtra("idTalhao", idTalhao);
                 startActivity(i);
             }
         });
         //define um botão como negativo.
         builder.setNegativeButton(R.string.lb_nao, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface arg0, int arg1) {
-                registroSemPraga.salvar(tracker.getLocation());
+                registroSemPraga.salvar(tracker.getLocation(), monitoramentoPresenter.getTalhao());
                 alertDialog.dismiss();
             }
         });

@@ -5,6 +5,7 @@ import android.util.Log;
 
 import br.com.geodrone.R;
 import br.com.geodrone.model.RegistroPraga;
+import br.com.geodrone.model.Talhao;
 import br.com.geodrone.service.RegistroPragaService;
 import br.com.geodrone.ui.base.BaseFragmentActivity;
 import br.com.geodrone.ui.base.BasePresenter;
@@ -30,12 +31,13 @@ public class RegistroSemPraga extends BasePresenter<RegistroSemPraga.View> {
         this.registroPragaService = new RegistroPragaService(activity);
     }
 
-    public void salvar(Location location) {
+    public void salvar(Location location, Talhao talhao) {
         try {
-            boolean isOk = validar(location);
+            boolean isOk = validar(location, talhao);
             if (isOk) {
                 RegistroPraga registroPraga = new RegistroPraga();
                 registroPraga.setIdPraga(null);
+                registroPraga.setIdTalhao(talhao != null ? talhao.getId() : null);
                 registroPraga.setLatitude(location != null ? location.getLatitude() : null);
                 registroPraga.setLongitude(location != null ? location.getLongitude() : null);
                 registroPraga.setQtde(0L);
@@ -49,7 +51,11 @@ public class RegistroSemPraga extends BasePresenter<RegistroSemPraga.View> {
         }
     }
 
-    private boolean validar(Location location) {
+    private boolean validar(Location location, Talhao talhao) {
+        if (talhao == null){
+            view.onErrorSemRegistroRegitroPraga(activity.getString(R.string.msg_obr_talhao));
+            return false;
+        }
         return true;
     }
 }

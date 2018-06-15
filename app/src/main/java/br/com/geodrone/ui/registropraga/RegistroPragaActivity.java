@@ -46,6 +46,8 @@ public class RegistroPragaActivity extends BaseActivity implements RegistroPraga
     private List<TipoCultivo> tipoCultivoList = new ArrayList<>();
     private TipoCultivo tipoCultivo = null;
     private Praga praga = null;
+    Long idTalhao = null;
+
 
     private GenericProgress mProgress;
 
@@ -58,6 +60,10 @@ public class RegistroPragaActivity extends BaseActivity implements RegistroPraga
 
         Intent it = getIntent();
         location = it.getParcelableExtra("localizacao");
+        idTalhao = it.getLongExtra("idTalhao", -1);
+        if (idTalhao == -1){
+            idTalhao = null;
+        }
         registroPragaPresenter = new RegistroPragaPresenter(this);
 
         initComponentes();
@@ -102,7 +108,7 @@ public class RegistroPragaActivity extends BaseActivity implements RegistroPraga
     @OnClick(R.id.btn_salvar_praga)
     public void salvar() {
         showLoading();
-        registroPragaPresenter.salvar(praga, editTextObservacao.getText().toString(), location.getLatitude(), location.getLongitude(), editTextQtdePragas.getText().toString());
+        registroPragaPresenter.salvar(praga, idTalhao, editTextObservacao.getText().toString(), location.getLatitude(), location.getLongitude(), editTextQtdePragas.getText().toString());
     }
 
     @Override

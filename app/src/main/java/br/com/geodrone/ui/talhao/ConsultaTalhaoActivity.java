@@ -22,6 +22,7 @@ import br.com.geodrone.resource.AlterarSenhaUsuarioResourse;
 import br.com.geodrone.ui.base.BaseActivity;
 import br.com.geodrone.ui.helper.GenericProgress;
 import br.com.geodrone.utils.Messenger;
+import br.com.geodrone.utils.Util;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -41,16 +42,22 @@ public class ConsultaTalhaoActivity extends BaseActivity implements ConsultaTalh
         setContentView(R.layout.activity_consulta_talhao);
         ButterKnife.bind(this);
 
-        consultaTalhaoPresenter = new ConsultaTalhaoPresenter(this);
-        mProgress = new GenericProgress(this);
-        recyclerViewTalhao.setLayoutManager(new LinearLayoutManager(this));
+        if (!Util.verificaConexao(this)) {
+            Util.initToast(this, getString(R.string.msg_sem_conexao_internet));
+            finish();
+        } else {
 
-        talhaoAdapter = new TalhaoAdapter();
-        talhaoAdapter.setActivity(this);
-        recyclerViewTalhao.setAdapter(talhaoAdapter);
-        // Configurando um dividr entre linhas, para uma melhor visualização.
-        recyclerViewTalhao.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+            consultaTalhaoPresenter = new ConsultaTalhaoPresenter(this);
+            mProgress = new GenericProgress(this);
+            recyclerViewTalhao.setLayoutManager(new LinearLayoutManager(this));
 
+            talhaoAdapter = new TalhaoAdapter();
+            talhaoAdapter.setActivity(this);
+            recyclerViewTalhao.setAdapter(talhaoAdapter);
+            // Configurando um dividr entre linhas, para uma melhor visualização.
+            recyclerViewTalhao.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+
+        }
     }
 
 

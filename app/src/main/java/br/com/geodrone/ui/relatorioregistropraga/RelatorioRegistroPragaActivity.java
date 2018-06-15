@@ -14,6 +14,7 @@ import br.com.geodrone.ui.base.BaseRelatorioActivity;
 import br.com.geodrone.ui.helper.GenericProgress;
 import br.com.geodrone.utils.DateUtils;
 import br.com.geodrone.utils.Messenger;
+import br.com.geodrone.utils.Util;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -43,10 +44,15 @@ public class RelatorioRegistroPragaActivity extends BaseRelatorioActivity implem
         setContentView(R.layout.activity_relatorio_registro_praga);
         ButterKnife.bind(this);
 
-        mProgress = new GenericProgress(this);
-        requisitarArquivoPragaPresenter = new RelatorioRegistroPragaPresenter(this);
-        if (!hasPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            requestPermissionsSafely(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQ_STORAGE_PERMISSION);
+        if (!Util.verificaConexao(this)){
+            Util.initToast(this, getString(R.string.msg_sem_conexao_internet));
+            finish();
+        }else {
+            mProgress = new GenericProgress(this);
+            requisitarArquivoPragaPresenter = new RelatorioRegistroPragaPresenter(this);
+            if (!hasPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                requestPermissionsSafely(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQ_STORAGE_PERMISSION);
+            }
         }
     }
 

@@ -49,24 +49,25 @@ public class MensagemActivity extends BaseActivity implements  MensagemPresenter
         ButterKnife.bind(this);
 
         if (!Util.verificaConexao(this)){
-            Util.initToast(this,"Você não tem conexão com internet");
+            Util.initToast(this, getString(R.string.msg_sem_conexao_internet));
             finish();
-        }
-        mProgress = new GenericProgress(this);
+        }else {
 
-        Bundle b = getIntent().getExtras();
-        if (b != null) {
-            idUsuario = b.getLong(Constantes.CHAVE_ID_USUARIO);
-        }
-        if (idUsuario == null){
-            Usuario usuario = SessionGeooDrone.getAttribute(SessionGeooDrone.CHAVE_USUARIO);
-            idUsuario = usuario.getId();
-        }
-        mensagemPresenter = new MensagemPresenter(this, idUsuario);
+            mProgress = new GenericProgress(this);
 
-        /*emojIcon = new EmojIconActions(this,contentRoot,mMessageEditText,btEmoji);
-        emojIcon.ShowEmojIcon();*/
+            Bundle b = getIntent().getExtras();
+            if (b != null) {
+                idUsuario = b.getLong(Constantes.CHAVE_ID_USUARIO);
+            }
+            if (idUsuario == null) {
+                Usuario usuario = SessionGeooDrone.getAttribute(SessionGeooDrone.CHAVE_USUARIO);
+                idUsuario = usuario.getId();
+            }
+            mensagemPresenter = new MensagemPresenter(this, idUsuario);
 
+            /*emojIcon = new EmojIconActions(this,contentRoot,mMessageEditText,btEmoji);
+            emojIcon.ShowEmojIcon();*/
+        }
     }
 
     @Override

@@ -96,7 +96,7 @@ public class MonitoramentoPresenter extends BasePresenter<MonitoramentoPresenter
     }
 
 
-    public void selecionarTalhao() {
+    public void selecionarTalhao(final Location location) {
 
         Cliente cliente = SessionGeooDrone.getAttribute(SessionGeooDrone.CHAVE_CLIENTE);
 
@@ -124,6 +124,8 @@ public class MonitoramentoPresenter extends BasePresenter<MonitoramentoPresenter
         alert.setPositiveButton(R.string.lb_confirmar, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                selecionarTalhao(spTalhao);
+                onChangeLocation(location);
                 dialog.dismiss();
             }
         });
@@ -134,5 +136,9 @@ public class MonitoramentoPresenter extends BasePresenter<MonitoramentoPresenter
 
     private void selecionarTalhao(Spinner spTalhao){
         this.talhao = (Talhao) spTalhao.getSelectedItem();
-     }
+    }
+
+    public Talhao getTalhao(){
+        return this.talhao;
+    }
 }

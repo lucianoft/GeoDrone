@@ -8,6 +8,7 @@ import br.com.geodrone.activity.utils.Mask;
 import br.com.geodrone.ui.base.BaseActivity;
 import br.com.geodrone.ui.helper.GenericProgress;
 import br.com.geodrone.utils.Messenger;
+import br.com.geodrone.utils.Util;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -36,11 +37,17 @@ public class CadastroClienteActivity extends BaseActivity implements CadastroCli
         setContentView(R.layout.activity_cadastro_cliente);
         ButterKnife.bind(this);
 
-        mProgress = new GenericProgress(this);
-        cadastroClientePresenter = new CadastroClientePresenter(this);
-        editTextTelefone.addTextChangedListener(Mask.insert("(##)#####-####", editTextTelefone));
-        editTextCelular.addTextChangedListener(Mask.insert("(##)#####-####", editTextCelular));
-        editTextCep.addTextChangedListener(Mask.insert("#####-###", editTextCep));
+        if (!Util.verificaConexao(this)) {
+            Util.initToast(this, getString(R.string.msg_sem_conexao_internet));
+            finish();
+        } else {
+
+            mProgress = new GenericProgress(this);
+            cadastroClientePresenter = new CadastroClientePresenter(this);
+            editTextTelefone.addTextChangedListener(Mask.insert("(##)#####-####", editTextTelefone));
+            editTextCelular.addTextChangedListener(Mask.insert("(##)#####-####", editTextCelular));
+            editTextCep.addTextChangedListener(Mask.insert("#####-###", editTextCep));
+        }
     }
 
     @Override

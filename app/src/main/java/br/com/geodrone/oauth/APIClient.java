@@ -129,8 +129,15 @@ public interface APIClient {
 
     @Multipart
     @POST(Constantes.API_URL_PREFIXO + "previsao-tempo-arqs/importacao-upload")
-    public Call<Void> uploadPrevisaoTempo(@Part MultipartBody.Part file,
+    public Call<Void> uploadPrevisaoTempoCliente(@Part MultipartBody.Part file,
                                           @Part("nomeArquivo") RequestBody nomeArquivo,
                                           @Part("idCliente") RequestBody idCliente,
-                                          @Part("dtRegistro") RequestBody dtRegistro);
+                                          @Part("dtPrevisao") RequestBody dtPrevisao_);
+
+    @Multipart
+    @POST(Constantes.API_URL_PREFIXO + "previsao-tempo-arqs/importacao-upload")
+    public Call<Void> uploadPrevisaoTempoMicroRegiao(@Part MultipartBody.Part file,
+                                                 @Part("nomeArquivo") RequestBody nomeArquivo,
+                                                 @Part("idMicroRegiao") RequestBody idMicroRegiao,
+                                                 @Part("dtPrevisao") RequestBody dtPrevisao_);
 }

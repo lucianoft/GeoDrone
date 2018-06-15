@@ -53,7 +53,7 @@ public class RegistroPragaPresenter extends BasePresenter<RegistroPragaPresenter
     }
 
 
-    private boolean validar(Praga praga, String observacao, Double latitude, Double longitude, String qtde){
+    private boolean validar(Praga praga, Long idTalhao, String observacao, Double latitude, Double longitude, String qtde){
         boolean isOk = true;
         if (hasView()) {
             if (praga == null){
@@ -64,17 +64,22 @@ public class RegistroPragaPresenter extends BasePresenter<RegistroPragaPresenter
                 view.onErrorQtde(activity.getString(R.string.msg_obr_qtde));
                 isOk = false;
             }
+            if (idTalhao == null){
+                view.onErrorRegitroPraga(activity.getString(R.string.msg_obr_talhao));
+            }
         }
         return isOk;
     }
 
-    public void salvar(Praga praga, String observacao, Double latitude, Double longitude, String qtde) {
+    public void salvar(Praga praga, Long idTalhao, String observacao, Double latitude, Double longitude, String qtde) {
         try {
-            boolean isOk = validar(praga, observacao, latitude, longitude, qtde);
+            boolean isOk = validar(praga, idTalhao, observacao, latitude, longitude, qtde);
 
             if (isOk) {
                 RegistroPraga registroPraga = new RegistroPraga();
                 registroPraga.setIdPraga(praga != null ? praga.getId() : null);
+                registroPraga.setObservacao(observacao);
+                registroPraga.setIdTalhao(idTalhao);
                 registroPraga.setLatitude(latitude);
                 registroPraga.setLongitude(longitude);
                 registroPraga.setQtde(Long.parseLong(qtde));

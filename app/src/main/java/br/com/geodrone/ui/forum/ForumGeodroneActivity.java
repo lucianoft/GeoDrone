@@ -99,7 +99,7 @@ public class ForumGeodroneActivity extends BaseActivity  implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forum_geodrone);
         if (!Util.verificaConexao(this)){
-            Util.initToast(this,"Você não tem conexão com internet");
+            Util.initToast(this, getString(R.string.msg_sem_conexao_internet));
             finish();
         }else{
             bindViews();
