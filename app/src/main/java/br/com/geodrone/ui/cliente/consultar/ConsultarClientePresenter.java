@@ -133,7 +133,7 @@ public class ConsultarClientePresenter extends BasePresenter<ConsultarClientePre
         }
     }
 
-    public void alterarCliente(ClienteResource clienteResource, MicroRegiaoResource microRegiaoResource, String flagStatus) {
+    public void alterarCliente(ClienteResource clienteResource, String telefone,  MicroRegiaoResource microRegiaoResource, String flagStatus) {
         try{
             String URL_BASE = configuracao != null ? configuracao.getUrl() : null;
             if (URL_BASE == null) {
@@ -141,7 +141,7 @@ public class ConsultarClientePresenter extends BasePresenter<ConsultarClientePre
             }
             clienteResource.setFlagStatus(flagStatus);
             clienteResource.setIdMicroRegiao(microRegiaoResource != null ? microRegiaoResource.getId() : null);
-
+            clienteResource.setTelefone(telefone);
             AccessToken accessToken =  PreferencesUtils.getAccessToken(activity);
 
             APIClient client = ServiceGenerator.getInstance(URL_BASE).createServiceWithAuth(APIClient.class, accessToken);

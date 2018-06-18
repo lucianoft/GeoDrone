@@ -1,10 +1,6 @@
 package br.com.geodrone.resource;
 
-import java.io.Serializable;
-
-public class UsuarioResource implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class UsuarioResource {
 
     private Long id;
     private String nome;
@@ -15,7 +11,8 @@ public class UsuarioResource implements Serializable {
     private String flagPerfil;
     private Long idCliente;
     private Integer indAtivo;
-    private Integer indAceite;
+    private Integer indAceiteGeomonitora;
+    private Integer indAceiteGeoClima;
 
     public Long getId() {
         return id;
@@ -89,11 +86,19 @@ public class UsuarioResource implements Serializable {
         this.indAtivo = indAtivo;
     }
 
-    public Integer getIndAceite() {
-        return indAceite;
+    public Integer getIndAceiteGeomonitora() {
+        return indAceiteGeomonitora;
     }
 
-    public void setIndAceite(Integer indAceite) {
-        this.indAceite = indAceite;
+    public void setIndAceiteGeomonitora(Integer indAceiteGeomonitora) {
+        this.indAceiteGeomonitora = indAceiteGeomonitora;
+    }
+
+    public Integer getIndAceiteGeoClima() {
+        return indAceiteGeoClima;
+    }
+
+    public void setIndAceiteGeoClima(Integer indAceiteGeoClima) {
+        this.indAceiteGeoClima = indAceiteGeoClima;
     }
 }

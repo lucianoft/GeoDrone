@@ -11,7 +11,7 @@
         <item android:title="@string/menu_geo_clima">
             <menu>
                 <item
-                    android:id="@+id/nav_ponto_previsao"
+                    android:id="@+id/menu_item_previsao_tempo"
                     android:title="@string/menu_previsao" />
                 <item
                     android:id="@+id/nav_ponto_coleta_chuva"
@@ -60,10 +60,6 @@
                 <item
                     android:id="@+id/menu_item_requisitar_arquivos_pragas"
                     android:title="@string/menu_requisitar_arquivos_pragas" />
-                <item
-                    android:id="@+id/menu_item_relatorio_indice_pragas"
-                    android:title="@string/menu_relatorio_indice_pragas" />
-
                 <item
                     android:id="@+id/menu_item_requisitar_arquivos_doencas"
                     android:title="@string/menu_requisitar_arquivos_doencas" />

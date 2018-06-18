@@ -33,12 +33,25 @@
             android:inputType="text"
             android:hint="@string/lb_email"/>
 
+    </android.support.design.widget.TextInputLayout>
 
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_telefone"
+        android:layout_below="@+id/input_layout_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText android:id="@+id/edit_text_telefone"
+            style="@style/TextLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:hint="@string/lb_telefone" />
     </android.support.design.widget.TextInputLayout>
 
     <TextView
         android:id="@+id/input_layout_microregiao"
-        android:layout_below="@+id/input_layout_email"
+        android:layout_below="@+id/input_layout_telefone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text= "@string/lb_microregiao"

@@ -5,7 +5,6 @@ import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.Property;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 import br.com.geodrone.model.api.AuditModel;
@@ -22,8 +21,8 @@ public class RegistroDefensivo extends GenericModel implements AuditModel, UserM
 	@Property(nameInDb = "ID_REGISTRO_DEFENSIVO_DISP")
 	private Long id;
 
-	@Property(nameInDb = "ID_TIPO_DEFENSIVO")
-	private Long idTipoDefensivo;
+	@Property(nameInDb = "ID_DEFENSIVO_QUIMICO")
+	private Long idDefensivoQuimico;
 
 	@Property(nameInDb = "DT_REGISTRO")
 	@NotNull
@@ -71,12 +70,12 @@ public class RegistroDefensivo extends GenericModel implements AuditModel, UserM
 		this.id = id;
 	}
 
-	public Long getidTipoDefensivo() {
-		return idTipoDefensivo;
+	public Long getIdDefensivoQuimico() {
+		return idDefensivoQuimico;
 	}
 
-	public void setidTipoDefensivo(Long idTipoDefensivo) {
-		this.idTipoDefensivo = idTipoDefensivo;
+	public void setIdDefensivoQuimico(Long idDefensivoQuimico) {
+		this.idDefensivoQuimico = idDefensivoQuimico;
 	}
 
 	public Long getIdRegistroDefensivo() {
@@ -203,13 +202,5 @@ public class RegistroDefensivo extends GenericModel implements AuditModel, UserM
 		return (this.id == null ? "" : this.id.toString() );
 	}
 	/** ***************************** */
-
-	public Long getIdTipoDefensivo() {
-		return this.idTipoDefensivo;
-	}
-
-	public void setIdTipoDefensivo(Long idTipoDefensivo) {
-		this.idTipoDefensivo = idTipoDefensivo;
-	}
 
 }

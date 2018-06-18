@@ -5,8 +5,11 @@ import java.util.Date;
 import java.util.List;
 
 import br.com.geodrone.R;
+import br.com.geodrone.model.DefensivoQuimico;
+import br.com.geodrone.model.Doenca;
 import br.com.geodrone.model.RegistroDefensivo;
 import br.com.geodrone.model.TipoDefensivo;
+import br.com.geodrone.service.DefensivoQuimicoService;
 import br.com.geodrone.service.RegistroDefensivoService;
 import br.com.geodrone.service.TipoDefensivoService;
 import br.com.geodrone.ui.base.BaseActivity;
@@ -34,11 +37,19 @@ public class RegistroDefensivoPresenter extends BasePresenter<RegistroDefensivoP
     private BaseActivity activity;
     RegistroDefensivoService registroDefensivoService = null;
     TipoDefensivoService tipoDefensivoService = null;
+    private DefensivoQuimicoService defensivoQuimicoService;
 
     public RegistroDefensivoPresenter(BaseActivity activity){
         this.activity = activity;
         this.tipoDefensivoService = new TipoDefensivoService(activity);
         this.registroDefensivoService = new RegistroDefensivoService(activity);
+        defensivoQuimicoService = new DefensivoQuimicoService(activity);
+    }
+
+
+    public List<DefensivoQuimico> findAllDefensivoQuimico(){
+        List<DefensivoQuimico> doencas = this.defensivoQuimicoService.findAll();
+        return doencas != null ? doencas : new ArrayList<DefensivoQuimico>();
     }
 
     public List<TipoDefensivo> findAllTipoDefensivo(){
@@ -47,10 +58,10 @@ public class RegistroDefensivoPresenter extends BasePresenter<RegistroDefensivoP
     }
 
 
-    private boolean validar(TipoDefensivo tipoDefensivo, String dtRegistro, String dose){
+    private boolean validar(DefensivoQuimico defensivoQuimico, String dtRegistro, String dose){
         boolean isOk = true;
         if (hasView()) {
-            if (tipoDefensivo == null){
+            if (defensivoQuimico == null){
                 view.onErrorTipoDefensivo(activity.getString(R.string.msg_obr_tipo_defensivo));
                 isOk = false;
             }
@@ -62,15 +73,15 @@ public class RegistroDefensivoPresenter extends BasePresenter<RegistroDefensivoP
         return isOk;
     }
 
-    public void salvar(TipoDefensivo tipoDefensivo, String dtRegistro, String dose) {
+    public void salvar(DefensivoQuimico defensivoQuimico, String dtRegistro, String dose) {
         try{
-            boolean isOk = validar(tipoDefensivo, dtRegistro, dose);
+            boolean isOk = validar(defensivoQuimico, dtRegistro, dose);
 
             if (isOk) {
                 DateUtils dateUtils = new DateUtils();
 
                 RegistroDefensivo registroDefensivo = new RegistroDefensivo();
-                registroDefensivo.setidTipoDefensivo(tipoDefensivo != null ? tipoDefensivo.getId() : null);
+                registroDefensivo.setIdDefensivoQuimico(defensivoQuimico != null ? defensivoQuimico.getId() : null);
                 registroDefensivo.setDose(Double.parseDouble(dose));
                 registroDefensivo.setDtRegistro(dateUtils.parse(dtRegistro, "dd/MM/yyyy"));
                 this.registroDefensivoService.insert(registroDefensivo);

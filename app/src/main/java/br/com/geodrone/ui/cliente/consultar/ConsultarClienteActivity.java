@@ -80,6 +80,8 @@ public class ConsultarClienteActivity extends BaseActivity implements ConsultarC
         View view = li.inflate(R.layout.dialog_alterar_cliente, null);
         final EditText editTextNome = view.findViewById(R.id.editText_nome);
         final EditText editTextEmail = view.findViewById(R.id.editText_email);
+        final EditText editTextTelefone = view.findViewById(R.id.edit_text_telefone);
+
 
         final Spinner spMicroregiao = view.findViewById(R.id.spinner_microregiao_cliente);
         ArrayAdapter<MicroRegiaoResource> adapterMicroregiao = new ArrayAdapter<MicroRegiaoResource>(this, android.R.layout.simple_spinner_item, microRegiaoResources);
@@ -93,6 +95,7 @@ public class ConsultarClienteActivity extends BaseActivity implements ConsultarC
 
         editTextNome.setText(clienteResource.getNomeRazaoSocial());
         editTextEmail.setText(clienteResource.getEmail());
+        editTextTelefone.setText(clienteResource.getTelefone());
         int positionMicroRegiao = getPositionMicroRegiao(clienteResource.getIdMicroRegiao());
         if (positionMicroRegiao > -1) {
             spMicroregiao.setSelection(positionMicroRegiao);
@@ -117,7 +120,10 @@ public class ConsultarClienteActivity extends BaseActivity implements ConsultarC
                 showLoading();
                 MicroRegiaoResource microRegiaoResource = (MicroRegiaoResource) spMicroregiao.getSelectedItem();
                 FlagStatusCliente flagStatusCliente = (FlagStatusCliente) spStatus.getSelectedItem();
-                consultarClientePresenter.alterarCliente(clienteResource, microRegiaoResource, flagStatusCliente != null ? flagStatusCliente.getValue() : null );
+                consultarClientePresenter.alterarCliente(clienteResource,
+                                                         editTextTelefone.getText().toString(),
+                                                         microRegiaoResource,
+                                                         flagStatusCliente != null ? flagStatusCliente.getValue() : null );
                 dialog.dismiss();
             }
         });

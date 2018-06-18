@@ -24,6 +24,7 @@ public class DaoMaster extends AbstractDaoMaster {
         ClienteDao.createTable(db, ifNotExists);
         ClienteUsuarioDao.createTable(db, ifNotExists);
         ConfiguracaoDao.createTable(db, ifNotExists);
+        DefensivoQuimicoDao.createTable(db, ifNotExists);
         DispositivoDao.createTable(db, ifNotExists);
         DoencaDao.createTable(db, ifNotExists);
         EstagioInfestacaoDao.createTable(db, ifNotExists);
@@ -47,6 +48,7 @@ public class DaoMaster extends AbstractDaoMaster {
         ClienteDao.dropTable(db, ifExists);
         ClienteUsuarioDao.dropTable(db, ifExists);
         ConfiguracaoDao.dropTable(db, ifExists);
+        DefensivoQuimicoDao.dropTable(db, ifExists);
         DispositivoDao.dropTable(db, ifExists);
         DoencaDao.dropTable(db, ifExists);
         EstagioInfestacaoDao.dropTable(db, ifExists);
@@ -84,6 +86,7 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(ClienteDao.class);
         registerDaoClass(ClienteUsuarioDao.class);
         registerDaoClass(ConfiguracaoDao.class);
+        registerDaoClass(DefensivoQuimicoDao.class);
         registerDaoClass(DispositivoDao.class);
         registerDaoClass(DoencaDao.class);
         registerDaoClass(EstagioInfestacaoDao.class);

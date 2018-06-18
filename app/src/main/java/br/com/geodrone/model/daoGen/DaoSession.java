@@ -11,6 +11,7 @@ import org.greenrobot.greendao.internal.DaoConfig;
 import br.com.geodrone.model.Cliente;
 import br.com.geodrone.model.ClienteUsuario;
 import br.com.geodrone.model.Configuracao;
+import br.com.geodrone.model.DefensivoQuimico;
 import br.com.geodrone.model.Dispositivo;
 import br.com.geodrone.model.Doenca;
 import br.com.geodrone.model.EstagioInfestacao;
@@ -31,6 +32,7 @@ import br.com.geodrone.model.Usuario;
 import br.com.geodrone.model.daoGen.ClienteDao;
 import br.com.geodrone.model.daoGen.ClienteUsuarioDao;
 import br.com.geodrone.model.daoGen.ConfiguracaoDao;
+import br.com.geodrone.model.daoGen.DefensivoQuimicoDao;
 import br.com.geodrone.model.daoGen.DispositivoDao;
 import br.com.geodrone.model.daoGen.DoencaDao;
 import br.com.geodrone.model.daoGen.EstagioInfestacaoDao;
@@ -60,6 +62,7 @@ public class DaoSession extends AbstractDaoSession {
     private final DaoConfig clienteDaoConfig;
     private final DaoConfig clienteUsuarioDaoConfig;
     private final DaoConfig configuracaoDaoConfig;
+    private final DaoConfig defensivoQuimicoDaoConfig;
     private final DaoConfig dispositivoDaoConfig;
     private final DaoConfig doencaDaoConfig;
     private final DaoConfig estagioInfestacaoDaoConfig;
@@ -80,6 +83,7 @@ public class DaoSession extends AbstractDaoSession {
     private final ClienteDao clienteDao;
     private final ClienteUsuarioDao clienteUsuarioDao;
     private final ConfiguracaoDao configuracaoDao;
+    private final DefensivoQuimicoDao defensivoQuimicoDao;
     private final DispositivoDao dispositivoDao;
     private final DoencaDao doencaDao;
     private final EstagioInfestacaoDao estagioInfestacaoDao;
@@ -109,6 +113,9 @@ public class DaoSession extends AbstractDaoSession {
 
         configuracaoDaoConfig = daoConfigMap.get(ConfiguracaoDao.class).clone();
         configuracaoDaoConfig.initIdentityScope(type);
+
+        defensivoQuimicoDaoConfig = daoConfigMap.get(DefensivoQuimicoDao.class).clone();
+        defensivoQuimicoDaoConfig.initIdentityScope(type);
 
         dispositivoDaoConfig = daoConfigMap.get(DispositivoDao.class).clone();
         dispositivoDaoConfig.initIdentityScope(type);
@@ -161,6 +168,7 @@ public class DaoSession extends AbstractDaoSession {
         clienteDao = new ClienteDao(clienteDaoConfig, this);
         clienteUsuarioDao = new ClienteUsuarioDao(clienteUsuarioDaoConfig, this);
         configuracaoDao = new ConfiguracaoDao(configuracaoDaoConfig, this);
+        defensivoQuimicoDao = new DefensivoQuimicoDao(defensivoQuimicoDaoConfig, this);
         dispositivoDao = new DispositivoDao(dispositivoDaoConfig, this);
         doencaDao = new DoencaDao(doencaDaoConfig, this);
         estagioInfestacaoDao = new EstagioInfestacaoDao(estagioInfestacaoDaoConfig, this);
@@ -181,6 +189,7 @@ public class DaoSession extends AbstractDaoSession {
         registerDao(Cliente.class, clienteDao);
         registerDao(ClienteUsuario.class, clienteUsuarioDao);
         registerDao(Configuracao.class, configuracaoDao);
+        registerDao(DefensivoQuimico.class, defensivoQuimicoDao);
         registerDao(Dispositivo.class, dispositivoDao);
         registerDao(Doenca.class, doencaDao);
         registerDao(EstagioInfestacao.class, estagioInfestacaoDao);
@@ -203,6 +212,7 @@ public class DaoSession extends AbstractDaoSession {
         clienteDaoConfig.clearIdentityScope();
         clienteUsuarioDaoConfig.clearIdentityScope();
         configuracaoDaoConfig.clearIdentityScope();
+        defensivoQuimicoDaoConfig.clearIdentityScope();
         dispositivoDaoConfig.clearIdentityScope();
         doencaDaoConfig.clearIdentityScope();
         estagioInfestacaoDaoConfig.clearIdentityScope();
@@ -231,6 +241,10 @@ public class DaoSession extends AbstractDaoSession {
 
     public ConfiguracaoDao getConfiguracaoDao() {
         return configuracaoDao;
+    }
+
+    public DefensivoQuimicoDao getDefensivoQuimicoDao() {
+        return defensivoQuimicoDao;
     }
 
     public DispositivoDao getDispositivoDao() {

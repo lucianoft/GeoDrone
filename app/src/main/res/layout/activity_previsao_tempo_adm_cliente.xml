@@ -7,7 +7,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    tools:context="br.com.geodrone.ui.previsaotempoadmcliente.PrevisaoTempoAdmClienteActivity">
+    tools:context="br.com.geodrone.ui.previsaotempo.admcliente.PrevisaoTempoAdmClienteActivity">
 
     <TextView
         android:id="@+id/text_view_SelecioneArquivo"

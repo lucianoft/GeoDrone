@@ -49,9 +49,15 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseErro
     }
 
     @Override
-    public void onError(Exception ex){
+    public void onError(final Exception ex){
+        final BaseActivity this_ = this;
         hideLoading();
-        MessageUI.showMessage(this, ex.toString());
+        runOnUiThread(new Runnable() {
+            public void run() {
+                MessageUI.showMessage(this_, ex);
+            }
+        });
+
     }
 
     @Override

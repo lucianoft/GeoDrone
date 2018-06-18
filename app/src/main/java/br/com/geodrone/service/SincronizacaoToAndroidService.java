@@ -6,6 +6,7 @@ import br.com.geodrone.SessionGeooDrone;
 import br.com.geodrone.model.Cliente;
 import br.com.geodrone.model.ClienteUsuario;
 import br.com.geodrone.model.Configuracao;
+import br.com.geodrone.model.DefensivoQuimico;
 import br.com.geodrone.model.Dispositivo;
 import br.com.geodrone.model.Doenca;
 import br.com.geodrone.model.EstagioInfestacao;
@@ -21,6 +22,7 @@ import br.com.geodrone.oauth.dto.AccessToken;
 import br.com.geodrone.repository.ClienteUsuarioRepository;
 import br.com.geodrone.resource.ClienteResource;
 import br.com.geodrone.resource.ClienteUsuarioResource;
+import br.com.geodrone.resource.DefensivoQuimicoResource;
 import br.com.geodrone.resource.DoencaResource;
 import br.com.geodrone.resource.EstagioInfestacaoResource;
 import br.com.geodrone.resource.InstallerResource;
@@ -55,6 +57,7 @@ public class SincronizacaoToAndroidService extends GenericService {
     TipoDefensivoService tipoDefensivoService = null;
     EstagioInfestacaoService estagioInfestacaoService = null;
     TalhaoService talhaoService = null;
+    DefensivoQuimicoService defensivoQuimicoService = null;
 
     private Context ctx = null;
     public SincronizacaoToAndroidService(Context ctx){
@@ -72,6 +75,7 @@ public class SincronizacaoToAndroidService extends GenericService {
         tipoDefensivoService = new TipoDefensivoService(ctx);
         estagioInfestacaoService = new EstagioInfestacaoService(ctx);
         talhaoService = new TalhaoService(ctx);
+        defensivoQuimicoService = new DefensivoQuimicoService(ctx);
     }
 
     public void instalarAplicativo (String url, InstallerResource installerResource)  {
@@ -159,6 +163,11 @@ public class SincronizacaoToAndroidService extends GenericService {
         if (sincronizacaoAndroidResource.getTalhaos() != null && !sincronizacaoAndroidResource.getTalhaos().isEmpty()){
             for (TalhaoResource talhaoResource : sincronizacaoAndroidResource.getTalhaos()) {
                 salvarTalhao(talhaoResource);
+            }
+        }
+        if (sincronizacaoAndroidResource.getDefensivoQuimicos() != null && !sincronizacaoAndroidResource.getDefensivoQuimicos().isEmpty()){
+            for (DefensivoQuimicoResource defensivoQuimicoResource : sincronizacaoAndroidResource.getDefensivoQuimicos()) {
+                salvarDefensivoQuimico(defensivoQuimicoResource);
             }
         }
 
@@ -298,6 +307,12 @@ public class SincronizacaoToAndroidService extends GenericService {
         usuario.setFlagPerfil(usuarioResource.getFlagPerfil());
         usuario.setIdCliente(usuarioResource.getIdCliente());
         usuario.setIndAtivo(usuarioResource.getIndAtivo());
+        if (usuarioResource.getIndAceiteGeoClima() != null && usuarioResource.getIndAceiteGeoClima().intValue() == 1){
+            usuario.setIndAceiteGeoClima(usuarioResource.getIndAceiteGeoClima());
+        }
+        if (usuarioResource.getIndAceiteGeomonitora() != null && usuarioResource.getIndAceiteGeomonitora().intValue() == 1) {
+            usuario.setIndAceiteGeomonitora(usuarioResource.getIndAceiteGeomonitora());
+        }
 
         if (bInsert){
             usuario = usuarioService.insert(usuario);
@@ -401,4 +416,24 @@ public class SincronizacaoToAndroidService extends GenericService {
             talhaoService.update(talhao);
         }
     }
+
+    private void salvarDefensivoQuimico(DefensivoQuimicoResource defensivoQuimicoResource) {
+        boolean bInsert = false;
+        DefensivoQuimico defensivoQuimico = defensivoQuimicoService.findById(defensivoQuimicoResource.getId());
+        if (defensivoQuimico == null) {
+            bInsert = true;
+            defensivoQuimico = new DefensivoQuimico();
+        }
+        defensivoQuimico.setId(defensivoQuimicoResource.getId());
+        defensivoQuimico.setDescricao(defensivoQuimicoResource.getDescricao());
+        defensivoQuimico.setIngredientesAtivos(defensivoQuimicoResource.getIngredientesAtivos());
+        defensivoQuimico.setIdTipoDefensivo(defensivoQuimicoResource.getIdTipoDefensivo());
+        defensivoQuimico.setIndAtivo(defensivoQuimicoResource.getIndAtivo());
+        if (bInsert){
+            defensivoQuimicoService.insert(defensivoQuimico);
+        }else{
+            defensivoQuimicoService.update(defensivoQuimico);
+        }
+    }
+
 }

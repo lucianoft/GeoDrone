@@ -1,6 +1,5 @@
 package br.com.geodrone.resource;
 
-import java.io.Serializable;
 import java.util.List;
 
 public class SincronizacaoAndroidResource {
@@ -19,6 +18,8 @@ public class SincronizacaoAndroidResource {
 	private List<TipoDefensivoResource> tipoDefensivos;
 	private List<EstagioInfestacaoResource> estagioInfestacaos;
 	private List<TalhaoResource> talhaos;
+	private List<DefensivoQuimicoResource> defensivoQuimicos;
+
 
 	public Long getIdUsuario() {
 		return idUsuario;
@@ -123,5 +124,13 @@ public class SincronizacaoAndroidResource {
 
 	public void setTalhaos(List<TalhaoResource> talhaos) {
 		this.talhaos = talhaos;
+	}
+
+	public List<DefensivoQuimicoResource> getDefensivoQuimicos() {
+		return defensivoQuimicos;
+	}
+
+	public void setDefensivoQuimicos(List<DefensivoQuimicoResource> defensivoQuimicos) {
+		this.defensivoQuimicos = defensivoQuimicos;
 	}
 }

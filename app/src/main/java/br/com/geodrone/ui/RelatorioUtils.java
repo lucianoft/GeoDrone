@@ -32,6 +32,7 @@ import br.com.geodrone.service.ConfiguracaoService;
 import br.com.geodrone.ui.base.BaseActivity;
 import br.com.geodrone.ui.base.BaseRelatorioActivity;
 import br.com.geodrone.ui.helper.GenericProgress;
+import br.com.geodrone.ui.helper.MessageUI;
 import br.com.geodrone.utils.Constantes;
 import br.com.geodrone.utils.DateUtils;
 import br.com.geodrone.utils.Download;
@@ -65,8 +66,7 @@ public class RelatorioUtils {
         downloader.execute(downloadFile);
     }
 
-    private void downloadFile(DownloadFile downloadFile)  {
-
+    private void downloadFile(final DownloadFile downloadFile)  {
         try {
             int count;
             byte data[] = new byte[1024 * 4];
@@ -112,6 +112,7 @@ public class RelatorioUtils {
 
         }catch (Exception ex){
             activity.onRelatorioError(ex.toString());
+            ex.printStackTrace();
         }
     }
 

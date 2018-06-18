@@ -11,15 +11,21 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import br.com.geodrone.R;
 import br.com.geodrone.SessionGeooDrone;
 import br.com.geodrone.activity.utils.Constantes;
+import br.com.geodrone.dto.MenuMainDto;
 import br.com.geodrone.model.Cliente;
 import br.com.geodrone.model.Usuario;
 import br.com.geodrone.ui.aceiteusuariogeoclima.AceiteUsuarioGeoclimaActivity;
@@ -29,11 +35,13 @@ import br.com.geodrone.ui.cliente.consultar.ConsultarClienteActivity;
 import br.com.geodrone.ui.forum.ForumGeodroneActivity;
 import br.com.geodrone.ui.helper.ActivityHelper;
 import br.com.geodrone.ui.logout.LogoutActivity;
+import br.com.geodrone.ui.mensagem.MensagemAdapter;
 import br.com.geodrone.ui.mensagem.usuarios.MensagemUsuariosActivity;
 import br.com.geodrone.ui.monitoramento.MonitoramentoActivity;
 import br.com.geodrone.ui.pontocoletachuva.PontoColetaChuvaActivity;
-import br.com.geodrone.ui.previsaotempoadmcliente.PrevisaoTempoAdmClienteActivity;
-import br.com.geodrone.ui.previsaotempoadmmicroregiao.PrevisaoTempoAdmMicroRegiaoActivity;
+import br.com.geodrone.ui.previsaotempo.admcliente.PrevisaoTempoAdmClienteActivity;
+import br.com.geodrone.ui.previsaotempo.admmicroregiao.PrevisaoTempoAdmMicroRegiaoActivity;
+import br.com.geodrone.ui.previsaotempo.consulta.PrevisaoTempoConsultaActivity;
 import br.com.geodrone.ui.registrochuva.RegistroPluviosidadeActivity;
 import br.com.geodrone.ui.registrocondicaotempo.RegistroCondicoesTempoActivity;
 import br.com.geodrone.ui.registrodefensivo.RegistroDefensivoActivity;
@@ -61,10 +69,13 @@ public class MainActivity extends BaseActivity
     public static final int REQ_PERMISSION_FORUM                          = 1006;
 
     private MainPresenter mainPresenter;
+    private MainAdapter mainAdapter;
 
     @BindView(R.id.nav_view_main)NavigationView navigationView;
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.drawer_layout) DrawerLayout drawer;
+    //@BindView(R.id.recyclerViewMain)
+    RecyclerView mRecyclerView;
 
     private Integer nSair =0;
     private Menu menu;
@@ -92,6 +103,7 @@ public class MainActivity extends BaseActivity
     public void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         mainPresenter.takeView(this);
+        //initAdapter();
         configurarUsuarioCliente();
         configurarPermissoes();
     }
@@ -198,7 +210,12 @@ public class MainActivity extends BaseActivity
         int id = item.getItemId();
 
         //geoclima
-        if (id == R.id.nav_registro_foto) {
+        if (id == R.id.menu_item_previsao_tempo){
+            if (isAceiteGeoClima()) {
+                Intent i = new Intent(this, PrevisaoTempoConsultaActivity.class);
+                startActivity(i);
+            }
+        }else if (id == R.id.nav_registro_foto) {
             if (isAceiteGeoClima()) {
                 getPermissionsCamera();
             }
@@ -260,12 +277,12 @@ public class MainActivity extends BaseActivity
                 Intent intent = new Intent(this, RelatorioRegistroDoencaActivity.class);
                 startActivity(intent);
             }
-        }else if (id == R.id.menu_item_relatorio_indice_pragas){
+        }/*else if (id == R.id.menu_item_relatorio_indice_pragas){
             if (isAceiteGeomonitora()) {
                 Intent intent = new Intent(this, RelatorioIndicePragaActivity.class);
                 startActivity(intent);
             }
-        }
+        }*/
 
         //sincronizacao
         else if (id == R.id.nav_sincronizacao){
@@ -453,6 +470,19 @@ public class MainActivity extends BaseActivity
             startActivity(i);
         }
         return false;
+    }
+
+    private void initAdapter() {
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        mainAdapter = new MainAdapter(this);
+        mRecyclerView.setAdapter(mainAdapter);
+        mainAdapter.setData(getMenuMainDto());
+    }
+    private List<MenuMainDto> getMenuMainDto(){
+        List<MenuMainDto> menuMainDtos = new ArrayList<>();
+        menuMainDtos.add(new MenuMainDto(1, "Teste" , R.drawable.emoji_00a9));
+        return  menuMainDtos;
     }
 
 }

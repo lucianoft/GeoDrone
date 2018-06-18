@@ -38,7 +38,7 @@ public class GeoDroneApplication extends Application {
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, Constantes.BD_NOME); //The users-db here is the name of our database.
         Database db = helper.getWritableDb();
         daoSession = new DaoMaster(db).newSession();
-        //DaoMaster.dropAllTables(db, true);
+        DaoMaster.dropAllTables(db, true);
 
         try{
             daoSession.getTalhaoDao().loadAll();
@@ -47,6 +47,7 @@ public class GeoDroneApplication extends Application {
             daoSession.getRotaTrabalhoDao().loadAll();
             daoSession.getRegistroDoencaDao().loadAll();
             daoSession.getRegistroDoencaDao().loadAll();
+            daoSession.getRegistroDefensivoDao().loadAll();
         }catch (Exception ex){
             DaoMaster.dropAllTables(db, true);
         }

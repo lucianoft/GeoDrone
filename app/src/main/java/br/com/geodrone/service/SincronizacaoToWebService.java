@@ -14,14 +14,15 @@ import br.com.geodrone.model.Dispositivo;
 import br.com.geodrone.model.PontoColetaChuva;
 import br.com.geodrone.model.RegistroChuva;
 import br.com.geodrone.model.RegistroCondicaoTempo;
+import br.com.geodrone.model.RegistroDefensivo;
 import br.com.geodrone.model.RegistroDoenca;
 import br.com.geodrone.model.RegistroImagem;
 import br.com.geodrone.model.RegistroPraga;
-import br.com.geodrone.model.Talhao;
 import br.com.geodrone.model.Usuario;
 import br.com.geodrone.repository.PontoColetaChuvaRepository;
 import br.com.geodrone.repository.RegistroChuvaRepository;
 import br.com.geodrone.repository.RegistroCondicaoTempoRepository;
+import br.com.geodrone.repository.RegistroDefensivoRepository;
 import br.com.geodrone.repository.RegistroDoencaRepository;
 import br.com.geodrone.repository.RegistroImagemRepository;
 import br.com.geodrone.repository.RegistroPragaRepository;
@@ -30,11 +31,11 @@ import br.com.geodrone.resource.ClienteResource;
 import br.com.geodrone.resource.PontoColetaChuvaResource;
 import br.com.geodrone.resource.RegistroChuvaResource;
 import br.com.geodrone.resource.RegistroCondicaoTempoResource;
+import br.com.geodrone.resource.RegistroDefensivoResource;
 import br.com.geodrone.resource.RegistroDoencaResource;
 import br.com.geodrone.resource.RegistroImagemResource;
 import br.com.geodrone.resource.RegistroPragaResource;
 import br.com.geodrone.resource.SincronizacaoWebResource;
-import br.com.geodrone.resource.TalhaoResource;
 import br.com.geodrone.resource.UsuarioResource;
 import br.com.geodrone.service.util.GenericService;
 import br.com.geodrone.utils.DateUtils;
@@ -66,6 +67,7 @@ public class SincronizacaoToWebService extends GenericService {
     RegistroCondicaoTempoRepository registroCondicaoTempoRepository = null;
     TalhaoService talhaoService = null;
     TalhaoRepository talhaoRepository = null;
+    RegistroDefensivoRepository registroDefensivoRepository;
 
     private Context ctx = null;
 
@@ -90,6 +92,7 @@ public class SincronizacaoToWebService extends GenericService {
         registroDoencaRepository = new RegistroDoencaRepository(ctx);
         registroCondicaoTempoService = new RegistroCondicaoTempoService(ctx);
         registroCondicaoTempoRepository = new RegistroCondicaoTempoRepository(ctx);
+        registroDefensivoRepository = new RegistroDefensivoRepository(ctx);
     }
 
     public SincronizacaoWebResource sincronizarWeb() {
@@ -108,8 +111,7 @@ public class SincronizacaoToWebService extends GenericService {
         sincronizacaoWebResource.setRegistroPragas(getRegistroPragaResources());
         sincronizacaoWebResource.setRegistroDoencas(getRegistroDoencaResources());
         sincronizacaoWebResource.setRegistroCondicaoTempos(getRegistroCondicaoTempoResources());
-        //sincronizacaoWebResource.setTalhaos(getTalhaoResources());
-
+        sincronizacaoWebResource.setRegistroDefensivos(getRegistroDefensivoResources());
         return sincronizacaoWebResource;
 
     }
@@ -127,6 +129,9 @@ public class SincronizacaoToWebService extends GenericService {
         usuarioResource.setFlagPerfil(usuario.getFlagPerfil());
         usuarioResource.setIdCliente(usuario.getIdCliente());
         usuarioResource.setIndAtivo(usuario.getIndAtivo());
+        usuarioResource.setIndAceiteGeoClima(usuario.getIndAceiteGeoClima());
+        usuarioResource.setIndAceiteGeomonitora(usuario.getIndAceiteGeomonitora());
+
         return usuarioResource;
     }
 
@@ -361,5 +366,38 @@ public class SincronizacaoToWebService extends GenericService {
         }
         return registroCondicaoTempoResources;
     }
-    
+
+
+    private List<RegistroDefensivoResource> getRegistroDefensivoResources() {
+        Cliente cliente = SessionGeooDrone.getAttribute(SessionGeooDrone.CHAVE_CLIENTE);
+        Dispositivo dispositivo = SessionGeooDrone.getAttribute(SessionGeooDrone.CHAVE_DISPOSITIVO);
+
+        Date date = new DateUtils().now();
+        Date dtSincronizacaoErp = dispositivo.getDtSincronizacaoErp() != null ? dispositivo.getDtSincronizacaoErp() : date;
+
+        List<RegistroDefensivoResource> registroDefensivoResources = new ArrayList<>();
+
+        List<RegistroDefensivo> registroDefensivos = registroDefensivoRepository.findAllByClienteToSincronizar(cliente.getId(), dtSincronizacaoErp);
+        if (registroDefensivos != null) {
+            for (RegistroDefensivo registroDefensivo : registroDefensivos) {
+
+                RegistroDefensivoResource registroDefensivoResource = new RegistroDefensivoResource();
+
+                registroDefensivoResource.setIdRegistroDefensivo(registroDefensivo.getIdRegistroDefensivo());
+                registroDefensivoResource.setIdRegistroDefensivoDisp(registroDefensivo.getId());
+                registroDefensivoResource.setIdDefensivoQuimico(registroDefensivo.getIdDefensivoQuimico());
+                registroDefensivoResource.setDose(registroDefensivo.getDose());
+                registroDefensivoResource.setIdCliente(registroDefensivo.getIdCliente());
+                //registroDefensivoResource.setLatitude(registroDefensivo.getLatitude());
+                //registroDefensivoResource.setLongitude(registroDefensivo.getLongitude());
+                registroDefensivoResource.setDtRegistro(registroDefensivo.getDtRegistro());
+                registroDefensivoResource.setIdDispositivo(registroDefensivo.getIdDispositivo());
+                registroDefensivoResource.setIdUsuarioReg(registroDefensivo.getIdUsuarioReg());
+
+                registroDefensivoResources.add(registroDefensivoResource);
+            }
+        }
+        return registroDefensivoResources;
+    }
+
 }

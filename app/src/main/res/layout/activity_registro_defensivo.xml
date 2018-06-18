@@ -32,9 +32,32 @@
     </LinearLayout>
 
 
+    <!--NEW LINE!-->
+    <LinearLayout
+        android:id="@+id/linear_layout_defensivoQuimico"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear_layout_tipo_defensivo"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/lb_defensivo_quimico"
+            android:visibility="visible" />
+
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteDefensivoQuimico"
+            android:hint="@string/lb_pesquisar"
+            android:completionThreshold="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    
     <android.support.design.widget.TextInputLayout
         android:id="@+id/text_input_layout_dt_registro"
-        android:layout_below="@+id/linear_layout_tipo_defensivo"
+        android:layout_below="@+id/linear_layout_defensivoQuimico"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText android:id="@+id/edit_text_dt_registro"

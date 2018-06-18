@@ -9,6 +9,7 @@ import br.com.geodrone.resource.ClienteResource;
 import br.com.geodrone.resource.InstallerResource;
 import br.com.geodrone.resource.MensagemResource;
 import br.com.geodrone.resource.MicroRegiaoResource;
+import br.com.geodrone.resource.PrevisaoTempoArqResource;
 import br.com.geodrone.resource.SincronizacaoAndroidResource;
 import br.com.geodrone.resource.SincronizacaoWebResource;
 import br.com.geodrone.resource.TalhaoResource;
@@ -140,4 +141,12 @@ public interface APIClient {
                                                  @Part("nomeArquivo") RequestBody nomeArquivo,
                                                  @Part("idMicroRegiao") RequestBody idMicroRegiao,
                                                  @Part("dtPrevisao") RequestBody dtPrevisao_);
+
+    @GET(Constantes.API_URL_PREFIXO + "previsao-tempo-arqs/cliente-resource/{idCliente}")
+    public Call<List<PrevisaoTempoArqResource>> findAllPrevisaoTempoByClienteResource(@Path("idCliente") Long idCliente);
+
+    @Streaming
+    @GET(Constantes.API_URL_PREFIXO + "previsao-tempo-arqs/{id}/relatorio-previsao")
+    public Call<ResponseBody> findRelatorioPrevisaoTempo(@Path("id") Long id);
+
 }

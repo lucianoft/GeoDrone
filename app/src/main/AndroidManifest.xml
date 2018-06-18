@@ -152,11 +152,17 @@
             android:parentActivityName=".ui.main.MainActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".ui.previsaotempoadmcliente.PrevisaoTempoAdmClienteActivity"
+            android:name=".ui.previsaotempo.admcliente.PrevisaoTempoAdmClienteActivity"
             android:label="@string/title_activity_arquivo_previsao_tempo_cliente"
             android:parentActivityName=".ui.main.MainActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".ui.previsaotempoadmmicroregiao.PrevisaoTempoAdmMicroRegiaoActivity"></activity>
+        <activity android:name=".ui.previsaotempo.admmicroregiao.PrevisaoTempoAdmMicroRegiaoActivity" />
+        <activity android:name=".ui.previsaotempo.consulta.PrevisaoTempoConsultaActivity"></activity>
+        <activity android:name=".ui.registrodefensivo.RegistroDefensivoActivity"
+            android:label="@string/title_activity_arquivo_previsao_tempo_cliente"
+            android:parentActivityName=".ui.main.MainActivity"
+            android:theme="@style/AppTheme"/>
+
     </application>
 
 </manifest>

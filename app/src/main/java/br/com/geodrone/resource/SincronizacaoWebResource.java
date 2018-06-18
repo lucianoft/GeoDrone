@@ -17,6 +17,7 @@ public class SincronizacaoWebResource {
     private List<RegistroDoencaResource> registroDoencas;
     private List<RegistroCondicaoTempoResource> registroCondicaoTempos;
     private List<TalhaoResource> talhaos;
+    private List<RegistroDefensivoResource> registroDefensivos;
 
     public List<ClienteResource> getClientes() {
         return clientes;
@@ -96,5 +97,13 @@ public class SincronizacaoWebResource {
 
     public void setTalhaos(List<TalhaoResource> talhaos) {
         this.talhaos = talhaos;
+    }
+
+    public List<RegistroDefensivoResource> getRegistroDefensivos() {
+        return registroDefensivos;
+    }
+
+    public void setRegistroDefensivos(List<RegistroDefensivoResource> registroDefensivos) {
+        this.registroDefensivos = registroDefensivos;
     }
 }

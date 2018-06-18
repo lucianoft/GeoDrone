@@ -2,7 +2,10 @@ package br.com.geodrone.ui.registrodefensivo;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -13,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 import br.com.geodrone.R;
+import br.com.geodrone.model.DefensivoQuimico;
 import br.com.geodrone.model.TipoDefensivo;
 import br.com.geodrone.ui.base.BaseActivity;
 import br.com.geodrone.ui.helper.GenericProgress;
@@ -29,9 +33,18 @@ public class RegistroDefensivoActivity extends BaseActivity implements  Registro
     @BindView(R.id.edit_text_dt_registro)
     EditText editTextDtRegistro;
     @BindView(R.id.edit_text_dose_defensivo) EditText editTextDose;
+    @BindView(R.id.autoCompleteDefensivoQuimico)
+    AutoCompleteTextView autoCompleteDoenca;
+
+    private List<DefensivoQuimico> doencaList = new ArrayList<>();
+    private List<DefensivoQuimico> doencaListFilter = new ArrayList<>();
+
 
     private GenericProgress mProgress;
+    private RegistroDefensivoAdapter registroDefensivoAdapter;
     private RegistroDefensivoPresenter registroDefensivoPresenter;
+    private DefensivoQuimico defensivoQuimico;
+
     private List<TipoDefensivo> tipoDefensivoList = new ArrayList<>();
     private TipoDefensivo tipoDefensivo = null;
 
@@ -57,11 +70,26 @@ public class RegistroDefensivoActivity extends BaseActivity implements  Registro
 
     private void initComponentes() {
         tipoDefensivoList = registroDefensivoPresenter.findAllTipoDefensivo();
-       
+        doencaList = registroDefensivoPresenter.findAllDefensivoQuimico();
+
         ArrayAdapter<TipoDefensivo> myAdapter = new ArrayAdapter<TipoDefensivo>(this, android.R.layout.simple_spinner_item, tipoDefensivoList);
         spiTipoDefensivo.setAdapter(myAdapter);
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
+        autoCompleteDoenca.setThreshold(1);
+        registroDefensivoAdapter = new RegistroDefensivoAdapter(this, R.layout.activity_registro_doenca, R.id.textViewDoencaDescricao, doencaListFilter);
+        autoCompleteDoenca.setAdapter(registroDefensivoAdapter);
+        registroDefensivoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        autoCompleteDoenca.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View arg1, int position, long id) {
+                Object item = parent.getItemAtPosition(0);
+                if (item instanceof DefensivoQuimico){
+                    defensivoQuimico =(DefensivoQuimico) item;
+                }
+            }
+
+        });
     }
 
     @OnClick(R.id.edit_text_dt_registro)
@@ -81,12 +109,24 @@ public class RegistroDefensivoActivity extends BaseActivity implements  Registro
     @OnItemSelected(R.id.spinner_tipo_defensivo)
     public void onChanceTipoDefensivo(int position) {
         tipoDefensivo = (TipoDefensivo) tipoDefensivoList.get(position);
+        doencaListFilter = new ArrayList<>();
+        if (doencaList != null){
+            for (DefensivoQuimico doenca : doencaList){
+                if (doenca.getIdTipoDefensivo() == null ||
+                        doenca.getIdTipoDefensivo().equals(tipoDefensivo.getId())){
+                    doencaListFilter.add(doenca);
+                }
+            }
+        }
+        autoCompleteDoenca.setText("");
+        registroDefensivoAdapter = new RegistroDefensivoAdapter(RegistroDefensivoActivity.this, R.layout.activity_main, R.id.textViewDoencaDescricao, doencaListFilter);
+        autoCompleteDoenca.setAdapter(registroDefensivoAdapter);
     }
 
     @OnClick(R.id.btn_salvar_defensivo)
     public void salvar() {
         showLoading();
-        registroDefensivoPresenter.salvar(tipoDefensivo, editTextDtRegistro.getText().toString(), editTextDose.getText().toString());
+        registroDefensivoPresenter.salvar(defensivoQuimico, editTextDtRegistro.getText().toString(), editTextDose.getText().toString());
     }
 
     @Override
