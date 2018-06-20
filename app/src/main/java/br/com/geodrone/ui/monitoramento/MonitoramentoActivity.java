@@ -167,7 +167,7 @@ public class MonitoramentoActivity extends BaseMapFragmentActivity implements Bo
     @Override
     public void onChangeLocation(Location location) {
         monitoramentoPresenter.onChangeLocation(location);
-        showMessage(location.toString());
+        //showMessage(location.toString());
     }
 
     @Override

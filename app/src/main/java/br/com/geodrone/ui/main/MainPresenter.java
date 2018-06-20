@@ -28,28 +28,28 @@ public class MainPresenter extends BasePresenter<MainPresenter.View> {
     }
 
     public boolean isPerfilMaster(Usuario usuario){
-        if (FlagPerfilUsuario.MASTER.value().equals(usuario.getFlagPerfil())){
+        if (FlagPerfilUsuario.MASTER.getValue().equals(usuario.getFlagPerfil())){
             return true;
         }
         return false;
     }
 
     public boolean isPerfilAdministrador(Usuario usuario){
-        if (FlagPerfilUsuario.ADMINISTRADOR.value().equals(usuario.getFlagPerfil())){
+        if (FlagPerfilUsuario.ADMINISTRADOR.getValue().equals(usuario.getFlagPerfil())){
             return true;
         }
         return false;
     }
 
     public boolean isPerfilCliente(Usuario usuario){
-        if (FlagPerfilUsuario.CLIENTE.value().equals(usuario.getFlagPerfil())){
+        if (FlagPerfilUsuario.CLIENTE.getValue().equals(usuario.getFlagPerfil())){
             return true;
         }
         return false;
     }
 
     public boolean isPerfilColetor(Usuario usuario){
-        if (FlagPerfilUsuario.COLETOR.value().equals(usuario.getFlagPerfil())){
+        if (FlagPerfilUsuario.COLETOR.getValue().equals(usuario.getFlagPerfil())){
             return true;
         }
         return false;

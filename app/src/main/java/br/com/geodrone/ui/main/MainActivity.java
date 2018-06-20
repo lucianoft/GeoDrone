@@ -35,7 +35,6 @@ import br.com.geodrone.ui.cliente.consultar.ConsultarClienteActivity;
 import br.com.geodrone.ui.forum.ForumGeodroneActivity;
 import br.com.geodrone.ui.helper.ActivityHelper;
 import br.com.geodrone.ui.logout.LogoutActivity;
-import br.com.geodrone.ui.mensagem.MensagemAdapter;
 import br.com.geodrone.ui.mensagem.usuarios.MensagemUsuariosActivity;
 import br.com.geodrone.ui.monitoramento.MonitoramentoActivity;
 import br.com.geodrone.ui.pontocoletachuva.PontoColetaChuvaActivity;
@@ -46,13 +45,13 @@ import br.com.geodrone.ui.registrochuva.RegistroPluviosidadeActivity;
 import br.com.geodrone.ui.registrocondicaotempo.RegistroCondicoesTempoActivity;
 import br.com.geodrone.ui.registrodefensivo.RegistroDefensivoActivity;
 import br.com.geodrone.ui.registroimagem.RegistroImagemActivity;
-import br.com.geodrone.ui.relatorioindicepraga.RelatorioIndicePragaActivity;
 import br.com.geodrone.ui.relatorioregistrochuva.RelatorioRegistroChuvaActivity;
 import br.com.geodrone.ui.relatorioregistrodoenca.RelatorioRegistroDoencaActivity;
 import br.com.geodrone.ui.relatorioregistropraga.RelatorioRegistroPragaActivity;
 import br.com.geodrone.ui.rotatrabalhokml.RotaTrabalhoKmlActivity;
 import br.com.geodrone.ui.sincronizacao.SincronizacaoActivity;
 import br.com.geodrone.ui.talhao.ConsultaTalhaoActivity;
+import br.com.geodrone.ui.usuario.consultar.ConsultarUsuarioActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -199,6 +198,10 @@ public class MainActivity extends BaseActivity
             activityHelper.alterarClienteSessao(this);
             configurarUsuarioCliente();
             configurarPermissoes();
+        }else if (id == R.id.action_usuarios){
+            Intent i = new Intent(this,ConsultarUsuarioActivity.class);
+            startActivity(i);
+
         }
         return super.onOptionsItemSelected(item);
     }

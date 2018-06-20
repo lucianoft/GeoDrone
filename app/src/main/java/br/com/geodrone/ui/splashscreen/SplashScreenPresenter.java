@@ -1,10 +1,8 @@
 package br.com.geodrone.ui.splashscreen;
 
 import br.com.geodrone.service.DispositivoService;
-import br.com.geodrone.service.UsuarioService;
 import br.com.geodrone.ui.base.BaseActivity;
 import br.com.geodrone.ui.base.BasePresenter;
-import br.com.geodrone.ui.usuario.UsuarioPresenter;
 
 /**
  * Created by fernandes on 31/03/2018.

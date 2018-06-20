@@ -26,7 +26,7 @@ public class UsuarioDao extends AbstractDao<Usuario, Long> {
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "ID_USUARIO");
         public final static Property Nome = new Property(1, String.class, "nome", false, "NOME");
-        public final static Property Sobrenome = new Property(2, String.class, "sobrenome", false, "SOBRENOME");
+        public final static Property CpfCnpj = new Property(2, Long.class, "cpfCnpj", false, "CPF_CNPJ");
         public final static Property Email = new Property(3, String.class, "email", false, "EMAIL");
         public final static Property Telefone = new Property(4, String.class, "telefone", false, "TELEFONE");
         public final static Property Senha = new Property(5, String.class, "senha", false, "SENHA");
@@ -55,7 +55,7 @@ public class UsuarioDao extends AbstractDao<Usuario, Long> {
         db.execSQL("CREATE TABLE " + constraint + "\"GEO_USUARIO\" (" + //
                 "\"ID_USUARIO\" INTEGER PRIMARY KEY ," + // 0: id
                 "\"NOME\" TEXT," + // 1: nome
-                "\"SOBRENOME\" TEXT," + // 2: sobrenome
+                "\"CPF_CNPJ\" INTEGER," + // 2: cpfCnpj
                 "\"EMAIL\" TEXT," + // 3: email
                 "\"TELEFONE\" TEXT," + // 4: telefone
                 "\"SENHA\" TEXT," + // 5: senha
@@ -89,9 +89,9 @@ public class UsuarioDao extends AbstractDao<Usuario, Long> {
             stmt.bindString(2, nome);
         }
  
-        String sobrenome = entity.getSobrenome();
-        if (sobrenome != null) {
-            stmt.bindString(3, sobrenome);
+        Long cpfCnpj = entity.getCpfCnpj();
+        if (cpfCnpj != null) {
+            stmt.bindLong(3, cpfCnpj);
         }
  
         String email = entity.getEmail();
@@ -144,9 +144,9 @@ public class UsuarioDao extends AbstractDao<Usuario, Long> {
             stmt.bindString(2, nome);
         }
  
-        String sobrenome = entity.getSobrenome();
-        if (sobrenome != null) {
-            stmt.bindString(3, sobrenome);
+        Long cpfCnpj = entity.getCpfCnpj();
+        if (cpfCnpj != null) {
+            stmt.bindLong(3, cpfCnpj);
         }
  
         String email = entity.getEmail();
@@ -201,7 +201,7 @@ public class UsuarioDao extends AbstractDao<Usuario, Long> {
     public void readEntity(Cursor cursor, Usuario entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setNome(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setSobrenome(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setCpfCnpj(cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2));
         entity.setEmail(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setTelefone(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setSenha(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));

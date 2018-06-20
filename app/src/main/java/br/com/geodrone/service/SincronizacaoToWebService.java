@@ -122,7 +122,7 @@ public class SincronizacaoToWebService extends GenericService {
 
         usuarioResource.setId(usuario.getId());
         usuarioResource.setNome(usuario.getNome());
-        usuarioResource.setSobrenome(usuario.getSobrenome());
+        usuarioResource.setCpfCnpj(usuario.getCpfCnpj());
         usuarioResource.setEmail(usuario.getEmail());
         usuarioResource.setTelefone(usuario.getTelefone());
         usuarioResource.setSenha(usuario.getSenha());

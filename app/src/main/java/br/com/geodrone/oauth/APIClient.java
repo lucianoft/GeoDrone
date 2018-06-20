@@ -14,6 +14,7 @@ import br.com.geodrone.resource.SincronizacaoAndroidResource;
 import br.com.geodrone.resource.SincronizacaoWebResource;
 import br.com.geodrone.resource.TalhaoResource;
 import br.com.geodrone.resource.UsuarioMensagemResource;
+import br.com.geodrone.resource.UsuarioResource;
 import br.com.geodrone.utils.Constantes;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -148,5 +149,8 @@ public interface APIClient {
     @Streaming
     @GET(Constantes.API_URL_PREFIXO + "previsao-tempo-arqs/{id}/relatorio-previsao")
     public Call<ResponseBody> findRelatorioPrevisaoTempo(@Path("id") Long id);
+
+    @GET(Constantes.API_URL_PREFIXO + "usuarios/cliente/{idCliente}/all-resource")
+    public Call<List<UsuarioResource>> findAllUsuarioResourceByCliente(@Path("idCliente") Long idCliente);
 
 }

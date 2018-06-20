@@ -17,7 +17,7 @@ public enum FlagSimNao {
         this.bundle = bundle;
     }
 
-    public Integer value() {
+    public Integer getValue() {
         return value;
     }
 
@@ -44,5 +44,21 @@ public enum FlagSimNao {
         }catch (Exception ex){
         }
         return null;
+    }
+
+    public static String getDescricao(Integer value) {
+        String instance = null;
+
+        if (value != null) {
+            FlagSimNao[] values = FlagSimNao.values();
+            for (FlagSimNao val : values) {
+                if (val.getValue().equals(value)) {
+                    instance = val.bundle;
+                    break;
+                }
+            }
+        }
+
+        return instance;
     }
 }

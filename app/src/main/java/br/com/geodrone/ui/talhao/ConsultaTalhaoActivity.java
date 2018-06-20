@@ -160,7 +160,7 @@ public class ConsultaTalhaoActivity extends BaseActivity implements ConsultaTalh
             public void onClick(DialogInterface dialog, int which) {
                 showLoading();
                 FlagSimNao flagSimNao = (FlagSimNao) spinnerAtivo.getSelectedItem();
-                Integer indAtivo = flagSimNao != null ? flagSimNao.value() : null;
+                Integer indAtivo = flagSimNao != null ? flagSimNao.getValue() : null;
                 salvarTalhao(talhao, ediTextCodigo.getText().toString(), ediTextDescricao.getText().toString(),indAtivo);
 
             }

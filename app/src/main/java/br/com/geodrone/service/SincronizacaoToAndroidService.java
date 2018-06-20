@@ -299,7 +299,7 @@ public class SincronizacaoToAndroidService extends GenericService {
 
         usuario.setId(usuarioResource.getId());
         usuario.setNome(usuarioResource.getNome());
-        usuario.setSobrenome(usuarioResource.getSobrenome());
+        usuario.setCpfCnpj(usuarioResource.getCpfCnpj());
         usuario.setEmail(usuarioResource.getEmail());
         usuario.setSenha(usuarioResource.getSenha());
         usuario.setTelefone(usuarioResource.getTelefone());

@@ -87,7 +87,10 @@
         <activity android:name=".ui.registroimagem.CameraFotoActivity" />
         <activity
             android:name=".ui.mensagem.MensagemActivity"
-            android:parentActivityName=".ui.main.MainActivity" />
+            android:label="@string/title_activity_arquivo_previsao_tempo_cliente"
+            android:parentActivityName=".ui.main.MainActivity"
+            android:theme="@style/AppTheme" />
+        />
         <activity
             android:name=".ui.monitoramento.MonitoramentoActivity"
             android:label="@string/title_activity_monitoramento"
@@ -125,27 +128,43 @@
         <activity android:name=".ui.aceiteusuariogeoclima.AceiteUsuarioGeoclimaActivity" />
         <activity android:name=".ui.rotatrabalhokml.RotaTrabalhoKmlActivity" />
         <activity android:name=".ui.aceiteusuariogeomonitora.AceiteUsuarioGeomonitoraActivity" />
-        <activity android:name=".ui.forum.ForumActivity" />
         <activity
             android:name=".ui.forum.ForumGeodroneActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.forum.FullScreenImageActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ui.mensagem.usuarios.MensagemUsuariosActivity" />
+        <activity
+            android:name=".ui.mensagem.usuarios.MensagemUsuariosActivity"
+            android:label="@string/title_activity_usuarios_mensagem"
+            android:parentActivityName=".ui.main.MainActivity"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.relatorioregistropraga.RelatorioRegistroPragaActivity"
             android:label="@string/title_activity_relatorio_registro_pragas"
+            android:parentActivityName=".ui.main.MainActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.relatorioregistrodoenca.RelatorioRegistroDoencaActivity"
             android:label="@string/title_activity_relatorio_registro_doencas"
+            android:parentActivityName=".ui.main.MainActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.relatorioregistrochuva.RelatorioRegistroChuvaActivity"
+            android:label="@string/title_activity_arquivo_registro_chuva"
+            android:parentActivityName=".ui.main.MainActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".ui.talhao.ConsultaTalhaoActivity" />
-        <activity android:name=".ui.relatorioindicepraga.RelatorioIndicePragaActivity" />
+        />
+        <activity
+            android:name=".ui.talhao.ConsultaTalhaoActivity"
+            android:label="@string/title_activity_arquivo_talhao"
+            android:parentActivityName=".ui.main.MainActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ui.relatorioindicepraga.RelatorioIndicePragaActivity"
+            android:label="@string/title_activity_arquivo_previsao_tempo_cliente"
+            android:parentActivityName=".ui.main.MainActivity"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.cliente.consultar.ConsultarClienteActivity"
             android:label="@string/title_activity_consultar_cliente"
@@ -156,13 +175,27 @@
             android:label="@string/title_activity_arquivo_previsao_tempo_cliente"
             android:parentActivityName=".ui.main.MainActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".ui.previsaotempo.admmicroregiao.PrevisaoTempoAdmMicroRegiaoActivity" />
-        <activity android:name=".ui.previsaotempo.consulta.PrevisaoTempoConsultaActivity"></activity>
-        <activity android:name=".ui.registrodefensivo.RegistroDefensivoActivity"
-            android:label="@string/title_activity_arquivo_previsao_tempo_cliente"
+        <activity
+            android:name=".ui.previsaotempo.admmicroregiao.PrevisaoTempoAdmMicroRegiaoActivity"
+            android:label="@string/title_activity_arquivo_previsao_tempo_micro_regiao"
             android:parentActivityName=".ui.main.MainActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ui.previsaotempo.consulta.PrevisaoTempoConsultaActivity"
+            android:label="@string/title_activity_arquivo_previsao_tempo_consulta"
+            android:parentActivityName=".ui.main.MainActivity"
+            android:theme="@style/AppTheme" />
+        />
+        <activity
+            android:name=".ui.registrodefensivo.RegistroDefensivoActivity"
+            android:label="@string/title_activity_arquivo_registro_defensivo"
+            android:parentActivityName=".ui.main.MainActivity"
+            android:theme="@style/AppTheme" />
 
+        <activity android:name=".ui.usuario.consultar.ConsultarUsuarioActivity"
+            android:label="@string/title_activity_consultar_usuarios"
+            android:parentActivityName=".ui.main.MainActivity"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

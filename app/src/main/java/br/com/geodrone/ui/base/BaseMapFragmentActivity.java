@@ -45,9 +45,16 @@ public abstract class BaseMapFragmentActivity extends BaseFragmentActivity imple
         tracker = new GPSTracker(this, mMap) {
             @Override
             public void onLocationChanged(Location location) {
-                super.onLocationChanged(location);
-                onChangeLocation(location);
-                SessionGeooDrone.setAttribute(PreferencesUtils.CHAVE_LOCALIZACAO_ATUAL, location);
+                if (location.getAccuracy() < 100.0 && location.getSpeed() < 6.95) {
+                    //Do something
+                    super.onLocationChanged(location);
+                    onChangeLocation(location);
+                    SessionGeooDrone.setAttribute(PreferencesUtils.CHAVE_LOCALIZACAO_ATUAL, location);
+                }
+                Location location_ = SessionGeooDrone.getAttribute(PreferencesUtils.CHAVE_LOCALIZACAO_ATUAL);
+                if (location_ == null){
+                    SessionGeooDrone.setAttribute(PreferencesUtils.CHAVE_LOCALIZACAO_ATUAL, location);
+                }
             }
         };
 

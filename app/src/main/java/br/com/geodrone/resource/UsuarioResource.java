@@ -4,7 +4,7 @@ public class UsuarioResource {
 
     private Long id;
     private String nome;
-    private String sobrenome;
+    private Long cpfCnpj;
     private String email;
     private String telefone;
     private String senha;
@@ -30,12 +30,12 @@ public class UsuarioResource {
         this.nome = nome;
     }
 
-    public String getSobrenome() {
-        return sobrenome;
+    public Long getCpfCnpj() {
+        return cpfCnpj;
     }
 
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
+    public void setCpfCnpj(Long cpfCnpj) {
+        this.cpfCnpj = cpfCnpj;
     }
 
     public String getEmail() {

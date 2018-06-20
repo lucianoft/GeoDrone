@@ -168,7 +168,7 @@ public class PontoColetaChuvaActivity extends BaseMapFragmentActivity implements
                         editTextDescricaoPonto.getText().toString(),
                         editTextLatitude.getText().toString(),
                         editTextLongitude.getText().toString(),
-                        flagSimNao.value());
+                        flagSimNao.getValue());
                 dialog.dismiss();
             }
         });
@@ -210,7 +210,7 @@ public class PontoColetaChuvaActivity extends BaseMapFragmentActivity implements
                     editTextDescricaoPonto.getText().toString(),
                     editTextLatitude.getText().toString(),
                     editTextLongitude.getText().toString(),
-                    flagSimNao.value());
+                    flagSimNao.getValue());
             dialog.dismiss();
             }
         });

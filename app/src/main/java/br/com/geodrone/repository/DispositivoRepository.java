@@ -27,7 +27,7 @@ public class DispositivoRepository extends CrudRepository<Dispositivo, Long>{
 
     public boolean isPrimeiroLogin() {
         QueryBuilder<Dispositivo> qrBuilder = getCrudDao().queryBuilder();
-        Dispositivo dispositivo = qrBuilder.unique();
+        Dispositivo dispositivo = qrBuilder.limit(1).unique();
 
         return dispositivo == null;
     }

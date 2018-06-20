@@ -23,6 +23,13 @@
     <string name="title_activity_relatorio_registro_doencas">Relatorio de Doencas</string>
     <string name="title_activity_consultar_cliente">Consultar Clientes</string>
     <string name="title_activity_arquivo_previsao_tempo_cliente">Previsão do Tempo Cliente</string>
+    <string name="title_activity_arquivo_previsao_tempo_micro_regiao">Previsão do Tempo Regiao</string>
+    <string name="title_activity_arquivo_registro_defensivo">Registro de Defensivos</string>
+    <string name="title_activity_arquivo_previsao_tempo_consulta">Previsao do Tempo</string>
+    <string name="title_activity_arquivo_talhao">Consulta de Talhao</string>
+    <string name="title_activity_arquivo_registro_chuva">Relatorio Pluviosidade</string>
+    <string name="title_activity_usuarios_mensagem">Usuarios</string>
+    <string name="title_activity_consultar_usuarios">Consultar Usuarios</string>
 
     <string name="title_activity_monitoramento">Monitoramento</string>
     <string name="title_activity_mon">Teste</string>
@@ -37,9 +44,9 @@
     <string name="lb_arquivo">Arquivo</string>
     <string name="lb_cliente">Cliente</string>
     <string name="lb_codigo">Codigo</string>
+    <string name="lb_cpf_cnpj">CPF/CNPJ</string>
     <string name="lb_cpf">cpf</string>
     <string name="lb_cnpj">cnpj</string>
-    <string name="lb_cpf_cnpj">Cpf/Cnpj</string>
     <string name="lb_nome">Nome</string>
     <string name="lb_sobrenome">Sobrenome</string>
     <string name="lb_celular">Celular</string>
@@ -95,6 +102,7 @@
     <string name="lb_talhao">Talhao</string>
     <string name="lb_estagio_infestacao">Estagio Infestacao</string>
     <string name="lb_dt_previsao">Data Previsao</string>
+    <string name="lb_perfi">Perfil</string>
 
     <string name="lb_btn_enviar_arquivo">Enviar Arquivo</string>
     <string name="lb_btn_salvar">Salvar</string>
@@ -205,7 +213,7 @@
     <string name="action_logout">Logout</string>
     <string name="action_alterar_cliente">Alterar Cliente</string>
     <string name="action_alterar_senha">Alterar Senha</string>
-    <string name="action_administracao">Administração</string>
+    <string name="action_usuarios">Usuarios</string>
 
     <string name="sendPhoto">Camera</string>
     <string name="sign_out">Logout</string>

@@ -24,8 +24,8 @@ public class Usuario extends GenericModel implements AuditModel, ActiveModel, Cl
 	@Property(nameInDb = "NOME")
 	private String nome;
 
-	@Property(nameInDb = "SOBRENOME")
-	private String sobrenome;
+	@Property(nameInDb = "CPF_CNPJ")
+	private Long cpfCnpj;
 
 	@Property(nameInDb = "EMAIL")
 	private String email;
@@ -82,12 +82,8 @@ public class Usuario extends GenericModel implements AuditModel, ActiveModel, Cl
 		this.nome = nome;
 	}
 
-	public String getSobrenome() {
-		return this.sobrenome;
-	}
-	public void setSobrenome(String sobrenome) {
-		this.sobrenome = sobrenome;
-	}
+	public Long getCpfCnpj() { return cpfCnpj;}
+	public void setCpfCnpj(Long cpfCnpj) { this.cpfCnpj = cpfCnpj;}
 
 	public String getEmail() {
 		return this.email;
