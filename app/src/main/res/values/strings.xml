@@ -103,6 +103,8 @@
     <string name="lb_estagio_infestacao">Estagio Infestacao</string>
     <string name="lb_dt_previsao">Data Previsao</string>
     <string name="lb_perfi">Perfil</string>
+    <string name="lb_alterar_usuario">Alterar Usuario</string>
+    <string name="lb_cadastrar_usuario">Cadastrar Usuario</string>
 
     <string name="lb_btn_enviar_arquivo">Enviar Arquivo</string>
     <string name="lb_btn_salvar">Salvar</string>

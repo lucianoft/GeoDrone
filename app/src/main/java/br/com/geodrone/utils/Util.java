@@ -9,7 +9,7 @@ import android.widget.Toast;
  */
 public class Util {
 
-    public static final String URL_STORAGE_REFERENCE = "gs://endless-bank-196919.appspot.com";
+    public static final String URL_STORAGE_REFERENCE = "gs://geoodrone.appspot.com";
     public static final String FOLDER_STORAGE_IMG = "images";
 
     public static void initToast(Context c, String message){

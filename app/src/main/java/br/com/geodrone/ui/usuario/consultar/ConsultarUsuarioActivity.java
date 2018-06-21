@@ -76,12 +76,14 @@ public class ConsultarUsuarioActivity extends BaseActivity implements ConsultarU
         LayoutInflater li = this.getLayoutInflater();
         View view = li.inflate(R.layout.dialog_alterar_usuario, null);
         final EditText editTextNome = view.findViewById(R.id.editText_nome);
+        final EditText editTextCpfCnpj = view.findViewById(R.id.editText_cpf_cnpj);
+
         final EditText editTextEmail = view.findViewById(R.id.editText_email);
         final EditText editTextTelefone = view.findViewById(R.id.edit_text_telefone);
-        final EditText ediTextNovaSenha = view.findViewById(R.id.input_nova_senha_usuario);
+        final EditText ediTextSenha = view.findViewById(R.id.input_senha_usuario);
         final EditText ediTextConfirmarNovaSenha = view.findViewById(R.id.input_confirmar_senha_usuario);
 
-        FlagPerfilUsuario[] flagPerfis = {FlagPerfilUsuario.CLIENTE, FlagPerfilUsuario.COLETOR};
+        final FlagPerfilUsuario[] flagPerfis = {FlagPerfilUsuario.CLIENTE, FlagPerfilUsuario.COLETOR};
 
         final Spinner spPerfil = view.findViewById(R.id.spinner_perfil);
         ArrayAdapter<FlagPerfilUsuario> adapterStatus = new ArrayAdapter<FlagPerfilUsuario>(this, android.R.layout.simple_spinner_item, flagPerfis);
@@ -94,8 +96,21 @@ public class ConsultarUsuarioActivity extends BaseActivity implements ConsultarU
         spAtivo.setAdapter(adapterAtivo);
         adapterAtivo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
+        editTextNome.setText(usuarioResource.getNome());
+        editTextCpfCnpj.setText(usuarioResource.getCpfCnpj() != null ? usuarioResource.getCpfCnpj().toString() : "");
+        editTextEmail.setText(usuarioResource.getEmail());
+        editTextTelefone.setText(usuarioResource.getTelefone());
+        ediTextSenha.setText(usuarioResource.getSenha());
+        ediTextConfirmarNovaSenha.setText(usuarioResource.getSenha());
+        spPerfil.setSelection(getIndexPerfil(spPerfil, usuarioResource.getFlagPerfil()));
+        spAtivo.setSelection(getIndexFlagAtivo(spAtivo, usuarioResource.getIndAtivo()));
+
         final AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setTitle(this.getString(R.string.lb_aceite_usuario));
+        if (usuarioResource.getId() != null) {
+            alert.setTitle(this.getString(R.string.lb_alterar_usuario));
+        }else {
+            alert.setTitle(this.getString(R.string.lb_cadastrar_usuario));
+        }
         alert.setView(view);
         alert.setCancelable(false);
         alert.setNegativeButton(R.string.lb_cancelar, new DialogInterface.OnClickListener() {
@@ -110,12 +125,13 @@ public class ConsultarUsuarioActivity extends BaseActivity implements ConsultarU
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 showLoading();
-                FlagPerfilUsuario flagStatusUsuario = (FlagPerfilUsuario) spAtivo.getSelectedItem();
-               /* consultarUsuarioPresenter.alterarUsuario(usuarioResource,
-                        editTextTelefone.getText().toString(),
-                        microRegiaoResource,
-                        flagStatusUsuario != null ? flagStatusUsuario.getValue() : null );*/
-                dialog.dismiss();
+                FlagPerfilUsuario flagPerfilUsuario = (FlagPerfilUsuario) spPerfil.getSelectedItem();
+                FlagSimNao flagSimNao = (FlagSimNao) spAtivo.getSelectedItem();
+               consultarUsuarioPresenter.salvarUsuario(usuarioResource, editTextNome.getText().toString(), editTextCpfCnpj.getText().toString(),
+                       editTextEmail.getText().toString(), editTextTelefone.getText().toString(), ediTextSenha.getText().toString(), ediTextConfirmarNovaSenha.getText().toString(),
+                       flagPerfilUsuario != null ? flagPerfilUsuario.getValue() : null,
+                       flagSimNao != null ? flagSimNao.getValue() : null);
+               dialog.dismiss();
             }
         });
         AlertDialog dialog = alert.create();
@@ -124,13 +140,12 @@ public class ConsultarUsuarioActivity extends BaseActivity implements ConsultarU
 
     @OnClick(R.id.float_button_incluir_usuario)
     public void onClickNovoUsuario(){
-
+        onClickUsuario(new UsuarioResource());
     }
 
 
-
     @Override
-    public void onAlterarStatusSucesso(String message) {
+    public void onSalvarUsuarioSucesso(String message) {
         showMessage(message);
         hideLoading();
     }
@@ -172,28 +187,30 @@ public class ConsultarUsuarioActivity extends BaseActivity implements ConsultarU
         mProgress.hide();
     }
 
-    private int getPositionMicroRegiao(Long idMicroRegiao){
-        if (microRegiaoResources != null && idMicroRegiao != null){
-            NumberUtils numberUtils = new NumberUtils();
-            for (int i = 0; i < microRegiaoResources.size(); i++) {   //listaPedidos é um ArrayList comum
-                if (numberUtils.isEqualsLong(idMicroRegiao, microRegiaoResources.get(i).getId())){
-                    return i;
-                }
-            }
-        }
-        return -1;
-    }
 
-    private int getIndexByString(Spinner spinner, String string) {
+    private int getIndexPerfil(Spinner spinner, String string) {
         int index = 0;
 
-        /*FlagStatusUsuario flagStatusUsuario = FlagStatusUsuario.getInstance(string);
+        FlagPerfilUsuario flagPerfi = FlagPerfilUsuario.getInstance(string);
         for (int i = 0; i < spinner.getCount(); i++) {
-            if (spinner.getItemAtPosition(i).equals(flagStatusUsuario)) {
+            if (spinner.getItemAtPosition(i).equals(flagPerfi)) {
                 index = i;
                 break;
             }
-        }*/
+        }
+        return index;
+    }
+
+    private int getIndexFlagAtivo(Spinner spinner, Integer indAtivo) {
+        int index = 0;
+
+        FlagSimNao flagPerfi = FlagSimNao.getInstance(indAtivo);
+        for (int i = 0; i < spinner.getCount(); i++) {
+            if (spinner.getItemAtPosition(i).equals(flagPerfi)) {
+                index = i;
+                break;
+            }
+        }
         return index;
     }
 }

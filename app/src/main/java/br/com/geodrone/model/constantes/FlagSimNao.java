@@ -61,4 +61,19 @@ public enum FlagSimNao {
 
         return instance;
     }
+    public static FlagSimNao getInstance(Integer value) {
+        FlagSimNao instance = null;
+
+        if (value != null) {
+            FlagSimNao[] values = FlagSimNao.values();
+            for (FlagSimNao value_ : values) {
+                if (value_.getValue().equals(value)) {
+                    instance = value_;
+                    break;
+                }
+            }
+        }
+
+        return instance;
+    }
 }

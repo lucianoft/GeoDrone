@@ -33,7 +33,7 @@
             <EditText android:id="@+id/editText_cpf_cnpj"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
+                android:inputType="number"
                 android:hint="@string/lb_cpf_cnpj"/>
         </android.support.design.widget.TextInputLayout>
 
@@ -106,7 +106,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/spinner_ativo"
             >
-            <EditText android:id="@+id/input_nova_senha_usuario"
+            <EditText android:id="@+id/input_senha_usuario"
                 style="@style/TextLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

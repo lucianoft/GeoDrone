@@ -40,4 +40,19 @@ public enum FlagPerfilUsuario {
         return instance;
     }
 
+    public static FlagPerfilUsuario getInstance(String descricao) {
+        FlagPerfilUsuario instance = null;
+
+        if (descricao != null) {
+            FlagPerfilUsuario[] values = FlagPerfilUsuario.values();
+            for (FlagPerfilUsuario value : values) {
+                if (value.getValue().equals(descricao)) {
+                    instance = value;
+                    break;
+                }
+            }
+        }
+
+        return instance;
+    }
 }

@@ -153,4 +153,12 @@ public interface APIClient {
     @GET(Constantes.API_URL_PREFIXO + "usuarios/cliente/{idCliente}/all-resource")
     public Call<List<UsuarioResource>> findAllUsuarioResourceByCliente(@Path("idCliente") Long idCliente);
 
+    @POST(Constantes.API_URL_PREFIXO + "usuarios/cliente/{idCliente}/resource")
+    public Call<UsuarioResource> insertUsuario(@Path("idCliente") Long idCliente,
+                                               @Body UsuarioResource usuarioResource);
+
+    @PUT(Constantes.API_URL_PREFIXO + "usuarios/{id}/resource")
+    public Call<UsuarioResource> updateUsuario(@Path("id") Long id,
+                                               @Body UsuarioResource usuarioResource);
+
 }
