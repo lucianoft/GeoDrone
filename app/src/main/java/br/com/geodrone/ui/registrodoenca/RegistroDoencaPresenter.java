@@ -5,8 +5,10 @@ import java.util.List;
 
 import br.com.geodrone.R;
 import br.com.geodrone.model.Doenca;
+import br.com.geodrone.model.EstagioInfestacao;
 import br.com.geodrone.model.RegistroDoenca;
 import br.com.geodrone.model.TipoCultivo;
+import br.com.geodrone.service.EstagioInfestacaoService;
 import br.com.geodrone.ui.base.BaseActivity;
 import br.com.geodrone.ui.base.BasePresenter;
 import br.com.geodrone.service.DoencaService;
@@ -35,12 +37,14 @@ public class RegistroDoencaPresenter extends BasePresenter<RegistroDoencaPresent
     RegistroDoencaService registroDoencaService = null;
     DoencaService doencaService = null;
     TipoCultivoService tipoCultivoService = null;
+    EstagioInfestacaoService estagioInfestacaoService = null;
 
     public RegistroDoencaPresenter(BaseActivity activity){
         this.activity = activity;
         this.doencaService = new DoencaService(activity);
         this.tipoCultivoService = new TipoCultivoService(activity);
         this.registroDoencaService = new RegistroDoencaService(activity);
+        this.estagioInfestacaoService = new EstagioInfestacaoService(activity);
     }
 
     public List<Doenca> findAllDoenca(){
@@ -53,6 +57,10 @@ public class RegistroDoencaPresenter extends BasePresenter<RegistroDoencaPresent
         return tipoCultivos != null ? tipoCultivos : new ArrayList<TipoCultivo>();
     }
 
+    public List<EstagioInfestacao> findAllEstagioInfestacao(){
+        List<EstagioInfestacao> estagioInfestacaos = this.estagioInfestacaoService.findAll();
+        return estagioInfestacaos != null ? estagioInfestacaos : new ArrayList<EstagioInfestacao>();
+    }
 
     private boolean validar(Doenca doenca, Long idTalhao, String observacao, Double latitude, Double longitude, String qtde){
         boolean isOk = true;
@@ -72,7 +80,7 @@ public class RegistroDoencaPresenter extends BasePresenter<RegistroDoencaPresent
         return isOk;
     }
 
-    public void salvar(Doenca doenca, Long idTalhao, String observacao, Double latitude, Double longitude, String qtde) {
+    public void salvar(Doenca doenca, Long idTalhao, EstagioInfestacao estagioInfestacao, String observacao, Double latitude, Double longitude, String qtde) {
         try{
             boolean isOk = validar(doenca, idTalhao, observacao, latitude, longitude, qtde);
 
@@ -81,6 +89,7 @@ public class RegistroDoencaPresenter extends BasePresenter<RegistroDoencaPresent
                 registroDoenca.setIdDoenca(doenca != null ? doenca.getId() : null);
                 registroDoenca.setObservacao(observacao);
                 registroDoenca.setIdTalhao(idTalhao);
+                registroDoenca.setIdEstagioInfestacao(estagioInfestacao != null ? estagioInfestacao.getId() : null);
                 registroDoenca.setQtde(new NumberUtils().parseLong(qtde));
                 registroDoenca.setLatitude(latitude);
                 registroDoenca.setLongitude(longitude);

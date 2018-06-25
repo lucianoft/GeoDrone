@@ -45,7 +45,7 @@ public abstract class BaseMapFragmentActivity extends BaseFragmentActivity imple
         tracker = new GPSTracker(this, mMap) {
             @Override
             public void onLocationChanged(Location location) {
-                if (location.getAccuracy() < 100.0 && location.getSpeed() < 6.95) {
+                if (location != null && location.getAccuracy() < 100.0 && location.getSpeed() < 6.95) {
                     //Do something
                     super.onLocationChanged(location);
                     onChangeLocation(location);

@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.geodrone.R;
+import br.com.geodrone.model.EstagioInfestacao;
 import br.com.geodrone.model.Praga;
 import br.com.geodrone.model.RegistroPraga;
 import br.com.geodrone.model.TipoCultivo;
+import br.com.geodrone.service.EstagioInfestacaoService;
 import br.com.geodrone.ui.base.BaseActivity;
 import br.com.geodrone.ui.base.BasePresenter;
 import br.com.geodrone.service.PragaService;
@@ -34,12 +36,14 @@ public class RegistroPragaPresenter extends BasePresenter<RegistroPragaPresenter
     RegistroPragaService registroPragaService = null;
     PragaService pragaService = null;
     TipoCultivoService tipoCultivoService = null;
+    EstagioInfestacaoService estagioInfestacaoService = null;
 
     public RegistroPragaPresenter(BaseActivity activity){
         this.activity = activity;
         this.pragaService = new PragaService(activity);
         this.tipoCultivoService = new TipoCultivoService(activity);
         this.registroPragaService = new RegistroPragaService(activity);
+        this.estagioInfestacaoService = new EstagioInfestacaoService(activity);
     }
 
     public List<Praga> findAllPraga(){
@@ -50,6 +54,11 @@ public class RegistroPragaPresenter extends BasePresenter<RegistroPragaPresenter
     public List<TipoCultivo> findAllTipoCultivo(){
         List<TipoCultivo> tipoCultivos = this.tipoCultivoService.findAll();
         return tipoCultivos != null ? tipoCultivos : new ArrayList<TipoCultivo>();
+    }
+
+    public List<EstagioInfestacao> findAllEstagioInfestacao(){
+        List<EstagioInfestacao> estagioInfestacaos = this.estagioInfestacaoService.findAll();
+        return estagioInfestacaos != null ? estagioInfestacaos : new ArrayList<EstagioInfestacao>();
     }
 
 
@@ -71,7 +80,7 @@ public class RegistroPragaPresenter extends BasePresenter<RegistroPragaPresenter
         return isOk;
     }
 
-    public void salvar(Praga praga, Long idTalhao, String observacao, Double latitude, Double longitude, String qtde) {
+    public void salvar(Praga praga, Long idTalhao, EstagioInfestacao estagioInfestacao, String observacao, Double latitude, Double longitude, String qtde) {
         try {
             boolean isOk = validar(praga, idTalhao, observacao, latitude, longitude, qtde);
 
@@ -80,6 +89,7 @@ public class RegistroPragaPresenter extends BasePresenter<RegistroPragaPresenter
                 registroPraga.setIdPraga(praga != null ? praga.getId() : null);
                 registroPraga.setObservacao(observacao);
                 registroPraga.setIdTalhao(idTalhao);
+                registroPraga.setIdEstagioInfestacao(estagioInfestacao != null ? estagioInfestacao.getId() : null);
                 registroPraga.setLatitude(latitude);
                 registroPraga.setLongitude(longitude);
                 registroPraga.setQtde(Long.parseLong(qtde));

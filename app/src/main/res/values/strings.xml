@@ -52,6 +52,7 @@
     <string name="lb_celular">Celular</string>
     <string name="lb_telefone">Telefone</string>
     <string name="lb_email">Email</string>
+    <string name="lb_email_cpf_cnpj">Email/Cpf/Cnpj</string>
     <string name="lb_status">Status</string>
     <string name="lb_senha">Senha</string>
     <string name="lb_confirmar">Confirmar</string>

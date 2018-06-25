@@ -25,4 +25,9 @@ public class UsuarioRepository extends CrudRepository<Usuario, Long>{
         QueryBuilder<Usuario> qrBuilder = getCrudDao().queryBuilder().where(UsuarioDao.Properties.Email.eq(email));
         return qrBuilder.unique();
     }
+
+    public Usuario findByCpfCnpj(Long cpfCnpj) {
+        QueryBuilder<Usuario> qrBuilder = getCrudDao().queryBuilder().where(UsuarioDao.Properties.CpfCnpj.eq(cpfCnpj));
+        return qrBuilder.unique();
+    }
 }

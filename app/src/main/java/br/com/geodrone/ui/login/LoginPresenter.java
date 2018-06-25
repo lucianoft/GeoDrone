@@ -107,7 +107,7 @@ public class LoginPresenter extends BasePresenter<LoginPresenter.View> {
         try {
             this.activity.showLoading();
             if (validarLogin(login, senha)) {
-                Usuario usuario = usuarioService.findByEmail(login);
+                Usuario usuario = usuarioService.findByLogin(login);
                 if (usuario != null) {
 
                     CryptoUtils cryptoUtils = new CryptoUtils();

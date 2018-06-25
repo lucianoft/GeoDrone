@@ -16,8 +16,10 @@ import java.util.List;
 
 import br.com.geodrone.R;
 import br.com.geodrone.model.Doenca;
+import br.com.geodrone.model.EstagioInfestacao;
 import br.com.geodrone.model.TipoCultivo;
 import br.com.geodrone.ui.base.BaseActivity;
+import br.com.geodrone.ui.estagioinfestacao.EstagioInfestacaoAdapter;
 import br.com.geodrone.ui.helper.GenericProgress;
 import br.com.geodrone.utils.NumberUtils;
 import butterknife.BindView;
@@ -34,11 +36,17 @@ public class RegistroDoencaActivity extends BaseActivity implements RegistroDoen
     @BindView(R.id.autoCompleteDoenca)
     AutoCompleteTextView autoCompleteDoenca;
 
+    @BindView(R.id.autoCompleteEstagioInfestacao)
+    AutoCompleteTextView autoCompleteEstagioInfestacao;
+
+
     private Location location;
     private NumberUtils numberUtils = new NumberUtils();
 
     private RegistroDoencaPresenter registroDoencaPresenter;
     private RegistroDoencaAdapter doencaAdapter;
+    private EstagioInfestacaoAdapter estagioInfestacaoAdapter;
+
 
     private List<Doenca> doencaList = new ArrayList<>();
     private List<Doenca> doencaListFilter = new ArrayList<>();
@@ -46,6 +54,10 @@ public class RegistroDoencaActivity extends BaseActivity implements RegistroDoen
     private List<TipoCultivo> tipoCultivoList = new ArrayList<>();
     private TipoCultivo tipoCultivo = null;
     private Doenca doenca = null;
+
+    private EstagioInfestacao estagioInfestacao = null;
+
+    private List<EstagioInfestacao> estagioInfestacaoList = new ArrayList<>();
 
     private GenericProgress mProgress;
     Long idTalhao = null;
@@ -82,6 +94,8 @@ public class RegistroDoencaActivity extends BaseActivity implements RegistroDoen
     private void initComponentes() {
         tipoCultivoList = registroDoencaPresenter.findAllTipoCultivo();
         doencaList = registroDoencaPresenter.findAllDoenca();
+        estagioInfestacaoList = registroDoencaPresenter.findAllEstagioInfestacao();
+
 
         ArrayAdapter<TipoCultivo> myAdapter = new ArrayAdapter<TipoCultivo>(this, android.R.layout.simple_spinner_item, tipoCultivoList);
         spiTipoDoenca.setAdapter(myAdapter);
@@ -101,6 +115,22 @@ public class RegistroDoencaActivity extends BaseActivity implements RegistroDoen
             }
 
         });
+
+        autoCompleteEstagioInfestacao.setThreshold(1);
+        estagioInfestacaoAdapter = new EstagioInfestacaoAdapter(this, R.layout.activity_registro_praga, R.id.textViewEstacaoInfestacaoDescricao, estagioInfestacaoList);
+        autoCompleteEstagioInfestacao.setAdapter(estagioInfestacaoAdapter);
+        estagioInfestacaoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        autoCompleteEstagioInfestacao.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View arg1, int position, long id) {
+                Object item = parent.getItemAtPosition(0);
+                if (item instanceof EstagioInfestacao){
+                    estagioInfestacao =(EstagioInfestacao) item;
+                }
+            }
+
+        });
+
     }
 
     @OnItemSelected(R.id.spinner_tipo_doenca)
@@ -111,8 +141,19 @@ public class RegistroDoencaActivity extends BaseActivity implements RegistroDoen
 
     @OnClick(R.id.btn_salvar_doenca)
     public void salvar() {
-        showLoading();
-        registroDoencaPresenter.salvar(doenca, idTalhao, editTextObservacao.getText().toString(), location.getLatitude(), location.getLongitude(), editTextQtdeDoencas.getText().toString());
+        try{
+            showLoading();
+            registroDoencaPresenter.salvar(doenca,
+                                           idTalhao,
+                                           estagioInfestacao,
+                                           editTextObservacao.getText().toString(),
+                                           location != null ? location.getLatitude() : null,
+                                           location != null ? location.getLongitude() : null,
+                                           editTextQtdeDoencas.getText().toString());
+        }catch (Exception ex){
+            hideLoading();
+            onError(ex);
+        }
     }
 
     @Override

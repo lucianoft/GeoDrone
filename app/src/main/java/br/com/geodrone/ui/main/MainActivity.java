@@ -181,6 +181,20 @@ public class MainActivity extends BaseActivity
     }
 
     @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        Usuario usuario = SessionGeooDrone.getAttribute(SessionGeooDrone.CHAVE_USUARIO);
+        if (mainPresenter.isPerfilColetor(usuario)) {
+
+            MenuItem menuItemAlterarCliente = menu.findItem(R.id.action_alterar_cliente);
+            menuItemAlterarCliente.setEnabled(false);
+
+            MenuItem menuItemUsuarios = menu.findItem(R.id.action_usuarios);
+            menuItemUsuarios.setEnabled(false);
+        }
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 

@@ -14,6 +14,7 @@ import br.com.geodrone.model.Usuario;
 import br.com.geodrone.repository.CrudRepository;
 import br.com.geodrone.repository.UsuarioRepository;
 import br.com.geodrone.service.util.CrudService;
+import br.com.geodrone.utils.NumberUtils;
 
 public class UsuarioService extends CrudService<Usuario, Long> {
 
@@ -29,6 +30,19 @@ public class UsuarioService extends CrudService<Usuario, Long> {
 
     public Usuario findByEmail(String email) {
         return usuarioRepository.findByEmail(email);
+    }
+
+
+    public Usuario findByLogin(String emailCpf) {
+        Usuario usuario = usuarioRepository.findByEmail(emailCpf);
+        if (usuario == null) {
+            NumberUtils numberUtils = new NumberUtils();
+            Long cpf = numberUtils.parseLongSeNumber(emailCpf);
+            if (cpf != null){
+                usuario = usuarioRepository.findByCpfCnpj(cpf);
+            }
+        }
+        return usuario;
     }
 
     public void alterarSenha(Usuario usuario, String senha){

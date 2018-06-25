@@ -16,12 +16,20 @@ li {
   text-align: justify;
   font-weight: normal;
   padding-left: 10px;
+  font-size: 14px;
+}
+
+h1{
+  text-align: left;
+  padding-top: 0px;
+  font-size: 10px;
 }
 
 h2{  
   line-height: 1;
-  text-align: left;
+  text-align: center;
   padding-top: 0px; 
+  font-size: 14px;
 
  }
 
@@ -31,12 +39,16 @@ h2{
   margin: 0px 0 0;
   padding-top: 0px; 
   padding-bottom: 0px;
+  font-size: 16px;
+
  }
  
  p{
   align: left;
-  padding-left: 0px;
+  padding-left: 6px;
+  padding-right: 6px;
   text-align: justify;
   font-weight: normal;
-  
+  font-size: 14px;
+
  }
