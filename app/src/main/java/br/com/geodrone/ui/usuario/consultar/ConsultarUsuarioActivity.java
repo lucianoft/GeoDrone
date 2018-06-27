@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.geodrone.R;
+import br.com.geodrone.SessionGeooDrone;
+import br.com.geodrone.model.Usuario;
 import br.com.geodrone.model.constantes.FlagPerfilUsuario;
 import br.com.geodrone.model.constantes.FlagSimNao;
 import br.com.geodrone.resource.MicroRegiaoResource;
@@ -73,6 +75,9 @@ public class ConsultarUsuarioActivity extends BaseActivity implements ConsultarU
 
     @Override
     public void onClickUsuario(final UsuarioResource usuarioResource) {
+
+        Usuario usuario = SessionGeooDrone.getAttribute(SessionGeooDrone.CHAVE_USUARIO);
+
         LayoutInflater li = this.getLayoutInflater();
         View view = li.inflate(R.layout.dialog_alterar_usuario, null);
         final EditText editTextNome = view.findViewById(R.id.editText_nome);
@@ -83,7 +88,15 @@ public class ConsultarUsuarioActivity extends BaseActivity implements ConsultarU
         final EditText ediTextSenha = view.findViewById(R.id.input_senha_usuario);
         final EditText ediTextConfirmarNovaSenha = view.findViewById(R.id.input_confirmar_senha_usuario);
 
-        final FlagPerfilUsuario[] flagPerfis = {FlagPerfilUsuario.CLIENTE, FlagPerfilUsuario.COLETOR};
+        FlagPerfilUsuario[] flagPerfis =  {FlagPerfilUsuario.CLIENTE, FlagPerfilUsuario.COLETOR};
+
+        if (consultarUsuarioPresenter.isPerfilAdministrador(usuario)){
+            flagPerfis = new FlagPerfilUsuario[]{FlagPerfilUsuario.CLIENTE, FlagPerfilUsuario.COLETOR, FlagPerfilUsuario.ADMINISTRADOR};
+        }else if (consultarUsuarioPresenter.isPerfilAdministrador(usuario)){
+            flagPerfis = new FlagPerfilUsuario[]{FlagPerfilUsuario.CLIENTE, FlagPerfilUsuario.COLETOR, FlagPerfilUsuario.ADMINISTRADOR, FlagPerfilUsuario.MASTER};
+        }else if (consultarUsuarioPresenter.isPerfilColetor(usuario)){
+            flagPerfis = new FlagPerfilUsuario[]{FlagPerfilUsuario.COLETOR};
+        }
 
         final Spinner spPerfil = view.findViewById(R.id.spinner_perfil);
         ArrayAdapter<FlagPerfilUsuario> adapterStatus = new ArrayAdapter<FlagPerfilUsuario>(this, android.R.layout.simple_spinner_item, flagPerfis);
