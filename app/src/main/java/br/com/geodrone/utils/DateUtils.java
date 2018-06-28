@@ -70,7 +70,7 @@ public class DateUtils {
 		cal.setTime(new Date());
 
 		cal.set(Calendar.DAY_OF_MONTH, dia);
-		cal.set(Calendar.MONTH, mes+1);
+		cal.set(Calendar.MONTH, mes);
 		cal.set(Calendar.YEAR, ano);
 
 		cal.set(Calendar.HOUR_OF_DAY, 0);

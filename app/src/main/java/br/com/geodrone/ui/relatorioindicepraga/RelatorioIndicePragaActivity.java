@@ -86,7 +86,7 @@ public class RelatorioIndicePragaActivity extends BaseRelatorioActivity
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         Calendar calendar = Calendar.getInstance();
         int ano = calendar.get(Calendar.YEAR);
-        int mes = calendar.get(Calendar.MONTH)+1;
+        int mes = calendar.get(Calendar.MONTH);
         int dia = calendar.get(Calendar.DAY_OF_MONTH);
         DateUtils dateUtils = new DateUtils();
         Date data = dateUtils.createDate(dayOfMonth, month, year);

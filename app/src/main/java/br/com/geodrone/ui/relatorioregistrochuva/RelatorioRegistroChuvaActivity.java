@@ -90,10 +90,6 @@ public class RelatorioRegistroChuvaActivity extends BaseRelatorioActivity implem
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        Calendar calendar = Calendar.getInstance();
-        int ano = calendar.get(Calendar.YEAR);
-        int mes = calendar.get(Calendar.MONTH)+1;
-        int dia = calendar.get(Calendar.DAY_OF_MONTH);
         DateUtils dateUtils = new DateUtils();
         Date data = dateUtils.createDate(dayOfMonth, month, year);
         String dataStr = dateUtils.format(data, "dd/MM/yyyy");

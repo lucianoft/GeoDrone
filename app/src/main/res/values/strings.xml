@@ -30,6 +30,7 @@
     <string name="title_activity_arquivo_registro_chuva">Relatorio Pluviosidade</string>
     <string name="title_activity_usuarios_mensagem">Usuarios</string>
     <string name="title_activity_consultar_usuarios">Consultar Usuarios</string>
+    <string name="title_activity_mensagem">Mensagem</string>
 
     <string name="title_activity_monitoramento">Monitoramento</string>
     <string name="title_activity_mon">Teste</string>

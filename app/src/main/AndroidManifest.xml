@@ -92,7 +92,7 @@
         <activity android:name=".ui.registroimagem.CameraFotoActivity" />
         <activity
             android:name=".ui.mensagem.MensagemActivity"
-            android:label="@string/title_activity_arquivo_previsao_tempo_cliente"
+            android:label="@string/title_activity_mensagem"
             android:parentActivityName=".ui.main.MainActivity"
             android:theme="@style/AppTheme" />
         />
